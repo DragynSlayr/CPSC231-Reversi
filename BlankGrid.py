@@ -1,5 +1,5 @@
 #This is pretty basic code, and will have to modified once the array is finished, but will work for now due to its simplicity.
-#Why so many functions for just outputing basic characters? 
+#Why so many functions for just outputing basic characters?
 #The idea is to have some of these be reused when we switch over to an array based design, that way the code is flexible
 #When the array is in place, inputs will have to be added to the functions, as well as a function to process it
 #Comments are not finalized, and need to be updated before the assignment is handed in.
@@ -11,25 +11,20 @@ def printletter (letter, number_to_print ):
 	while loopcount < number_to_print:
 		print (letter, end="")
 		loopcount = loopcount + 1
-		
-	return
 
 #This function will print the lines that make up the top and bottom border, which cleans up the actual line printing
 def printtop ():
 	printletter('-', 12)
 	print (" ")
-	return
 
-#This is a temporary function that prints a blank line, specifically for the first move. 	
+#This is a temporary function that prints a blank line, specifically for the first move.
 def createline_blank():
 	printletter('|', 1)
 	printletter(' ', 10)
 	printletter('|', 1)
 	print (" ")
-	return
 
-	
-#Using the functions created this creates the unique lines in the middle that contains the 'x' characters and 'O' characters that appear before the first move	
+#Using the functions created this creates the unique lines in the middle that contains the 'x' characters and 'O' characters that appear before the first move
 def printstartlines():
 	printletter('|', 1)
 	printletter(' ', 4)
@@ -45,8 +40,7 @@ def printstartlines():
 	printletter(' ', 4)
 	printletter('|', 1)
 	print (" ")
-	
-	return 
+
 #Again, using all the previous functions it very straightforward to print the starting grid.
 def printblankgrid ():
 	printtop()
@@ -60,8 +54,6 @@ def printblankgrid ():
 	createline_blank()
 	createline_blank()
 	printtop()
-	
-	return
 
 #1111111111
 #1000000001
