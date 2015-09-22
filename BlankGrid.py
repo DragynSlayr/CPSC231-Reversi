@@ -63,15 +63,6 @@ def printblankgrid ():
 	
 	return
 
-#Calls the actual function 
-printblankgrid ()
-	
-
-
-
-#This just prevents it from closing right away.
-x = input ()
-
 #1111111111
 #1000000001
 #1000000001
