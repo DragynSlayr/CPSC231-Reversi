@@ -69,5 +69,3 @@ def printblankgrid ():
 		else:
 			createline_blank(i)
 		printtop()
-
-printblankgrid()
