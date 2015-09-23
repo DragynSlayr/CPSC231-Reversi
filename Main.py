@@ -39,15 +39,12 @@ def main():
         elif user_option is 2:
 			#Call the show rules menu from the Text module
             info.show_rules()
-
-            #Show the menu
-            display_menu()
         else:
             print("Invalid option, try again!\n")
 
-            #Show the menu
-            display_menu()
-
+		  #Show the menu
+        display_menu()
+        
         #Ask for input again
         user_option = int(input("Enter your choice: "))
 
