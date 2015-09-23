@@ -12,7 +12,7 @@ def printletter (letter, number_to_print ):
 
 #This function will print the lines that make up the top and bottom border, which cleans up the actual line printing
 def printtop ():
-	printletter(' -', 1)
+	printletter('+-', 1)
 	for i in range(8):
 		print("+", end="")
 		printletter("-", 3)
@@ -20,7 +20,7 @@ def printtop ():
 
 #This is a temporary function that prints a blank line, specifically for the first move.
 def createline_blank(row_num):
-	print(" " + str(row_num) + "|", end="")
+	print("|" + str(row_num) + "|", end="")
 	for i in range(8):
 		printletter(' ', 3)
 		printletter('|', 1)
@@ -29,7 +29,7 @@ def createline_blank(row_num):
 #Using the functions created this creates the unique lines in the middle that contains the 'x' characters and 'O' characters that appear before the first move
 def printstartlines(flipped):
 	if not flipped:
-		print(" 4|", end="")
+		print("|4|", end="")
 		for i in range(3):
 			printletter(" ", 3)
 			printletter("|", 1)
@@ -38,7 +38,7 @@ def printstartlines(flipped):
 			printletter(" ", 3)
 			printletter("|", 1)
 	else:
-		print(" 5|", end="")
+		print("|5|", end="")
 		for i in range(3):
 			printletter(" ", 3)
 			printletter("|", 1)
@@ -50,7 +50,7 @@ def printstartlines(flipped):
 
 #Print the row of letters at the top of the grid
 def printletterrow():
-	print("  ", end="")
+	print("| ", end="")
 	for i in ["A", "B", "C", "D", "E", "F", "G", "H"]:
 		print("| " + i + " ", end="")
 		if i is "H":
@@ -60,6 +60,7 @@ def printletterrow():
 #Again, using all the previous functions it very straightforward to print the starting grid.
 def printblankgrid ():
 	print()
+	printtop()
 	printletterrow()
 	printtop()
 	for i in range(1, 9):
