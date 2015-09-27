@@ -25,6 +25,14 @@ for y in ['1', '2', '3', '4', '5', '6', '7', '8']:
 		grid.pencolor ("black")
 		grid.forward(50)
 		grid.left(90)
+		grid.forward(50)
+		grid.left(90)
+		grid.forward(50)
+		grid.left(90)
+		grid.forward(50)
+		grid.left(90)
+		grid.end_fill()
+		grid.forward(50)
 		grid.penup()
 		coord = grid.pos()
 		coordx = grid.xcor()
@@ -35,14 +43,6 @@ for y in ['1', '2', '3', '4', '5', '6', '7', '8']:
 		grid.goto(coord)
 		grid.pendown()
 		grid.pencolor("black")
-		grid.forward(50)
-		grid.left(90)
-		grid.forward(50)
-		grid.left(90)
-		grid.forward(50)
-		grid.left(90)
-		grid.end_fill()
-		grid.forward(50)
 		
 	grid.left(180) #getting to the next row.
 	grid.forward(400)
@@ -73,4 +73,12 @@ for sidey in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']:
 	grid.write(sidey, True)
 	grid.forward(48)
 	
-wn.exitonclick()
+
+def getPos(x, y):
+	print(x, ", ", y)
+	return
+	
+def main():
+	wn.onscreenclick(getPos)
+	wn.mainloop()
+main()
