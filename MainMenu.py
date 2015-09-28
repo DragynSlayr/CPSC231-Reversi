@@ -21,6 +21,7 @@ def MenuInput(text):
 	
 def show_rules():
 	#Initializes rules list
+	
 	text.clear()
 	text.up()
 	text.goto(0, 250)
@@ -51,21 +52,16 @@ def show_rules():
 		text.up()
 		text.goto(-350, line)
 		text.down()
-		#Ask user if they wish to continue
-		option = MenuInput("Press enter to continue or q to quit: ")
 		
-		quit = "false"
-		if option is "q":
-			#Ends loop prematurely
-			text.clear()
-			text.up()
-			text.goto(0, 250)
-			text.down()
-			text.write("RERVERSI GAME", False, align = "center", font = ("Arial", 50, "bold"))
-			quit = "true"
-			break
 			
-			
+	#Ask user if they wish to continue or exit
+	option = MenuInput("Press enter to return to the Menu or press any q to quit: ")
+		
+	quit = "false"
+	if option is "q":
+		quit = "true"		
+		exit()	
+	
 	#Prints blank line
 	return quit
 	print()
@@ -104,6 +100,7 @@ def MainMenu():
 			userchoice = "return"
 	elif userinput == "3":
 		userchoice = "quit"
+
 		
 	#If the user makes an invalid choice, then this screen will show up, where it unstucts the uers to make a valid choice.
 	else :
@@ -111,9 +108,14 @@ def MainMenu():
 		text.up()
 		text.goto(0, 250)
 		text.down()
-		text.write("Invalid option, please choose 1, 2 or 3. ", False, align = "center", font = ("Arial", 40, "bold"))
-		text.clear()
+		text.write("Invalid option. Try Again", False, align = "center", font = ("Arial", 40, "bold"))
 		userchoice = "Invalid"
+		option = MenuInput("Press enter to return to the Menu or press any q to quit: ")
+		
+		quit = "false"
+		if option is "q":
+			quit = "true"		
+			exit()
 		
 	return userchoice
 	
@@ -125,11 +127,10 @@ def StartMenu():
 	while userchoice is not "Play":
 		text.clear()
 		userchoice = MainMenu()
-		print(userchoice)
 		if userchoice == "quit":
+			exit()
 			break
 
-#Uncomment the below line to test the function
 StartMenu()
 	
 
