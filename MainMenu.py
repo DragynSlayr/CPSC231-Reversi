@@ -2,6 +2,7 @@
 
 import turtle
 wn = turtle.Screen()
+wn.setup(1000, 1080)
 text = turtle.Turtle()
 
 wn.clear()
