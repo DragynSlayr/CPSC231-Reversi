@@ -1,4 +1,4 @@
-#constants.py
+#Constants.py
 
 NUM_OF_CELLS = 64
 WINDOW_WIDTH = 800
