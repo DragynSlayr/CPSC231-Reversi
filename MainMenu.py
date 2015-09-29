@@ -117,7 +117,7 @@ def MainMenu():
 		text.up()
 		text.goto(constants.TITLE_LOCATIONX, constants.TITLE_LOCATIONY)
 		text.down()
-		text.write("Invalid option, please choose 1, 2 or 3. ", False, align = "center", font = ("Arial", 10, "bold"))
+		text.write("Invalid option, please choose 1, 2 or 3. Returning to Menu... ", False, align = "center", font = ("Arial", 10, "bold"))
 		time.sleep(2)
 		text.clear()
 		userchoice = "Invalid"
