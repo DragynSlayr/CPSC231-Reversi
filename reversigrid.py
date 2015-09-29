@@ -27,7 +27,7 @@ grid.speed(0)
 grid.penup()
 grid.goto(Constants.WINDOW_WIDTH / 4, Constants.WINDOW_HEIGHT * (3 / 4))
 grid.pendown()
-grid.shape("turtle")
+grid.hideturtle()
 
 #function for creating a square
 def square():
@@ -122,6 +122,7 @@ grid.goto(25, 575)
 grid.pendown()
 grid.pencolor("black")
 grid.write("R   e   v   e   r   s   i")
+wn.update()
 
 #the two functions below will, together, print the position of where you click on the screen.
 def getPos(x, y):
