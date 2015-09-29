@@ -1,4 +1,4 @@
-#Here is another draft of the gameboard. 
+#Here is another draft of the gameboard.
 #I could not get the world coordinates to work with 0, 0 on the top left. It made everything upside down. On top of that,
 #it changes the orientation of some of the commands like setheading.
 #0, 0 is bottom left (for now) and it makes everything work properly. (Seriously! left was right with the other way)
@@ -6,10 +6,11 @@
 
 #import turtle module and opens the turtle screen.
 import turtle
+import Constants
 wn = turtle.Screen()
 wn.tracer(10) #makes the turtle end somewhere differently as well for some reason.
 #changes the default coordinates to user made coordinates.
-wn.setworldcoordinates(0, 0, 800, 600)
+wn.setworldcoordinates(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
 #in this case bottom left corner is 0,0. Changes screen to World coordinates mode from standard.
 
 
@@ -19,7 +20,7 @@ grid = turtle.Turtle()
 #pre-set the turtle
 grid.speed(0)
 grid.penup()
-grid.goto(200, 450)
+grid.goto(Constants.WINDOW_WIDTH / 4, Constants.WINDOW_HEIGHT * (3 / 4))
 grid.pendown()
 grid.shape("turtle")
 
@@ -27,7 +28,7 @@ grid.shape("turtle")
 def square():
 	for i in range(4):
 		grid.pendown()
-		grid.forward(50)
+		grid.forward(Constants.CELL_WIDTH)
 		grid.left(90)
 
 #function for labeling each square according to their coordinates in the array.
@@ -44,10 +45,10 @@ def coord_label():
 	grid.pencolor("black")
 
 #function for sending the turtle to the next row lower.
-def next_row():		
+def next_row():
 	grid.penup()
 	grid.left(180)
-	grid.forward(400)
+	grid.forward(Constants.WINDOW_WIDTH / 2)
 	grid.left(90)
 	grid.forward(50)
 	grid.left(90)
@@ -56,12 +57,13 @@ def next_row():
 #function to label the y coordinates vertically, to the left of the board.
 def label_y():
 	grid.goto(175, 125)
-	for sidey in ['8', '7', '6', '5', '4', '3', '2', '1']:
+	#Iterate through the row numbers in reverse
+	for sidey in Constants.ROW_NUMBERS[::-1]:
 		coordyy = grid.ycor()
 		grid.pendown()
 		grid.write(sidey, True)
 		grid.penup()
-		coordyy = coordyy + 50
+		coordyy = coordyy + Constants.CELL_HEIGHT
 		grid.goto(175, coordyy)
 		grid.setheading(90)
 
@@ -73,36 +75,36 @@ def label_x():
 		grid.pendown()
 		grid.write(sidex, True)
 		grid.penup()
-		coordxx = coordxx + 50
+		coordxx = coordxx + Constants.CELL_WIDTH
 		grid.goto(coordxx, 525)
 		grid.setheading(0)
-	
-#function that draws a frame around the board.	
+
+#function that draws a frame around the board.
 def reversi_frame():
 	grid.pencolor("dark green")
 	grid.pensize(10)
 	grid.goto(0,0)
 	grid.pendown()
-	grid.forward(800)
+	grid.forward(Constants.WINDOW_WIDTH)
 	grid.left(90)
-	grid.forward(600)
+	grid.forward(Constants.WINDOW_HEIGHT)
 	grid.left(90)
-	grid.forward(800)
+	grid.forward(Constants.WINDOW_WIDTH)
 	grid.left(90)
-	grid.forward(600)
+	grid.forward(Constants.WINDOW_HEIGHT)
 	grid.penup()
 
-	
-#Didn't function this one out yet.....	
+
+#Didn't function this one out yet.....
 #nested for loop that creates the board with the above functions.
-for y in ['1', '2', '3', '4', '5', '6', '7', '8']: #This stacks the rows on each other.
-	for x in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']: #This creates the horizontal rows.
+for y in Constants.ROW_NUMBERS: #This stacks the rows on each other.
+	for x in Constants.COLUMN_LETTERS: #This creates the horizontal rows.
 		grid.fillcolor("green")
 		grid.begin_fill()
 		grid.pencolor ("black")
 		square()
 		grid.end_fill()
-		grid.forward(50)
+		grid.forward(Constants.CELL_WIDTH)
 		coord_label()
 	next_row()
 	grid.penup()
@@ -120,7 +122,7 @@ grid.write("R   e   v   e   r   s   i")
 def getPos(x, y):
 	print(x, ", ", y)
 	return
-	
+
 def main():
 	wn.onscreenclick(getPos)
 	wn.mainloop()
