@@ -8,8 +8,13 @@
 import turtle
 import Constants
 wn = turtle.Screen()
+
+#Set the size of the screen
+wn.setup(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
+
 wn.tracer(10) #makes the turtle end somewhere differently as well for some reason.
 #changes the default coordinates to user made coordinates.
+
 wn.setworldcoordinates(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
 #in this case bottom left corner is 0,0. Changes screen to World coordinates mode from standard.
 
