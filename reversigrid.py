@@ -127,4 +127,6 @@ def main():
 	wn.onscreenclick(getPos)
 	wn.mainloop()
 
-main()
+#Only runs when it is not imported
+if __name__ is "__name__":
+	main()

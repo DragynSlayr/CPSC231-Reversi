@@ -1,5 +1,6 @@
 import string
 import Constants
+import reversigrid
 
 def get_stripped_line(location):
 	"""
@@ -71,29 +72,33 @@ def prompt_move():
 	Then places a piece on the board if the move is valid."""
 
 	valid_move = False
+	location = ""
+	try:
+		#Only run when move is not valid
+		while not valid_move:
+			#Prompt the user for a location
+			location = input("Enter a location ('q' to quit): ").strip()
 
-	#Only run when move is not valid
-	while not valid_move:
-		#Prompt the user for a location
-		location = input("Enter a location: ").strip()
+			#Splits location into column and row
+			column_and_row = get_column_and_row(location)
 
-		#Splits location into column and row
-		column_and_row = get_column_and_row(location)
+			#Extract column and row
+			column = column_and_row[0]
+			row = column_and_row[1]
 
-		#Extract column and row
-		column = column_and_row[0]
-		row = column_and_row[1]
+			#Check if the move is valid
+			valid_move = check_validity(column, row)
 
-		#Check if the move is valid
-		valid_move = check_validity(column, row)
+			#Alert the user
+			if not valid_move:
+				print("That is not a valid position!")
 
-		#Alert the user
-		if not valid_move:
-			print("That is not a valid position!")
-
-	#Place a piece at the position
-	place_piece(column, row)
+		#Place a piece at the position
+		place_piece(column, row)
+	except:
+		print("Quitting")
 
 #Only run this file if it is the main file
 if __name__ == "__main__":
+	#reversigrid.main()
 	prompt_move()
