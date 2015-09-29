@@ -42,9 +42,9 @@ def get_column_and_row(location):
 
 def check_validity(column, row):
 	"""
-		Checks if the coordinate lies within the board.
-		Takes the column and row of the coordinate.
-		Returns True if on the board and False otherwise.
+	Checks if the coordinate lies within the board.
+	Takes the column and row of the coordinate.
+	Returns True if on the board and False otherwise.
 	"""
 	#columns = {"A" : 1, "B" : 2, "C" :  3, "D" : 4, "E" : 5, "F" : 6, "G" :  7, "H" : 8}
 	#return (columns[column] >= 1 and columns[column] <= 8) and (row >= 1 and row <= 8)
@@ -55,7 +55,25 @@ def check_validity(column, row):
 	#Check if column is in the valid columns and is in the rows
 	return (column in Constants.COLUMN_LETTERS) and (row in Constants.ROW_NUMBERS)
 
-def place_piece(column, row):
+def getPosition(column, row):
+	"""
+	Gets the position in pixesl from the column and row
+	Takes a column and row, ex, A 4
+	Returns position in pixels, ex, (400, 300) 
+	"""
+	
+	#Get the x coordinate which is 
+	#the offset plus the cell width * the cell letter as a number
+	x = Constants.X_OFFSET + (Constants.COLUMN_LETTERS.index(column) * Constants.CELL_WIDTH)
+	
+	#Get the y coordinate which is 
+	#the offset minus the cell height * the cell number
+	y = Constants.Y_OFFSET - (Constants.ROW_NUMBERS.index(row) * Constants.CELL_HEIGHT)
+	
+	return (x, y)
+
+
+def place_piece(column, row, color):
 	"""
 	Places a piece at a column and row
 	Takes a column, ex: 'A'	and a row, ex: 8
@@ -64,8 +82,28 @@ def place_piece(column, row):
 	#Upper case letter
 	column = column.upper()
 
-
-	print(column, row)
+	#Get the turtle from the grid
+	turtle = reversigrid.grid
+	
+	#Get the screen from the grid
+	wn = reversigrid.wn
+	
+	#Go to the position
+	turtle.up()
+	turtle.goto(getPosition(column, row))
+	turtle.down()
+	
+	#Set turtle properties
+	turtle.fillcolor(color)
+	turtle.pensize(2)
+	
+	#Draw a filled circle
+	turtle.begin_fill()
+	turtle.circle(Constants.CELL_WIDTH / 2)
+	turtle.end_fill()
+	
+	#Update what is drawn
+	wn.update()
 
 def prompt_move():
 	"""Prompts the user for a move until it is valid.
@@ -73,6 +111,8 @@ def prompt_move():
 
 	valid_move = False
 	location = ""
+	
+	#Try and except allow the program to keep going after an error
 	try:
 		#Only run when move is not valid
 		while not valid_move:
@@ -94,9 +134,17 @@ def prompt_move():
 				print("That is not a valid position!")
 
 		#Place a piece at the position
-		place_piece(column, row)
+		place_piece(column, row, "white")
 	except:
-		print("Quitting")
+		print("Game over.")
+	
+	#Exit when the screen is clicked
+	reversigrid.wn.exitonclick()
+
+place_piece("D", 4, "black")
+place_piece("E", 4, "white")
+place_piece("D", 5, "white")
+place_piece("E", 5, "black")
 
 #Only run this file if it is the main file
 if __name__ == "__main__":
