@@ -1,8 +1,8 @@
 #Here we set up the turtle window.
-
+import constants
 import turtle
+import time
 wn = turtle.Screen()
-wn.setup(1000, 1080)
 text = turtle.Turtle()
 
 wn.clear()
@@ -22,10 +22,9 @@ def MenuInput(text):
 	
 def show_rules():
 	#Initializes rules list
-	
 	text.clear()
 	text.up()
-	text.goto(0, 250)
+	text.goto(constants.TITLE_LOCATIONX, constants.TITLE_LOCATIONY)
 	text.down()
 	text.write("RERVERSI GAME", False, align = "center", font = ("Arial", 50, "bold"))
 	rules = []
@@ -40,29 +39,39 @@ def show_rules():
 	rules.append("When a player places a disk on the board, all the pieces that are between that player's newly placed disc \n and any of their previously placed discs, are turned to that player's color. \n")
 	rules.append("When placing your discs on your turn, there has to be at least one piece of the opposite colour between \n your placed piece and any of your previously placed pieces. Otherwise the move is not valid. ")
 	rules.append("The placed pieces have to make either a horizontal, vertical or diagonal line with the opposing player's discs to flip any pieces over.")
-	line = 170
+	line = constants.RULES_LINESTARTY
 	text.up()
-	text.goto(-350, 170)
+	text.goto(constants.TITLE_LOCATIONX, constants.RULES_LINESTARTY)
 	text.down()
 	#Loop to print rules
+	firsttime = "true"
 	for r in range(len(rules)):
 		#Print rule
 		
 		line = line - 30
+		text.up()
+		text.goto(constants.RULES_LINESTARTX, line)
+		text.down()
 		text.write("\n" + str(r + 1) + ") " + rules[r], False, align = "left", font = ("Arial", 10, "normal"))
 		text.up()
-		text.goto(-350, line)
+		text.goto(constants.RULES_LINESTARTX, line)
 		text.down()
+		#Ask user if they wish to continue
+		option = MenuInput("Press enter to continue or q to quit: ")
 		
+		quit = "false"
+		firsttime = "false"
+		if option is "q":
+			#Ends loop prematurely
+			text.clear()
+			text.up()
+			text.goto(constants.TITLE_LOCATIONX, constants.TITLE_LOCATIONY)
+			text.down()
+			text.write("RERVERSI GAME", False, align = "center", font = ("Arial", 50, "bold"))
+			quit = "true"
+			break
 			
-	#Ask user if they wish to continue or exit
-	option = MenuInput("Press enter to return to the Menu or press any q to quit: ")
-		
-	quit = "false"
-	if option is "q":
-		quit = "true"		
-		exit()	
-	
+			
 	#Prints blank line
 	return quit
 	print()
@@ -72,23 +81,23 @@ def show_rules():
 def MainMenu():
 	text.clear()
 	text.up()
-	text.goto(0, 250)
+	text.goto(constants.TITLE_LOCATIONX, constants.TITLE_LOCATIONY)
 	text.down()
 	text.write("RERVERSI GAME", False, align = "center", font = ("Arial", 50, "bold"))
 	text.up()
-	text.goto(0, 200)
+	text.goto(constants.TITLE_LOCATIONX, constants.RULES_LIST)
 	text.down()
 	text.write("1. Play", False, align = "center", font = ("Arial", 10, "normal"))
 	text.up()
-	text.goto(0, 180)
+	text.goto(constants.TITLE_LOCATIONX, constants.RULES_LIST-20)
 	text.down()
 	text.write("2. Rules", False, align = "center", font = ("Arial", 10, "normal"))
 	text.up()
-	text.goto(0, 160)
+	text.goto(constants.TITLE_LOCATIONX, constants.RULES_LIST-40)
 	text.down()
 	text.write("3. Exit", False, align = "center", font = ("Arial", 10, "normal"))
 	text.up()
-	text.goto(0, 130)
+	text.goto(constants.TITLE_LOCATIONX, constants.RULES_LIST-60)
 	text.down()
 	#Here we accept the user's input and based on it, what the function returns changes.
 	userinput = MenuInput("Please enter a menu number:")
@@ -101,22 +110,18 @@ def MainMenu():
 			userchoice = "return"
 	elif userinput == "3":
 		userchoice = "quit"
-
 		
 	#If the user makes an invalid choice, then this screen will show up, where it unstucts the uers to make a valid choice.
 	else :
 		text.clear()
 		text.up()
-		text.goto(0, 250)
+		text.goto(constants.TITLE_LOCATIONX, constants.TITLE_LOCATIONY)
 		text.down()
-		text.write("Invalid option. Try Again", False, align = "center", font = ("Arial", 40, "bold"))
+		text.write("Invalid option, please choose 1, 2 or 3. ", False, align = "center", font = ("Arial", 10, "bold"))
+		time.sleep(2)
+		text.clear()
 		userchoice = "Invalid"
-		option = MenuInput("Press enter to return to the Menu or press any q to quit: ")
 		
-		quit = "false"
-		if option is "q":
-			quit = "true"		
-			exit()
 		
 	return userchoice
 	
@@ -128,10 +133,12 @@ def StartMenu():
 	while userchoice is not "Play":
 		text.clear()
 		userchoice = MainMenu()
+		print(userchoice)
 		if userchoice == "quit":
 			exit()
 			break
 
+#Uncomment the below line to test the function
 StartMenu()
 	
 
