@@ -1,5 +1,5 @@
 #Here we set up the turtle window.
-import constants
+import Constants
 import turtle
 import time
 wn = turtle.Screen()
