@@ -6,7 +6,7 @@
 
 #import turtle module and opens the turtle screen.
 import turtle
-import constants
+import Constants
 wn = turtle.Screen()
 
 #Set the size of the screen
