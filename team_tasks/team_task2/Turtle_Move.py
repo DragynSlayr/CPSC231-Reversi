@@ -86,7 +86,7 @@ def place_piece(column, row, color):
 	turtle = reversigrid.grid
 
 	#Get the screen from the grid
-	wn = reversigrid.wn
+	wn = Constants.WINDOW
 
 	#Go to the position
 	turtle.up()
@@ -139,12 +139,15 @@ def prompt_move():
 		print("Game over.")
 
 	#Exit when the screen is clicked
-	reversigrid.wn.exitonclick()
+	Constants.WINDOW.exitonclick()
 
-place_piece("D", 4, "black")
-place_piece("E", 4, "white")
-place_piece("D", 5, "white")
-place_piece("E", 5, "black")
+def setup():
+	reversigrid.main()
+
+	place_piece("D", 4, "black")
+	place_piece("E", 4, "white")
+	place_piece("D", 5, "white")
+	place_piece("E", 5, "black")
 
 #Only run this file if it is the main file
 if __name__ == "__main__":
