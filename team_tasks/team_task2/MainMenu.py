@@ -24,7 +24,7 @@ def show_rules():
 	#Initializes rules list
 	text.clear()
 	text.up()
-	text.goto(constants.TITLE_LOCATIONX, constants.TITLE_LOCATIONY)
+	text.goto(Constants.TITLE_LOCATIONX, Constants.TITLE_LOCATIONY)
 	text.down()
 	text.write("RERVERSI GAME", False, align = "center", font = ("Arial", 50, "bold"))
 	rules = []
@@ -39,9 +39,9 @@ def show_rules():
 	rules.append("When a player places a disk on the board, all the pieces that are between that player's newly placed disc \n and any of their previously placed discs, are turned to that player's color. \n")
 	rules.append("When placing your discs on your turn, there has to be at least one piece of the opposite colour between \n your placed piece and any of your previously placed pieces. Otherwise the move is not valid. ")
 	rules.append("The placed pieces have to make either a horizontal, vertical or diagonal line with the opposing player's discs to flip any pieces over.")
-	line = constants.RULES_LINESTARTY
+	line = Constants.RULES_LINESTARTY
 	text.up()
-	text.goto(constants.TITLE_LOCATIONX, constants.RULES_LINESTARTY)
+	text.goto(Constants.TITLE_LOCATIONX, Constants.RULES_LINESTARTY)
 	text.down()
 	#Loop to print rules
 	firsttime = "true"
@@ -50,11 +50,11 @@ def show_rules():
 
 		line = line - 30
 		text.up()
-		text.goto(constants.RULES_LINESTARTX, line)
+		text.goto(Constants.RULES_LINESTARTX, line)
 		text.down()
 		text.write("\n" + str(r + 1) + ") " + rules[r], False, align = "left", font = ("Arial", 10, "normal"))
 		text.up()
-		text.goto(constants.RULES_LINESTARTX, line)
+		text.goto(Constants.RULES_LINESTARTX, line)
 		text.down()
 		#Ask user if they wish to continue
 		option = MenuInput("Press enter to continue or q to quit: ")
@@ -65,7 +65,7 @@ def show_rules():
 			#Ends loop prematurely
 			text.clear()
 			text.up()
-			text.goto(constants.TITLE_LOCATIONX, constants.TITLE_LOCATIONY)
+			text.goto(Constants.TITLE_LOCATIONX, Constants.TITLE_LOCATIONY)
 			text.down()
 			text.write("RERVERSI GAME", False, align = "center", font = ("Arial", 50, "bold"))
 			quit = "true"
@@ -81,23 +81,23 @@ def show_rules():
 def MainMenu():
 	text.clear()
 	text.up()
-	text.goto(constants.TITLE_LOCATIONX, constants.TITLE_LOCATIONY)
+	text.goto(Constants.TITLE_LOCATIONX, Constants.TITLE_LOCATIONY)
 	text.down()
 	text.write("RERVERSI GAME", False, align = "center", font = ("Arial", 50, "bold"))
 	text.up()
-	text.goto(constants.TITLE_LOCATIONX, constants.RULES_LIST)
+	text.goto(Constants.TITLE_LOCATIONX, Constants.RULES_LIST)
 	text.down()
 	text.write("1. Play", False, align = "center", font = ("Arial", 10, "normal"))
 	text.up()
-	text.goto(constants.TITLE_LOCATIONX, constants.RULES_LIST-20)
+	text.goto(Constants.TITLE_LOCATIONX, Constants.RULES_LIST-20)
 	text.down()
 	text.write("2. Rules", False, align = "center", font = ("Arial", 10, "normal"))
 	text.up()
-	text.goto(constants.TITLE_LOCATIONX, constants.RULES_LIST-40)
+	text.goto(Constants.TITLE_LOCATIONX, Constants.RULES_LIST-40)
 	text.down()
 	text.write("3. Exit", False, align = "center", font = ("Arial", 10, "normal"))
 	text.up()
-	text.goto(constants.TITLE_LOCATIONX, constants.RULES_LIST-60)
+	text.goto(Constants.TITLE_LOCATIONX, Constants.RULES_LIST-60)
 	text.down()
 	#Here we accept the user's input and based on it, what the function returns changes.
 	userinput = MenuInput("Please enter a menu number:")
@@ -115,7 +115,7 @@ def MainMenu():
 	else :
 		text.clear()
 		text.up()
-		text.goto(constants.TITLE_LOCATIONX, constants.TITLE_LOCATIONY)
+		text.goto(Constants.TITLE_LOCATIONX, Constants.TITLE_LOCATIONY)
 		text.down()
 		text.write("Invalid option, please choose 1, 2 or 3. Returning to Menu... ", False, align = "center", font = ("Arial", 10, "bold"))
 		time.sleep(2)
