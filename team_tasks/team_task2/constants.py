@@ -1,4 +1,4 @@
-#Constants.py
+#constans
 
 NUM_OF_CELLS = 64
 NUM_OF_ROWS = 8

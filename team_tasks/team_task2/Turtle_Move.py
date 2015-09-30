@@ -1,5 +1,5 @@
 import string
-import Constants
+import constants
 import reversigrid
 
 def get_stripped_line(location):
