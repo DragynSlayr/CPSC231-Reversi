@@ -135,5 +135,5 @@ def main():
 	#wn.mainloop()
 
 #Only runs when it is not imported
-if __name__ is "__name__":
+if __name__ is "__main__":
 	main()
