@@ -1,5 +1,5 @@
 import string
-import constants
+import Constants
 import reversigrid
 
 def get_stripped_line(location):
@@ -59,17 +59,17 @@ def getPosition(column, row):
 	"""
 	Gets the position in pixesl from the column and row
 	Takes a column and row, ex, A 4
-	Returns position in pixels, ex, (400, 300) 
+	Returns position in pixels, ex, (400, 300)
 	"""
-	
-	#Get the x coordinate which is 
+
+	#Get the x coordinate which is
 	#the offset plus the cell width * the cell letter as a number
 	x = Constants.X_OFFSET + (Constants.COLUMN_LETTERS.index(column) * Constants.CELL_WIDTH)
-	
-	#Get the y coordinate which is 
+
+	#Get the y coordinate which is
 	#the offset minus the cell height * the cell number
 	y = Constants.Y_OFFSET - (Constants.ROW_NUMBERS.index(row) * Constants.CELL_HEIGHT)
-	
+
 	return (x, y)
 
 
@@ -84,24 +84,24 @@ def place_piece(column, row, color):
 
 	#Get the turtle from the grid
 	turtle = reversigrid.grid
-	
+
 	#Get the screen from the grid
 	wn = reversigrid.wn
-	
+
 	#Go to the position
 	turtle.up()
 	turtle.goto(getPosition(column, row))
 	turtle.down()
-	
+
 	#Set turtle properties
 	turtle.fillcolor(color)
 	turtle.pensize(2)
-	
+
 	#Draw a filled circle
 	turtle.begin_fill()
 	turtle.circle(Constants.CELL_WIDTH / 2)
 	turtle.end_fill()
-	
+
 	#Update what is drawn
 	wn.update()
 
@@ -111,7 +111,7 @@ def prompt_move():
 
 	valid_move = False
 	location = ""
-	
+
 	#Try and except allow the program to keep going after an error
 	try:
 		#Only run when move is not valid
@@ -137,7 +137,7 @@ def prompt_move():
 		place_piece(column, row, "white")
 	except:
 		print("Game over.")
-	
+
 	#Exit when the screen is clicked
 	reversigrid.wn.exitonclick()
 

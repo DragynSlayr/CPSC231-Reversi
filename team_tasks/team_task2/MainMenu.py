@@ -2,6 +2,7 @@
 import Constants
 import turtle
 import time
+import Turtle_Move
 wn = turtle.Screen()
 text = turtle.Turtle()
 
@@ -134,6 +135,8 @@ def StartMenu():
 		text.clear()
 		userchoice = MainMenu()
 		print(userchoice)
+		if userchoice == "Play":
+			Turtle_Move.prompt_move()
 		if userchoice == "quit":
 			exit()
 			break
