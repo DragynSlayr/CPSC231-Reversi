@@ -134,18 +134,18 @@ def StartMenu():
 	#This loop will not procede until the user either hits play or exit in the menu.
 	#If the user chooses "rules" then they are redirected back to the main menu, so the loop continues
 
-	print("!")
-
 	userchoice = MainMenu()
-	while userchoice is not "Play":
+	while userchoice != "Play" or userchoice != "quit":
 		text.clear()
-		userchoice = MainMenu()
 		print(userchoice)
 		if userchoice == "quit":
 			exit()
+		if userchoice == "Play":
 			break
-	Turtle_Move.setup()
-	Turtle_Move.prompt_move()
+		userchoice = MainMenu()
+	if userchoice == "Play":
+		Turtle_Move.setup()
+		Turtle_Move.prompt_move()
 
 #Run if main file
 if __name__ == "__main__":
