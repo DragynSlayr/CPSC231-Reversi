@@ -131,8 +131,10 @@ def getPos(x, y):
 
 def main():
 	wn.onscreenclick(getPos)
-	wn.mainloop()
+	
 
 #Only runs when it is not imported
 if __name__ is "__name__":
 	main()
+
+wn.mainloop()
