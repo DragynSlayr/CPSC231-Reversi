@@ -131,9 +131,12 @@ def main():
 	grid.pencolor("black")
 	grid.write("R   e   v   e   r   s   i")
 	wn.update()
+	
+	if __name__ == "__main__":
+		wn.exitonclick()
 	#wn.onscreenclick(getPos)
 	#wn.mainloop()
 
 #Only runs when it is not imported
-if __name__ is "__name__":
+if __name__ == "__main__":
 	main()
