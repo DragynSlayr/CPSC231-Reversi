@@ -1,6 +1,6 @@
 import string
 import Constants
-import reversigrid
+import ReversiGrid
 
 def get_stripped_line(location):
 	"""
@@ -83,7 +83,7 @@ def place_piece(column, row, color):
 	column = column.upper()
 
 	#Get the turtle from the grid
-	turtle = reversigrid.grid
+	turtle = ReversiGrid.grid
 
 	#Get the screen from the grid
 	wn = Constants.WINDOW
@@ -142,7 +142,7 @@ def prompt_move():
 	Constants.WINDOW.exitonclick()
 
 def setup():
-	reversigrid.main()
+	ReversiGrid.main()
 
 	place_piece("D", 4, "black")
 	place_piece("E", 4, "white")

@@ -2,7 +2,7 @@
 import Constants
 import turtle
 import time
-import Turtle_Move
+import TurtleMove
 
 wn = Constants.WINDOW
 text = turtle.Turtle()
@@ -144,8 +144,8 @@ def StartMenu():
 			break
 		userchoice = MainMenu()
 	if userchoice == "Play":
-		Turtle_Move.setup()
-		Turtle_Move.prompt_move()
+		TurtleMove.setup()
+		TurtleMove.prompt_move()
 
 #Run if main file
 if __name__ == "__main__":
