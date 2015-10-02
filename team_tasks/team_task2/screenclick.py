@@ -4,5 +4,6 @@ layout = turtle.Turtle()
 
 wn.onscreenclick(layout.goto)
 
-wn.onkey(wn.bye, "SPACE")
+wn.onkey(wn.bye, "space")
+wn.listen()
 wn.mainloop()
