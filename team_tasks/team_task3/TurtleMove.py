@@ -116,8 +116,11 @@ def prompt_move():
 	try:
 		#Only run when move is not valid
 		while not valid_move:
+			wn = Constants.WINDOW
+
 			#Prompt the user for a location
-			location = input("Enter a location ('q' to quit): ").strip()
+			location = wn.textinput("Piece Location", "Enter a location ('q' to quit): ").strip()
+			#location = input("Enter a location ('q' to quit): ").strip()
 
 			#Splits location into column and row
 			column_and_row = get_column_and_row(location)
