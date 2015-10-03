@@ -145,7 +145,9 @@ def prompt_move():
 	#Exit when the screen is clicked
 	Constants.WINDOW.exitonclick()
 
-#Draws the board and places starting pieces
+# Draws the board and places starting pieces
+# Params: None
+# Returns: None
 def setup():
 	#Draws the board
 	ReversiGrid.main()
