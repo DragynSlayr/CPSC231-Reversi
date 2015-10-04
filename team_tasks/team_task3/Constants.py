@@ -1,7 +1,5 @@
-"""
-This file holds the constant values for the game
-These values are used for all drawing and sizing of the game
-"""
+#This file holds the constant values for the game
+#These values are used for all drawing and sizing of the game
 
 import turtle
 import string
