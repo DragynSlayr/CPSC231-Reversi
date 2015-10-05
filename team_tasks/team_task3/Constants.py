@@ -2,7 +2,6 @@
 #These values are used for all drawing and sizing of the game
 
 import turtle
-import string
 
 #Grid information
 NUM_OF_ROWS = 8
