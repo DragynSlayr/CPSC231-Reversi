@@ -5,7 +5,7 @@ import random
 #Set up screem
 wn = turtle.Screen()
 wn.setworldcoordinates(0, 0, 100, 100)
-wn.setup(800, 800)
+wn.setup(1920, 1080)
 wn.tracer(0)
 
 #Set up turtle
@@ -21,6 +21,9 @@ rows = 10
 #Constants for cell letters and numbers
 column_letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
 row_numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+#Changes color
+isWhite = True
 
 #Draws a circle
 #Params: radius, The radius of the circle
@@ -97,18 +100,36 @@ def place_piece(x, y):
         letter = str(column_letters[int(x / cell_width)])
         number = str(row_numbers[int(y / cell_height)])
         line = "(" + letter + ", " + number + ")"
+        
+        #Calculate location
+        x_location = (column_letters.index(letter) * cell_width) + (cell_width / 2)
+        y_location = (int(number) - 1) * cell_height
+        
+        #Use global variable
+        global isWhite
+	
 
         #Place the piece
-        draw_at_location((column_letters.index(letter) * cell_width) + cell_width / 2, (int(number) - 1) * cell_height, line, random.randint(0,1) == 0)
+        draw_at_location(x_location, y_location, line, isWhite)
+        
+        #Flip the value of isWhite
+        isWhite = not isWhite
 
+#The main loop of the function
+#Waits for input from the user
+#Params: None
+#Returns: None
 def run():
     wn.onclick(place_piece)
     wn.onkey(wn.bye, "space")
     wn.listen()
     wn.mainloop()
 
+#Draws a square at the turtle's location
+#Params: None
+#Returns: None 
 def draw_cell():
-    t.fillcolor("green")
+    t.fillcolor("blue")
     t.begin_fill()
     for i in range(2):
         t.forward(cell_width)
@@ -119,6 +140,9 @@ def draw_cell():
     t.fillcolor("white")
     wn.update()
 
+#Draws the game board 
+#Parmas: None
+#Returns: None
 def draw_grid():
     for i in range(rows):
         for j in range(columns):
@@ -127,6 +151,9 @@ def draw_grid():
         move_to(0, cell_height * (i + 1))
         wn.update()
 
+#The main function, draws board then waits for user input
+#Params: None
+#Returns: None
 def start():
     draw_grid()
     run()
