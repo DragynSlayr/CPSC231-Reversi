@@ -87,10 +87,6 @@ def getPos(x, y):
 	return
 
 def main():
-<<<<<<< HEAD
-	wn.onscreenclick(getPos)
-	
-=======
 	wn = Constants.WINDOW
 
 	wn.clear()
@@ -140,10 +136,7 @@ def main():
 		wn.exitonclick()
 	#wn.onscreenclick(getPos)
 	#wn.mainloop()
->>>>>>> 3d212bb7599d7b681f53d339684d001aeb948f2b
 
 #Only runs when it is not imported
 if __name__ == "__main__":
 	main()
-
-wn.mainloop()
