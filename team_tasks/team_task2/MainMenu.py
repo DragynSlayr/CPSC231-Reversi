@@ -2,8 +2,13 @@
 import Constants
 import turtle
 import time
-wn = turtle.Screen()
+import Turtle_Move
+
+wn = Constants.WINDOW
 text = turtle.Turtle()
+
+wn.setup(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
+wn.setworldcoordinates(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
 
 wn.clear()
 #
@@ -129,7 +134,9 @@ def StartMenu():
 	#This loop will not procede until the user either hits play or exit in the menu.
 	#If the user chooses "rules" then they are redirected back to the main menu, so the loop continues
 
-	userchoice = MainMenu
+	print("!")
+
+	userchoice = MainMenu()
 	while userchoice is not "Play":
 		text.clear()
 		userchoice = MainMenu()
@@ -137,12 +144,12 @@ def StartMenu():
 		if userchoice == "quit":
 			exit()
 			break
+	Turtle_Move.setup()
+	Turtle_Move.prompt_move()
 
-#Uncomment the below line to test the function
-StartMenu()
-
-
-
+#Run if main file
+if __name__ == "__main__":
+	StartMenu()
 
 #Remember to comment out this exit once this file has been imported
-wn.exitonclick()
+#wn.exitonclick()
