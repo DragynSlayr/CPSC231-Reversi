@@ -1,14 +1,11 @@
-#Here is another draft of the gameboard.
-#I could not get the world coordinates to work with 0, 0 on the top left. It made everything upside down. On top of that,
-#it changes the orientation of some of the commands like setheading.
-#0, 0 is bottom left (for now) and it makes everything work properly. (Seriously! left was right with the other way)
-#When you click you will get the position printed in the command terminal.
+#This is the module that will create the Reversi Game board.
 
-#import turtle module and opens the turtle screen.
+
+#Imports turtle module and opens the turtle screen. imports constants
 import turtle
 import Constants
 
-#creates a turtle class called grid
+#Creates a turtle class called grid
 grid = turtle.Turtle()
 
 #function for creating a square
@@ -81,37 +78,12 @@ def reversi_frame():
 	grid.forward(Constants.WINDOW_HEIGHT)
 	grid.penup()
 
-#the two functions below will, together, print the position of where you click on the screen.
-def getPos(x, y):
-	print(x, ", ", y)
-	return
-
-def main():
-	wn = Constants.WINDOW
-
-	wn.clear()
-
-	#Set the size of the screen
-	wn.setup(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
-
-	wn.tracer(10) #makes the turtle end somewhere differently as well for some reason.
-	#changes the default coordinates to user made coordinates.
-
-	wn.setworldcoordinates(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
-	#in this case bottom left corner is 0,0. Changes screen to World coordinates mode from standard.
-
-	#pre-set the turtle
-	grid.speed(0)
-	grid.penup()
-	grid.goto(Constants.WINDOW_WIDTH / 4, Constants.WINDOW_HEIGHT * (3 / 4))
-	grid.pendown()
-	grid.hideturtle()
-
-	wn.reset()
-	#Didn't function this one out yet.....
-	#nested for loop that creates the board with the above functions.
-	for y in Constants.ROW_NUMBERS: #This stacks the rows on each other.
-		for x in Constants.COLUMN_LETTERS: #This creates the horizontal rows.
+#This is the function that creates the board, using the functions above.
+#It contains a nested for loop that will create the grid and label it.
+#It will also frame the game window.
+def ReversiBoard():
+	for y in Constants.ROW_NUMBERS: #This stacks the rows of squares downwards.
+		for x in Constants.COLUMN_LETTERS: #This creates the squares in a horizontal row.
 			grid.fillcolor("green")
 			grid.begin_fill()
 			grid.pencolor ("black")
@@ -130,12 +102,40 @@ def main():
 	grid.pendown()
 	grid.pencolor("black")
 	grid.write("R   e   v   e   r   s   i")
+
+
+#This function creates the window, sets the coordinates of the window, creates the grid with labels, and frames it.
+def main():
+	wn = Constants.WINDOW
+	
+	wn.clear()
+
+	#Set the size of the screen
+	wn.setup(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
+
+	wn.tracer(10) 
+	
+	#The method below changes the default coordinates to user made coordinates.
+	#in this case bottom left corner is 0,0. Changes screen to World coordinates mode from standard.
+	#0, 0 is bottom left of the window 
+	wn.setworldcoordinates(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
+	
+
+	#pre-set the turtle
+	grid.speed(0)
+	grid.penup()
+	grid.goto(Constants.WINDOW_WIDTH / 4, Constants.WINDOW_HEIGHT * (3 / 4))
+	grid.pendown()
+	grid.hideturtle()
+	ReversiBoard()
 	wn.update()
 	
 	if __name__ == "__main__":
 		wn.exitonclick()
-	#wn.onscreenclick(getPos)
-	#wn.mainloop()
+
+	wn.reset()
+	
+
 
 #Only runs when it is not imported
 if __name__ == "__main__":
