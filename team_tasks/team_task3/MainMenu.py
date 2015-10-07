@@ -9,7 +9,9 @@ wn = Constants.WINDOW
 text = turtle.Turtle()
 wn.setup(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
 wn.setworldcoordinates(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
-
+wn = turtle.Screen()
+text = turtle.Turtle()
+wn.clear()
 
 #
 #______      ___________    ____  _______ .______          _______. __       _______      ___      .___  ___.  _______
@@ -20,9 +22,7 @@ wn.setworldcoordinates(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
 #| _| `._____|_______|   \__/     |_______|| _| `._____|_______/    |__|     \______| /__/     \__\ |__|  |__| |_______|
 
 
-wn = turtle.Screen()
-text = turtle.Turtle()
-wn.clear()
+
 #This function accepts and returns a user input in the turtle screen.
 def MenuInput(text):
 	userinput = wn.textinput("User Input", text)
@@ -70,6 +70,7 @@ def MenuRules():
 		exit()
 	
 def MainMenu():
+	#We now print all of the menu text
 	text.clear()
 	text.up()
 	text.goto(constants.TITLE_LOCATIONX, constants.TITLE_LOCATIONY)
@@ -90,29 +91,33 @@ def MainMenu():
 	text.up()
 	text.goto(constants.TITLE_LOCATIONX, constants.RULES_LIST-60)
 	text.down()
+	#And then we take the user's choice
 	MenuChoice = MenuInput("Please make a choice:")
 	return MenuChoice
 	
 
 def InvalidChoice():
+	#If the user makes an invalid choice then it prints out this screen:
 	text.clear()
 	text.up()
 	text.goto(constants.TITLE_LOCATIONX, constants.TITLE_LOCATIONY)
 	text.down()
 	text.write("Invalid Choice", False, align = "center", font = ("Arial", 50, "bold"))
+	#Delay it by one second
 	time.sleep(1)
 	
 
 def main():
 	
-	
 	while 0 < 1 :
+		#If the user chooses play, break the loop and start the game
 		UserChoice = MainMenu()
 		if UserChoice == '1' :
 			break
 			TurtleMove.setup()
 			TurtleMove.prompt_move()
 		else:
+			#other wise print the rules, or show the invalid choice screen
 			if UserChoice == '2' :
 				MenuRules()
 			if UserChoice == '3':
@@ -125,4 +130,4 @@ if __name__ == "__main__":
 	StartMenu()
 
 #Remember to comment out this exit once this file has been imported
-#wn.exitonclick()
+
