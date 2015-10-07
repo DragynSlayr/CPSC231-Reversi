@@ -82,7 +82,7 @@ def place_piece(column, row, color):
 	column = column.upper()
 
 	#Get the turtle from the grid
-	turtle = ReversiGrid.grid
+	turtle = Constants.TURTLE
 
 	#Get the screen from the grid
 	wn = Constants.WINDOW

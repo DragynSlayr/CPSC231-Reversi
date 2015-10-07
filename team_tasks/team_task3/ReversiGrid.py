@@ -4,11 +4,9 @@
 import turtle
 import Constants
 
-#Creates a turtle class called grid
-grid = turtle.Turtle()
-
 #function for creating a square
 def square():
+	grid = Constants.TURTLE
 	for i in range(4):
 		grid.pendown()
 		grid.forward(Constants.CELL_WIDTH)
@@ -16,6 +14,7 @@ def square():
 
 #Function for labeling each square according to their coordinates in the array.
 def coord_label(x, y):
+	grid = Constants.TURTLE
 	grid.penup()
 	coord = grid.pos()
 	coordx = grid.xcor()
@@ -29,6 +28,7 @@ def coord_label(x, y):
 
 #Function for sending the turtle to the next row lower.
 def next_row():
+	grid = Constants.TURTLE
 	grid.penup()
 	grid.left(180)
 	grid.forward(Constants.WINDOW_WIDTH / 2)
@@ -39,6 +39,7 @@ def next_row():
 
 #Function to label the y coordinates vertically, to the left of the board.
 def label_y():
+	grid = Constants.TURTLE
 	grid.goto(175, 125)
 	#Iterate through the row numbers in reverse
 	for sidey in Constants.ROW_NUMBERS[::-1]:
@@ -52,6 +53,7 @@ def label_y():
 
 #Function to label the x coordinates horizontally, above the board.
 def label_x():
+	grid = Constants.TURTLE
 	grid.goto(225, 525)
 	for sidex in Constants.COLUMN_LETTERS:
 		coordxx = grid.xcor()
@@ -64,6 +66,7 @@ def label_x():
 
 #Function that draws a frame around the board.
 def reversi_frame():
+	grid = Constants.TURTLE
 	grid.pencolor("dark green")
 	grid.pensize(10)
 	grid.goto(0,0)
@@ -81,6 +84,7 @@ def reversi_frame():
 #It contains a nested for loop that will create the grid and label it.
 #It will also frame the game window.
 def ReversiBoard():
+	grid = Constants.TURTLE
 	for y in Constants.ROW_NUMBERS: #This stacks the rows of squares downwards.
 		for x in Constants.COLUMN_LETTERS: #This creates the squares in a horizontal row.
 			grid.fillcolor("green")
@@ -105,6 +109,7 @@ def ReversiBoard():
 
 #This function creates the window, sets the coordinates of the window, creates the grid with labels, and frames it.
 def main():
+	grid = Constants.TURTLE
 	wn = Constants.WINDOW
 	
 	wn.clear()
