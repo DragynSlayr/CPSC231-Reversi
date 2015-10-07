@@ -1,6 +1,5 @@
 #This is the module that will create the Reversi Game board.
 
-
 #Imports turtle module and opens the turtle screen. imports constants
 import turtle
 import Constants
@@ -15,7 +14,7 @@ def square():
 		grid.forward(Constants.CELL_WIDTH)
 		grid.left(90)
 
-#function for labeling each square according to their coordinates in the array.
+#Function for labeling each square according to their coordinates in the array.
 def coord_label(x, y):
 	grid.penup()
 	coord = grid.pos()
@@ -28,7 +27,7 @@ def coord_label(x, y):
 	grid.pendown()
 	grid.pencolor("black")
 
-#function for sending the turtle to the next row lower.
+#Function for sending the turtle to the next row lower.
 def next_row():
 	grid.penup()
 	grid.left(180)
@@ -38,7 +37,7 @@ def next_row():
 	grid.left(90)
 	grid.pendown()
 
-#function to label the y coordinates vertically, to the left of the board.
+#Function to label the y coordinates vertically, to the left of the board.
 def label_y():
 	grid.goto(175, 125)
 	#Iterate through the row numbers in reverse
@@ -51,7 +50,7 @@ def label_y():
 		grid.goto(175, coordyy)
 		grid.setheading(90)
 
-#function to label the x coordinates horizontally, above the board.
+#Function to label the x coordinates horizontally, above the board.
 def label_x():
 	grid.goto(225, 525)
 	for sidex in Constants.COLUMN_LETTERS:
@@ -63,7 +62,7 @@ def label_x():
 		grid.goto(coordxx, 525)
 		grid.setheading(0)
 
-#function that draws a frame around the board.
+#Function that draws a frame around the board.
 def reversi_frame():
 	grid.pencolor("dark green")
 	grid.pensize(10)
@@ -127,7 +126,7 @@ def main():
 	grid.goto(Constants.WINDOW_WIDTH / 4, Constants.WINDOW_HEIGHT * (3 / 4))
 	grid.pendown()
 	grid.hideturtle()
-	ReversiBoard()
+	ReversiBoard() #Creates the board.
 	wn.update()
 	
 	if __name__ == "__main__":
