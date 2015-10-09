@@ -1,8 +1,7 @@
 import turtle
 import math
-import random
 
-#Set up screem
+#Set up screen
 wn = turtle.Screen()
 wn.setworldcoordinates(0, 0, 100, 100)
 wn.setup(1920, 1080)
@@ -129,7 +128,7 @@ def run():
 #Params: None
 #Returns: None 
 def draw_cell():
-    t.fillcolor("blue")
+    t.fillcolor("green")
     t.begin_fill()
     for i in range(2):
         t.forward(cell_width)
@@ -156,6 +155,10 @@ def draw_grid():
 #Returns: None
 def start():
     draw_grid()
+    place_piece(50, 50)
+    place_piece(40, 50)
+    place_piece(40, 40)
+    place_piece(50, 40)
     run()
 
 if __name__ == "__main__":
