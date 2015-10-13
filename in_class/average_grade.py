@@ -21,7 +21,7 @@ def get_average(total, num_of_grades):
 def main():
     #Intro message
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    print("This porgram finds the average grade from the entered values")
+    print("This program finds the average grade from the entered values")
     print("Only values between 0 and 4.3 are valid, enter -1 to exit")
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
