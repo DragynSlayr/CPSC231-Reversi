@@ -4,6 +4,18 @@ import turtle
 import time
 import TurtleMove
 
+<<<<<<< HEAD
+
+#This function accepts and returns a user input in the turtle screen.
+def MenuInput(text):
+	wn=Constants.WINDOW
+	userinput = wn.textinput("User Input", text)
+	return userinput
+	
+def MenuRules():
+	text = Constants.TURTLE
+	#Here we print the title of the game again, after we clear the previous menu.
+=======
 #
 #______      ___________    ____  _______ .______          _______. __       _______      ___      .___  ___.  _______
 #|   _  \    |   ____\   \  /   / |   ____||   _  \        /       ||  |     /  _____|    /   \     |   \/   | |   ____|
@@ -21,6 +33,7 @@ def MenuInput(text):
 def show_rules():
 	text = Constants.TURTLE
 	#Initializes rules list
+>>>>>>> 2fa821953557434486e5183821b0ace348980b1d
 	text.clear()
 	text.up()
 	text.goto(Constants.TITLE_LOCATIONX, Constants.TITLE_LOCATIONY)
@@ -41,9 +54,14 @@ def show_rules():
 	line = Constants.RULES_LINESTARTY
 	text.up()
 	text.goto(Constants.TITLE_LOCATIONX, Constants.RULES_LINESTARTY)
+<<<<<<< HEAD
+	
+=======
+>>>>>>> 2fa821953557434486e5183821b0ace348980b1d
 	text.down()
 	#Loop to print rules
 	firsttime = "true"
+	#Loops for the number of rules in the list, which is what the len() function returns
 	for r in range(len(rules)):
 		#Print rule
 
@@ -55,6 +73,15 @@ def show_rules():
 		text.up()
 		text.goto(Constants.RULES_LINESTARTX, line)
 		text.down()
+<<<<<<< HEAD
+	
+	#If the user choices 3, then the program will exit.
+	RulesChoice = MenuInput("Press any key to return, or press '3' to quit.")
+	if RulesChoice == '3' :
+		exit()
+	
+	#This prints the main menu
+=======
 		#Ask user if they wish to continue
 		option = MenuInput("Press enter to continue or q to quit: ")
 
@@ -77,6 +104,7 @@ def show_rules():
 
 
 	#This prints out all of the main menu text
+>>>>>>> 2fa821953557434486e5183821b0ace348980b1d
 def MainMenu():
 	text = Constants.TURTLE
 	text.clear()
@@ -99,6 +127,47 @@ def MainMenu():
 	text.up()
 	text.goto(Constants.TITLE_LOCATIONX, Constants.RULES_LIST-60)
 	text.down()
+<<<<<<< HEAD
+	#Here the user makes an input, which is what the function returns
+	MenuChoice = MenuInput("Please make a choice:")
+	return MenuChoice
+	
+
+	#This function is used in main, and will only show up if the user makes an invalid key entry
+	
+def InvalidChoice():
+	text = Constants.TURTLE
+	text.clear()
+	text.up()
+	text.goto(Constants.TITLE_LOCATIONX, Constants.TITLE_LOCATIONY)
+	text.down()
+	text.write("Invalid Choice", False, align = "center", font = ("Arial", 50, "bold"))
+	#Wait one second then continue
+	time.sleep(1)
+	
+
+def main():
+	
+	#This loop will always loop back to the main menu, prompting the user for a choice until they press play, or exit.
+	while 0 < 1 :
+		UserChoice = MainMenu()
+		if UserChoice == '1' :
+			#User wants to play!
+			#Here we set up the board and prompt them for a move
+			TurtleMove.setup()
+			TurtleMove.prompt_move()
+			break
+		else:
+			#Check if the user wannts to see the rules or quit
+			if UserChoice == '2' :
+				MenuRules()
+			if UserChoice == '3':
+				exit()
+		#Here we check if the user made a valid choice and dsiplay the appropriate text if they did not.
+		if UserChoice is not '1' or '2' or '3' :
+			InvalidChoice()
+		
+=======
 	#Here we accept the user's input and based on it, what the function returns changes.
 	userinput = MenuInput("Please enter a menu number:")
 	userchoice = "Invalid"
@@ -143,12 +212,18 @@ def StartMenu():
 		TurtleMove.setup()
 		TurtleMove.prompt_move()
 
+>>>>>>> 2fa821953557434486e5183821b0ace348980b1d
 #Run if main file
 if __name__ == "__main__":
 	Constants.WINDOW.setup(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
 	Constants.WINDOW.setworldcoordinates(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
 	Constants.WINDOW.clear()
+<<<<<<< HEAD
+	main()
+	
+=======
 	StartMenu()
+>>>>>>> 2fa821953557434486e5183821b0ace348980b1d
 
 #Remember to comment out this exit once this file has been imported
 #wn.exitonclick()
