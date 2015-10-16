@@ -6,8 +6,7 @@ import turtle
 #Grid information
 NUM_OF_ROWS = 8
 NUM_OF_COLUMNS = 8
-#NUM_OF_CELLS = NUM_OF_ROWS * NUM_OF_COLUMNS
-NUM_OF_CELLS = 6
+NUM_OF_CELLS = NUM_OF_ROWS * NUM_OF_COLUMNS
 
 #Window information
 WINDOW_WIDTH = 800
