@@ -7,6 +7,7 @@ import Constants
 #Params: isOver, Whether the random board should be a completed game
 #        isPretty, Whther the board should be nicely formatted for humans
 #Returns: Random string representing the board
+#Author: Inderpreet Dhillon
 def generate(isOver, isPretty):
     #Will hold the board
     game_state = ""
