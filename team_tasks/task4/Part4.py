@@ -3,17 +3,16 @@ import Constants
 import BoardGenerator as cfg
 
 def PlayerWon(game_state):
-
     numBlack = 0
     numWhite = 0
 
-#Iterate through the game state and count black and white pieces
+    #Iterate through the game state and count black and white pieces
     for i in game_state:
         if i == Constants.PIECE_BLACK:
             numBlack += 1
         elif i == Constants.PIECE_WHITE:
             numWhite += 1
-#Compare number of white and black pieces and return whether a player won or not
+    #Compare number of white and black pieces and return whether a player won or not
     if numBlack > numWhite:
         return False
     else:
