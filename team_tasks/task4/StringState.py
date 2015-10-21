@@ -82,6 +82,10 @@ def validate_local_location(P_gridString, P_location, colour):
 	#|4|x|5|#
 	#|6|7|8|#	
 	#########
+	#NNNNNNNNNNN | NNNNNNNNNNN| NNNNNNWBWBWBBWN|
+	#########
+	#|x|5|
+	#|7|8|
 	
 	
 	
@@ -104,26 +108,37 @@ def validate_local_location(P_gridString, P_location, colour):
 	#	print (L_gridSpot)
 	#	print(L_gridSpot <0)
 		
-		if L_gridSpot <= 0:
+		if L_gridSpot < 0:
 			L_gridList[loopcount] = 'U'
 	#		print("done")
 		
-		if L_gridSpot >=64:
+		if L_gridSpot >63:
 			L_gridList[loopcount] = 'U'
 			
-		if L_gridSpot%8 == 1:
+		if L_gridSpot%8 == 0:
 			L_gridList[loopcount ] = 'U'
 			########################################################################
 			#This is not correctly detecting if it is off the edge left or right!!!!
-			print("AHA")
-			print(L_gridSpot)
-			print(loopcount)
-		loopcount = loopcount +1	
+			#print("AHA")
+			#print(L_gridSpot)
+			#print(loopcount)
+				
+			#For some reason this will check the left side correctly if the next if statement is not enabled
 		
+		if L_gridSpot%7 == 0:
+			L_gridList[loopcount] = 'U'
+			########################################################################
+			#This is not correctly detecting if it is off the edge left or right!!!!
+			#print("AHA")
+			#print(L_gridSpot)
+			#print(loopcount)
+			
+		loopcount = loopcount +1
+	
 	#Uncomment to test
 	
-	#for L_gridSpot in L_gridList:
-		#print(L_gridSpot)
+	for L_gridSpot in L_gridList:
+		print(L_gridSpot)
 			
 		
 			
@@ -133,7 +148,7 @@ def validate_local_location(P_gridString, P_location, colour):
 	
 	
 															#Eventually 'null' will be replaced by the colour of the piece
-validate_local_location(initialize_grid_string_start(), 'A1', 'null')	
+validate_local_location(initialize_grid_string_start(), 'H1', 'null')	
 #print(len(initialize_grid_string_start()))	
 #print(validate_move_location('NNNNNNNNBBBBWWWWNNNNNNNNNNNBWNNNNNNWBNNNNNNNNNNNNNNNNNNNNNNNNNNN', 'H8'))
 
