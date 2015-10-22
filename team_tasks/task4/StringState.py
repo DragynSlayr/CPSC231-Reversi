@@ -82,7 +82,7 @@ def validate_local_location(P_gridString, P_location, colour):
 	#|4|x|5|#
 	#|6|7|8|#	
 	#########
-	#NNNNNNNNNNN | NNNNNNNNNNN| NNNNNNWBWBWBBWN|
+	#NNNNNNNN|NNNNNNNN|NNNNNNNN|
 	#########
 	#|x|5|
 	#|7|8|
@@ -92,9 +92,18 @@ def validate_local_location(P_gridString, P_location, colour):
 	
 	#These locations will then be compared to what is stored in the string to check if any of the pieces is of the opposite colour 
 	
-	L_gridSpot1 = L_StringLocation -9
+	#L_gridSpot1 = L_StringLocation -11
+	#L_gridSpot2 = L_StringLocation -10	
+	#L_gridSpot3 = L_StringLocation -9
+	#L_gridSpot4 = L_StringLocation -1
+	#L_gridSpot5 = L_StringLocation +1
+	#L_gridSpot6 = L_StringLocation +9
+	#L_gridSpot7 = L_StringLocation +10
+	#L_gridSpot8 = L_StringLocation +11
+	
+	L_gridSpot1 = L_StringLocation -7
 	L_gridSpot2 = L_StringLocation -8	
-	L_gridSpot3 = L_StringLocation -7
+	L_gridSpot3 = L_StringLocation -9
 	L_gridSpot4 = L_StringLocation -1
 	L_gridSpot5 = L_StringLocation +1
 	L_gridSpot6 = L_StringLocation +7
@@ -104,39 +113,40 @@ def validate_local_location(P_gridString, P_location, colour):
 	loopcount = 0
 	L_gridList=[L_gridSpot1,  L_gridSpot2, L_gridSpot3,  L_gridSpot4, L_gridSpot5, L_gridSpot6, L_gridSpot7, L_gridSpot8 ]
 	for L_gridSpot in L_gridList:
-		
+		#print (type(L_gridSpot))
+		#print (L_gridSpot)
 	#	print (L_gridSpot)
 	#	print(L_gridSpot <0)
 		
-		if L_gridSpot < 0:
+		if L_gridSpot < 1:
 			L_gridList[loopcount] = 'U'
-	#		print("done")
+			print (L_gridSpot, " is too small!")
 		
-		if L_gridSpot >63:
+		elif L_gridSpot >64:
 			L_gridList[loopcount] = 'U'
-			
-		if L_gridSpot%8 == 0:
-			L_gridList[loopcount ] = 'U'
-			########################################################################
-			#This is not correctly detecting if it is off the edge left or right!!!!
-			#print("AHA")
-			#print(L_gridSpot)
-			#print(loopcount)
-				
-			#For some reason this will check the left side correctly if the next if statement is not enabled
+			print(L_gridSpot, " is too big!")
 		
-		if L_gridSpot%7 == 0:
-			L_gridList[loopcount] = 'U'
-			########################################################################
-			#This is not correctly detecting if it is off the edge left or right!!!!
-			#print("AHA")
-			#print(L_gridSpot)
-			#print(loopcount)
+		
+		elif L_StringLocation%8 == 0:
+			if L_gridSpot%8 ==1:
+				L_gridList[loopcount ] = 'U'
+				print (L_StringLocation, " is divisiable by 8, and ",L_gridSpot, " is divisiable 8 remainder 1" )
+			print (L_StringLocation, " is only divisable by 8, met no conditions")
+		elif L_StringLocation%8 ==1:
+			if L_gridSpot%8 == 0:
+				L_gridList[loopcount ] = 'U'
+				print (L_StringLocation, " is divisiable by 8 remainder 1, and ",L_gridSpot, " is divisiable 8 remainder 0" )
+			print (L_StringLocation, " is only divisable by 8 remainder 1, met no conditions")
+		else:
+			print(L_gridSpot, " met no conditions")
 			
+			
+		
 		loopcount = loopcount +1
 	
 	#Uncomment to test
-	
+	print("#######################")
+	print ("Loopcount = ", loopcount)
 	for L_gridSpot in L_gridList:
 		print(L_gridSpot)
 			
@@ -148,8 +158,10 @@ def validate_local_location(P_gridString, P_location, colour):
 	
 	
 															#Eventually 'null' will be replaced by the colour of the piece
-validate_local_location(initialize_grid_string_start(), 'H1', 'null')	
+validate_local_location(initialize_grid_string_start(), 'A8', 'null')	
 #print(len(initialize_grid_string_start()))	
-#print(validate_move_location('NNNNNNNNBBBBWWWWNNNNNNNNNNNBWNNNNNNWBNNNNNNNNNNNNNNNNNNNNNNNNNNN', 'H8'))
-
-
+#print(validate_move_location('NNNNNNNNBBBBWWWWNNNNNNNNNNNBWNNNNNNWBNNNNNNNNNNNNNNNNNNNNNNNNNNN', 'A2'))
+#UUU
+#PxU
+#PPU
+#UUUPUPPU
