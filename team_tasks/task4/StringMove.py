@@ -78,7 +78,7 @@ def get_move(P_StringState):
 		L_userMove = MenuInput("Please enter a move:")
 		while  validate_move_location(P_StringState, L_userMove) == False:
 			L_userMove = MenuInput("Invalid Location: Re-Enter")
-		
+		print(type(L_userMove))
 		return L_userMove
 
 #Function updates the string to include the move
