@@ -143,8 +143,7 @@ def main():
 		if UserChoice == '1' :
 			#User wants to play!
 			#Here we set up the board and prompt them for a move
-			TurtleMove.setup()
-			TurtleMove.prompt_move()
+			
 
 			#So we must end the loop
 			loopend = True
