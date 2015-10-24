@@ -130,6 +130,10 @@ def InvalidChoice():
 
 
 def main():
+	Constants.WINDOW.setup(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
+	Constants.WINDOW.setworldcoordinates(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
+	Constants.WINDOW.clear()
+
 	#Declare the variable that is used to end the loop
 	loopend = False
 
@@ -143,7 +147,7 @@ def main():
 		if UserChoice == '1' :
 			#User wants to play!
 			#Here we set up the board and prompt them for a move
-			
+
 
 			#So we must end the loop
 			loopend = True
@@ -170,9 +174,6 @@ def main():
 
 #Run if main file
 if __name__ == "__main__":
-	Constants.WINDOW.setup(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
-	Constants.WINDOW.setworldcoordinates(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
-	Constants.WINDOW.clear()
 	main()
 
 

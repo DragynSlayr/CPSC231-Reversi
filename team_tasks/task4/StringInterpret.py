@@ -26,9 +26,9 @@ def StringToPiece(token, i):
 				TurtleMove.place_piece(x_coord,y_coord, "White")
 			i = i + 1
 
-			
 
-			
+
+
 #This function will decide on the colour of the next piece based on whose turn number it is.
 #The takes a counter for the turns as a parameter.
 #It returns a B or a W depending on whose turn it is.
@@ -41,30 +41,30 @@ def WhoseTurn(counter):
 	return Piece
 
 
-	
+
 #This function will convert a move coordinate into a string.
 #It receives the parameters are a token, a move coordinate, and the turn number.
 #It returns the updated string as NewToken.
 #For testing, you can get the index number of the changed character with MoveToString
 #Author: Kyle Hinton
 def StringInterpret(token, NewMove, turn):
-		column = NewMove[0] 
+		column = NewMove[0].upper() 
 		row = int(NewMove[1])
 
 		ColumnIDX = (Constants.COLUMN_LETTERS.index(column))
 		RowIDX = (Constants.ROW_NUMBERS.index(row))
-        
+
 		MoveToString = ((RowIDX * Constants.NUM_OF_ROWS) + ColumnIDX) #Equation for converting a move coordinate to the index number to be changed
 
-		
+
 		TurnColour = WhoseTurn(turn)
-		
+
 		NewToken = token[:MoveToString] + TurnColour + token[MoveToString + 1:]
-        
+
 		StringToPiece(NewToken, 0)
-		
-		
-		
+
+
+
 		#TESTING TESTING TESTING
 		##########################
 		print(" ")
@@ -74,18 +74,18 @@ def StringInterpret(token, NewMove, turn):
 		print(column, "Column")	#Prints the Column Letter
 		print(row, "Row") #Prints the Row Number
 		print(token[MoveToString], ": Character at the move's index number.") #Prints the character at the index [MoveToString]
-		print(MoveToString, "Index number of new move") #Takes the move and converts it to the index number for the string 
+		print(MoveToString, "Index number of new move") #Takes the move and converts it to the index number for the string
 		print(NewToken)	#Prints the NewToken with the character at index.MoveToString in place
 		print(" ")
 		##########################
-		
-		
+
+
 		return NewToken	#returns the NewToken, The updated move.
-		
-		
+
+
 #Sets up the board using the pieces and reading through the string.
 #
-		
+
 def Setup2():
 	NewToken = StringInterpret(("NNNNNNNN" * 8), "D4", -2)
 	NewToken = StringInterpret((NewToken), "E4", -1)
@@ -94,9 +94,9 @@ def Setup2():
 	for turn in range(64):
 		NewToken = StringInterpret((NewToken), input("Move?"), turn + 1)
 
-	
-	
-	
+
+
+
 
 
 if __name__ == "__main__":
@@ -104,5 +104,3 @@ if __name__ == "__main__":
 		Setup2()
 
 		Constants.WINDOW.exitonclick()
-
-        
