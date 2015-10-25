@@ -4,6 +4,7 @@ import StringMove
 import VictoryStatus
 import PlayerVictory
 import StringInterpret
+import Constants
 
 def Main():
 
@@ -21,12 +22,11 @@ def Main():
 		if move != None:
 			Gamestate = StringInterpret.StringInterpret(Gamestate, move, move_num)
 			move_num += 1
-	if PlayerVictory.PlayerWon(Gamestate) == True:
-		#Black Won!
-		print("Black Won")
-	else:
-		#White Won!
-		print("White Won!")
+	#Print who won
+	print(PlayerVictory.PlayerWon(Gamestate))
+
+	#Wait for user
+	Constants.WINDOW.exitonclick()
 
 if __name__ == "__main__":
 	Main()
