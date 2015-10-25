@@ -48,7 +48,7 @@ def WhoseTurn(counter):
 #For testing, you can get the index number of the changed character with MoveToString
 #Author: Kyle Hinton
 def StringInterpret(token, NewMove, turn):
-		column = NewMove[0].upper() 
+		column = NewMove[0].upper()
 		row = int(NewMove[1])
 
 		ColumnIDX = (Constants.COLUMN_LETTERS.index(column))
@@ -56,28 +56,26 @@ def StringInterpret(token, NewMove, turn):
 
 		MoveToString = ((RowIDX * Constants.NUM_OF_ROWS) + ColumnIDX) #Equation for converting a move coordinate to the index number to be changed
 
-
 		TurnColour = WhoseTurn(turn)
 
 		NewToken = token[:MoveToString] + TurnColour + token[MoveToString + 1:]
 
 		StringToPiece(NewToken, 0)
 
-
-
-		#TESTING TESTING TESTING
-		##########################
-		print(" ")
-		print("turn ", turn)
-		print(ColumnIDX, "Columnidx") # Column index number from letters
-		print(RowIDX, "Rowidx")	#Row index number from numbers
-		print(column, "Column")	#Prints the Column Letter
-		print(row, "Row") #Prints the Row Number
-		print(token[MoveToString], ": Character at the move's index number.") #Prints the character at the index [MoveToString]
-		print(MoveToString, "Index number of new move") #Takes the move and converts it to the index number for the string
-		print(NewToken)	#Prints the NewToken with the character at index.MoveToString in place
-		print(" ")
-		##########################
+		if __name__ == "__main__":
+			#TESTING TESTING TESTING
+			##########################
+			print("Testing")
+			print("turn ", turn)
+			print(ColumnIDX, "Columnidx") # Column index number from letters
+			print(RowIDX, "Rowidx")	#Row index number from numbers
+			print(column, "Column")	#Prints the Column Letter
+			print(row, "Row") #Prints the Row Number
+			print(token[MoveToString], ": Character at the move's index number.") #Prints the character at the index [MoveToString]
+			print(MoveToString, "Index number of new move") #Takes the move and converts it to the index number for the string
+			print(NewToken)	#Prints the NewToken with the character at index.MoveToString in place
+			print()
+			##########################
 
 
 		return NewToken	#returns the NewToken, The updated move.
@@ -94,13 +92,7 @@ def Setup2():
 	for turn in range(64):
 		NewToken = StringInterpret((NewToken), input("Move?"), turn + 1)
 
-
-
-
-
-
 if __name__ == "__main__":
 		TurtleMove.setup()
 		Setup2()
-
 		Constants.WINDOW.exitonclick()
