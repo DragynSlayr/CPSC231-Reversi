@@ -60,7 +60,12 @@ def StringInterpret(token, NewMove, turn):
 
 		NewToken = token[:MoveToString] + TurnColour + token[MoveToString + 1:]
 
-		StringToPiece(NewToken, 0)
+		#StringToPiece(NewToken, 0)
+		if WhoseTurn(turn) == "B":
+			color = "White"
+		else:
+			color = "Black"
+		TurtleMove.place_piece(column, row, color)
 
 		if __name__ == "__main__":
 			#TESTING TESTING TESTING
