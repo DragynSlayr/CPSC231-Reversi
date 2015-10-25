@@ -13,10 +13,12 @@ def PlayerWon(game_state):
         elif i == Constants.PIECE_WHITE:
             numWhite += 1
     #Compare number of white and black pieces and return whether a player won or not
-    if numBlack > numWhite:
-        return False
+    if numBlack == numWhite:
+        return "It was a Tie!"
+    elif numBlack > numWhite:
+        return "Black won, with " + str(numBlack) + " pieces!"
     else:
-        return True
+        return "White won, with " + str(numWhite) + " pieces!"
 
 if __name__ == "__main__":
 	board = cfg.generate(True, True)
