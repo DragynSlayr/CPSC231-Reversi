@@ -37,8 +37,6 @@ def validate_move_location(P_gridString, P_location):
 	L_xy = TurtleMove.get_column_and_row(P_location)
 	L_x =  convert_column_number(L_xy[0]) #NOTE!!: This will be assigned 'invalid_range' if it is outside of range. This is done by the convert function
 	L_y = L_xy[1]
-	print ("My x", L_x)
-	print("My y", L_y)
 
 	#Check if the location is on the board,
 	if L_x == 'invalid_range':
@@ -49,8 +47,6 @@ def validate_move_location(P_gridString, P_location):
 	if 0<= L_y > 8:
 		print ("y out of range")
 		return False
-
-	print("U apparently", get_Char(P_gridString, L_x + (8*(L_y -1))))
 
 	#Checks if the location is occupied already
 	if 'N' != get_Char(P_gridString, L_x + (8*(L_y -1))):
