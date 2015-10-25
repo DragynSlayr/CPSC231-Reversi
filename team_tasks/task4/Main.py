@@ -17,9 +17,10 @@ def Main():
 	Gamestate = StringInterpret.StringInterpret(Gamestate, "D5", 3)
 	move_num = 4
 	while VictoryStatus.is_game_over(Gamestate) == False:
-		move = StringMove.get_move(Gamestate)
-		Gamestate = StringInterpret.StringInterpret(Gamestate, move, move_num)
-		move_num += 1
+		move = StringMove.get_move(Gamestate, "Please enter a move:")
+		if move != None:
+			Gamestate = StringInterpret.StringInterpret(Gamestate, move, move_num)
+			move_num += 1
 	if PlayerVictory.PlayerWon(Gamestate) == True:
 		#Black Won!
 		print("Black Won")
