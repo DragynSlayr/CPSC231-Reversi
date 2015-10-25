@@ -2,6 +2,11 @@
 import Constants
 import BoardGenerator as cfg
 
+#Gets a string representing who won
+#Takes the game state as a parameter
+#Reurns who won and the amount of pieces they had
+#Author: Anton Lysov
+#Editor: Inderpreet Dhillon, Added comments to top of function
 def PlayerWon(game_state):
     numBlack = 0
     numWhite = 0
