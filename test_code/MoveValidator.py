@@ -67,20 +67,38 @@ def getPieceAt(column, row, game_state):
     index = calculateIndex(column, row)
     return game_state[index]
 
-
-def getColumnSign(column_index):
+#Gets whether the column's modifier is negative or positive
+#Params: column_index, The index of the column
+#Returns: 1 if the column_index is odd, -1 otherwise
+def getColumnModifier(column_index):
     if column_index % 2 == 1:
         return 1
     else:
         return -1
 
-def getRowSign(row_index):
-    if row_index <= 2:
+#Get whether the row's modifier is positive or negative
+#Params: row_index, The index of the row
+#Returns: 1 if the row_index is odd, -1 otherwise
+def getRowModifier(row_index):
+    if row_index % 2 == 1:
         return 1
     else:
         return -1
 
-def getIdentifier(corner_index, order_index):
+#Get whether the row's modifier is positive or negative
+#Params: corner_index, The index of the corner
+#Returns: 1 if the corner_index is 1 or 2, -1 otherwise
+def getRowSignOfCorner(corner_index):
+    if corner_index <= 2:
+        return 1
+    else:
+        return -1
+
+#Gets the identifier of an index in a corner relative to the user's move
+#Params: corner_index, The index of the corner
+#        order_index, The index of the position relative to the corner
+#Returns a string that represents the order_index's position relative to the corner
+def getIdentifierOfCorner(corner_index, order_index):
     if order_index == 1:
         if corner_index % 2 == 1:
             return "R"
@@ -92,17 +110,18 @@ def getIdentifier(corner_index, order_index):
         else:
             return "T"
     else:
+        #Return a combination of T or B and R or L
         return getIdentifier(corner_index, 2) + getIdentifier(corner_index, 1)
 
 def piecesByCorner(game_state, corner_index, column, row):
     pieces = []
     order_index = 0
     column_sign = getColumnSign(corner_index)
-    row_sign = getRowSign(corner_index)
+    row_sign = getRowSignOfCorner(corner_index)
     for i in range(2):
         for j in range(2):
             if order_index > 0:
-                identifier = getIdentifier(corner_index, order_index)
+                identifier = getIdentifierOfCorner(corner_index, order_index)
             else:
                 identifier = "C"
             pieces.append(getPieceAt(chr(ord(column) + (j * column_sign)), row + (i * row_sign), game_state) + ":" + identifier)
@@ -134,7 +153,7 @@ def getColumnIdentifier(column_index, order_index):
 def piecesByColumn(game_state, column_index, column, row):
     pieces = []
     order_index = 0
-    column_sign = getColumnSign(column_index)
+    column_sign = getColumnModifier(column_index)
     for i in range(3):
         for j in range(2):
             if order_index == 2:
@@ -162,7 +181,7 @@ def getRowIdentifier(row_index, order_index):
 def piecesByRow(game_state, row_index, column, row):
     pieces = []
     order_index = 0
-    row_sign = getColumnSign(row_index)
+    row_sign = getRowModifier(row_index)
     for i in range(2):
         for j in range(3):
             if order_index == 1:
