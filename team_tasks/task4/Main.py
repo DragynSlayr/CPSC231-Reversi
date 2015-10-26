@@ -33,10 +33,10 @@ def Main():
 		move = StringMove.get_move(Gamestate, "Please enter a move:")
 
 		#If the player didn't hit cancel
-		if move != None:
+		if move != "invalid":
 			Gamestate = StringInterpret.StringInterpret(Gamestate, move, move_num)
 			move_num += 1
-			
+
 	#Print who won
 	print(PlayerVictory.PlayerWon(Gamestate))
 
