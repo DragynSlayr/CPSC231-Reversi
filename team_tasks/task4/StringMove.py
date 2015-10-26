@@ -71,14 +71,14 @@ def get_move(P_StringState, message):
 	else:
 		validMove = False
 		while not validMove:
-			#Recursively ask the user for their move until it is valid
-			L_userMove = get_move(P_StringState, "Invalid Location: Re-Enter")
-
 			#Check if the move is not blank
 			if L_userMove != "":
 				validMove = validate_move_location(P_StringState, L_userMove)
 			else:
 				validMove = False
+			#Ask the user for the move again if it is not valid
+			if not validMove:
+				L_userMove = MenuInput("Invalid Location: Re-Enter")
 		return L_userMove
 
 #Function updates the string to include the move
