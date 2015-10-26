@@ -71,8 +71,8 @@ def get_move(P_StringState, message):
 	else:
 		validMove = False
 		while not validMove:
-			#Check if the move is not blank
-			if L_userMove != "":
+			#Check if the move is at least length 2
+			if len(L_userMove) == 2:
 				validMove = validate_move_location(P_StringState, L_userMove)
 			else:
 				validMove = False
