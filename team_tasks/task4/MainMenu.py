@@ -1,13 +1,3 @@
-
-#______      ___________    ____  _______ .______          _______. __       _______      ___      .___  ___.  _______
-#|   _  \    |   ____\   \  /   / |   ____||   _  \        /       ||  |     /  _____|    /   \     |   \/   | |   ____|
-#|  |_)  |   |  |__   \   \/   /  |  |__   |  |_)  |      |   (----`|  |    |  |  __     /  ^  \    |  \  /  | |  |__
-#|      /    |   __|   \      /   |   __|  |      /        \   \    |  |    |  | |_ |   /  /_\  \   |  |\/|  | |   __|
-#|  |\  \----|  |____   \    /    |  |____ |  |\  \----.----)   |   |  |    |  |__| |  /  _____  \  |  |  |  | |  |____
-#| _| `._____|_______|   \__/     |_______|| _| `._____|_______/    |__|     \______| /__/     \__\ |__|  |__| |_______|
-
-
-#Here we import the required files
 import Constants
 import turtle
 import time
@@ -29,7 +19,7 @@ def show_rules():
 	text.up()
 	text.goto(Constants.TITLE_LOCATIONX, Constants.TITLE_LOCATIONY)
 	text.down()
-	text.write("RERVERSI GAME", False, align = "center", font = ("Arial", 50, "bold"))
+	text.write("REVERSI GAME", False, align = "center", font = ("Arial", 50, "bold"))
 
 	#Creates a list called rules, which is emppty for now
 	rules = []
@@ -94,7 +84,7 @@ def MainMenu():
 	text.up()
 	text.goto(Constants.TITLE_LOCATIONX, Constants.TITLE_LOCATIONY)
 	text.down()
-	text.write("RERVERSI GAME", False, align = "center", font = ("Arial", 50, "bold"))
+	text.write("REVERSI GAME", False, align = "center", font = ("Arial", 50, "bold"))
 	text.up()
 	text.goto(Constants.TITLE_LOCATIONX, Constants.RULES_LIST)
 	text.down()
