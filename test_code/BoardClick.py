@@ -11,15 +11,15 @@ wn.tracer(0)
 t = turtle.Turtle()
 t.speed(0)
 
-#Constants
-cell_width = 10
-cell_height = 10
-columns = 10
-rows = 10
-
 #Constants for cell letters and numbers
-column_letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
-row_numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+column_letters = ["A", "B", "C", "D", "E", "F", "G", "H"]
+row_numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+#Constants
+columns = len(column_letters)
+rows = len(row_numbers)
+cell_width = 13
+cell_height = 13
 
 #Changes color
 isWhite = True
@@ -66,7 +66,7 @@ def draw_at_location(x, y, line, isWhite):
     t.end_fill()
 
     #Move to center of cell
-    move_to(x - (cell_width / 5), y + (cell_height / 3))
+    move_to(x - (cell_width / (cell_width / 2)), y + (cell_height / (cell_height / 3)))
 
     #Set line color to black if isWhite is true, white other wise
     t.pencolor("black" if isWhite else "white")
@@ -82,8 +82,8 @@ def draw_at_location(x, y, line, isWhite):
 #Returns: True if a piece can be placed at a location, False otherwise
 def isValidSquare(x, y):
     #Convert the x and y to the coordinate of a cell
-    x /= len(column_letters)
-    y /= len(row_numbers)
+    x /= cell_width
+    y /= cell_height
 
     #Check if the x and y are in any cell
     return (0 <= x and x <= len(column_letters)) and (0 <= y and y <= len(row_numbers))
@@ -97,20 +97,20 @@ def place_piece(x, y):
     if isValidSquare(x, y):
         #Convert x and y to column and row
         letter = str(column_letters[int(x / cell_width)])
-        number = str(row_numbers[int(y / cell_height)])
+        number = str(row_numbers[(len(row_numbers) - 1 ) - int(y / cell_height)])
         line = "(" + letter + ", " + number + ")"
-        
+
         #Calculate location
         x_location = (column_letters.index(letter) * cell_width) + (cell_width / 2)
-        y_location = (int(number) - 1) * cell_height
-        
+        y_location = (row_numbers[int(y / cell_height)] - 1) * cell_height
+
         #Use global variable
         global isWhite
-	
+
 
         #Place the piece
         draw_at_location(x_location, y_location, line, isWhite)
-        
+
         #Flip the value of isWhite
         isWhite = not isWhite
 
@@ -126,7 +126,7 @@ def run():
 
 #Draws a square at the turtle's location
 #Params: None
-#Returns: None 
+#Returns: None
 def draw_cell():
     t.fillcolor("green")
     t.begin_fill()
@@ -139,7 +139,7 @@ def draw_cell():
     t.fillcolor("white")
     wn.update()
 
-#Draws the game board 
+#Draws the game board
 #Parmas: None
 #Returns: None
 def draw_grid():
