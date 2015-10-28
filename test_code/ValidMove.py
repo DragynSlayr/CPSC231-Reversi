@@ -2,7 +2,7 @@
 
 MoveToString = 27                   
                                     #                              
-token = "WNNNNNBNNBNNNBNNNNBNBWBBBBBWNNNNNNBNBNNNNBNNNBNNBNNNNNBNNNNNNNNW"
+token = "WNNNNBBNNBNNBNNNNNBNBWBBBBBWBBBWNNBNBNNNNBNNNBNNBNNNNNBNNNNNNNNW"
 TurnColour = "W"
 OtherColour = "B"
 WEST = -1
@@ -16,50 +16,52 @@ n = 1
 	
 n = 1
 
+def CheckWest(token, MoveToString):
 
-while token[MoveToString + (WEST * n)] == OtherColour:
-#	if token[MoveToString + (WEST * n)] == OtherColour:
+	TurnColour = "W"
+	OtherColour = "B"
+	WEST = -1
+	NORTHWEST = -7
+	n = 1
+
+	while token[MoveToString + (WEST)] == OtherColour:
+		print (n, "n Number of other colours")
+		print (MoveToString + (WEST), "index of OtherColour")
+		MoveToString = MoveToString + (WEST)
+		if token[MoveToString] == "N":
+			print("that move is invalid")
 		n = n + 1
-		print (n, "Number of other colours")
-		print (MoveToString + (WEST * n), "index of OtherColour")
-		MoveToString = MoveToString + (WEST * n)		
-		
-		
-if token[MoveToString + (WEST * n)] == TurnColour:
-	while n != 0:
-			NewToken = token[:MoveToString + (WEST * n) + 1] + TurnColour + token[MoveToString + (WEST * n) + 1:]
-			print(NewToken)
-			n = n + WEST
-			print (n)
 
-""""
-if token[MoveToString + NORTHWEST(n)] == OtherColour:
-	while token[MoveToString + NORTHWEST(n)] == OtherColour:
+		if token[MoveToString + (WEST)] == TurnColour:
+			NewToken = token[:MoveToString] + (TurnColour * n) + token[MoveToString + (WEST) + n + 1:]
+			print (token)
+			print(NewToken)
+			print (n, "How many times we have to print the TurnColour's letter.")
+
+
+			
+def CheckEAST(token, MoveToString):
+	TurnColour = "W"
+	OtherColour = "B"
+	WEST = -1
+	NORTHWEST = -7
+	EAST = 1
+	n = 1
+
+	while token[MoveToString + (EAST)] == OtherColour:
+		print (n, "n Number of other colours")
+		print (MoveToString + (EAST), "index of OtherColour")
+		MoveToString = MoveToString + (EAST)
+		if token[MoveToString] == "N":
+			print("that move is invalid")
 		n = n + 1
-		print (n)
-	if token[MoveToString + NORTHWEST(n)] == TurnColour:
-		while n != 0:
-			NewToken = token[:MoveToString + NORTHWEST(n)] + TurnColour + token[((MoveToString + NORTHWEST(n))) + 1:]
+
+		if token[MoveToString + (EAST)] == TurnColour:
+			NewToken = token[:MoveToString - n + 1] + (TurnColour * n) + token[MoveToString + 1:]
+			print (token)
 			print(NewToken)
-			n = n - NORTHWEST
-			print (n)
-		
-"""
+			print (n, "How many times we have to print the TurnColour's letter.")
 
 
-
-""""
-
-for StringCoord in range(MoveToString, 0, -7):
-	if token[MoveToString - Northwest] == OtherColour:
-		print ("True")
-		print (token[MoveToString - Northwest])
-		print (StringCoord)
-		Northwest = Northwest - 7
-		
-
-	else:
-		print ("False")
-		print (StringCoord)
-		print (token[MoveToString])
-"""
+CheckWest(token, 27)
+CheckEAST(token, 27)
