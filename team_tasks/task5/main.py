@@ -6,6 +6,7 @@ import PlayerVictory
 import StringInterpret
 import Constants
 import BoardGenerator
+import BoardClick
 
 def main():
 	#Set up the other classes
@@ -24,24 +25,9 @@ def main():
 	token = StringInterpret.stringInterpret(token, "E5", 2)
 	token = StringInterpret.stringInterpret(token, "D5", 3)
 
-	#Keeps track of how many moves have been made
-	move_num = 4
-
-	#Loop until board is full
-	while VictoryStatus.endGameStatus(token) == False:
-		#Get validated player move
-		move = StringMove.getMove(token, "Please enter a move:")
-
-		#If the player didn't hit cancel
-		if move != "invalid":
-			hame_state = StringInterpret.stringInterpret(token, move, move_num)
-			move_num += 1
-
-	#Print who won
-	print(PlayerVictory.playerWon(token))
-
-	#Wait for user
-	Constants.WINDOW.exitonclick()
+	#Start listening for clicks on a board,
+	#BoardClick takes over the logic from here
+	BoardClick.run(token)
 
 if __name__ == "__main__":
 	main()
