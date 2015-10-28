@@ -43,3 +43,15 @@ TURTLE = turtle.Turtle()
 PIECE_BLACK = 'B'
 PIECE_WHITE = 'W'
 PIECE_NONE = 'N'
+
+#Information for the boards coordinates
+#The board is drawn between:
+#(LEFT_MOST_X, BOTTOM_MOST_Y) and (RIGHT_MOST_X, TOP_MOST_Y)
+LEFT_MOST_X = 200
+RIGHT_MOST_X = 600
+TOP_MOST_Y = 500
+BOTTOM_MOST_Y = 100
+
+#These represents the above numbers in terms of columns and rows
+OFFSET_OF_COLUMNS = 4
+OFFSET_OF_ROWS = 2
