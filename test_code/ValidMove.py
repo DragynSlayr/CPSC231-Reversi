@@ -1,11 +1,13 @@
 
 
-MoveToString = 27
-token = "WNNNNNBNNBNNNBNNNNBNBNNNWBBWNNNNNNBNBNNNNBNNNBNNBNNNNNBNNNNNNNNW"
+MoveToString = 27                   
+                                    #                              
+token = "WNNNNNBNNBNNNBNNNNBNBWBBBBBWNNNNNNBNBNNNNBNNNBNNBNNNNNBNNNNNNNNW"
 TurnColour = "W"
 OtherColour = "B"
 WEST = -1
 NORTHWEST = -7
+n = 1
 
 # if the piece next to the current move is the OtherColour:  (8 times one for each direction)
 #while the index does not equal the OtherColour add that index to the turn's string. if the index finds the turn colour, turn all the colours up to that index into the TurnColour.
@@ -16,16 +18,18 @@ n = 1
 
 
 while token[MoveToString + (WEST * n)] == OtherColour:
-	while token[MoveToString + (WEST * n)] == OtherColour:
+#	if token[MoveToString + (WEST * n)] == OtherColour:
 		n = n + 1
-		MoveToString = MoveToString + (WEST * n)
 		print (n, "Number of other colours")
 		print (MoveToString + (WEST * n), "index of OtherColour")
-	if token[MoveToString + (WEST * n)] == TurnColour:
-		while n != 0:
-			NewToken = token[:MoveToString + (WEST * n)] + TurnColour + token[MoveToString + (WEST * n) + 1:]
+		MoveToString = MoveToString + (WEST * n)		
+		
+		
+if token[MoveToString + (WEST * n)] == TurnColour:
+	while n != 0:
+			NewToken = token[:MoveToString + (WEST * n) + 1] + TurnColour + token[MoveToString + (WEST * n) + 1:]
 			print(NewToken)
-			n = n - WEST
+			n = n + WEST
 			print (n)
 
 """"
