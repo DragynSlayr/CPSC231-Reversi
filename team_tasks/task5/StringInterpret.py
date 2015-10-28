@@ -2,12 +2,9 @@
 #It will setup the board and place the correct piece colour based on the turn number.
 #It will prompt the user for moves in the terminal and will only take a valid move so a Capital and a number.
 #It will update the board and the token string based on the move.
-
-
 import Constants
 import TurtleMove
 import ReversiGrid
-
 
 #This function will take a token and update the gamestate on the game board.
 #It's parameters are for the token, which is the 64 character string;i, which is the index number on that string.
@@ -26,21 +23,16 @@ def stringToPiece(token, i):
 				TurtleMove.placePiece(x_coord,y_coord, "White")
 			i = i + 1
 
-
-
-
 #This function will decide on the colour of the next piece based on whose turn number it is.
 #The takes a counter for the turns as a parameter.
 #It returns a B or a W depending on whose turn it is.
 def whoseTurn(counter):
 	piece = ""
 	if counter % 2 == 0:
-		piece = "B"
-	else:
 		piece = "W"
+	else:
+		piece = "B"
 	return piece
-
-
 
 #This function will convert a move coordinate into a string.
 #It receives the parameters are a token, a move coordinate, and the turn number.
@@ -60,8 +52,7 @@ def stringInterpret(token, NewMove, turn):
 
 		new_token = token[:move_to_string] + turn_colour + token[move_to_string + 1:]
 
-		#stringToPiece(new_token, 0)
-		if whoseTurn(turn) == "B":
+		if whoseTurn(turn) == "W":
 			color = "White"
 		else:
 			color = "Black"
@@ -81,14 +72,9 @@ def stringInterpret(token, NewMove, turn):
 			print(new_token)	#Prints the new_token with the character at index.move_to_string in place
 			print()
 			##########################
-
-
 		return new_token	#returns the new_token, The updated move.
 
-
 #Sets up the board using the pieces and reading through the string.
-#
-
 def setup2():
 	new_token = StringInterpret(("NNNNNNNN" * 8), "D4", -2)
 	new_token = StringInterpret((new_token), "E4", -1)
