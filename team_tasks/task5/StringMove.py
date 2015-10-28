@@ -34,18 +34,18 @@ def convertColumnNumber(column):
 #Function takes the current grid string and an unstripped location string
 #Returns Boolean whether or not it is on the grid.
 def validateMoveLocation(token, location):
-	
+
 	xy = TurtleMove.getColumnAndRow(location)
 	x =  convertColumnNumber(xy[0]) #NOTE!!: This will be assigned 'invalid_range' if it is outside of range. This is done by the convert function
 	y = xy[1]
-	
+
 	#Check if the location is on the board,
 	if x == 'invalid_range':
-		
+
 		return False
 
 	if 0<= y > 8:
-		
+
 		return False
 
 	#Checks if the location is occupied already
@@ -76,10 +76,8 @@ def getMove(token, message):
 		while not valid_move:
 			#Check if the move is at least length 2
 			if len(user_move) == 2:
-				
 				valid_move = validateMoveLocation(token, user_move)
 			else:
-				
 				valid_move = False
 			#Ask the user for the move again if it is not valid
 			if not valid_move:
