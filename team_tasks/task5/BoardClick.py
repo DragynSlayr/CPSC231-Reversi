@@ -5,11 +5,7 @@ import StringMove
 import VictoryStatus
 import PlayerVictory
 import Main
-
-#We need a global variable to hold the state
-#of the game and the move number
-game_state = ""
-move_num = 4
+import FileHandler
 
 #Converts an x coordinate to a cell on the board
 #Params: x, The x coordinate
@@ -42,10 +38,9 @@ def isValidSquare(x, y):
 #        y, The y location to check
 #Returns: None
 def place_piece(x, y):
-    #Specify that we are using global move_num and game_state
-    global move_num
-    global game_state
-
+    #Load the variables we need
+    game_state = FileHandler.loadVariable("State")
+    move_num = int(FileHandler.loadVariable("Move"))
     #Make sure the game is not over
     if VictoryStatus.endGameStatus(game_state) != True:
         #Check if the point is valid
@@ -64,6 +59,10 @@ def place_piece(x, y):
                 #Update the game state
                 game_state = StringInterpret.stringInterpret(game_state, letter + str(number), move_num)
                 move_num += 1
+
+                #Save the variables
+                FileHandler.saveVariable("State", game_state)
+                FileHandler.saveVariable("Move", str(move_num))
     else:
         #Print who won
     	print(PlayerVictory.playerWon(game_state))
@@ -71,14 +70,18 @@ def place_piece(x, y):
     	#Wait for user
     	Constants.WINDOW.exitonclick()
 
+        #Reset state and move
+    	FileHandler.saveVariable("State", "")
+    	FileHandler.saveVariable("Move", "")
+
 #The main loop of the function
 #Waits for input from the user
 #Params: state, The current game state
 #Returns: None
 def run(state):
-    #Specify the need to use a global variable
-    global game_state
-    game_state = state
+    #Save variables to be used later
+    FileHandler.saveVariable("State", state)
+    FileHandler.saveVariable("Move", str(4))
 
     #Set up the window
     wn = Constants.WINDOW
