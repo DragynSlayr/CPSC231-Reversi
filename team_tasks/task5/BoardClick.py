@@ -4,8 +4,8 @@ import StringInterpret
 import StringMove
 import VictoryStatus
 import PlayerVictory
-import Main
 import FileHandler
+import random
 
 #Converts an x coordinate to a cell on the board
 #Params: x, The x coordinate
@@ -32,6 +32,35 @@ def isValidSquare(x, y):
 
     #Check if the x and y are in any cell
     return xValid and yValid
+
+#Gets a random letter between A-H
+#Params: None
+#Returns: A letter from A-H
+def getRandomLetter():
+    return Constants.COLUMN_LETTERS[random.randrange(Constants.NUM_OF_COLUMNS)]
+
+#Gets a random number between 1-8
+#Params: None
+#Returns: A number from 1-8
+def getRandomNumber():
+    return Constants.ROW_NUMBERS[random.randrange(Constants.NUM_OF_ROWS)]
+
+#The computer generates a move and places a piece if possible
+#Params: state, The current game state
+#        move_num, The current move number
+#Returns: The new game state
+def computerTurn(state, move_num):
+    #Generate a letter and number
+    letter = getRandomLetter()
+    number = getRandomNumber()
+
+    #Generate move until one is valid
+    while not StringMove.validateMoveLocation(state, letter + str(number)):
+        letter = getRandomLetter()
+        number = getRandomNumber()
+
+    #Place piece and return state
+    return StringInterpret.stringInterpret(state, letter + str(number), move_num)
 
 #Places a piece at a location if it is a cell
 #Params: x, The x location to check
@@ -60,6 +89,10 @@ def place_piece(x, y):
                 game_state = StringInterpret.stringInterpret(game_state, letter + str(number), move_num)
                 move_num += 1
 
+                #Allow the computer to place a piece
+                game_state = computerTurn(game_state, move_num)
+                move_num += 1
+
                 #Save the variables
                 FileHandler.saveVariable("State", game_state)
                 FileHandler.saveVariable("Move", str(move_num))
@@ -77,11 +110,18 @@ def place_piece(x, y):
 #The main loop of the function
 #Waits for input from the user
 #Params: state, The current game state
+#        move_num, The current move number
+#        isPlayerMove, Whether it is the player's move or not
 #Returns: None
-def run(state):
+def run(state, move_num, isPlayerMove):
+    #Allow the computer to make it's move
+    if not isPlayerMove:
+        state = computerTurn(state, move_num)
+        move_num += 1
+
     #Save variables to be used later
     FileHandler.saveVariable("State", state)
-    FileHandler.saveVariable("Move", str(4))
+    FileHandler.saveVariable("Move", str(move_num))
 
     #Set up the window
     wn = Constants.WINDOW
