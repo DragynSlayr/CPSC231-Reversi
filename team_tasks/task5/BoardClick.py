@@ -89,9 +89,10 @@ def place_piece(x, y):
                 game_state = StringInterpret.stringInterpret(game_state, letter + str(number), move_num)
                 move_num += 1
 
-                #Allow the computer to place a piece
-                game_state = computerTurn(game_state, move_num)
-                move_num += 1
+                #Allow the computer to place a piece if the game is not over
+                if VictoryStatus.endGameStatus(game_state) != True:
+                    game_state = computerTurn(game_state, move_num)
+                    move_num += 1
 
                 #Save the variables
                 FileHandler.saveVariable("State", game_state)
