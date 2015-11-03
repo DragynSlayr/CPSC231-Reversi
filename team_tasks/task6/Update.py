@@ -27,7 +27,7 @@ def UpdateHorizontal(turn_letter, location, token):
 	XY = TurtleMove.getColumnAndRow(location)
 	x = XY[0]
 	y = XY[1]
-	
+	#print(tempToken)
 	
 	horizontal = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 	counter = 0
@@ -40,7 +40,7 @@ def UpdateHorizontal(turn_letter, location, token):
 	#print(rowIDX)
 	#print(tempToken)
 	row = tempToken[rowIDX] 
-	#print (row)
+	print (row)
 	
 	
 UpdateHorizontal("null", "A2", token)

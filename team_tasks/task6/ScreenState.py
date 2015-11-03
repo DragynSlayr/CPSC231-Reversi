@@ -20,8 +20,8 @@ def prep_token(token):
 			updated_token = updated_token + 'x' + letter
 			count = 1
 		count = count +1
-	updated_token = updated_token + 'x'
-	
+	updated_token = updated_token 
+	#print(updated_token)
 	return updated_token
 			
 
@@ -49,7 +49,7 @@ def initialize_token_string():
 	while loopcount != linetotal:
 		tokenState = tokenState + 'x' + lines[loopcount]
 		loopcount = loopcount+1
-	tokenState = tokenState + 'x'
+	tokenState = tokenState 
 	#Loop ends when all of the lines have been added to the string
 
 	return tokenState
@@ -91,24 +91,27 @@ def convert_string_to_list(tokenState):
 	#these variables are all for the for loop to change which list is being used
 	lineChoiceIncrease = 0
 	lineChoice = tokenList[lineChoiceIncrease]
-	
+	filledTokenList =[]
 	#for each letter in the string parameter
 	
 	for letter in tokenState:
-		
+		#print("letter is ", letter)
 		if letter == 'x':
+			#print(lineChoiceIncrease)
 			#if the letter is x then switch the line list that the letter ie being added to
-			lineChoiceIncrease += lineChoiceIncrease
 			lineChoice = tokenList[lineChoiceIncrease]
-		
+			lineChoiceIncrease = lineChoiceIncrease +1
+			
+			#Also means that we now have a filled line that we can use!
+			filledTokenList.append(lineChoice)
+			#print(lineChoice)
 			
 		if letter != 'x':
 			#if the letter is regular then add it to the list
 			lineChoice.append(letter)
-	
-	
-	#Returns the list
-	return tokenList
+		
+
+	return filledTokenList
 	
 	
 	
@@ -151,8 +154,8 @@ def clean_token(token):
 			updated_token = updated_token + letter
 	return updated_token
 	
-print(prep_token('NNNNNNNNBWBWNNNBNNNNNNBWNNBWBWWBBNNNWWNNNNNNNNNNNNNNNNNNNNNNNNNN'))
-print(convert_token_list_to_string(convert_string_to_list(initialize_token_string())))
-print("xNNNNNNNNxBWBWNNNbxNNNNNNBWxNNBwBWWBxBNNNWWNNxNNNNNNNNxNNNNNNNNxNNNNNNNNx")
-print(convert_token_list_to_string(convert_string_to_list('xNNNNNNNNxBWBWNNNbxNNNNNNBWxNNBwBWWBxBNNNWWNNxNNNNNNNNxNNNNNNNNxNNNNNNNNx')))
+#print(prep_token('NNNNNNNNBWBWNNNBNNNNNNBWNNBWBWWBBNNNWWNNNNNNNNNNNNNNNNNNNNNNNNNN'))
+#print(convert_token_list_to_string(convert_string_to_list(initialize_token_string())))
+#print("xNNNNNNNNxBWBWNNNbxNNNNNNBWxNNBwBWWBxBNNNWWNNxNNNNNNNNxNNNNNNNNxNNNNNNNNx")
+#print(convert_token_list_to_string(convert_string_to_list('xNNNNNNNNxBWBWNNNbxNNNNNNBWxNNBwBWWBxBNNNWWNNxNNNNNNNNxNNNNNNNNxNNNNNNNNx')))
 
