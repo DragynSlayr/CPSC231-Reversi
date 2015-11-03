@@ -1,3 +1,6 @@
+#Added my List Manager. Has a couple different functions in it. It can prep a token by adding the 'x' markers, convert that to a list of lists, and convert it back into a string.
+
+
 #Let N be an exmpty square
 #let B be a black square
 #let W be a white circle
@@ -137,6 +140,16 @@ def convert_token_list_to_string(tokenStateList):
 				letter = 0
 			
 	return tokenStateString
+	
+
+	
+#Removes all of the 'x's from a token	
+def clean_token(token):
+	updated_token = ""
+	for letter in token:
+		if letter != 'x':
+			updated_token = updated_token + letter
+	return updated_token
 	
 print(prep_token('NNNNNNNNBWBWNNNBNNNNNNBWNNBWBWWBBNNNWWNNNNNNNNNNNNNNNNNNNNNNNNNN'))
 print(convert_token_list_to_string(convert_string_to_list(initialize_token_string())))
