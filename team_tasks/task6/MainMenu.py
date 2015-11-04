@@ -14,22 +14,19 @@ def inputRequest(text):
 	return user_input
 
 #Moves a turtle to a location without making a line
-#Params: t, The turtle
+#Params: text, The turtle
 #		 x, The x location
 #		 y, The y location
 #Returns: None
-def moveTurtle(t, x, y):
-	t.up()
-	t.goto(x, y)
-	t.down()
+def moveTurtle(text, x, y):
+	text.up()
+	text.goto(x, y)
+	text.down()
 
 #Function displays the rules on the window
 #The user is given the option to quit or return to the main menu
-#Returns nothing and takes no parameters
-def displayRules():
-	#Get the turtle
-	text = Constants.TURTLE
-
+#Returns nothing and takes a turtle as a parameter
+def displayRules(text):
 	#Move to the location for the title
 	text.clear()
 	moveTurtle(text, Constants.TITLE_LOCATIONX, Constants.TITLE_LOCATIONY)
@@ -78,12 +75,9 @@ def displayRules():
 		exit()
 
 #This prints out all of the main menu text
-#Takes no parameters
+#Takes a turtle as a parameter
 #Returns the user's choice
-def mainMenu():
-	#Get the turtle
-	text = Constants.TURTLE
-
+def mainMenu(text):
 	#Move to the title location
 	text.clear()
 	moveTurtle(text, Constants.TITLE_LOCATIONX, Constants.TITLE_LOCATIONY)
@@ -108,11 +102,8 @@ def mainMenu():
 
 
 #Function displays the 'Invalid Choice' screen, and then waits a second
-#Takes no parameters and returns nothing
-def invalidChoice():
-	#Get the turtle
-	text = Constants.TURTLE
-
+#Takes a turtle and returns nothing
+def invalidChoice(text):
 	#Move to the title location
 	text.clear()
 	moveTurtle(text, Constants.TITLE_LOCATIONX, Constants.TITLE_LOCATIONY)
@@ -132,6 +123,9 @@ def main():
 	Constants.WINDOW.setworldcoordinates(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
 	Constants.WINDOW.clear()
 
+	#Get the turtle
+	text = Constants.TURTLE
+
 	#Declare the variable that is used to end the loop
 	end_loop = False
 
@@ -141,7 +135,8 @@ def main():
 		user_in_rules = False
 
 		#We get the user's choice
-		user_choice = mainMenu()
+		user_choice = mainMenu(text)
+
 		if user_choice == '1' :
 			#User wants to play,
 			#so we must end the loop
@@ -149,19 +144,21 @@ def main():
 		else:
 			#Check if the user wannts to see the rules or quit
 			if user_choice == '2' :
-				displayRules()
+				displayRules(text)
 
 				#update user_in_rules to prevent the invalidChoice function from running in line
 				user_in_rules = True
+
 			if user_choice == '3':
 				#The user sucks and wants to quit
 				exit()
+				
 		#Here we check if the user made a valid choice and dsiplay the appropriate text if they did not.
 		if user_choice is not '1' or '2' or '3':
 			#This if statement will prevent invalidChoice from running when the user is viewing the rules
 			if user_in_rules == False:
 				if end_loop == False:
-					invalidChoice()
+					invalidChoice(text)
 
 #Run if main file
 if __name__ == "__main__":
