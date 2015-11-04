@@ -1,8 +1,9 @@
+#This file holds the functions to start the game
+
 import MainMenu
 import ReversiGrid
 import StringInterpret
 import Constants
-import BoardGenerator
 import BoardClick
 import random
 
@@ -10,9 +11,6 @@ def main():
 	#Set up the other classes
 	MainMenu.main()
 	ReversiGrid.main()
-
-	#Generate a random board
-	#token = BoardGenerator.generate(False, False)
 
 	#Use a blank starting board
 	token = Constants.PIECE_NONE * Constants.NUM_OF_CELLS

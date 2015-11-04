@@ -1,3 +1,7 @@
+#This program holds a method to write a variable to a file, saveVariable,
+#and a method to read a variable from a file, loadVariable.
+#The file being used is variables.txt
+
 #Removes all instances of \n character
 #Params: line, The line to remove \n from
 #Returns: A string with no \n characters

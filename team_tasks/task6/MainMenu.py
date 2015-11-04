@@ -1,8 +1,9 @@
+#This file has the method, main, to show and take input for the main menu
+
 import Constants
 import turtle
 import time
 import TurtleMove
-
 
 #This function prompts a user for an input
 #Only parameter is the text that is to be displayed with the prompt
@@ -12,21 +13,31 @@ def inputRequest(text):
 	user_input = wn.textinput("User Input", text)
 	return user_input
 
-	
+#Moves a turtle to a location without making a line
+#Params: t, The turtle
+#		 x, The x location
+#		 y, The y location
+#Returns: None
+def moveTurtle(t, x, y):
+	t.up()
+	t.goto(x, y)
+	t.down()
+
 #Function displays the rules on the window
 #The user is given the option to quit or return to the main menu
 #Returns nothing and takes no parameters
 def displayRules():
+	#Get the turtle
 	text = Constants.TURTLE
-	#Initializes rules list
 
+	#Move to the location for the title
 	text.clear()
-	text.up()
-	text.goto(Constants.TITLE_LOCATIONX, Constants.TITLE_LOCATIONY)
-	text.down()
+	moveTurtle(text, Constants.TITLE_LOCATIONX, Constants.TITLE_LOCATIONY)
+
+	#Draw the title text
 	text.write("REVERSI GAME", False, align = "center", font = ("Arial", 50, "bold"))
 
-	#Creates a list called rules, which is emppty for now
+	#Initialize a list for holding the rules
 	rules = []
 
 	#Add rules to list
@@ -42,72 +53,56 @@ def displayRules():
 
 	#Move the turtle to the appropriate location for the rules output
 	line = Constants.RULES_LINESTARTY
-	text.up()
-	text.goto(Constants.TITLE_LOCATIONX, Constants.RULES_LINESTARTY)
-	text.down()
+	moveTurtle(text, Constants.TITLE_LOCATIONX, Constants.RULES_LINESTARTY)
 
-
-
-	#Loops for the number of rules in the list, which is what the len() function returns
+	#Go through the rules list
 	for r in range(len(rules)):
-		#Print rules
-
-
 		#Each loop moves the next rule down 30 units
 		line = line - 30
 
-		text.up()
-		text.goto(Constants.RULES_LINESTARTX, line)
-		text.down()
+		#Move the turtle
+		moveTurtle(text, Constants.RULES_LINESTARTX, line)
 
-		#The next line will print the rules
-		#We use \n to ensure it starts a new line
-		#str(r+1) is the number of the rule that is getting printed, ex				 1) "reversi...."
-		#False denotes whether or not the turtle is moveable
-		text.write("\n" + str(r + 1) + ") " + rules[r], False, align = "left", font = ("Arial", 10, "normal"))
+		#Format the line
+		rule = "\n" + str(r + 1) + ") " + rules[r]
 
-		text.up()
-		text.goto(Constants.RULES_LINESTARTX, line)
-		text.down()
+		#Draw the rule
+		text.write(rule, False, align = "left", font = ("Arial", 10, "normal"))
 
+		#Move back to the start of the line
+		moveTurtle(text, Constants.RULES_LINESTARTX, line)
 
-	#If the user choices 3, then the program will exit.
+	#Prompt the user for a choice
 	user_choice = inputRequest("Press any key to return, or press '3' to quit.")
-	if user_choice == '3' :
+	if user_choice == '3':
 		exit()
-
-
-
-
 
 #This prints out all of the main menu text
 #Takes no parameters
 #Returns the user's choice
 def mainMenu():
-	#For each of he text.write methods, False denotes whether or not the turtle is moveable
+	#Get the turtle
 	text = Constants.TURTLE
-	text.clear()
-	text.up()
-	text.goto(Constants.TITLE_LOCATIONX, Constants.TITLE_LOCATIONY)
-	text.down()
-	text.write("REVERSI GAME", False, align = "center", font = ("Arial", 50, "bold"))
-	text.up()
-	text.goto(Constants.TITLE_LOCATIONX, Constants.RULES_LIST)
-	text.down()
-	text.write("1. Play", False, align = "center", font = ("Arial", 10, "normal"))
-	text.up()
-	text.goto(Constants.TITLE_LOCATIONX, Constants.RULES_LIST-20)
-	text.down()
-	text.write("2. Rules", False, align = "center", font = ("Arial", 10, "normal"))
-	text.up()
-	text.goto(Constants.TITLE_LOCATIONX, Constants.RULES_LIST-40)
-	text.down()
-	text.write("3. Exit", False, align = "center", font = ("Arial", 10, "normal"))
-	text.up()
-	text.goto(Constants.TITLE_LOCATIONX, Constants.RULES_LIST-60)
-	text.down()
 
-	#Here the user makes an input, which is what the function returns
+	#Move to the title location
+	text.clear()
+	moveTurtle(text, Constants.TITLE_LOCATIONX, Constants.TITLE_LOCATIONY)
+
+	#Write the title to the screen
+	text.write("REVERSI GAME", False, align = "center", font = ("Arial", 50, "bold"))
+
+	#List of options
+	options = ["1. Play", "2. Rules", "3. Exit"]
+
+	#Draw the options
+	for i in range(len(options)):
+		#Move turtle down
+		moveTurtle(text, Constants.TITLE_LOCATIONX, Constants.RULES_LIST - (i *  20))
+
+		#Write option
+		text.write(options[i], False, align = "center", font = ("Arial", 10, "normal"))
+
+	#Here the user makes a choice, which is what the function returns
 	menu_choice = inputRequest("Please make a choice:")
 	return menu_choice
 
@@ -115,19 +110,24 @@ def mainMenu():
 #Function displays the 'Invalid Choice' screen, and then waits a second
 #Takes no parameters and returns nothing
 def invalidChoice():
+	#Get the turtle
 	text = Constants.TURTLE
+
+	#Move to the title location
 	text.clear()
-	text.up()
-	text.goto(Constants.TITLE_LOCATIONX, Constants.TITLE_LOCATIONY)
-	text.down()
+	moveTurtle(text, Constants.TITLE_LOCATIONX, Constants.TITLE_LOCATIONY)
+
+	#Draw the line
 	text.write("Invalid Choice", False, align = "center", font = ("Arial", 50, "bold"))
+
 	#Wait one second then continue
 	time.sleep(1)
 
 #Function shows the main menu and will show the desired menu
 #Function will not continue unless the user press's play
-#Returns nothin and takes no parameters	
+#Returns nothin and takes no parameters
 def main():
+	#Set up the window
 	Constants.WINDOW.setup(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
 	Constants.WINDOW.setworldcoordinates(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
 	Constants.WINDOW.clear()
@@ -173,4 +173,3 @@ def main():
 #Run if main file
 if __name__ == "__main__":
 	main()
-

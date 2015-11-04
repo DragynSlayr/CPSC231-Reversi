@@ -1,3 +1,5 @@
+#This file handles all the clicking and logic of the game
+
 import Constants
 import TurtleMove
 import StringInterpret

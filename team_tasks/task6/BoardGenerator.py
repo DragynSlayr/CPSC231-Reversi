@@ -10,37 +10,43 @@ import Constants
 #Author: Inderpreet Dhillon
 def generate(is_over, is_pretty):
     #Will hold the board
-    token = ""
+    game_state = ""
+
     #Go through every row and column of the board
     for i in range(1, Constants.NUM_OF_CELLS + 1):
+
         #Random number, either: 0, 1, 2
         random_int = random.randint(0, 2)
         #Check number
         if random_int == 0:
-            token += Constants.PIECE_BLACK
+            game_state += Constants.PIECE_BLACK
         elif random_int == 1:
-            token += Constants.PIECE_WHITE
+            game_state += Constants.PIECE_WHITE
         else:
             #Check if the game should be a finished one
             if is_over:
                 #Get a new number, either: 0 or 1
                 random_int_two = random.randint(0, 1)
+
                 #Check the new number
                 if random_int_two == 0:
-                    token += Constants.PIECE_WHITE
+                    game_state += Constants.PIECE_WHITE
                 else:
-                    token += Constants.PIECE_BLACK
+                    game_state += Constants.PIECE_BLACK
             else:
                 #Only place no piece if the game is not over
-                token += Constants.PIECE_NONE
+                game_state += Constants.PIECE_NONE
+
         #Check if board should be nicely formatted
         if is_pretty:
             if i != Constants.NUM_OF_CELLS:
                 if i % 8 == 0 and i != Constants.NUM_OF_CELLS:
-                    token += "\n"
+                    game_state += "\n"
                 else:
-                    token += "|"
-    return token
+                    game_state += "|"
+
+    #Return the created state
+    return game_state
 
 if __name__ == "__main__":
     is_over = random.randint(0, 1) == 0
