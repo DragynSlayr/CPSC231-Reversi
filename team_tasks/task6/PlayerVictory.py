@@ -1,4 +1,5 @@
-#A function that takes a game state as a parameter and returns which player won.
+#A function that takes a game state as a parameter
+# and returns which player won.
 import Constants
 import BoardGenerator as cfg
 
@@ -17,7 +18,9 @@ def playerWon(token):
             num_black += 1
         elif i == Constants.PIECE_WHITE:
             num_white += 1
-    #Compare number of white and black pieces and return whether a player won or not
+
+    #Compare number of white and black pieces and return
+    #the result of the game
     if num_black == num_white:
         return "It was a Tie!"
     elif num_black > num_white:
