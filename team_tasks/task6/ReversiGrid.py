@@ -1,12 +1,10 @@
 #This is the module that will create the Reversi Game board.
-
-#Imports turtle module and opens the turtle screen. imports constants
 import turtle
 import Constants
 
 #function for creating a square
-#Function takes no parameters and returns nothing
-def square():
+#Function takes a turtle and returns nothing
+def square(grid):
 	grid = Constants.TURTLE
 	for i in range(4):
 		grid.pendown()
@@ -14,9 +12,8 @@ def square():
 		grid.left(90)
 
 #Function for labeling each square according to their coordinates in the array.
-#Function takes no parameters and returns nothing
-def coordLabel(x, y):
-	grid = Constants.TURTLE
+#Function takes an x, y and a turtle and returns nothing
+def coordLabel(x, y, grid):
 	grid.penup()
 	coord = grid.pos()
 	coordx = grid.xcor()
@@ -29,9 +26,8 @@ def coordLabel(x, y):
 	grid.pencolor("black")
 
 #Function for sending the turtle to the next row lower.
-#Function takes no parameters and returns nothing
-def nextRow():
-	grid = Constants.TURTLE
+#Function takes a turtle and returns nothing
+def nextRow(grid):
 	grid.penup()
 	grid.left(180)
 	grid.forward(Constants.WINDOW_WIDTH / 2)
@@ -41,10 +37,10 @@ def nextRow():
 	grid.pendown()
 
 #Function to label the y coordinates vertically, to the left of the board.
-#Function takes no parameters and returns nothing
-def label_y():
-	grid = Constants.TURTLE
+#Function takes a turtle and returns nothing
+def label_y(grid):
 	grid.goto(175, 125)
+
 	#Iterate through the row numbers in reverse
 	for sidey in Constants.ROW_NUMBERS[::-1]:
 		coord_yy = grid.ycor()
@@ -56,9 +52,8 @@ def label_y():
 		grid.setheading(90)
 
 #Function to label the x coordinates horizontally, above the board.
-#Function takes no parameters and returns nothing
-def label_x():
-	grid = Constants.TURTLE
+#Function takes a turtle and returns nothing
+def label_x(grid):
 	grid.goto(225, 525)
 	for sidex in Constants.COLUMN_LETTERS:
 		coord_xx = grid.xcor()
@@ -70,9 +65,8 @@ def label_x():
 		grid.setheading(0)
 
 #Function that draws a frame around the board.
-#Function takes no parameters and returns nothing
-def reversiFrame():
-	grid = Constants.TURTLE
+#Function takes a turtle and returns nothing
+def reversiFrame(grid):
 	grid.pencolor("dark green")
 	grid.pensize(10)
 	grid.goto(0,0)
@@ -89,23 +83,22 @@ def reversiFrame():
 #This is the function that creates the board, using the functions above.
 #It contains a nested for loop that will create the grid and label it.
 #It will also frame the game window.
-#Function takes no parameters and returns nothing
-def reversiBoard():
-	grid = Constants.TURTLE
+#Function takes a turtle and returns nothing
+def reversiBoard(grid):
 	for y in Constants.ROW_NUMBERS: #This stacks the rows of squares downwards.
 		for x in Constants.COLUMN_LETTERS: #This creates the squares in a horizontal row.
 			grid.fillcolor("green")
 			grid.begin_fill()
 			grid.pencolor ("black")
-			square()
+			square(grid)
 			grid.end_fill()
 			grid.forward(Constants.CELL_WIDTH)
-			coordLabel(x, y)
-		nextRow()
+			#coordLabel(x, y)
+		nextRow(grid)
 		grid.penup()
-	label_y()
-	label_x()
-	reversiFrame()
+	label_y(grid)
+	label_x(grid)
+	reversiFrame(grid)
 
 	grid.penup()
 	grid.goto(25, 575)
@@ -113,25 +106,26 @@ def reversiBoard():
 	grid.pencolor("black")
 	grid.write("R   e   v   e   r   s   i")
 
-
 #This function creates the window, sets the coordinates of the window, creates the grid with labels, and frames it.
 #Function takes no parameters and returns nothing
 def main():
+	#Get window and turtle
 	grid = Constants.TURTLE
 	wn = Constants.WINDOW
-	
+
+	#Clear the screen
 	wn.clear()
 
 	#Set the size of the screen
 	wn.setup(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
 
-	wn.tracer(10) 
-	
+	#Set only the n-th frame to be drawn, this speeds up all drawing
+	wn.tracer(10)
+
 	#The method below changes the default coordinates to user made coordinates.
 	#in this case bottom left corner is 0,0. Changes screen to World coordinates mode from standard.
-	#0, 0 is bottom left of the window 
+	#0, 0 is bottom left of the window
 	wn.setworldcoordinates(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
-	
 
 	#pre-set the turtle
 	grid.speed(0)
@@ -139,15 +133,12 @@ def main():
 	grid.goto(Constants.WINDOW_WIDTH / 4, Constants.WINDOW_HEIGHT * (3 / 4))
 	grid.pendown()
 	grid.hideturtle()
-	reversiBoard() #Creates the board.
+	reversiBoard(grid) #Creates the board.
 	wn.update()
-	
+	wn.reset()
+
 	if __name__ == "__main__":
 		wn.exitonclick()
-
-	wn.reset()
-	
-
 
 #Only runs when it is not imported
 if __name__ == "__main__":
