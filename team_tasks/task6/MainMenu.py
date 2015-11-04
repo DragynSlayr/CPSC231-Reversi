@@ -138,16 +138,13 @@ def main():
 	#This loop will always loop back to the main menu, prompting the user for a choice until they press play, or exit.
 	while end_loop == False :
 		#We declare user_in_rules to be False, which will prevent the ""invalidChoice"" functioning from running when the user presses 'any key' in the rules.
-		user_in_rules= False
+		user_in_rules = False
 
 		#We get the user's choice
 		user_choice = mainMenu()
 		if user_choice == '1' :
-			#User wants to play!
-			#Here we set up the board and prompt them for a move
-
-
-			#So we must end the loop
+			#User wants to play,
+			#so we must end the loop
 			end_loop = True
 		else:
 			#Check if the user wannts to see the rules or quit
@@ -155,20 +152,16 @@ def main():
 				displayRules()
 
 				#update user_in_rules to prevent the invalidChoice function from running in line
-				user_in_rules= True
-
+				user_in_rules = True
 			if user_choice == '3':
 				#The user sucks and wants to quit
 				exit()
 		#Here we check if the user made a valid choice and dsiplay the appropriate text if they did not.
 		if user_choice is not '1' or '2' or '3':
 			#This if statement will prevent invalidChoice from running when the user is viewing the rules
-			if user_in_rules==False:
+			if user_in_rules == False:
 				if end_loop == False:
 					invalidChoice()
-
-
-
 
 #Run if main file
 if __name__ == "__main__":
