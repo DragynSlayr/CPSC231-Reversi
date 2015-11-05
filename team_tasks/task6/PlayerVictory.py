@@ -8,12 +8,12 @@ import BoardGenerator as cfg
 #Reurns who won and the amount of pieces they had
 #Author: Anton Lysov
 #Editor: Inderpreet Dhillon, Added comments to top of function
-def playerWon(token):
+def playerWon(game_state):
     num_black = 0
     num_white = 0
 
     #Iterate through the game state and count black and white pieces
-    for i in token:
+    for i in game_state:
         if i == Constants.PIECE_BLACK:
             num_black += 1
         elif i == Constants.PIECE_WHITE:

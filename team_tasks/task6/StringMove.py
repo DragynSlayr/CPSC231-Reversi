@@ -7,14 +7,14 @@ import StringInterpret
 #Function returns a string that represents the initial grid state
 #Takes no parameters
 def initializeGridStringStart():
-	token = 'NNNNNNNNNNNNNNNNNNNNNNNNNNNBWNNNNNNWBNNNNNNNNNNNNNNNNNNNNNNNNNNN'
-	return token
+	game_state = 'NNNNNNNNNNNNNNNNNNNNNNNNNNNBWNNNNNNWBNNNNNNNNNNNNNNNNNNNNNNNNNNN'
+	return game_state
 
 
 #Function takes a string and a location and returns the char at the loction
-def getChar(token, location):
-	#print(location, "in", token)
-	character = token[location-1]
+def getChar(game_state, location):
+	#print(location, "in", game_state)
+	character = game_state[location-1]
 	return character
 
 #Converts a column letter to an index number
@@ -33,7 +33,7 @@ def convertColumnNumber(column):
 #Function checks if a location is on the board
 #Function takes the current grid string and an unstripped location string
 #Returns Boolean whether or not it is on the grid.
-def validateMoveLocation(token, location):
+def validateMoveLocation(game_state, location):
 
 	xy = TurtleMove.getColumnAndRow(location)
 	x =  convertColumnNumber(xy[0]) #NOTE!!: This will be assigned 'invalid_range' if it is outside of range. This is done by the convert function
@@ -49,7 +49,7 @@ def validateMoveLocation(token, location):
 		return False
 
 	#Checks if the location is occupied already
-	if 'N' != getChar(token, x + (8*(y -1))):
+	if 'N' != getChar(game_state, x + (8*(y -1))):
 		#All of that math simply takes the number of x + a certain number of rows
 		return False
 	else:
@@ -67,7 +67,7 @@ def menuInput(text):
 #Function asks the user for a move and then validates it
 #Takes the current string state and a message to prompt the user
 #Function returns the move if valid
-def getMove(token, message):
+def getMove(game_state, message):
 	user_move = menuInput(message)
 	if user_move == None:
 		return "invalid"
@@ -76,7 +76,7 @@ def getMove(token, message):
 		while not valid_move:
 			#Check if the move is at least length 2
 			if len(user_move) == 2:
-				valid_move = validateMoveLocation(token, user_move)
+				valid_move = validateMoveLocation(game_state, user_move)
 			else:
 				valid_move = False
 			#Ask the user for the move again if it is not valid
@@ -88,7 +88,7 @@ def getMove(token, message):
 #Takes previous grid state and the location change, and colour
 #Function returns updated grid state
 #Example: updateStringState(initializeGridStringStart(), 'H8', 'B')
-def updateStringState(token, location, colour):
+def updateStringState(game_state, location, colour):
 	#Get column and row from location
 	xy = TurtleMove.get_column_and_row(location)
 
@@ -99,14 +99,14 @@ def updateStringState(token, location, colour):
 	#Convert column and row to an index
 	update_location = (8*y + x)
 	letter_tracker = 0
-	new_token = ''
+	new_state = ''
 
 	#Iterate through gamesate and accumulate an updated board
-	for letter in token:
+	for letter in game_state:
 		letter_tracker = letter_tracker +1
 		if letter_tracker == update_location:
-			new_token = new_token + colour
+			new_state = new_state + colour
 		else:
-			new_token = new_token + letter
+			new_state = new_state + letter
 
-	return new_token
+	return new_state

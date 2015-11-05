@@ -1,7 +1,7 @@
 #Running this file in the terminal will let you play the board with input from the command prompt.
 #It will setup the board and place the correct piece colour based on the turn number.
 #It will prompt the user for moves in the terminal and will only take a valid move so a Capital and a number.
-#It will update the board and the token string based on the move.
+#It will update the board and the game state string based on the move.
 import Constants
 import TurtleMove
 import ReversiGrid
@@ -38,11 +38,11 @@ def whoseTurn(counter):
 		return "B"
 
 #This function will convert a move coordinate into a string.
-#It receives the parameters are a token, a move coordinate, and the turn number.
-#It returns the updated string as new_token.
+#It receives the parameters are a game state, a move coordinate, and the turn number.
+#It returns the updated string as new_state.
 #For testing, you can get the index number of the changed character with move_to_string
 #Author: Kyle Hinton
-def stringInterpret(token, NewMove, turn):
+def stringInterpret(game_state, NewMove, turn):
 		column = NewMove[0].upper()
 		row = int(NewMove[1])
 
@@ -54,7 +54,7 @@ def stringInterpret(token, NewMove, turn):
 
 		turn_colour = whoseTurn(turn)
 
-		new_token = token[:move_to_string] + turn_colour + token[move_to_string + 1:]
+		new_state = game_state[:move_to_string] + turn_colour + game_state[move_to_string + 1:]
 
 		if whoseTurn(turn) == "W":
 			color = "White"
@@ -72,21 +72,21 @@ def stringInterpret(token, NewMove, turn):
 			print(row_IDX, "row_IDX")	#Row index number from numbers
 			print(column, "Column")	#Prints the Column Letter
 			print(row, "Row") #Prints the Row Number
-			print(token[move_to_string], ": Character at the move's index number.") #Prints the character at the index [move_to_string]
+			print(game_state[move_to_string], ": Character at the move's index number.") #Prints the character at the index [move_to_string]
 			print(move_to_string, "Index number of new move") #Takes the move and converts it to the index number for the string
-			print(new_token)	#Prints the new_token with the character at index.move_to_string in place
+			print(new_state)	#Prints the new_state with the character at index.move_to_string in place
 			print()
 			##########################
-		return new_token	#returns the new_token, The updated move.
+		return new_state	#returns the new_state, The updated move.
 
 #Sets up the board using the pieces and reading through the string.
 def setup2():
-	new_token = StringInterpret(("NNNNNNNN" * 8), "D4", -2)
-	new_token = StringInterpret((new_token), "E4", -1)
-	new_token = StringInterpret((new_token), "D5", -1)
-	new_token = StringInterpret((new_token), "E5", -2)
+	new_state = StringInterpret(("NNNNNNNN" * 8), "D4", -2)
+	new_state = StringInterpret((new_state), "E4", -1)
+	new_state = StringInterpret((new_state), "D5", -1)
+	new_state = StringInterpret((new_state), "E5", -2)
 	for turn in range(64):
-		new_token = StringInterpret((new_token), input("Move?"), turn + 1)
+		new_state = StringInterpret((new_state), input("Move?"), turn + 1)
 
 if __name__ == "__main__":
 		TurtleMove.setup()
