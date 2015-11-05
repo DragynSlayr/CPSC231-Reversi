@@ -1,5 +1,4 @@
-#Write a function that takes a current game state as a parameter and returns true if the game is over.
-#It must detect if the board is full or if there are no further moves possible.
+#This file constains a function that takes a current game state as a parameter and returns true if the game is over.
 import Constants
 import BoardGenerator as cfg
 
