@@ -93,7 +93,7 @@ def placePiece(column, row, color):
 
 	#Set turtle properties
 	turtle.fillcolor(color)
-	turtle.pensize(2)
+	turtle.pensize(1)
 
 	#Draw a filled circle
 	turtle.begin_fill()
