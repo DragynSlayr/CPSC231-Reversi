@@ -21,7 +21,7 @@ COLUMN_LETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 ROW_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8]
 
 #The offset of the first cell of the grid
-X_OFFSET = WINDOW_WIDTH / 4 #Evaluates to 200
+X_OFFSET = (WINDOW_WIDTH / 4) + CELL_WIDTH #Evaluates to 250
 Y_OFFSET = (WINDOW_HEIGHT * (2/3)) + (WINDOW_HEIGHT / 8) #Evaluates to 475
 
 #Offset for the title

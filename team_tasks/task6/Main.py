@@ -13,16 +13,16 @@ def main():
 	ReversiGrid.main()
 
 	#Use a blank starting board
-	token = Constants.PIECE_NONE * Constants.NUM_OF_CELLS
+	game_state = Constants.PIECE_NONE * Constants.NUM_OF_CELLS
 
 	#Place the pieces from the random board
-	StringInterpret.stringToPiece(token, 0)
+	StringInterpret.stringToPiece(game_state)
 
 	#Place starting config
-	token = StringInterpret.stringInterpret(token, "D4", 0)
-	token = StringInterpret.stringInterpret(token, "E4", 1)
-	token = StringInterpret.stringInterpret(token, "E5", 2)
-	token = StringInterpret.stringInterpret(token, "D5", 3)
+	game_state = StringInterpret.stringInterpret(game_state, "D4", 0)
+	game_state = StringInterpret.stringInterpret(game_state, "E4", 1)
+	game_state = StringInterpret.stringInterpret(game_state, "E5", 2)
+	game_state = StringInterpret.stringInterpret(game_state, "D5", 3)
 	move_num = 4
 
 	#Determine who goes first
@@ -31,7 +31,7 @@ def main():
 
 	#Start listening for clicks on a board,
 	#BoardClick takes over the logic from here
-	BoardClick.run(token, move_num, isPlayerMove)
+	BoardClick.run(game_state, move_num, isPlayerMove)
 
 if __name__ == "__main__":
 	main()

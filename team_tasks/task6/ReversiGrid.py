@@ -68,16 +68,20 @@ def label_x(grid):
 #Function takes a turtle and returns nothing
 def reversiFrame(grid):
 	grid.pencolor("dark green")
-	grid.pensize(10)
-	grid.goto(0,0)
+	grid.pensize(9)
+	grid.goto(-5,-5)
+	grid.setheading(90)
 	grid.pendown()
-	grid.forward(Constants.WINDOW_WIDTH)
-	grid.left(90)
+	
+	#Draw the border
 	grid.forward(Constants.WINDOW_HEIGHT)
-	grid.left(90)
-	grid.forward(Constants.WINDOW_WIDTH)
-	grid.left(90)
+	grid.right(90)
+	grid.forward(Constants.WINDOW_WIDTH - 1)
+	grid.right(90)
 	grid.forward(Constants.WINDOW_HEIGHT)
+	grid.right(90)
+	grid.forward(Constants.WINDOW_WIDTH - 1)
+	grid.right(90)
 	grid.penup()
 
 #This is the function that creates the board, using the functions above.

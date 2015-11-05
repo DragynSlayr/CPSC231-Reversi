@@ -6,33 +6,36 @@ import Constants
 import TurtleMove
 import ReversiGrid
 
-#This function will take a token and update the gamestate on the game board.
-#It's parameters are for the token, which is the 64 character string;i, which is the index number on that string.
-#It's output will update the board by placing pieces based on the token-string it receives.
+#This function will take a game state and update the gamestate on the game board.
+#It takes the game state, which is a 64 character string
+#It returns nothing
 #Author: Kyle Hinton
-def stringToPiece(token, i):
+def stringToPiece(game_state):
+	index = 0
 	for y in range(len(Constants.ROW_NUMBERS)):
 		for x in range(len(Constants.COLUMN_LETTERS)):
+			#Get location
 			x_coord = Constants.COLUMN_LETTERS[x]
 			y_coord = Constants.ROW_NUMBERS[y]
-			if token[i] == "N": #if index i on the string equals N place a green piece which is a non-piece.
-				TurtleMove.placePiece(x_coord, y_coord, "Green")
-			elif token[i] == "B":
+
+			#Check each piece at the index in the game state
+			piece = game_state[index]
+			if piece == "B":
 				TurtleMove.placePiece(x_coord, y_coord, "Black")
-			elif token[i] == "W":
-				TurtleMove.placePiece(x_coord,y_coord, "White")
-			i = i + 1
+			elif piece == "W":
+				TurtleMove.placePiece(x_coord, y_coord, "White")
+
+			#Increment index
+			index += 1
 
 #This function will decide on the colour of the next piece based on whose turn number it is.
 #The takes a counter for the turns as a parameter.
 #It returns a B or a W depending on whose turn it is.
 def whoseTurn(counter):
-	piece = ""
 	if counter % 2 == 0:
-		piece = "W"
+		return "W"
 	else:
-		piece = "B"
-	return piece
+		return "B"
 
 #This function will convert a move coordinate into a string.
 #It receives the parameters are a token, a move coordinate, and the turn number.
@@ -46,7 +49,8 @@ def stringInterpret(token, NewMove, turn):
 		column_IDX = (Constants.COLUMN_LETTERS.index(column))
 		row_IDX = (Constants.ROW_NUMBERS.index(row))
 
-		move_to_string = ((row_IDX * Constants.NUM_OF_ROWS) + column_IDX) #Equation for converting a move coordinate to the index number to be changed
+ 		#Equation for converting a move coordinate to the index number to be changed
+		move_to_string = ((row_IDX * Constants.NUM_OF_ROWS) + column_IDX)
 
 		turn_colour = whoseTurn(turn)
 
@@ -56,6 +60,7 @@ def stringInterpret(token, NewMove, turn):
 			color = "White"
 		else:
 			color = "Black"
+
 		TurtleMove.placePiece(column, row, color)
 
 		if __name__ == "__main__":

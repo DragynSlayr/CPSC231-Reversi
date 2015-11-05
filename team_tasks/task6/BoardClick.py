@@ -72,6 +72,7 @@ def place_piece(x, y):
     #Load the variables we need
     game_state = FileHandler.loadVariable("State")
     move_num = int(FileHandler.loadVariable("Move"))
+
     #Make sure the game is not over
     if VictoryStatus.endGameStatus(game_state) != True:
         #Check if the point is valid

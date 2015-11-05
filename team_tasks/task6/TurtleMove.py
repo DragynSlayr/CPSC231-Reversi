@@ -37,7 +37,6 @@ def getColumnAndRow(location):
 	#Return column and row
 	return [column, row]
 
-
 # Checks if the coordinate lies within the board
 # Params: column, The column letter of the coordinate
 #		  row, The row number of the coordinate
@@ -74,7 +73,7 @@ def getPosition(column, row):
 # Places a piece at a column and row with specified color
 # Params: column, The column letter of the position
 #		  row, The row number of the position
-#		  color, A string specifying piece color
+#		  color, A string specifying piece color; None does not draw
 # Returns: None
 # Example, ("A", 2, "white") places a white piece at (A, 2)
 def placePiece(column, row, color):
