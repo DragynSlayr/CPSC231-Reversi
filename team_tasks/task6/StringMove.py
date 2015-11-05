@@ -1,3 +1,4 @@
+#This file contains methods that help with overall move validation
 import TurtleMove
 import string
 import Constants
@@ -10,7 +11,6 @@ def initializeGridStringStart():
 	game_state = 'NNNNNNNNNNNNNNNNNNNNNNNNNNNBWNNNNNNWBNNNNNNNNNNNNNNNNNNNNNNNNNNN'
 	return game_state
 
-
 #Function takes a string and a location and returns the char at the loction
 def getChar(game_state, location):
 	#print(location, "in", game_state)
@@ -20,12 +20,11 @@ def getChar(game_state, location):
 #Converts a column letter to an index number
 #Takes a column letter as a parameter
 def convertColumnNumber(column):
-	column_All = 'ABCDEFGH'
 	loopcount = 0
-	for letter in column_All:
-		if column.upper() == letter:
-			return loopcount +1
-		loopcount = loopcount +1
+	column = column.upper()
+	for i in range(len(Constants.COLUMN_LETTERS)):
+		if column == Constants.COLUMN_LETTERS[i]:
+			return i + 1
 
 	#print (column)
 	return 'invalid_range'
@@ -34,27 +33,19 @@ def convertColumnNumber(column):
 #Function takes the current grid string and an unstripped location string
 #Returns Boolean whether or not it is on the grid.
 def validateMoveLocation(game_state, location):
-
 	xy = TurtleMove.getColumnAndRow(location)
 	x =  convertColumnNumber(xy[0]) #NOTE!!: This will be assigned 'invalid_range' if it is outside of range. This is done by the convert function
 	y = xy[1]
 
 	#Check if the location is on the board,
 	if x == 'invalid_range':
-
 		return False
-
-	if 0<= y > 8:
-
+	if 0 <= y > 8:
 		return False
 
 	#Checks if the location is occupied already
-	if 'N' != getChar(game_state, x + (8*(y -1))):
-		#All of that math simply takes the number of x + a certain number of rows
-		return False
-	else:
-		#If the location is on the board return True.
-		return True
+	return getChar(game_state, x + (8*(y -1))) == Constants.PIECE_NONE
+	#All of that math simply takes the number of x + a certain number of rows
 
 #Displays a window that asks the user for input
 #Takes a message as input
