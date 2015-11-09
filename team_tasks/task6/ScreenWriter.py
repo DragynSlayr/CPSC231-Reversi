@@ -26,11 +26,11 @@ def writeScore(black, white):
 
     goto(Constants.BLACK_SCORE_X, Constants.BLACK_SCORE_Y)
     clearArea(Constants.BLACK_SCORE_X, Constants.BLACK_SCORE_Y)
-    write("BLACK\n" + str(black))
+    write("BLACK\n    " + str(black))
 
     goto(Constants.WHITE_SCORE_X, Constants.WHITE_SCORE_Y)
     clearArea(Constants.WHITE_SCORE_X, Constants.WHITE_SCORE_Y)
-    write("WHITE\n" + str(white))
+    write("WHITE\n    " + str(white))
 
     goto(starting_X, starting_y)
 
