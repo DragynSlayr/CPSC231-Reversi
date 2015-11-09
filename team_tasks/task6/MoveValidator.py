@@ -111,7 +111,7 @@ def getIdentifierOfCorner(corner_index, order_index):
             return "T"
     else:
         #Return a combination of T or B and R or L
-        return getIdentifier(corner_index, 2) + getIdentifier(corner_index, 1)
+        return getIdentifierOfCorner(corner_index, 2) + getIdentifierOfCorner(corner_index, 1)
 
 #Gets all the pieces surrounding a corner
 #Params: game_state, The current state of the game
@@ -123,7 +123,7 @@ def getIdentifierOfCorner(corner_index, order_index):
 def piecesByCorner(game_state, corner_index, column, row):
     pieces = []
     order_index = 0
-    column_sign = getColumnSign(corner_index)
+    column_sign = getColumnModifier(corner_index)
     row_sign = getRowSignOfCorner(corner_index)
     for i in range(2):
         for j in range(2):
