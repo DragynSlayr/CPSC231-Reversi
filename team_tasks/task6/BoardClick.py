@@ -9,6 +9,7 @@ import PlayerVictory
 import FileHandler
 import random
 import MoveValidator
+import ScreenWriter
 
 #Converts an x coordinate to a cell on the board
 #Params: x, The x coordinate
@@ -108,16 +109,22 @@ def place_piece(x, y):
                 #Save the variables
                 FileHandler.saveVariable("State", game_state)
                 FileHandler.saveVariable("Move", str(move_num))
+
+                #Update the scoreboard
+                black_score = VictoryStatus.countPieces(Constants.PIECE_BLACK, game_state)
+                white_score = VictoryStatus.countPieces(Constants.PIECE_WHITE, game_state)
+                ScreenWriter.writeScore(black_score, white_score)
     else:
         #Print who won
-    	print(PlayerVictory.playerWon(game_state))
+        game_status = PlayerVictory.playerWon(game_state)
+        ScreenWriter.writeMessage(game_status)
 
-    	#Wait for user
-    	Constants.WINDOW.exitonclick()
+        #Wait for user
+        Constants.WINDOW.exitonclick()
 
         #Reset state and move
-    	FileHandler.saveVariable("State", "")
-    	FileHandler.saveVariable("Move", "")
+        FileHandler.saveVariable("State", "")
+        FileHandler.saveVariable("Move", "")
 
 #The main loop of the function
 #Waits for input from the user

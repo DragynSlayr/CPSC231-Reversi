@@ -52,6 +52,14 @@ RIGHT_MOST_X = 600
 TOP_MOST_Y = 500
 BOTTOM_MOST_Y = 100
 
-#These represents the above numbers in terms of columns and rows
+#These represent the above numbers in terms of columns and rows
 OFFSET_OF_COLUMNS = 4
 OFFSET_OF_ROWS = 2
+
+#Constants for writing information to the Screen
+WHITE_SCORE_X = 660
+WHITE_SCORE_Y = 440
+BLACK_SCORE_X = 40
+BLACK_SCORE_Y = 440
+MESSAGE_X = 300
+MESSAGE_Y = 20

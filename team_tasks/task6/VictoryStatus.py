@@ -2,6 +2,13 @@
 import Constants
 import BoardGenerator as cfg
 
+def countPieces(piece, game_state):
+	count = 0
+	for i in game_state:
+		if i == piece:
+			count += 1
+	return count
+
 #Checks if the game is over
 #Params: game_state, A string representation of the board
 #Returns: True if the board is full and False otherwise
