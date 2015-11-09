@@ -28,6 +28,15 @@ def stringToPiece(game_state):
 			#Increment index
 			index += 1
 
+#Converts an index to a move
+#Params: index, The index to convert
+#Returns: A string representing the Index
+#Example: pieceToString(10) returns "C2"
+def pieceToString(index):
+	column = Constants.COLUMN_LETTERS[index % 8]
+	row = Constants.ROW_NUMBERS[index // 8]
+	return str(column) + str(row)
+
 #This function will decide on the colour of the next piece based on whose turn number it is.
 #The takes a counter for the turns as a parameter.
 #It returns a B or a W depending on whose turn it is.
@@ -81,12 +90,12 @@ def stringInterpret(game_state, NewMove, turn):
 
 #Sets up the board using the pieces and reading through the string.
 def setup2():
-	new_state = StringInterpret(("NNNNNNNN" * 8), "D4", -2)
-	new_state = StringInterpret((new_state), "E4", -1)
-	new_state = StringInterpret((new_state), "D5", -1)
-	new_state = StringInterpret((new_state), "E5", -2)
+	new_state = stringInterpret(("NNNNNNNN" * 8), "D4", -2)
+	new_state = stringInterpret((new_state), "E4", -1)
+	new_state = stringInterpret((new_state), "D5", -1)
+	new_state = stringInterpret((new_state), "E5", -2)
 	for turn in range(64):
-		new_state = StringInterpret((new_state), input("Move?"), turn + 1)
+		new_state = stringInterpret((new_state), input("Move?"), turn + 1)
 
 if __name__ == "__main__":
 		TurtleMove.setup()
