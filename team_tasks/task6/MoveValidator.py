@@ -6,6 +6,7 @@
 
 import Constants
 import BoardGenerator as bg
+import StringInterpret as si
 
 #Checks if a column is near the edges of the board
 #Params: column, The column to check
@@ -290,7 +291,7 @@ def isValidMove(move, game_state):
             filled_spaces = countFilledSpaces(surrounding_pieces)
 
             #Move is valid if at least 1 piece is near the move
-            return filled_spaces > 1
+            return filled_spaces >= 1
     else:
         #Piece not on board
         return False
@@ -298,11 +299,22 @@ def isValidMove(move, game_state):
 #Test the validate method with user input
 #Params: game_state, The state of the game
 #Returns: None
-def test_with_input(game_state):
+def testWithInput(game_state):
     move = input("Enter a move: ")
     while not isValidMove(move, game_state):
         print("Not valid!")
         move = input("Enter a move: ")
+
+#Gets all possible moves
+#Params: game_state, The current game's state
+#Returns: A list of possible moves
+def getValidMoves(game_state):
+    valid_moves = []
+    for i in range(len(game_state)):
+        move = si.pieceToString(i)
+        if isValidMove(move, game_state):
+            valid_moves.append(move)
+    return valid_moves
 
 if __name__ == "__main__":
     board = bg.generate(False, False)
@@ -311,4 +323,4 @@ if __name__ == "__main__":
         if i % 8 == 0:
             print()
     print()
-    test_with_input(board)
+    testWithInput(board)
