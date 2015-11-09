@@ -229,6 +229,85 @@ def CheckSouthWest(token, MoveToString):
 			print (token)
 			print (NewToken)
 
+def CheckSouthEast(token, MoveToString):
+
+	TurnColour = "W"
+	OtherColour = "B"
+	SOUTHEAST = 9
+	NofChanges = 0
+
+	PlaceHolder = ""
+	NextToken = ""
+	NewToken = ""
+	MoveID = 0
+	MoveXID = 0
+
+#	if token[MoveToString + NORTH] == TurnColour or "N":
+#		print("Not SOUTHEAST")
+#		return False
+#	else:
+	MoveID = MoveToString
+	while token[MoveToString + SOUTHEAST] == OtherColour:
+		MoveToString = MoveToString + SOUTHEAST
+		NofChanges = NofChanges + 1
+	if token[MoveToString + SOUTHEAST] == TurnColour:
+		MoveXID = MoveToString + SOUTHEAST				#!!!!!!to slice must be [MoveToString+SOUTHEAST+9]
+		while NofChanges != 0:
+			PlaceHolder = TurnColour + token[MoveToString + 1:MoveToString + SOUTHEAST]
+			NextToken = NextToken + PlaceHolder
+			MoveToString = MoveToString - SOUTHEAST
+			NofChanges = NofChanges - 1
+			print (PlaceHolder, "PlaceHolder")
+			print (NextToken, "NextToken")
+			print (MoveToString, "Index of Change")
+			print (NofChanges, "Number of Changes left")
+		if NofChanges == 0:
+			NewToken = token[:MoveID + SOUTHEAST] + NextToken + token[MoveXID:]
+			print ("         #        #        #       #")
+			print ("01234567890123456789012345678901234567890")
+			print (token)
+			print (NewToken)
+
+
+def CheckSouth(token, MoveToString):
+
+	TurnColour = "W"
+	OtherColour = "B"
+	SOUTH = 8
+	NofChanges = 0
+
+	PlaceHolder = ""
+	NextToken = ""
+	NewToken = ""
+	MoveID = 0
+	MoveXID = 0
+
+#	if token[MoveToString + NORTH] == TurnColour or "N":
+#		print("Not SOUTH")
+#		return False
+#	else:
+	MoveID = MoveToString
+	while token[MoveToString + SOUTH] == OtherColour:
+		MoveToString = MoveToString + SOUTH
+		NofChanges = NofChanges + 1
+	if token[MoveToString + SOUTH] == TurnColour:
+		MoveXID = MoveToString + SOUTH				#!!!!!!to slice must be [MoveToString+SOUTH+9]
+		while NofChanges != 0:
+			PlaceHolder = TurnColour + token[MoveToString + 1:MoveToString + SOUTH]
+			NextToken = NextToken + PlaceHolder
+			MoveToString = MoveToString - SOUTH
+			NofChanges = NofChanges - 1
+			print (PlaceHolder, "PlaceHolder")
+			print (NextToken, "NextToken")
+			print (MoveToString, "Index of Change")
+			print (NofChanges, "Number of Changes left")
+		if NofChanges == 0:
+			NewToken = token[:MoveID + SOUTH] + NextToken + token[MoveXID:]
+			print ("         #        #        #       #")
+			print ("01234567890123456789012345678901234567890")
+			print (token)
+			print (NewToken)
+
 
 
 
@@ -278,4 +357,34 @@ CheckSouthWest("WWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBWWBBBBBBWBBBBBBBBBBBBBBBBBBBBBBBB
 print ("___________________________")
 print ("TEST 2 TEST 2 TEST 2 TEST 2")
 print (" ")
-CheckSouthWest("WWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBWBBBBBBBWBBBBBBBBBBBBBBBBBBBBBBBB", 3)
+CheckSouthWest("WWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBWWBBBBBBWBBBBBBBBBBBBBBBBBBBBBBBB", 3)
+
+
+
+print("_________________________________")
+print("<('o'<)".center(50))
+print("_________________________________")
+print("CHECK SOUTH CHECK SOUTH CHECK SOUTH".center(50))
+print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+print("TEST1 TEST1 TEST1 ".center(50))
+print("_________________________________")
+print(" ")
+CheckSouthWest("WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 3)
+print("_________________________________")
+print("<('o'<)".center(50))
+print("_________________________________")
+print("CHECK SOUTH CHECK SOUTH CHECK SOUTH".center(50))
+print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+print("TEST2 TEST2 TEST2 ".center(50))
+print("_________________________________")
+print(" ")
+CheckSouthWest("WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 5)
+print("_________________________________")
+print("<('o'<)".center(50))
+print("_________________________________")
+print("CHECK SOUTH CHECK SOUTH CHECK SOUTH".center(50))
+print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+print("TEST2 TEST2 TEST2 ".center(50))
+print("_________________________________")
+print(" ")
+CheckSouthWest("WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 57)
