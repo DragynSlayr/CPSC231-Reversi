@@ -45,7 +45,7 @@ def label_y(grid):
 	for sidey in Constants.ROW_NUMBERS[::-1]:
 		coord_yy = grid.ycor()
 		grid.pendown()
-		grid.write(sidey, True)
+		grid.write(sidey, False)
 		grid.penup()
 		coord_yy = coord_yy + Constants.CELL_HEIGHT
 		grid.goto(175, coord_yy)
@@ -58,7 +58,7 @@ def label_x(grid):
 	for sidex in Constants.COLUMN_LETTERS:
 		coord_xx = grid.xcor()
 		grid.pendown()
-		grid.write(sidex, True)
+		grid.write(sidex, False)
 		grid.penup()
 		coord_xx = coord_xx + Constants.CELL_WIDTH
 		grid.goto(coord_xx, 525)
@@ -72,7 +72,7 @@ def reversiFrame(grid):
 	grid.goto(-5,-5)
 	grid.setheading(90)
 	grid.pendown()
-	
+
 	#Draw the border
 	grid.forward(Constants.WINDOW_HEIGHT)
 	grid.right(90)
@@ -108,7 +108,7 @@ def reversiBoard(grid):
 	grid.goto(25, 575)
 	grid.pendown()
 	grid.pencolor("black")
-	grid.write("R   e   v   e   r   s   i")
+	grid.write("R   e   v   e   r   s   i", False)
 
 #This function creates the window, sets the coordinates of the window, creates the grid with labels, and frames it.
 #Function takes no parameters and returns nothing
