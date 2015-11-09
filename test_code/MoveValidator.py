@@ -113,6 +113,13 @@ def getIdentifierOfCorner(corner_index, order_index):
         #Return a combination of T or B and R or L
         return getIdentifier(corner_index, 2) + getIdentifier(corner_index, 1)
 
+#Gets all the pieces surrounding a corner
+#Params: game_state, The current state of the game
+#        corner_index, The index of the corner
+#        column, The current column, either 'A' or 'H'
+#        row, The current row, either 1 or 8
+#Returns: A list containing 4 objects that represent a position and it's realation to the corner
+#Notes: Corner indices are as follows, top corner are 1 and 2 bottom are 3 and 4
 def piecesByCorner(game_state, corner_index, column, row):
     pieces = []
     order_index = 0
@@ -128,6 +135,9 @@ def piecesByCorner(game_state, corner_index, column, row):
             order_index += 1
     return pieces
 
+#Counts how many places in a list are occupied by "B" or "W":
+#Params: pieces, The list to check
+#Returns: A count of the number of indexs in the list that start with "B" or "W"
 def countFilledSpaces(pieces):
     count = 0
     for i in pieces:
@@ -136,12 +146,19 @@ def countFilledSpaces(pieces):
             count += 1
     return count
 
+#Gets the index of a column
+#Params: column, The column to get the index for
+#Returns: 1 if left-most column, 2 otherwise
 def getColumn(column):
     if column == Constants.COLUMN_LETTERS[0]:
         return 1
     else:
         return 2
 
+#Gets an identifier for a piece in a column
+#Params: column_index, The index of the column
+#        order_index, The index of the piece
+#Returns: A unique identifier for the piece
 def getColumnIdentifier(column_index, order_index):
     if column_index == 1:
         order = ["T", "TR", "", "R", "B", "BR"]
@@ -150,6 +167,12 @@ def getColumnIdentifier(column_index, order_index):
         order = ["T", "TL", "", "L", "B", "BL"]
         return order[order_index]
 
+#Gets a list of all pieces around a point near the edge of the board
+#Params: game_state, The current state of the game
+#        column_index, The index of the column, either 1 or 2
+#        column, The column, either 'A' or 'H'
+#        row, The row
+#Returns: A list of pieces around the point (column, row)
 def piecesByColumn(game_state, column_index, column, row):
     pieces = []
     order_index = 0
@@ -164,12 +187,19 @@ def piecesByColumn(game_state, column_index, column, row):
             order_index += 1
     return pieces
 
+#Gets the index of the row near the top or bottom of the board
+#Params: row, The row check
+#Returns: 1 if row is 1, 2 otherwise
 def getRow(row):
     if row == Constants.ROW_NUMBERS[0]:
         return 1
     else:
         return 2
 
+#Get the identifier for a row
+#Params: row_index, The index of the row, either 1 or 2
+#        order_index, The piece number in relation to the point
+#Returns: A unique identifier for the relation between a point and the order_index
 def getRowIdentifier(row_index, order_index):
     if row_index == 1:
         order = ["L", "", "R", "BL", "B", "BR"]
@@ -178,6 +208,11 @@ def getRowIdentifier(row_index, order_index):
         order = ["L", "", "R", "TL", "T", "TR"]
         return order[order_index]
 
+#Gets a list of all the pieces by a point near the top or bottom of the board
+#Params: game_state, The current state of the game
+#        row_index, The index of the row, either 1 or 2
+#        column, The column
+#        row, The row, either 1 or 2
 def piecesByRow(game_state, row_index, column, row):
     pieces = []
     order_index = 0
@@ -192,10 +227,18 @@ def piecesByRow(game_state, row_index, column, row):
             order_index += 1
     return pieces
 
+#Get an identifer for a point in relation to another
+#Params: order_index, The index of the position
+#Returns: A unique identifer for the index
 def getPointIdentifier(order_index):
     order = ["TL", "T", "TR", "L", "C", "R", "BL", "B", "BR"]
     return order[order_index]
 
+#Gets a list of all pieces around a point
+#Params: game_state, The current state of the game
+#        column, The column of the point
+#        row, The row of the point
+#Returns: A list of all pieces around the point (column, row)
 def piecesByPoint(game_state, column, row):
     pieces = []
     order_index = 0
@@ -206,11 +249,11 @@ def piecesByPoint(game_state, column, row):
             order_index += 1
     return pieces
 
+#Checks whether a move is close to another piece on the board
+#Params: move, The move to check
+#        game_state, The curent state of the game
+#Returns: True if the move is adjacent to another piece, False otherwise
 def isValidMove(move, game_state):
-    #Test code
-    if move == "f":
-        return True
-
     #Extract row and column
     row = int(move[1:])
     column = move[:1].upper()
@@ -252,7 +295,10 @@ def isValidMove(move, game_state):
         #Piece not on board
         return False
 
-def validate(game_state):
+#Test the validate method with user input
+#Params: game_state, The state of the game
+#Returns: None
+def test_with_input(game_state):
     move = input("Enter a move: ")
     while not isValidMove(move, game_state):
         print("Not valid!")
@@ -265,4 +311,4 @@ if __name__ == "__main__":
         if i % 8 == 0:
             print()
     print()
-    validate(board)
+    test_with_input(board)
