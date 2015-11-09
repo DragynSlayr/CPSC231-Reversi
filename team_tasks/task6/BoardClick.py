@@ -8,6 +8,7 @@ import VictoryStatus
 import PlayerVictory
 import FileHandler
 import random
+import MoveValidator
 
 #Converts an x coordinate to a cell on the board
 #Params: x, The x coordinate
@@ -52,17 +53,21 @@ def getRandomNumber():
 #        move_num, The current move number
 #Returns: The new game state
 def computerTurn(state, move_num):
-    #Generate a letter and number
-    letter = getRandomLetter()
-    number = getRandomNumber()
+    #Get a list of possible moves
+    valid_moves = MoveValidator.getValidMoves(state)
 
-    #Generate move until one is valid
-    while not StringMove.validateMoveLocation(state, letter + str(number)):
-        letter = getRandomLetter()
-        number = getRandomNumber()
+    #If no moves are valid then the move is skipped
+    if len(valid_moves) == 0:
+        return state
+    else:
+        #Generate a random number
+        random_num = random.randrange(len(valid_moves))
 
-    #Place piece and return state
-    return StringInterpret.stringInterpret(state, letter + str(number), move_num)
+        #Get a move from the list
+        move = valid_moves[random_num]
+
+        #Make the move
+        return StringInterpret.stringInterpret(state, move, move_num)
 
 #Places a piece at a location if it is a cell
 #Params: x, The x location to check
@@ -85,13 +90,16 @@ def place_piece(x, y):
             letter = Constants.COLUMN_LETTERS[x]
             number = Constants.ROW_NUMBERS[Constants.NUM_OF_ROWS - (y + 1)]
 
-            #Make sure a piece is not in this location
-            if StringMove.validateMoveLocation(game_state, letter + str(number)):
+            #The move being made
+            move = letter + str(number)
+
+            #Make sure a piece is not in this location and the move is valid
+            if StringMove.validateMoveLocation(game_state, move) and MoveValidator.isValidMove(move, game_state):
 
                 #Update the game state
                 game_state = StringInterpret.stringInterpret(game_state, letter + str(number), move_num)
                 move_num += 1
-                
+
                 #Allow the computer to place a piece if the game is not over
                 if VictoryStatus.endGameStatus(game_state) != True:
                     game_state = computerTurn(game_state, move_num)
