@@ -2,6 +2,10 @@
 import Constants
 import BoardGenerator as cfg
 
+#Counts the number of a specified character in a string
+#Params: piece, The piece to count occurences of
+#		 game_state, The string to check
+#Returns: A count of the piece in the game_state
 def countPieces(piece, game_state):
 	count = 0
 	for i in game_state:
@@ -15,12 +19,7 @@ def countPieces(piece, game_state):
 #Author: Inderpreet Dhillon
 def endGameStatus(game_state):
 	limit = Constants.NUM_OF_CELLS
-	count = 0
-	#Iterate through the game state
-	for s in game_state:
-		#Count non blank pieces
-		if s == Constants.PIECE_BLACK or s == Constants.PIECE_WHITE:
-			count += 1
+	count = countPieces(Constants.PIECE_BLACK, game_state) + countPieces(Constants.PIECE_WHITE, game_state)
 	return count == limit
 
 if __name__ == "__main__":
