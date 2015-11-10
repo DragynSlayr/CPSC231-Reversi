@@ -63,3 +63,13 @@ BLACK_SCORE_X = 40
 BLACK_SCORE_Y = 440
 MESSAGE_X = 300
 MESSAGE_Y = 20
+
+#Constants for checking for pieces in the directions
+NORTH = -8
+NORTHEAST = -7
+EAST = 1
+SOUTHEAST = 9
+SOUTH = 8
+SOUTHWEST = 7
+WEST = -1
+NORTHWEST = -9

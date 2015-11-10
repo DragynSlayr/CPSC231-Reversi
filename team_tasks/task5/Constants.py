@@ -21,7 +21,7 @@ COLUMN_LETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 ROW_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8]
 
 #The offset of the first cell of the grid
-X_OFFSET = WINDOW_WIDTH / 4 #Evaluates to 200
+X_OFFSET = (WINDOW_WIDTH / 4) + CELL_WIDTH #Evaluates to 250
 Y_OFFSET = (WINDOW_HEIGHT * (2/3)) + (WINDOW_HEIGHT / 8) #Evaluates to 475
 
 #Offset for the title
@@ -52,6 +52,24 @@ RIGHT_MOST_X = 600
 TOP_MOST_Y = 500
 BOTTOM_MOST_Y = 100
 
-#These represents the above numbers in terms of columns and rows
+#These represent the above numbers in terms of columns and rows
 OFFSET_OF_COLUMNS = 4
 OFFSET_OF_ROWS = 2
+
+#Constants for writing information to the Screen
+WHITE_SCORE_X = 660
+WHITE_SCORE_Y = 440
+BLACK_SCORE_X = 40
+BLACK_SCORE_Y = 440
+MESSAGE_X = 300
+MESSAGE_Y = 20
+
+#Constants for checking for pieces in the directions
+NORTH = -8
+NORTHEAST = -7
+EAST = 1
+SOUTHEAST = 9
+SOUTH = 8
+SOUTHWEST = 7
+WEST = -1
+NORTHWEST = -9
