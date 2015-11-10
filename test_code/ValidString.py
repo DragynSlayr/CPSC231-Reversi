@@ -215,7 +215,7 @@ def CheckSouthWest(token, MoveToString):
 		MoveXID = MoveToString + SOUTHWEST				#!!!!!!to slice must be [MoveToString+SOUTHWEST+9]
 		while NofChanges != 0:
 			PlaceHolder = TurnColour + token[MoveToString + 1:MoveToString + SOUTHWEST]
-			NextToken = NextToken + PlaceHolder
+			NextToken = PlaceHolder + NextToken
 			MoveToString = MoveToString - SOUTHWEST
 			NofChanges = NofChanges - 1
 			print (PlaceHolder, "PlaceHolder")
@@ -254,7 +254,7 @@ def CheckSouthEast(token, MoveToString):
 		MoveXID = MoveToString + SOUTHEAST				#!!!!!!to slice must be [MoveToString+SOUTHEAST+9]
 		while NofChanges != 0:
 			PlaceHolder = TurnColour + token[MoveToString + 1:MoveToString + SOUTHEAST]
-			NextToken = NextToken + PlaceHolder
+			NextToken = PlaceHolder + NextToken
 			MoveToString = MoveToString - SOUTHEAST
 			NofChanges = NofChanges - 1
 			print (PlaceHolder, "PlaceHolder")
@@ -294,19 +294,20 @@ def CheckSouth(token, MoveToString):
 		MoveXID = MoveToString + SOUTH				#!!!!!!to slice must be [MoveToString+SOUTH+9]
 		while NofChanges != 0:
 			PlaceHolder = TurnColour + token[MoveToString + 1:MoveToString + SOUTH]
-			NextToken = NextToken + PlaceHolder
+			NextToken = PlaceHolder + NextToken
 			MoveToString = MoveToString - SOUTH
 			NofChanges = NofChanges - 1
 			print (PlaceHolder, "PlaceHolder")
 			print (NextToken, "NextToken")
 			print (MoveToString, "Index of Change")
 			print (NofChanges, "Number of Changes left")
-		if NofChanges == 0:
-			NewToken = token[:MoveID + SOUTH] + NextToken + token[MoveXID:]
-			print ("         #        #        #       #")
-			print ("01234567890123456789012345678901234567890")
-			print (token)
-			print (NewToken)
+#		if NofChanges == 0:
+		NewToken = token[:MoveID + SOUTH] + NextToken + token[MoveXID:]
+		print (MoveID + SOUTH, " MoveID")
+		print (MoveXID, " MoveXID")
+		print ("012345678901234567890123456789012345678901234567890123")
+		print (token)
+		print (NewToken)
 
 
 
@@ -369,7 +370,7 @@ print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 print("TEST1 TEST1 TEST1 ".center(50))
 print("_________________________________")
 print(" ")
-CheckSouthWest("WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 3)
+CheckSouth("WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 3)
 print("_________________________________")
 print("<('o'<)".center(50))
 print("_________________________________")
@@ -378,7 +379,8 @@ print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 print("TEST2 TEST2 TEST2 ".center(50))
 print("_________________________________")
 print(" ")
-CheckSouthWest("WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 5)
+CheckSouth("WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 5)
+"""
 print("_________________________________")
 print("<('o'<)".center(50))
 print("_________________________________")
@@ -388,3 +390,4 @@ print("TEST2 TEST2 TEST2 ".center(50))
 print("_________________________________")
 print(" ")
 CheckSouthWest("WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 57)
+"""
