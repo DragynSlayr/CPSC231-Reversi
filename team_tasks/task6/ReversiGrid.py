@@ -89,11 +89,16 @@ def reversiFrame(grid):
 #It will also frame the game window.
 #Function takes a turtle and returns nothing
 def reversiBoard(grid):
+	grid.fillcolor("dark green")
+	grid.pencolor ("black")
+	grid.begin_fill()
+	square(grid)
+	grid.end_fill()
 	for y in Constants.ROW_NUMBERS: #This stacks the rows of squares downwards.
 		for x in Constants.COLUMN_LETTERS: #This creates the squares in a horizontal row.
-			grid.fillcolor("green")
-			grid.begin_fill()
+			grid.fillcolor("dark green")
 			grid.pencolor ("black")
+			grid.begin_fill()
 			square(grid)
 			grid.end_fill()
 			grid.forward(Constants.CELL_WIDTH)
