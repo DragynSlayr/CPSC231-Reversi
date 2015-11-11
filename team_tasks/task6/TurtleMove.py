@@ -1,6 +1,38 @@
+#Contains methods for interpreting input and placing pieces
 import string
 import Constants
 import ReversiGrid
+
+#Redraws a single square back to default
+#Params: column, The column of the square
+#		 row, The row of the square
+#Returns: None
+def resetSquare(column, row):
+	#Get the turtle
+	turtle = Constants.TURTLE
+
+	#Go to the position
+	turtle.up()
+	turtle.goto(getPosition(column, row))
+	turtle.down()
+
+	#Set the color
+	turtle.fillcolor("dark green")
+
+	#Draw the square
+	turtle.begin_fill()
+	for i in range(4):
+		turtle.forward(Constants.CELL_WIDTH / 2)
+		turtle.left(90)
+		turtle.forward(Constants.CELL_WIDTH / 2)
+	turtle.end_fill()
+
+#Draw all valid moves to the board
+#Params: valid_moves, The moves to draw
+#Returns: None
+def displayValidMoves(valid_moves):
+	for move in valid_moves:
+		placePiece(move[0], int(move[1]), "#34DDDD")
 
 # Removes spaces and punctuation from a string
 # Params: location, the string to strip
