@@ -31,11 +31,11 @@ def convertYToBoard(y):
 #Returns: True if a piece can be placed at a location, False otherwise
 def isValidSquare(x, y):
     #Check if each coordinate is valid separately
-    xValid = x >= Constants.LEFT_MOST_X and x <= Constants.RIGHT_MOST_X
-    yValid = y >= Constants.BOTTOM_MOST_Y and y <= Constants.TOP_MOST_Y
+    x_valid = x >= Constants.LEFT_MOST_X and x <= Constants.RIGHT_MOST_X
+    y_valid = y >= Constants.BOTTOM_MOST_Y and y <= Constants.TOP_MOST_Y
 
     #Check if the x and y are in any cell
-    return xValid and yValid
+    return x_valid and y_valid
 
 #Gets a random letter between A-H
 #Params: None
@@ -74,7 +74,7 @@ def computerTurn(state, move_num):
 #Params: x, The x location to check
 #        y, The y location to check
 #Returns: None
-def place_piece(x, y):
+def placePiece(x, y):
     #Load the variables we need
     game_state = FileHandler.loadVariable("State")
     move_num = int(FileHandler.loadVariable("Move"))
@@ -138,13 +138,18 @@ def run(state, move_num, isPlayerMove):
         state = computerTurn(state, move_num)
         move_num += 1
 
+    #Update the scoreboard
+    black_score = VictoryStatus.countPieces(Constants.PIECE_BLACK, state)
+    white_score = VictoryStatus.countPieces(Constants.PIECE_WHITE, state)
+    ScreenWriter.writeScore(black_score, white_score)
+
     #Save variables to be used later
     FileHandler.saveVariable("State", state)
     FileHandler.saveVariable("Move", str(move_num))
 
     #Set up the window
     wn = Constants.WINDOW
-    wn.onclick(place_piece)
+    wn.onclick(placePiece)
     wn.onkey(wn.bye, "space")
     wn.listen()
     wn.mainloop()
