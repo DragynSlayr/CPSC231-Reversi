@@ -96,6 +96,11 @@ def placePiece(x, y):
 
             #Make sure a piece is not in this location and the move is valid
             if StringMove.validateMoveLocation(game_state, move) and MoveValidator.isValidMove(move, game_state):
+                #Get valid moves
+                valid_moves = MoveValidator.getValidMoves(game_state)
+
+                #Clear valid moves
+                TurtleMove.resetSquare(letter, number)
 
                 #Update the game state
                 game_state = StringInterpret.stringInterpret(game_state, letter + str(number), move_num)
@@ -110,10 +115,16 @@ def placePiece(x, y):
                 FileHandler.saveVariable("State", game_state)
                 FileHandler.saveVariable("Move", str(move_num))
 
-                #Update the scoreboard
-                black_score = VictoryStatus.countPieces(Constants.PIECE_BLACK, game_state)
-                white_score = VictoryStatus.countPieces(Constants.PIECE_WHITE, game_state)
-                ScreenWriter.writeScore(black_score, white_score)
+            #Update the scoreboard
+            black_score = VictoryStatus.countPieces(Constants.PIECE_BLACK, game_state)
+            white_score = VictoryStatus.countPieces(Constants.PIECE_WHITE, game_state)
+            ScreenWriter.writeScore(black_score, white_score)
+
+            #Get valid moves again
+            valid_moves = MoveValidator.getValidMoves(game_state)
+
+            #Display valid moves
+            TurtleMove.displayValidMoves(valid_moves)
     else:
         #Print who won
         game_status = PlayerVictory.playerWon(game_state)
@@ -142,6 +153,10 @@ def run(state, move_num, isPlayerMove):
     black_score = VictoryStatus.countPieces(Constants.PIECE_BLACK, state)
     white_score = VictoryStatus.countPieces(Constants.PIECE_WHITE, state)
     ScreenWriter.writeScore(black_score, white_score)
+
+    #Display valid moves
+    valid_moves = MoveValidator.getValidMoves(state)
+    TurtleMove.displayValidMoves(valid_moves)
 
     #Save variables to be used later
     FileHandler.saveVariable("State", state)
