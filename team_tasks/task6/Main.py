@@ -1,5 +1,4 @@
 #This file holds the functions to start the game
-
 import MainMenu
 import ReversiGrid
 import StringInterpret
@@ -9,7 +8,6 @@ import random
 
 def main():
 	#Set up the other classes
-	MainMenu.main()
 	ReversiGrid.main()
 
 	#Use a blank starting board
@@ -34,4 +32,4 @@ def main():
 	BoardClick.run(game_state, move_num, isPlayerMove)
 
 if __name__ == "__main__":
-	main()
+	MainMenu.main()
