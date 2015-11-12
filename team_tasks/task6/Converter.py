@@ -43,12 +43,40 @@ def toString(state_list):
     #Return the game state string
     return state_string
 
+def asBoardRepresentation(state):
+    #Make sure state is a list
+    if type(state) == type("String"):
+        state = toList(state)
+
+    #Will hold the board
+    board = ""
+
+    #Go through each index in the state
+    for row in range(len(state)):
+        for piece in state[row]:
+            #Add each element to the board string
+            board += piece
+
+        #Add a new line if not at the last line
+        if row != len(state) - 1:
+            board += "\n"
+
+    #Return the string
+    return board
+
+
 def main():
     state = (("N" * 8) + ("B" * 8) + ("W" * 8) + ("NBWNBWNB")) * 2
     state_list = toList(state)
-    print(state_list)
+    #print(state_list)
+
     state_string = toString(state_list)
-    print(state_string)
+    #print(state_string)
+
+    board_list = asBoardRepresentation(state_list)
+    board_string = asBoardRepresentation(state_string)
+    print(board_list == board_string)
+    print(board_list)
 
 if __name__ == "__main__":
     main()
