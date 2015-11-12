@@ -10,20 +10,22 @@ def CheckWest(game_state, stringID, turn_colour):
 	MoveID = stringID
 
 	while game_state[stringID + (Constants.WEST)] == other_colour:
-
+		"""
 		if NofChanges > (MoveID % 8) - 2:
+			print ("out of bounds")
 			return game_state
 
 		if game_state[stringID + Constants.WEST] != other_colour or game_state[stringID + Constants.WEST] != turn_colour:
+			print ("!= turn colour or other")
 			return game_state
-
+		"""
 		print (NofChanges, "NofChanges Number of other colours")
 		print (stringID + (Constants.WEST), "index of other_colour")
 		stringID = stringID + (Constants.WEST)
 
 		if game_state[stringID] == "N":
 			print("None in that direction.")
-
+			return game_state
 		NofChanges = NofChanges + 1
 
 
@@ -48,13 +50,15 @@ def CheckEast(game_state, stringID, turn_colour):
 
 
 	while game_state[stringID + (Constants.EAST)] == other_colour:
-
+		"""
 		if NofChanges > (8 - (MoveID % 8)) - 2:
+			print("Out of bounds.")
 			return game_state
 
 		if game_state[stringID + Constants.EAST] != other_colour or game_state[stringID + Constants.EAST] != turn_colour:
+			print("!= any colour")
 			return game_state
-
+		"""
 		print (NofChanges, "NofChanges Number of other colours")
 		print (stringID + (Constants.EAST), "index of other_colour")
 		stringID = stringID + (Constants.EAST)
@@ -404,6 +408,19 @@ def ChangePieces(game_state, stringID, turn_colour):
 	return game_state
 
 
+
+print ("WEST WEST WEST".center(50))
+print ("___________________________")
+print ("TEST 1 TEST 1 TEST 1 TEST 1")
+print (" ")
+CheckWest("WWWWWWWWWBBBBBBBBBBBBWBBNWBBBBBWNNBWWWNNNBNNNBNNBNNNNNBNNNNNNNNW", 31, "W")
+print ("___________________________")
+print ("TEST 2 TEST 2 TEST 2 TEST 2")
+print (" ")
+CheckWest("WWWWWWWWWBBBBBBBBBBBBWBBNBBBBBBWNWBWWWNNNBNNNBNNBNNNNNBNNNNNNNNW", 35, "W")
+
+
+print ("NORTHWEST NORTHWEST NORTHWEST".center(50))
 print ("___________________________")
 print ("TEST 1 TEST 1 TEST 1 TEST 1")
 print (" ")
