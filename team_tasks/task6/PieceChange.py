@@ -12,6 +12,9 @@ def CheckWest(game_state, stringID, turn_colour):
 
 	while game_state[stringID + (Constants.WEST)] == other_colour:
 
+		if NofChanges > (MoveID % 8) - 2:
+			return game_state
+
 		if game_state[stringID + Constants.WEST] != other_colour or game_state[stringID + Constants.WEST] != turn_colour:
 			return game_state
 
@@ -24,8 +27,7 @@ def CheckWest(game_state, stringID, turn_colour):
 
 		NofChanges = NofChanges + 1
 
-		if NofChange > (MoveID % 8):
-			return game_state
+
 
 		if game_state[stringID + (Constants.WEST)] == turn_colour:
 			new_state = game_state[:stringID] + (turn_colour * NofChanges) + game_state[stringID + (Constants.WEST) + NofChanges + 1:]
@@ -43,9 +45,13 @@ def CheckEast(game_state, stringID, turn_colour):
 	NofChanges = 0
 	other_colour = OtherColour(turn_colour)
 	new_state = ""
+	MoveID = stringID
 
 
 	while game_state[stringID + (Constants.EAST)] == other_colour:
+
+		if NofChanges > (8 - (MoveID % 8)) - 2:
+			return game_state
 
 		if game_state[stringID + Constants.EAST] != other_colour or game_state[stringID + Constants.EAST] != turn_colour:
 			return game_state
@@ -60,8 +66,7 @@ def CheckEast(game_state, stringID, turn_colour):
 
 		NofChanges = NofChanges + 1
 
-		if NofChanges > (8 - (MoveID % 8)):
-			return game_state
+
 
 		if game_state[stringID + (Constants.EAST)] == turn_colour:
 			new_state = game_state[:stringID - NofChanges + 1] + (turn_colour * NofChanges) + game_state[stringID + 1:]
@@ -85,13 +90,17 @@ def CheckNorthWest(game_state, stringID, turn_colour):
 	MoveID = stringID
 
 	while game_state[stringID + Constants.NORTHWEST] == other_colour:
+
+		if NofChanges > (MoveID // 8) - 2:
+			return game_state
+
 		if game_state[stringID + Constants.NORTHWEST] != other_colour or game_state[stringID + Constants.NORTHWEST] != turn_colour:
 			return game_state
+
 		stringID = stringID + Constants.NORTHWEST
 		NofChanges = NofChanges + 1
 
-		if NofChanges > MoveID // 8:
-			return game_state
+
 
 	if game_state[stringID + Constants.NORTHWEST] == turn_colour:
 		MoveXID = stringID + Constants.NORTHWEST
@@ -132,13 +141,18 @@ def CheckNorth(game_state, stringID, turn_colour):
 	MoveID = stringID
 
 	while game_state[stringID + Constants.NORTH] == other_colour:
+
+		if NofChanges > (MoveID // 8) - 2:
+			return game_state
+
+
 		if game_state[stringID + Constants.NORTH] != other_colour or game_state[stringID + Constants.NORTH] != turn_colour:
 			return game_state
+
 		stringID = stringID + Constants.NORTH
 		NofChanges = NofChanges + 1
 
-		if NofChanges > MoveID // 8:
-			return game_state
+
 
 	if game_state[stringID + Constants.NORTH] == turn_colour:
 		MoveXID = stringID + Constants.NORTH
@@ -182,14 +196,16 @@ def CheckNorthEast(game_state, stringID, turn_colour):
 
 	while game_state[stringID + Constants.NORTHEAST] == other_colour:
 
+		if NofChanges > (MoveID // 8) - 2:
+			return game_state
+
 		if game_state[stringID + Constants.NORTHEAST] != other_colour or game_state[stringID + Constants.NORTHEAST] != turn_colour:
 			return game_state
 
 		stringID = stringID + Constants.NORTHEAST
 		NofChanges = NofChanges + 1
 
-		if NofChanges > MoveID // 8:
-			return game_state
+
 
 	if game_state[stringID + Constants.NORTHEAST] == turn_colour:
 		MoveXID = stringID + Constants.NORTHEAST				#!!!!!!to slice must be [stringID+Constants.NORTHEAST+9]
@@ -232,14 +248,14 @@ def CheckSouthWest(game_state, stringID, turn_colour):
 
 	while game_state[stringID + Constants.SOUTHWEST] == other_colour:
 
+		if NofChanges > (8-(MoveID // 8)) - 2:
+			return game_state
+
 		if game_state[stringID + Constants.SOUTHWEST] != other_colour or game_state[stringID + Constants.SOUTHWEST] != turn_colour:
 			return game_state
 
 		stringID = stringID + Constants.SOUTHWEST
 		NofChanges = NofChanges + 1
-
-		if NofChange > (8-(MoveID // 8)):
-			return game_state
 
 	if game_state[stringID + Constants.SOUTHWEST] == turn_colour:
 		MoveXID = stringID + Constants.SOUTHWEST				#!!!!!!to slice must be [stringID+Constants.SOUTHWEST+9]
@@ -285,14 +301,16 @@ def CheckSouthEast(game_state, stringID, turn_colour):
 
 	while game_state[stringID + Constants.SOUTHEAST] == other_colour:
 
+		if NofChanges > (8 - (MoveID // 8)) - 2:
+			return game_state
+
 		if game_state[stringID + Constants.SOUTHEAST] != other_colour or game_state[stringID + Constants.SOUTHEAST] != turn_colour:
 			return game_state
 
 		stringID = stringID + Constants.SOUTHEAST
 		NofChanges = NofChanges + 1
 
-		if NofChange > (8 - (MoveID // 8)):
-			return game_state
+
 
 	if game_state[stringID + Constants.SOUTHEAST] == turn_colour:
 		MoveXID = stringID + Constants.SOUTHEAST				#!!!!!!to slice must be [stringID+Constants.SOUTHEAST+9]
@@ -331,14 +349,16 @@ def CheckSouth(game_state, stringID, turn_colour):
 	MoveID = stringID
 	while game_state[stringID + Constants.SOUTH] == other_colour:
 
+		if NofChanges > (8 - (MoveID // 8)) - 2:
+			return game_state
+
 		if game_state[stringID + Constants.SOUTHEAST] != other_colour or game_state[stringID + Constants.SOUTHEAST] != turn_colour:
 			return game_state
 
 		stringID = stringID + Constants.SOUTH
 		NofChanges = NofChanges + 1
 
-		if NofChange > (8 - (MoveID // 8)):
-			return game_state
+
 
 	if game_state[stringID + Constants.SOUTH] == turn_colour:
 		MoveXID = stringID + Constants.SOUTH				#!!!!!!to slice must be [stringID+Constants.SOUTH+9]
@@ -376,7 +396,8 @@ def ChangePieces(game_state, stringID, turn_colour):
 
 	game_state = CheckEast(game_state, stringID, turn_colour)
 	print (game_state)
-#	game_state = CheckSouthEast(game_state, stringID, turn_colour)
+	print (stringID)
+	game_state = CheckSouthEast(game_state, stringID, turn_colour)
 	game_state = CheckSouth(game_state, stringID, turn_colour)
 	game_state = CheckSouthWest(game_state, stringID, turn_colour)
 	game_state = CheckWest(game_state, stringID, turn_colour)
@@ -384,7 +405,7 @@ def ChangePieces(game_state, stringID, turn_colour):
 	game_state = CheckNorth(game_state, stringID, turn_colour)
 	game_state = CheckNorthEast(game_state, stringID, turn_colour)
 
-	return new_state
+	return game_state
 
 """
 print ("___________________________")
@@ -398,5 +419,5 @@ CheckNorthWest("WWWWWWWWWBBBBBBBBBBBBWBBNBBBBBBWNNBWWWNNNBNNNBNNBNNNNNBNNNNNNNNW
 Hilda = CheckSouth("WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 5)
 print(Hilda, "Hilda")
 """
-Change = ChangePieces("WWWWWWWWWBBBBBBBBBBBBWBBNBBBBBBWNNBWWWNNNBNNNBNNBNNNNNBNNNNNNNNW", 5, "W")
+Change = ChangePieces("WWWWWWWWWBBBBBBBBBBBBWBBNBBBBBBWNNBWWWNNNBNNNBNNBNNNNNBNNNNNNNNW", 3, "W")
 print(Change)
