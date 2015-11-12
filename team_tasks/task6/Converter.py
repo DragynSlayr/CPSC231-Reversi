@@ -43,6 +43,9 @@ def toString(state_list):
     #Return the game state string
     return state_string
 
+#Gets a nice representation of the state
+#Params: state, The state as a string or list
+#Returns: The state as a formatted board
 def asBoardRepresentation(state):
     #Make sure state is a list
     if type(state) == type("String"):
