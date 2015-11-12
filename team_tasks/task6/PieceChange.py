@@ -3,8 +3,7 @@ import Constants
 #############################################################################
 def CheckWest(game_state, stringID, turn_colour):
 
-#	turn_colour = "W"
-#	other_colour = "B"
+
 	NofChanges = 0
 	other_colour = OtherColour(turn_colour)
 	new_state = ""
@@ -79,8 +78,7 @@ def CheckEast(game_state, stringID, turn_colour):
 #############################################################################
 def CheckNorthWest(game_state, stringID, turn_colour):
 
-#	turn_colour = "W"
-#	other_colour = "B"
+
 	NofChanges = 0
 	PlaceHolder = ""
 	slice_new_state = ""
@@ -117,7 +115,6 @@ def CheckNorthWest(game_state, stringID, turn_colour):
 
 		if NofChanges == 0:
 			new_state = game_state[:MoveXID - Constants.NORTHWEST] + slice_new_state + game_state[MoveID:]
-			print ("         #        #        #       #")
 			print ("01234567890123456789012345678901234567890")
 			print (game_state)
 			print (new_state)
@@ -142,12 +139,12 @@ def CheckNorth(game_state, stringID, turn_colour):
 
 	while game_state[stringID + Constants.NORTH] == other_colour:
 
-		if NofChanges > (MoveID // 8) - 2:
-			return game_state
+#		if NofChanges > (MoveID // 8) - 2:
+#			return game_state
 
 
-		if game_state[stringID + Constants.NORTH] != other_colour or game_state[stringID + Constants.NORTH] != turn_colour:
-			return game_state
+#		if game_state[stringID + Constants.NORTH] != other_colour or game_state[stringID + Constants.NORTH] != turn_colour:
+#			return game_state
 
 		stringID = stringID + Constants.NORTH
 		NofChanges = NofChanges + 1
@@ -169,7 +166,6 @@ def CheckNorth(game_state, stringID, turn_colour):
 
 		if NofChanges == 0:
 			new_state = game_state[:MoveXID - Constants.NORTH] + slice_new_state + game_state[MoveID:]
-			print ("         #        #        #       #")
 			print ("01234567890123456789012345678901234567890")
 			print (game_state)
 			print (new_state)
@@ -222,7 +218,7 @@ def CheckNorthEast(game_state, stringID, turn_colour):
 
 		if NofChanges == 0:
 			new_state = game_state[:MoveXID - Constants.NORTHEAST] + slice_new_state + game_state[MoveID:]
-			print ("         #        #        #       #")
+
 			print ("01234567890123456789012345678901234567890")
 			print (game_state)
 			print (new_state)
@@ -274,7 +270,7 @@ def CheckSouthWest(game_state, stringID, turn_colour):
 
 		if NofChanges == 0:
 			new_state = game_state[:MoveID + Constants.SOUTHWEST] + slice_new_state + game_state[MoveXID:]
-			print ("         #        #        #       #")
+
 			print ("01234567890123456789012345678901234567890")
 			print (game_state)
 			print (new_state)
@@ -325,7 +321,7 @@ def CheckSouthEast(game_state, stringID, turn_colour):
 			print (NofChanges, "Number of Changes left")
 		if NofChanges == 0:
 			new_state = game_state[:MoveID + Constants.SOUTHEAST] + slice_new_state + game_state[MoveXID:]
-			print ("         #        #        #       #")
+
 			print ("01234567890123456789012345678901234567890")
 			print (game_state)
 			print (new_state)
@@ -416,8 +412,76 @@ print ("___________________________")
 print ("TEST 2 TEST 2 TEST 2 TEST 2")
 print (" ")
 CheckNorthWest("WWWWWWWWWBBBBBBBBBBBBWBBNBBBBBBWNNBWWWNNNBNNNBNNBNNNNNBNNNNNNNNW", 36, "W")
+
+print("_____________________________")
+print("TEST3 TEST3 TEST3".center(50))
+CheckNorthWest("WWWWWWWWWBBBBBBBBBBBBWBBNBBBBBBWNNBWWWNNNBNNNBNNBNNNNNBNNNNNNNNW", 37, "W")
+
+
+
+print("_________________________________")
+print("CHECK NORTH CHECK NORTH CHECK NORTH".center(50))
+print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+print("TEST1TEST1TEST1".center(50))
+print("_________________________________")
+CheckNorth("WWWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWBBBBBBBBBBBB", 51, "W")
+
+print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+print("<('o'<)".center(50))
+print("_________________________________")
+print("CHECK NORTHEAST CHECK NORTHEAST CHECK NORTH".center(50))
+print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+print("TEST1TEST1TEST1".center(50))
+print("_________________________________")
+CheckNorthEast("WWWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWBBBBBBBBBBBBBBBBBBBBBNN", 40, "W")
+
+print("_________________________________")
+print("<('o'<)".center(50))
+print("_________________________________")
+print("CHECK SOUTHWEST CHECK SOUTHWEST CHECK SOUTHWEST".center(50))
+print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+print("TEST1 TEST1 TEST1 ".center(50))
+print("_________________________________")
+print(" ")
+CheckSouthWest("WWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBWWBBBBBBWBBBBBBBBBBBBBBBBBBBBBBBB", 4, "W")
+print ("___________________________")
+print ("TEST 2 TEST 2 TEST 2 TEST 2")
+print (" ")
+CheckSouthWest("WWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBWWBBBBBBWBBBBBBBBBBBBBBBBBBBBBBBB", 3, "W")
+print("_________________________________")
+print("<('o'<)".center(50))
+print("_________________________________")
+print("CHECK SOUTH CHECK SOUTH CHECK SOUTH".center(50))
+print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+print("TEST1 TEST1 TEST1 ".center(50))
+print("_________________________________")
+print(" ")
+CheckSouth("WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 3, "W")
+print("_________________________________")
+print("<('o'<)".center(50))
+print("_________________________________")
+print("CHECK SOUTH CHECK SOUTH CHECK SOUTH".center(50))
+print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+print("TEST2 TEST2 TEST2 ".center(50))
+print("_________________________________")
+print(" ")
+CheckSouth("WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 5, "W")
+
+Hilda = CheckSouth("WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 5, "W")
+print( Hilda + " Hilda")
+
+
+
+print ("___________________________")
+print ("TEST 1 TEST 1 TEST 1 TEST 1")
+print (" ")
+CheckNorthWest("WWWWWWWWWBBBBBBBBBBBBWBBNBBBBBBWNNBWWWNNNBNNNBNNBNNNNNBNNNNNNNNW", 35, "W")
+print ("___________________________")
+print ("TEST 2 TEST 2 TEST 2 TEST 2")
+print (" ")
+CheckNorthWest("WWWWWWWWWBBBBBBBBBBBBWBBNBBBBBBWNNBWWWNNNBNNNBNNBNNNNNBNNNNNNNNW", 36, "W")
 Hilda = CheckSouth("WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 5, "W")
 print(Hilda, "Hilda")
 
-Change = ChangePieces("WWWWWWWWWBBBBBBBBBBBBWBBNBBBBBBWNNBWWWNNNBNNNBNNBNNNNNBNNNNNNNNW", 3, "W")
-print(Change)
+#Change = ChangePieces("WWWWWWWWWBBBBBBBBBBBBWBBNBBBBBBWNNBWWWNNNBNNNBNNBNNNNNBNNNNNNNNW", 3, "W")
+#print(Change)
