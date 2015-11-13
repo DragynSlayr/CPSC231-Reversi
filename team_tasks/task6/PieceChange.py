@@ -59,8 +59,6 @@ def CheckNorth(game_state, stringID, turn_colour, isTesting = False):
 
 			#testing
 			if isTesting:
-
-
 				print (PlaceHolder, "PlaceHolder")
 				print (slice_new_state, "slice_new_state")
 				print (stringID, "Index of Change")
@@ -160,17 +158,16 @@ def CheckNorthEast(game_state, stringID, turn_colour, isTesting = False):
 #Three parameters: The game state string, the Index of the move on the string, and the current turn colour and an optional parameter for testing
 #returns: Updated string with new pieces.
 def CheckEast(game_state, stringID, turn_colour, isTesting = False):
-	NofChanges = 0 								#Counts the number of pieces to change.
-	other_colour = OtherColour(turn_colour) 	#Determines the other colour.
-	new_state = "" 								#Calls the variable for the new_string.
-	MoveID = stringID 							#Makes a copy of the index of the move.
+	NofChanges = 0								#Counts the number of pieces to change.
+	MoveID = 0									#This will make a copy of the index of the players move.
+	other_colour = OtherColour(turn_colour) 	#This Determines the colour of the other player's piece.
+	MoveID = stringID 							#This will make a copy of the index of the players move.
 
 	#While the next token to check is the other colour.
 	#EAST = 1
-	while game_state[stringID + (Constants.EAST)] == other_colour:
-
+	while game_state[stringID + Constants.EAST] == other_colour:
 		#Possible statements for catching invalid moves.
-		if NofChanges > (8 - (MoveID % 8)) - 1:
+		if NofChanges > ((8 - (MoveID % 8)) - 1):
 			print("Out of bounds.")
 			return game_state
 		if game_state[stringID + Constants.EAST] != other_colour and game_state[stringID + Constants.EAST] != turn_colour:
@@ -183,29 +180,12 @@ def CheckEast(game_state, stringID, turn_colour, isTesting = False):
 			print (stringID + (Constants.EAST), "index of other_colour")
 
 		#Move on to the Next Token
-		stringID = stringID + (Constants.EAST)
-
-		#If the next token to check is N, return the original game_state
-		if game_state[stringID] == "N":
-			if isTesting:
-				print("None in that direction.")
-			return game_state
+		stringID = stringID + Constants.EAST
 
 		#Add one to the number of tokens that need to be changed.
 		NofChanges = NofChanges + 1
 
-		#If the next token that is checked is the current turn's player, create the new game state string.
-		if game_state[stringID + (Constants.EAST)] == turn_colour:
-			new_state = game_state[:stringID - NofChanges + 1] + (turn_colour * NofChanges) + game_state[stringID + 1:]
-
-			#Testing.
-			if isTesting:
-				print (game_state)
-				print(new_state)
-				print (NofChanges, "How many times we have to print the turn_colour's letter.")
-
-	#Return the new string.
-	return new_state
+	return game_state[:MoveID + 1] + (turn_colour * NofChanges) + game_state[MoveID + NofChanges + 1:]
 
 #Author: Kyle Hinton
 #This function will change the string so that the opponents pieces, in a valid move, will be changed on the string.
@@ -373,7 +353,6 @@ def CheckSouthWest(game_state, stringID, turn_colour, isTesting = False):
 	MoveID = stringID 							#This will make a copy of the index of the players move.
 
 	while game_state[stringID + Constants.SOUTHWEST] == other_colour:
-
 		#Check if move is invalid
 		if NofChanges > (8-(MoveID // 8)) - 1:
 			print("Out of bounds!")
@@ -435,15 +414,18 @@ def CheckSouthWest(game_state, stringID, turn_colour, isTesting = False):
 #Three parameters: The game state string, the Index of the move on the string, and the current turn colour and an optional one for testing
 #Returns: Updated string with new pieces.
 def CheckWest(game_state, stringID, turn_colour, isTesting = False):
-	NofChanges = 0 								#Counts the number of pieces to change.
-	other_colour = OtherColour(turn_colour) 	#Determines the other colour.
-	new_state = "" 								#Calls the variable for the new_string.
-	MoveID = stringID 							#Makes a copy of the index of the move.
+	NofChanges = 0								#Counts the number of pieces to change.
+	PlaceHolder = "" 							#This will be a section of the new string.
+	slice_new_state = "" 						#This will be a bigger section of the new game state string.
+	new_state = "" 								#This going to be the new game stat.
+	MoveID = 0									#This will make a copy of the index of the players move.
+	MoveXID = 0 								#This will be a marker for where the players piece is accross from their move.
+	other_colour = OtherColour(turn_colour) 	#This Determines the colour of the other player's piece.
+	MoveID = stringID 							#This will make a copy of the index of the players move.
 
 	#While the next token to check is the other colour.
 	#WEST = -1
-	while game_state[stringID + (Constants.WEST)] == other_colour:
-
+	while game_state[stringID + Constants.WEST] == other_colour:
 		#Possible statements for catching invalid moves.
 		if NofChanges > (MoveID % 8) - 1:
 			print ("out of bounds")
@@ -458,31 +440,12 @@ def CheckWest(game_state, stringID, turn_colour, isTesting = False):
 			print(stringID + (Constants.WEST), "index of other_colour")
 
 		#Move on to the Next Token
-		stringID = stringID + (Constants.WEST)
-
-		#If the next token to check is N, return the original game_state
-		if game_state[stringID] == "N":
-
-			#Testing
-			if testing:
-				print("None in that direction.")
-			return game_state
+		stringID = stringID + Constants.WEST
 
 		#Add one to the number of tokens that need to be changed.
 		NofChanges = NofChanges + 1
 
-		#If the next token that is checked is the current turn's player, create the new game state string.
-		if game_state[stringID + (Constants.WEST)] == turn_colour:
-			new_state = game_state[:stringID] + (turn_colour * NofChanges) + game_state[stringID + (Constants.WEST) + NofChanges + 1:]
-
-			#Testing.
-			if isTesting:
-				print(game_state)
-				print(new_state)
-				print(NofChanges, "How many times we have to print the turn_colour's letter.")
-
-	#Returns the string that is the new game state.
-	return new_state
+	return game_state[:(MoveID - NofChanges)] + (turn_colour * NofChanges) + game_state[MoveID:]
 
 #Author: Kyle Hinton
 #This function will change the string so that the opponents pieces, in a valid move, will be changed on the string.
@@ -559,7 +522,6 @@ def CheckNorthWest(game_state, stringID, turn_colour, isTesting = False):
 	#Return the new string with all the pieces changed in the corresponding direction.
 	return new_state
 
-
 #This function will determine the colour of the other player's token, based on the player's turn colour.
 #This function takes the current turn colour as the parameter.
 #returns: the character for the other colour.
@@ -574,31 +536,39 @@ def OtherColour(turn_colour):
 #DOES NOT WORK YET.
 #This function will change the string so that the opponents pieces, in a valid move, will be changed on the string.
 #This function will change the pieces in all the directions.
-#Three parameters: The game state string, the Index of the move on the string, and the current turn colour.
+#Three parameters: The game state string, the Index of the move on the string, and the current turn colour and an optional one for testing
 #returns: Updated string with new pieces.
-def ChangePieces(game_state, stringID, turn_colour):
+def ChangePieces(game_state, stringID, turn_colour, isTesting = False):
 	#Check every direction
-	game_state = CheckNorth(game_state, stringID, turn_colour)
-	game_state = CheckNorthEast(game_state, stringID, turn_colour)
-	game_state = CheckEast(game_state, stringID, turn_colour)
-	game_state = CheckSouthEast(game_state, stringID, turn_colour)
-	game_state = CheckSouth(game_state, stringID, turn_colour)
-	game_state = CheckSouthWest(game_state, stringID, turn_colour)
-	game_state = CheckWest(game_state, stringID, turn_colour)
-	game_state = CheckNorthWest(game_state, stringID, turn_colour)
+	game_state = CheckNorth(game_state, stringID, turn_colour, isTesting)
+
+	game_state = CheckNorthEast(game_state, stringID, turn_colour, isTesting)
+
+	game_state = CheckEast(game_state, stringID, turn_colour, isTesting)
+
+	game_state = CheckSouthEast(game_state, stringID, turn_colour, isTesting)
+
+	game_state = CheckSouth(game_state, stringID, turn_colour, isTesting)
+
+	game_state = CheckSouthWest(game_state, stringID, turn_colour, isTesting)
+
+	game_state = CheckWest(game_state, stringID, turn_colour, isTesting)
+
+	game_state = CheckNorthWest(game_state, stringID, turn_colour, isTesting)
 
 	#Return updated string
-	return game_state
+	return game_state[:stringID] + turn_colour + game_state[stringID + 1:]
 
 #Tests a function
 #Params: function, The function to test
 #		 param_one, The first parameter of the function to test
 #		 param_two, The second parameter of the function to test
 #		 param_three, The third parameter of the function to test
+# 		 param_four, The fourth parameter of the function to test, defaults to False
 #Returns: None
 #Notes: Refer to the function for what it's parameters are
-def testFunction(function, param_one, param_two, param_three):
-	result = function(param_one, param_two, param_three)
+def testFunction(function, param_one, param_two, param_three, param_four = False):
+	result = function(param_one, param_two, param_three, param_four)
 	formatted_start = Converter.asBoardRepresentation(param_one)
 	formatted_end = Converter.asBoardRepresentation(result)
 	print("At:", StringInterpret.pieceToString(param_two))
@@ -614,37 +584,34 @@ def testProgram():
 	print("NORTH NORTH NORTH".center(27))
 	print("___________________________")
 	print("TEST 1 TEST 1 TEST 1 TEST 1\n")
-	testFunction(CheckNorth, "WWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBW", 63, "W")
+	testFunction(CheckNorth, "WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBW", 63, "W")
 
 	input()
 
 	print("NORTHEAST NORTHEAST NORTHEAST".center(27))
 	print("___________________________")
 	print("TEST 1 TEST 1 TEST 1 TEST 1\n")
-	testFunction(CheckNorthEast, "WWWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWBBBBBBBBBBBBBBBBBBBBBNN", 40, "W")
+	testFunction(CheckNorthEast, "WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWBBBBBBB", 56, "W")
 
 	input()
 
 	print("EAST EAST EAST".center(27))
 	print("___________________________")
 	print("TEST 1 TEST 1 TEST 1 TEST 1\n")
-	testFunction(CheckEast, "WBBBBBBWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", 0, "W")
+	testFunction(CheckEast, "WBBBBBBWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", 0, "W")
 
 	input()
 
 	print("SOUTHEAST SOUTHEAST SOUTHEAST".center(27))
 	print("___________________________")
 	print("TEST 1 TEST 1 TEST 1 TEST 1\n")
-	testFunction(CheckSouthEast, "WBBBBBBBBBBBBBBBBBWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", 0, "W")
+	testFunction(CheckSouthEast, "WBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBW", 0, "W")
 
 	input()
 
 	print("SOUTH SOUTH SOUTH".center(27))
 	print("___________________________")
 	print("TEST 1 TEST 1 TEST 1 TEST 1\n")
-	testFunction(CheckSouth, "WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 3, "W")
-	print("___________________________")
-	print("TEST 2 TEST 2 TEST 2 TEST 2\n")
 	testFunction(CheckSouth, "WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 5, "W")
 
 	input()
@@ -652,34 +619,22 @@ def testProgram():
 	print("SOUTHWEST SOUTHWEST SOUTHWEST".center(27))
 	print("___________________________")
 	print("TEST 1 TEST 1 TEST 1 TEST 1\n")
-	testFunction(CheckSouthWest, "WWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBWWBBBBBBWBBBBBBBBBBBBBBBBBBBBBBBB", 4, "W")
-	print("___________________________")
-	print("TEST 2 TEST 2 TEST 2 TEST 2\n")
-	testFunction(CheckSouthWest, "WWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBWWBBBBBBWBBBBBBBBBBBBBBBBBBBBBBBB", 3, "W")
+	testFunction(CheckSouthWest, "BBBBBBBWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWBBBBBBB", 7, "W")
 
 	input()
 
 	print("WEST WEST WEST".center(27))
 	print("___________________________")
 	print("TEST 1 TEST 1 TEST 1 TEST 1\n")
-	testFunction(CheckWest, "WWWWWWWWWBBBBBBBBBBBBWBBNWBBBBBWNNBWWWNNNBNNNBNNBNNNNNBNNNNNNNNW", 31, "W")
-	print("___________________________")
-	print("TEST 2 TEST 2 TEST 2 TEST 2\n")
-	testFunction(CheckWest, "WWWWWWWWWBBBBBBBBBBBBWBBNBBBBBBWNWBWWWNNNBNNNBNNBNNNNNBNNNNNNNNW", 35, "W")
+	testFunction(CheckWest, "WBBBBBBWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", 7, "W")
 
 	input()
 
 	print("NORTHWEST NORTHWEST NORTHWEST".center(27))
 	print("___________________________")
 	print("TEST 1 TEST 1 TEST 1 TEST 1\n")
-	testFunction(CheckNorthWest, "WWWWWWWWWBBBBBBBBBBBBWBBNBBBBBBWNNBWWWNNNBNNNBNNBNNNNNBNNNNNNNNW", 35, "W")
-	print("___________________________")
-	print("TEST 2 TEST 2 TEST 2 TEST 2\n")
-	testFunction(CheckNorthWest, "WWWWWWWWWBBBBBBBBBBBBWBBNBBBBBBWNNBWWWNNNBNNNBNNBNNNNNBNNNNNNNNW", 36, "W")
-	print("___________________________")
-	print("TEST 3 TEST 3 TEST 3 TEST 3\n")
-	testFunction(CheckNorthWest, "WWWWWWWWWBBBBBBBBBBBBWBBNBBBBBBWNNBWWWNNNBNNNBNNBNNNNNBNNNNNNNNW", 37, "W")
+	testFunction(CheckNorthWest, "WBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBW", 63, "W")
 
 if __name__ == "__main__":
 	testProgram()
-#	testFunction(ChangePieces, "WWWWWWWWWBBBBBBBBBBBBWBBNBBBBBBWNNBWWWNNNBNNNBNNBNNNNNBNNNNNNNNW", 3, "W")
+	#testFunction(ChangePieces, ("W" * 8) + ("B" * 48) + ("W" * 8), 33, "W")
