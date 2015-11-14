@@ -8,9 +8,10 @@ import BoardGenerator as cfg
 #Returns: A count of the piece in the game_state
 def countPieces(piece, game_state):
 	count = 0
-	for i in game_state:
-		if i == piece:
-			count += 1
+	for y in game_state:
+		for x in y:
+			if x == piece:
+				count += 1
 	return count
 
 #Checks if the game is over
