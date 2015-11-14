@@ -5,13 +5,14 @@ import StringInterpret
 import Constants
 import BoardClick
 import random
+import Converter
 
 def main():
 	#Set up the other classes
 	ReversiGrid.main()
 
 	#Use a blank starting board
-	game_state = Constants.PIECE_NONE * Constants.NUM_OF_CELLS
+	game_state = Converter.toList("N" * 64)
 
 	#Place the pieces from the random board
 	StringInterpret.stringToPiece(game_state)
