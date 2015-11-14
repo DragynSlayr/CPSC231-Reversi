@@ -52,11 +52,6 @@ def stringInterpret(game_state, NewMove, turn):
 		column_IDX = (Constants.COLUMN_LETTERS.index(column))
 		row_IDX = (Constants.ROW_NUMBERS.index(row))
 
-		print(column_IDX, row_IDX)
-
- 		#Equation for converting a move coordinate to the index number to be changed
-		#move_to_string = ((row_IDX * Constants.NUM_OF_ROWS) + column_IDX)
-
 		turn_colour = whoseTurn(turn)
 
 		new_state = game_state[:]
