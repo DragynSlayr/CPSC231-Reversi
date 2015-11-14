@@ -5,6 +5,7 @@
 # It should use the function written by team member 1.
 
 import Constants
+import Converter
 import BoardGenerator as bg
 import StringInterpret as si
 
@@ -310,10 +311,13 @@ def testWithInput(game_state):
 #Returns: A list of possible moves
 def getValidMoves(game_state):
     valid_moves = []
-    for i in range(len(game_state)):
-        move = si.pieceToString(i)
-        if isValidMove(move, game_state):
-            valid_moves.append(move)
+    for y in range(len(game_state)):
+        for x in range(len(game_state[y])):
+            column = Constants.COLUMN_LETTERS[y]
+            row = Constants.ROW_NUMBERS[x]
+            move = column + str(row)
+            if isValidMove(move, Converter.toString(game_state)):
+                valid_moves.append(move)
     return valid_moves
 
 if __name__ == "__main__":
