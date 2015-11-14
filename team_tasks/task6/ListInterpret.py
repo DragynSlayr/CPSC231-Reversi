@@ -11,22 +11,16 @@ import ReversiGrid
 #It returns nothing
 #Author: Kyle Hinton
 def stringToPiece(game_state):
-	index = 0
-	for y in range(len(Constants.ROW_NUMBERS)):
-		for x in range(len(Constants.COLUMN_LETTERS)):
-			#Get location
-			x_coord = Constants.COLUMN_LETTERS[x]
-			y_coord = Constants.ROW_NUMBERS[y]
+	for y in range(len(game_state)):
+		for x in range(len(game_state[y])):
+			column = Constants.COLUMN_LETTERS[y]
+			row = Constants.ROW_NUMBERS[x]
+			piece = game_state[y][x]
 
-			#Check each piece at the index in the game state
-			piece = game_state[index]
-			if piece == "B":
-				TurtleMove.placePiece(x_coord, y_coord, "Black")
-			elif piece == "W":
-				TurtleMove.placePiece(x_coord, y_coord, "White")
-
-			#Increment index
-			index += 1
+			if piece == Constants.PIECE_BLACK:
+				TurtleMove.placePiece(column, row, "Black")
+			elif piece == Constants.PIECE_WHITE:
+				TurtleMove.placePiece(column, row, "White")
 
 #Converts an index to a move
 #Params: index, The index to convert
@@ -42,9 +36,9 @@ def pieceToString(index):
 #It returns a B or a W depending on whose turn it is.
 def whoseTurn(counter):
 	if counter % 2 == 0:
-		return "W"
+		return Constants.PIECE_WHITE
 	else:
-		return "B"
+		return Constants.PIECE_BLACK
 
 #This function will convert a move coordinate into a string.
 #It receives the parameters are a game state, a move coordinate, and the turn number.
@@ -58,14 +52,13 @@ def stringInterpret(game_state, NewMove, turn):
 		column_IDX = (Constants.COLUMN_LETTERS.index(column))
 		row_IDX = (Constants.ROW_NUMBERS.index(row))
 
- 		#Equation for converting a move coordinate to the index number to be changed
-		move_to_string = ((row_IDX * Constants.NUM_OF_ROWS) + column_IDX)
-
 		turn_colour = whoseTurn(turn)
 
-		new_state = game_state[:move_to_string] + turn_colour + game_state[move_to_string + 1:]
+		new_state = game_state[:]
 
-		if whoseTurn(turn) == "W":
+		new_state[row_IDX][column_IDX] = turn_colour
+
+		if whoseTurn(turn) == Constants.PIECE_WHITE:
 			color = "White"
 		else:
 			color = "Black"
@@ -86,7 +79,7 @@ def stringInterpret(game_state, NewMove, turn):
 			print(new_state)	#Prints the new_state with the character at index.move_to_string in place
 			print()
 			##########################
-		return new_state	#returns the new_state, The updated move.
+		return new_state	#Return the updated game state
 
 #Sets up the board using the pieces and reading through the string.
 def setup2():
