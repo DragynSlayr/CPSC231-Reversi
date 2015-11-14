@@ -30,11 +30,12 @@ def findVarLine(lines, name):
 
 #Writes a variable to variables.txt
 #Params: name, The name of the variable to write
-#        value, The value of the variable to write
+#        value, The value of the variable to write, must be String
+#        file_name, The name of the file, defaults to variables.txr
 #Returns: None
-def saveVariable(name, value):
+def saveVariable(name, value, file_name = "variables.txt"):
     #Open a file for reading and writing
-    var_file = open("variables.txt", "r+")
+    var_file = open(file_name, "r+")
 
     #Read each line and store it as a list element
     lines = var_file.readlines()
@@ -53,10 +54,10 @@ def saveVariable(name, value):
             line_list.append(line)
 
     #Wipe the file
-    open("variables.txt", "w").close()
+    open(file_name, "w").close()
 
     #Reopen the file
-    var_file = open("variables.txt", "r+")
+    var_file = open(file_name, "r+")
 
     #Go to the beginning
     var_file.seek(0)
@@ -69,10 +70,11 @@ def saveVariable(name, value):
 
 #Reads a variable from variables.txt
 #Params: name, The name of the variable to read
+#        file_name, The name of the file, defaults to variables.txt
 #Returns: The value of the variable if found, None otherwise
-def loadVariable(name):
+def loadVariable(name, file_name = "variables.txt"):
     #Open a file for reading and writing
-    var_file = open("variables.txt", "r+")
+    var_file = open(file_name, "r+")
 
     #Read each line and store it as a list element
     lines = var_file.readlines()
