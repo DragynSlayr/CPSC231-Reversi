@@ -1,7 +1,7 @@
 #This file holds the functions to start the game
 import MainMenu
 import ReversiGrid
-import StringInterpret
+import ListInterpret
 import Constants
 import BoardClick
 import random
@@ -15,13 +15,13 @@ def main():
 	game_state = Converter.toList("N" * 64)
 
 	#Place the pieces from the random board
-	StringInterpret.stringToPiece(game_state)
+	ListInterpret.stringToPiece(game_state)
 
 	#Place starting config
-	game_state = StringInterpret.stringInterpret(game_state, "D4", 0)
-	game_state = StringInterpret.stringInterpret(game_state, "E4", 1)
-	game_state = StringInterpret.stringInterpret(game_state, "E5", 2)
-	game_state = StringInterpret.stringInterpret(game_state, "D5", 3)
+	game_state = ListInterpret.stringInterpret(game_state, "D4", 0)
+	game_state = ListInterpret.stringInterpret(game_state, "E4", 1)
+	game_state = ListInterpret.stringInterpret(game_state, "E5", 2)
+	game_state = ListInterpret.stringInterpret(game_state, "D5", 3)
 	move_num = 4
 
 	#Determine who goes first
