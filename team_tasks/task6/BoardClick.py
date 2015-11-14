@@ -3,6 +3,7 @@
 import Constants
 import TurtleMove
 import StringInterpret
+import ListInterpret
 import StringMove
 import VictoryStatus
 import PlayerVictory
@@ -10,6 +11,7 @@ import FileHandler
 import random
 import MoveValidator
 import ScreenWriter
+import Converter
 
 #Converts an x coordinate to a cell on the board
 #Params: x, The x coordinate
@@ -68,7 +70,7 @@ def computerTurn(state, move_num):
         move = valid_moves[random_num]
 
         #Make the move
-        return StringInterpret.stringInterpret(state, move, move_num)
+        return ListInterpret.stringInterpret(state, move, move_num)
 
 #Places a piece at a location if it is a cell
 #Params: x, The x location to check
@@ -159,7 +161,7 @@ def run(state, move_num, isPlayerMove):
     TurtleMove.displayValidMoves(valid_moves)
 
     #Save variables to be used later
-    FileHandler.saveVariable("State", state)
+    FileHandler.saveVariable("State", Converter.toString(state))
     FileHandler.saveVariable("Move", str(move_num))
 
     #Set up the window
