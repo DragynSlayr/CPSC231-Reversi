@@ -13,11 +13,12 @@ def playerWon(game_state):
     num_white = 0
 
     #Iterate through the game state and count black and white pieces
-    for i in game_state:
-        if i == Constants.PIECE_BLACK:
-            num_black += 1
-        elif i == Constants.PIECE_WHITE:
-            num_white += 1
+    for y in game_state:
+        for x in y:
+            if x == Constants.PIECE_BLACK:
+                num_black += 1
+            elif x == Constants.PIECE_WHITE:
+                num_white += 1
 
     #Compare number of white and black pieces and return
     #the result of the game
