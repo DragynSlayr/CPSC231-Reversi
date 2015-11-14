@@ -43,8 +43,11 @@ def validateMoveLocation(game_state, location):
 	if 0 <= y > 8:
 		return False
 
+	#print("Move:", y, x)
+
 	#Checks if the location is occupied already
-	return getChar(game_state, x + (8*(y -1))) == Constants.PIECE_NONE
+	#return getChar(game_state, x + (8*(y -1))) == Constants.PIECE_NONE
+	return game_state[y - 1][x - 1] == Constants.PIECE_NONE
 	#All of that math simply takes the number of x + a certain number of rows
 
 #Displays a window that asks the user for input
