@@ -78,7 +78,7 @@ def computerTurn(state, move_num):
 #Returns: None
 def placePiece(x, y):
     #Load the variables we need
-    game_state = FileHandler.loadVariable("State")
+    game_state = Converter.toList(FileHandler.loadVariable("State"))
     move_num = int(FileHandler.loadVariable("Move"))
 
     #Make sure the game is not over
@@ -97,7 +97,7 @@ def placePiece(x, y):
             move = letter + str(number)
 
             #Make sure a piece is not in this location and the move is valid
-            if StringMove.validateMoveLocation(game_state, move) and MoveValidator.isValidMove(move, game_state):
+            if StringMove.validateMoveLocation(game_state, move) and MoveValidator.isValidMove(move, Converter.toString(game_state)):
                 #Get valid moves
                 valid_moves = MoveValidator.getValidMoves(game_state)
 
@@ -105,7 +105,7 @@ def placePiece(x, y):
                 TurtleMove.resetSquare(letter, number)
 
                 #Update the game state
-                game_state = StringInterpret.stringInterpret(game_state, letter + str(number), move_num)
+                game_state = ListInterpret.stringInterpret(game_state, letter + str(number), move_num)
                 move_num += 1
 
                 #Allow the computer to place a piece if the game is not over
@@ -114,7 +114,7 @@ def placePiece(x, y):
                     move_num += 1
 
                 #Save the variables
-                FileHandler.saveVariable("State", game_state)
+                FileHandler.saveVariable("State", Converter.toString(game_state))
                 FileHandler.saveVariable("Move", str(move_num))
 
             #Update the scoreboard
