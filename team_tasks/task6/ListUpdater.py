@@ -48,7 +48,7 @@ def inverseTurnChar(char):
 #Works for "rows" of all sizes
 #returns the updated row
 def update_row(row, Relativelocation, turn_letter):
-
+	Relativelocation = Relativelocation -1
 	#Used to alert the programmer if they passed in a paramter that will result in a crash
 	if len(row)< Relativelocation:
 		print("ERROR RL TOO BIG")
@@ -176,9 +176,9 @@ def update_diagnalUD(token, location, turn_letter):
 		#Diagnal approaching upper left
 		while EdgeFound == False:
 			if 0<= xTracker <=7:
-				tokenRow = tempToken[yTracker]
+				tokenRow = tempToken[xTracker]
 				if 0 <= yTracker <= 7:
-					tokenPiece = tokenRow[xTracker]
+					tokenPiece = tokenRow[yTracker]
 					row.append(tokenPiece)
 				else:
 					EdgeFound = True
