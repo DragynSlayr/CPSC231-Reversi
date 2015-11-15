@@ -77,67 +77,75 @@ def computerTurn(state, move_num):
 #        y, The y location to check
 #Returns: None
 def placePiece(x, y):
-    #Load the variables we need
-    game_state = Converter.toList(FileHandler.loadVariable("State"))
-    move_num = int(FileHandler.loadVariable("Move"))
+    #Make sure a move is not being made
+    if FileHandler.loadVariable("Moving") == "False":
+        #Save variable
+        FileHandler.saveVariable("Moving", "True")
 
-    #Make sure the game is not over
-    if VictoryStatus.endGameStatus(game_state) != True:
-        #Check if the point is valid
-        if isValidSquare(x, y):
-            #Convert the x and y to the coordinate of a cell
-            x = convertXToBoard(x)
-            y = convertYToBoard(y)
+        #Load the variables we need
+        game_state = Converter.toList(FileHandler.loadVariable("State"))
+        move_num = int(FileHandler.loadVariable("Move"))
 
-            #Convert x and y to column and row
-            letter = Constants.COLUMN_LETTERS[x]
-            number = Constants.ROW_NUMBERS[Constants.NUM_OF_ROWS - (y + 1)]
+        #Make sure the game is not over
+        if VictoryStatus.endGameStatus(game_state) != True:
+            #Check if the point is valid
+            if isValidSquare(x, y):
+                #Convert the x and y to the coordinate of a cell
+                x = convertXToBoard(x)
+                y = convertYToBoard(y)
 
-            #The move being made
-            move = letter + str(number)
+                #Convert x and y to column and row
+                letter = Constants.COLUMN_LETTERS[x]
+                number = Constants.ROW_NUMBERS[Constants.NUM_OF_ROWS - (y + 1)]
 
-            #Make sure a piece is not in this location and the move is valid
-            if StringMove.validateMoveLocation(game_state, move) and MoveValidator.isValidMove(move, Converter.toString(game_state)):
-                #Get valid moves
-                valid_moves = MoveValidator.getValidMoves(game_state)
+                #The move being made
+                move = letter + str(number)
 
-                #Clear valid moves
-                TurtleMove.resetSquare(letter, number)
+                #Make sure a piece is not in this location and the move is valid
+                if StringMove.validateMoveLocation(game_state, move) and MoveValidator.isValidMove(move, Converter.toString(game_state)):
+                    #Get valid moves
+                    valid_moves = MoveValidator.getValidMoves(game_state)
 
-                #Update the game state
-                game_state = ListInterpret.stringInterpret(game_state, letter + str(number), move_num)
-                move_num += 1
+                    #Clear valid moves
+                    TurtleMove.resetSquare(letter, number)
 
-                #Allow the computer to place a piece if the game is not over
-                if VictoryStatus.endGameStatus(game_state) != True:
-                    game_state = computerTurn(game_state, move_num)
+                    #Update the game state
+                    game_state = ListInterpret.stringInterpret(game_state, letter + str(number), move_num)
                     move_num += 1
 
-                #Save the variables
-                FileHandler.saveVariable("State", Converter.toString(game_state))
-                FileHandler.saveVariable("Move", str(move_num))
+                    #Allow the computer to place a piece if the game is not over
+                    if VictoryStatus.endGameStatus(game_state) != True:
+                        game_state = computerTurn(game_state, move_num)
+                        move_num += 1
 
-            #Update the scoreboard
-            black_score = VictoryStatus.countPieces(Constants.PIECE_BLACK, game_state)
-            white_score = VictoryStatus.countPieces(Constants.PIECE_WHITE, game_state)
-            ScreenWriter.writeScore(black_score, white_score)
+                    #Save the variables
+                    FileHandler.saveVariable("State", Converter.toString(game_state))
+                    FileHandler.saveVariable("Move", str(move_num))
 
-            #Get valid moves again
-            valid_moves = MoveValidator.getValidMoves(game_state)
+                #Update the scoreboard
+                black_score = VictoryStatus.countPieces(Constants.PIECE_BLACK, game_state)
+                white_score = VictoryStatus.countPieces(Constants.PIECE_WHITE, game_state)
+                ScreenWriter.writeScore(black_score, white_score)
 
-            #Display valid moves
-            TurtleMove.displayValidMoves(valid_moves)
-    else:
-        #Print who won
-        game_status = PlayerVictory.playerWon(game_state)
-        ScreenWriter.writeMessage(game_status)
+                #Get valid moves again
+                valid_moves = MoveValidator.getValidMoves(game_state)
 
-        #Wait for user
-        Constants.WINDOW.exitonclick()
+                #Display valid moves
+                TurtleMove.displayValidMoves(valid_moves)
+        else:
+            #Print who won
+            game_status = PlayerVictory.playerWon(game_state)
+            ScreenWriter.writeMessage(game_status)
 
-        #Reset state and move
-        FileHandler.saveVariable("State", "")
-        FileHandler.saveVariable("Move", "")
+            #Wait for user
+            Constants.WINDOW.exitonclick()
+
+            #Reset state and move
+            FileHandler.saveVariable("State", "")
+            FileHandler.saveVariable("Move", "")
+
+        #Save variable
+        FileHandler.saveVariable("Moving", "False")
 
 #The main loop of the function
 #Waits for input from the user
@@ -163,6 +171,7 @@ def run(state, move_num, isPlayerMove):
     #Save variables to be used later
     FileHandler.saveVariable("State", Converter.toString(state))
     FileHandler.saveVariable("Move", str(move_num))
+    FileHandler.saveVariable("Moving", "False")
 
     #Set up the window
     wn = Constants.WINDOW
