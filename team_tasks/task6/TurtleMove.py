@@ -75,10 +75,6 @@ def getColumnAndRow(location):
 # Returns: True if on the board, False otherwise
 # Example: ("a", 4) returns True, while ("i", 4) returns False
 def checkvalidity(column, row):
-	#Functional test code, ignore this for now
-	#columns = {"A" : 1, "B" : 2, "C" :  3, "D" : 4, "E" : 5, "F" : 6, "G" :  7, "H" : 8}
-	#return (columns[column] >= 1 and columns[column] <= 8) and (row >= 1 and row <= 8)
-
 	#Change entered column to uppercase
 	column = column.upper()
 
