@@ -480,7 +480,6 @@ def CheckNorthWest(game_state, stringID, turn_colour, isTesting = False):
 		#Counts one more for the number of pieces to change.
 		NofChanges = NofChanges + 1
 
-
 	#If the next piece is the turn player's colour....
 	if game_state[stringID + Constants.NORTHWEST] == turn_colour:
 
@@ -541,19 +540,12 @@ def OtherColour(turn_colour):
 def ChangePieces(game_state, stringID, turn_colour, isTesting = False):
 	#Check every direction
 	game_state = CheckNorth(game_state, stringID, turn_colour, isTesting)
-
 	game_state = CheckNorthEast(game_state, stringID, turn_colour, isTesting)
-
 	game_state = CheckEast(game_state, stringID, turn_colour, isTesting)
-
 	game_state = CheckSouthEast(game_state, stringID, turn_colour, isTesting)
-
 	game_state = CheckSouth(game_state, stringID, turn_colour, isTesting)
-
 	game_state = CheckSouthWest(game_state, stringID, turn_colour, isTesting)
-
 	game_state = CheckWest(game_state, stringID, turn_colour, isTesting)
-
 	game_state = CheckNorthWest(game_state, stringID, turn_colour, isTesting)
 
 	#Return updated string
