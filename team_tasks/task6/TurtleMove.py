@@ -3,6 +3,9 @@ import string
 import Constants
 import ReversiGrid
 
+#Holds all valid moves that have been displayed
+SHOWN_MOVES = []
+
 #Redraws a single square back to default
 #Params: column, The column of the square
 #		 row, The row of the square
@@ -31,8 +34,11 @@ def resetSquare(column, row):
 #Params: valid_moves, The moves to draw
 #Returns: None
 def displayValidMoves(valid_moves):
+	global SHOWN_MOVES
 	for move in valid_moves:
-		placePiece(move[0], int(move[1]), "#34DDDD")
+		if move not in SHOWN_MOVES:
+			placePiece(move[0], int(move[1]), "#34DDDD")
+			SHOWN_MOVES.append(move)
 
 # Removes spaces and punctuation from a string
 # Params: location, the string to strip
