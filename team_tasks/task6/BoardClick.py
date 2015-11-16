@@ -144,6 +144,40 @@ def placePiece(x, y):
         #Save variable
         FileHandler.saveVariable("Moving", "False")
 
+#Saves the current game configuration
+def saveGame():
+    #Get current game info
+    current_state = FileHandler.loadVariable("State")
+    current_move_num = FileHandler.loadVariable("Move")
+
+    #Save game info
+    FileHandler.saveVariable("State", current_state, "save.txt")
+    FileHandler.saveVariable("Move", current_move_num, "save.txt")
+
+def loadGame():
+    #Load game info
+    saved_state = FileHandler.loadVariable("State", "save.txt")
+    saved_move_num = FileHandler.loadVariable("Move", "save.txt")
+
+    #Write loaded variables to variables file
+    FileHandler.saveVariable("State", saved_state)
+    FileHandler.saveVariable("Move", saved_move_num)
+
+    #Convert state from string to list
+    saved_state = Converter.toList(saved_state)
+
+    #Load board configuration
+    ListInterpret.stringToPiece(saved_state)
+
+    #Update the scoreboard
+    black_score = VictoryStatus.countPieces(Constants.PIECE_BLACK, saved_state)
+    white_score = VictoryStatus.countPieces(Constants.PIECE_WHITE, saved_state)
+    ScreenWriter.writeScore(black_score, white_score)
+
+    #Display valid moves
+    valid_moves = MoveValidator.getValidMoves(saved_state)
+    TurtleMove.displayValidMoves(valid_moves)
+
 #The main loop of the function
 #Waits for input from the user
 #Params: state, The current game state
@@ -173,6 +207,8 @@ def run(state, move_num, isPlayerMove):
     #Set up the window
     wn = Constants.WINDOW
     wn.onclick(placePiece)
+    wn.onkey(saveGame, "s")
+    wn.onkey(loadGame, "l")
     wn.onkey(wn.bye, "space")
     wn.listen()
     wn.mainloop()
