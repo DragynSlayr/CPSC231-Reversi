@@ -145,6 +145,8 @@ def placePiece(x, y):
         FileHandler.saveVariable("Moving", "False")
 
 #Saves the current game configuration
+#Params: None
+#Returns: None
 def saveGame():
     #Get current game info
     current_state = FileHandler.loadVariable("State")
@@ -154,6 +156,9 @@ def saveGame():
     FileHandler.saveVariable("State", current_state, "save.txt")
     FileHandler.saveVariable("Move", current_move_num, "save.txt")
 
+#Loads the saved game configuration
+#Params: None
+#Returns: None
 def loadGame():
     #Load game info
     saved_state = FileHandler.loadVariable("State", "save.txt")
@@ -180,6 +185,19 @@ def loadGame():
     #Display valid moves
     valid_moves = MoveValidator.getValidMoves(saved_state)
     TurtleMove.displayValidMoves(valid_moves)
+
+#Gracefully quits the game
+#Params: None
+#Returns: None
+def quitGame():
+    #Reset variables
+    FileHandler.saveVariable("State", "")
+    FileHandler.saveVariable("Move", "")
+    FileHandler.saveVariable("Moving", "False")
+
+    #Close the game
+    wn = Constants.WINDOW
+    wn.bye()
 
 #The main loop of the function
 #Waits for input from the user
@@ -212,6 +230,6 @@ def run(state, move_num, isPlayerMove):
     wn.onclick(placePiece)
     wn.onkey(saveGame, "s")
     wn.onkey(loadGame, "l")
-    wn.onkey(wn.bye, "space")
+    wn.onkey(quitGame, "space")
     wn.listen()
     wn.mainloop()
