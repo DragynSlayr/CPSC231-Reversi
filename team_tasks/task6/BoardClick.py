@@ -174,6 +174,9 @@ def loadGame():
     white_score = VictoryStatus.countPieces(Constants.PIECE_WHITE, saved_state)
     ScreenWriter.writeScore(black_score, white_score)
 
+    #Reset valid moves from TurtleMove
+    TurtleMove.SHOWN_MOVES = []
+
     #Display valid moves
     valid_moves = MoveValidator.getValidMoves(saved_state)
     TurtleMove.displayValidMoves(valid_moves)
