@@ -67,6 +67,7 @@ def label_x(grid):
 #Function that draws a frame around the board.
 #Function takes a turtle and returns nothing
 def reversiFrame(grid):
+	size = grid.pensize()
 	grid.pencolor("dark green")
 	grid.pensize(9)
 	grid.goto(-5,-5)
@@ -83,6 +84,9 @@ def reversiFrame(grid):
 	grid.forward(Constants.WINDOW_WIDTH - 1)
 	grid.right(90)
 	grid.penup()
+
+	#Reset size
+	grid.pensize(size)
 
 #This is the function that creates the board, using the functions above.
 #It contains a nested for loop that will create the grid and label it.
