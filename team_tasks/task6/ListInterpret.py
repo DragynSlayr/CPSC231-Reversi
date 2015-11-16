@@ -15,12 +15,14 @@ def stringToPiece(game_state):
 		for x in range(len(game_state[y])):
 			column = Constants.COLUMN_LETTERS[y]
 			row = Constants.ROW_NUMBERS[x]
-			piece = game_state[y][x]
+			piece = game_state[x][y]
 
 			if piece == Constants.PIECE_BLACK:
 				TurtleMove.placePiece(column, row, "Black")
 			elif piece == Constants.PIECE_WHITE:
 				TurtleMove.placePiece(column, row, "White")
+			else:
+				TurtleMove.resetSquare(column, row)
 
 #Converts an index to a move
 #Params: index, The index to convert
