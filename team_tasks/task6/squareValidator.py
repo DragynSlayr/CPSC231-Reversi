@@ -1,5 +1,5 @@
 import BoardGenerator as bg
-
+import Constants
 
 #==================================================================================================================================
 #==================================================================================================================================
@@ -290,11 +290,23 @@ def mainSquareValidator(game_state, pieceColor):
     #The program will go over the whole grid and check whether there is aready a piece on a square or not
     validMoves = firstValidation(validMoves)
 
+    if pieceColor == Constants.PIECE_WHITE:
+        pieceColor = "White"
+    else:
+        pieceColor = "Black"
 
     #The program will go over the whole grid and check whether there is at least one piece of opposite color around the square that is checked.
     listOfValidMoves = secondValidation(validMoves, pieceColor)
 
-    return listOfValidMoves
+    movesList = []
+    
+    for location in listOfValidMoves:
+        x, y, piece = location
+        letter = Constants.COLUMN_LETTERS[x - 1]
+        number = Constants.ROW_NUMBERS[y - 1]
+        movesList.append(letter + str(number))
+
+    return movesList
 
 if __name__ == "__main__":
 
