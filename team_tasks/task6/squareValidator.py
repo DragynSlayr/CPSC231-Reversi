@@ -23,12 +23,7 @@ import BoardGenerator as bg
                # using isAlreadyAPiece funciton. If not, then the state of the square will be changed to "Invalid"
 
 #2ND VALIDATION: A piece cannot be placed on a square that is not surrounded by at least one piece
-               # The program will go over the whole grid and check whether there is at least one piece around the square that is checked or not.
-               # using isSurrounded function. If not, then the state of the square will be changed to "Invalid"
-
-#3RD VALIDATION: Based on a piece color that has to be placed on the board, the program will find valid squares to move the piece next to squares with pieces of opposite color on them.
-
-#4RTH VALIDATION:
+               # The program will go over the whole grid and check whether there is at least one piece of opposite color around the square that is checked.
 
 
 #The function checks whether the coordiantes of the square are valid or not.
@@ -58,12 +53,6 @@ def gameStateFromStringToList(gameStateString):
         count += 1
 
     return validMoves
-
-#==============================================================================================================================
-#==============================================================================================================================
-#======================================================THE 1ST VALIDATION======================================================
-#==============================================================================================================================
-#==============================================================================================================================
 
 
 #The function checks whether there's already a piece on a testing square or not. and returns True if conditions are met.
@@ -261,7 +250,7 @@ def testColorSE(testingSquare, validMoves, color):
 
 
 #The function gets the color of a piece and is looking for squares with an opposite piece color on it
-#The function returns squares where that piece can be placed
+#The function returns a list of squares where that piece can be placed
 def secondValidation(validMoves, pieceColor):
     for square in range(len(validMoves)):
         if validMoves[square][2] == "N":
@@ -285,19 +274,24 @@ def secondValidation(validMoves, pieceColor):
     return listOfValidMoves
 
 
-
-
-
 #the main function
 def mainSquareValidator(game_state, pieceColor):
 
     #The program gets a game state as a string and converts it into a validMoves list
     validMoves = gameStateFromStringToList(game_state)
 
+    #The program will go over the whole grid and check whether there is aready a piece on a square or not
     firstValidation(validMoves)
 
-    #TEST
-    #print(secondValidation(validMoves, pieceColor))
+    #The program will go over the whole grid and check whether there is at least one piece of opposite color around the square that is checked.
+    secondValidation(validMoves, pieceColor)
+
+
+#==============================================================================================================================
+#==============================================================================================================================
+#======================================================THE MAIN FUNCTION======================================================
+#==============================================================================================================================
+#==============================================================================================================================
 
 
 if __name__ == "__main__":
