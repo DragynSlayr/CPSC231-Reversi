@@ -280,7 +280,7 @@ def secondValidation(validMoves, pieceColor):
 
     for square in range(len(validMoves)):
         if validMoves[square][2] == "N":
-            listOfValidMoves.append[validMoves[square]]
+            listOfValidMoves.append(validMoves[square])
 
     return listOfValidMoves
 
@@ -289,16 +289,22 @@ def secondValidation(validMoves, pieceColor):
 
 
 #the main function
-def main(game_state, pieceColor):
+def mainSquareValidator(game_state, pieceColor):
 
     #The program gets a game state as a string and converts it into a validMoves list
     validMoves = gameStateFromStringToList(game_state)
 
     firstValidation(validMoves)
 
-    print(secondValidation(validMoves))
+    #TEST
+    #print(secondValidation(validMoves, pieceColor))
 
 
 if __name__ == "__main__":
-    sampleGameState = generate(False, False)
-    main(sampleGameState, "Black")
+
+    sampleGameState = bg.generate(False, False)
+
+    #TEST
+    #print(sampleGameState)
+
+    mainSquareValidator(sampleGameState, "Black")
