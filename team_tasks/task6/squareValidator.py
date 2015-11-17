@@ -288,16 +288,18 @@ def mainSquareValidator(game_state, pieceColor):
     validMoves = gameStateFromStringToList(game_state)
 
     #The program will go over the whole grid and check whether there is aready a piece on a square or not
-    firstValidation(validMoves)
+    validMoves = firstValidation(validMoves)
+
 
     #The program will go over the whole grid and check whether there is at least one piece of opposite color around the square that is checked.
-    secondValidation(validMoves, pieceColor)
+    listOfValidMoves = secondValidation(validMoves, pieceColor)
 
+    return listOfValidMoves
 
 if __name__ == "__main__":
 
     #TEST
-    #sampleGameState = bg.generate(False, False)
-    #print(sampleGameState)
+    sampleGameState = bg.generate(False, False)
+    print(sampleGameState)
 
-    mainSquareValidator(sampleGameState, "Black")
+    print(mainSquareValidator(sampleGameState, "Black"))
