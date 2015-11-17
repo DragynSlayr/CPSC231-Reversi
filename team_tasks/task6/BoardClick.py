@@ -12,6 +12,7 @@ import random
 import MoveValidator
 import ScreenWriter
 import Converter
+import SquareValidator
 
 #Converts an x coordinate to a cell on the board
 #Params: x, The x coordinate
@@ -57,7 +58,7 @@ def getRandomNumber():
 #Returns: The new game state
 def computerTurn(state, move_num):
     #Get a list of possible moves
-    valid_moves = MoveValidator.getValidMoves(state)
+    valid_moves = SquareValidator.mainSquareValidator(Converter.toString(state), ListInterpret.whoseTurn(move_num))
 
     #If no moves are valid then the move is skipped
     if len(valid_moves) == 0:
@@ -102,7 +103,7 @@ def placePiece(x, y):
                 move = letter + str(number)
 
                 #Make sure a piece is not in this location and the move is valid
-                if StringMove.validateMoveLocation(game_state, move) and MoveValidator.isValidMove(move, Converter.toString(game_state)):
+                if StringMove.validateMoveLocation(game_state, move) and MoveValidator.isValidMove(move, Converter.toString(game_state)) and move in SquareValidator.mainSquareValidator(Converter.toString(game_state), ListInterpret.whoseTurn(move_num)):
                     #Clear space at move
                     TurtleMove.resetSquare(letter, number)
 
@@ -124,10 +125,8 @@ def placePiece(x, y):
                     white_score = VictoryStatus.countPieces(Constants.PIECE_WHITE, game_state)
                     ScreenWriter.writeScore(black_score, white_score)
 
-                    #Get valid moves
-                    valid_moves = MoveValidator.getValidMoves(game_state)
-
                     #Display valid moves
+                    valid_moves = SquareValidator.mainSquareValidator(Converter.toString(game_state), ListInterpret.whoseTurn(move_num))
                     TurtleMove.displayValidMoves(valid_moves)
         else:
             #Print who won
@@ -183,7 +182,7 @@ def loadGame():
     TurtleMove.SHOWN_MOVES = []
 
     #Display valid moves
-    valid_moves = MoveValidator.getValidMoves(saved_state)
+    valid_moves = SquareValidator.mainSquareValidator(Converter.toString(saved_state), ListInterpret.whoseTurn(int(saved_move_num)))
     TurtleMove.displayValidMoves(valid_moves)
 
 #Gracefully quits the game
@@ -217,7 +216,7 @@ def run(state, move_num, isPlayerMove):
     ScreenWriter.writeScore(black_score, white_score)
 
     #Display valid moves
-    valid_moves = MoveValidator.getValidMoves(state)
+    valid_moves = SquareValidator.mainSquareValidator(Converter.toString(state), ListInterpret.whoseTurn(move_num))
     TurtleMove.displayValidMoves(valid_moves)
 
     #Save variables to be used later
