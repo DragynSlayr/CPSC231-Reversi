@@ -299,7 +299,7 @@ def mainSquareValidator(game_state, pieceColor):
     listOfValidMoves = secondValidation(validMoves, pieceColor)
 
     movesList = []
-    
+
     for location in listOfValidMoves:
         x, y, piece = location
         letter = Constants.COLUMN_LETTERS[x - 1]
