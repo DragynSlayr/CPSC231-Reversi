@@ -47,113 +47,126 @@ def inverseTurnChar(char):
 #Function then updates the row as if it was horizontal
 #Works for "rows" of all sizes
 #returns the updated row
-def update_row(row, Relativelocation, turn_letter):
-	
-	#print("Starts with ", row, "at ", Relativelocation)
-	Relativelocation = Relativelocation 
-	#Used to alert the programmer if they passed in a paramter that will result in a crash
-	if len(row)<= Relativelocation:
-		print("ERROR RL TOO BIG")
-		print(row)
-		print(Relativelocation)
-
-	if Relativelocation < 0:
-		print("ERROR RL TOO SMALL")
-		print(row)
-		print(Relativelocation)
-
-	#Add the turn_letter into said spot
-	row[Relativelocation] = turn_letter
-
-	#Break the row into left and right sides:
-		#Ex: ['N', 'N', 'B', 'W', 'W', 'W, 'W, 'N']
-						#adding a "B" into the 3rd last spot will break the row into:
-			#['N', 'N', 'B', 'W', 'B'] <- that "B is the one added" and ['W', 'W', 'N']
-	rowLeft = row[:Relativelocation]
-	#print("RowLeft was: ", rowLeft)
-	#Update the characters on the left hand size of the move location
-	locCount = 0
-	StartConvert = False
-	for letter in rowLeft:
-		if StartConvert == True:
-			rowLeft[locCount] = turn_letter
-		if letter == turn_letter:
-			StartConvert = True
-		locCount = locCount +1
-	
-	#print("RowLeft is now :",  rowLeft)
-	row[Relativelocation] = turn_letter
-
-	rowRight = row[Relativelocation+1:]
-	#print("RowRight was : ", rowRight)
-	que = []
+		
+def update_row(row, relativeLoaction, turn_letter):
+	startConvert = False
+	rowLeft = row[:relativeLoaction]
 	EndFound = False
-	FirstRound = True
-	StartCount = True
-
-	#Update move on the right hand side:
-		#NOTE: This is handled slightly differently, as it cannot be counted on for there to be a turn letter further in the string
-		#For this reason, we simply add the letters to a que, and  do not update them until we can verify that another turn letter has been found
-		#Ex: if rowRight = ['W', 'W', 'W', 'W'] and the turn letter is 'B' then we do not change the W's until we find another B.
-	for letter in rowRight:
-		if letter != inverseTurnChar(turn_letter):
-			StartCount = False
-		if FirstRound == True:
-			if letter == inverseTurnChar(turn_letter):
-				StartCount = True
-			FirstRound = False
-		if letter == turn_letter:
-			EndFound = True
-		if StartCount == True:
-			que.append(letter)
-
-			
-	#print("Que is ", que)
-	#Update the rowRight based on if an end was found
-	loopCount = 0
-	if EndFound == False:
-		que = []
-	else:
-		for letter in que:
-			rowRight[loopCount] = inverseTurnChar(letter)
-			loopCount = loopCount +1
-
-	#print("RowRight is now : ", rowRight)
-	#Combine left and right side rows into the new row
-	newRow = []
+	que = []
+	#print(row)
+	#print(rowLeft)
+	rowLeft.reverse()
+	#print(rowLeft)
+	stop = False
 	for letter in rowLeft:
-		newRow.append(letter)
+		#['B', 'W', 'B', 'N', 'N', 'N', 'N', 'N']
+		if letter == inverseTurnChar(turn_letter) and stop == False:
+			startConvert = True
+		
+		if letter == 'N':
+			startConvert == False
+			stop = True
+		if letter == turn_letter:
+			startConvert = False
+			EndFound = True
+			stop = True
+		if startConvert == True and letter == inverseTurnChar(turn_letter):
+			que.append(letter)
+		
+		
+	#print(que)	
+	#print(rowLeft)
+	counter = 0
+	""""
+	for i in rowLeft:
+		if i != inverseTurnChar(turn_letter):
+			que = []
+	"""
+	if EndFound == True and len(que) > 0:
+		for letter in que:
+			rowLeft[counter] = turn_letter
+			counter = counter+1
 	
-	newRow.append(turn_letter)
+	rowLeft.reverse()
 	
+	
+	#print(rowLeft)
+	
+	
+	startConvert = False
+	rowRight = row[relativeLoaction+1:]
+	#print(rowRight)
+	EndFound = False
+	que2 = []
+	#print(row)
+	#print(rowLeft)
+	#print(rowLeft)
+	stop = False
 	for letter in rowRight:
-		newRow.append(letter)
-
-	#print("Returns ", newRow)
+		#['B', 'W', 'B', 'N', 'N', 'N', 'N', 'N']
+		if letter == inverseTurnChar(turn_letter) and stop == False:
+			startConvert = True
+		
+		if letter == 'N':
+			startConvert == False
+			stop = True
+		if letter == turn_letter:
+			startConvert = False
+			EndFound = True
+			stop = True
+		if startConvert == True and letter == inverseTurnChar(turn_letter):
+			que2.append(letter)
+		
+		
+	print(que2)	
+	#print(rowRight)
+	"""
+	for i in rowRight:
+		if i != inverseTurnChar(turn_letter):
+			que2 = []
+	"""
+	counter = 0
+	if EndFound == True and len(que2) > 0:
+		for letter in que2:
+			rowRight[counter] = turn_letter
+			counter = counter+1
+	
+	#print(rowRight)
+	newRow = rowLeft
+	newRow.append(turn_letter)
+	newRow = newRow + rowRight
+	#print(newRow)
 	return newRow
-
 #Updates the board token vertically
 #Takes the token as a 2D list, the relative location, and the turnletter
 #Returns the updated list
-def update_column(token, Relativelocation, turn_letter):
+def update_column(token, x, y, turn_letter):
 	#print("Update Column was passed : ", token, " ", Relativelocation, " ", turn_letter)
-	tempRow = []
+	
 	#Create a temporary row of all of ther vertical letters for easy updating
+	tempRow = []
+	
+	
 	for row in token:
-		tempRow.append(row[Relativelocation])
+		tempRow.append(row[x])
+	
+	#Update the row
+	tempRow = update_row(tempRow, y, turn_letter)
 	
 	#print("column found ", tempRow, " To be the column")
-	#Update the row
-	tempRow = update_row(tempRow, Relativelocation, turn_letter)
-
+	
+	
+	#print("Column now   ", tempRow, " To be the column")
 	#Using the updated row change the token
+	newToken = token [:]
 	loopCount = 0
-	for row in token:
-		change = tempRow[loopCount]
-		row[Relativelocation] = change
+	for row in newToken:
+		tempPiece = tempRow[loopCount]
+		row[x] = tempPiece
 		loopCount = loopCount + 1
 
-	return token
+	return newToken
+	
 
 #Function updates the board's Up to Down diagnals based on a token, move and turn_letter
 #Up to down is styled like this:
@@ -241,14 +254,9 @@ def update_diagnalUD(token, location, turn_letter):
 	xTracker = x
 	yTracker = y
 	direction = 1
-	idx = x
+	idx = x -1
 	EdgeFound = False
 
-	halfRow = row[:relativeLocation]
-	halfRow.reverse()
-	halfRow = halfRow + row[relativeLocation +1 :]
-	row = halfRow
-	
 	
 	
 	while EdgeFound == False:
@@ -391,22 +399,15 @@ def update_diagnalDU(token, location, turn_letter):
 	xTracker = x
 	yTracker = y
 	direction = -1
-	idx = x
+	idx = x -1
 	EdgeFound = False
-	
-	
-	halfRow = row[:relativeLocation]
-	halfRow.reverse()
-	halfRow = halfRow + row[relativeLocation +1 :]
-	row = halfRow
-	
 	
 	
 	while EdgeFound == False:
 		if 0<= yTracker <=7:
 			tokenRow = tempToken[yTracker]
 			if 0 <= xTracker <= 7:
-				if idx >= 0 and len(row)> 0:
+				if idx >= 0 and len(row)> idx:
 	#				print("Before Crsh tokenRow = : ", tokenRow, " xTracker is : ", xTracker)
 	#				print(" row is  ", row, " row idx is : ", idx)
 					tokenRow[xTracker] = row[idx]
@@ -457,20 +458,21 @@ def updateToken(token, move, turn_letter):
 	xy = convertMove(move)
 	x = xy[0]-1
 	y = xy[1]-1
-	#print(x, y)
-	#tempToken = token[:]
-	tempToken = update_column(token, x, turn_letter)
-	tempRow = update_row(token[y], x, turn_letter)
+	print(x, y)
+	tempToken = token[:]
+	
+	tempToken = update_column(token, x, y, turn_letter)
+	tempRow = update_row(tempToken[y], x, turn_letter)
 	tempToken[y] = tempRow
-	tempToken = update_diagnalDU(token, move, turn_letter)
-	tempToken = update_diagnalUD(token, move, turn_letter)
+	#tempToken = update_diagnalDU(token, move, turn_letter)
+	#tempToken = update_diagnalUD(token, move, turn_letter)
 	
-	finalRow = tempToken[y]
-	finalRow[x] = turn_letter
+	#finalRow = tempToken[y]
+	#finalRow[x] = turn_letter
 	
-	tempToken[y] = finalRow
-
-	return token
+	#tempToken[y] = finalRow
+	
+	return tempToken
 
 #Generic test code
 #Do not worry about this, it was just used for debugging
@@ -499,8 +501,8 @@ def testCode():
 	token = []
 	print("CHECK VERTICAL BASIC::>>>")
 	token =         [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'W', ]]  
-	token = token + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'B', ]]
-	token = token + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'B', ]]
+	token = token + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
+	token = token + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'W', ]]
 	token = token + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'B', ]]
 	token = token + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'B', ]]
 	token = token + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'B', ]]
@@ -556,8 +558,68 @@ def testCode():
 	token = updateToken(token, 'D4', 'B')
 	for row in token:
 		print(row)
+		
+	
+	
+	
+	token = []
+	print("CHECK UD DIAGNAL BASIC BASIC::>>>")
+	token =         [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]  
+	token = token + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
+	token = token + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
+	token = token + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
+	token = token + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
+	token = token + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
+	token = token + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
+	token = token + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
+	for row in token:
+		print(row)
+		
+	print("  ")
+	print("  is now  >>>")
+		
+	token = updateToken(token, 'A1', 'B')
+	for row in token:
+		print(row)
+	
+		
+	token = []
+	print("CHECK CUSTOM BASIC BASIC::>>>")
+	print("      A    B    C    D    E    F    G    H")
+	token =         [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]  
+	token = token + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
+	token = token + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
+	token = token + [['N', 'N', 'N', 'W', 'B', 'N', 'N', 'N', ]]
+	token = token + [['N', 'N', 'N', 'B', 'W', 'N', 'N', 'N', ]]
+	token = token + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
+	token = token + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
+	token = token + [['N', 'N', 'W', 'B', 'N', 'N', 'W', 'N', ]]
+	tempCount = 1
+	for row in token:
+		
+		print(tempCount, " ", row)
+		tempCount = tempCount +1
+	
+	tempCount = 1
+	print("  ")
+	print("  is now  >>>")
+	
+	token = updateToken(token, 'H8', 'B')
+	print("      A    B    C    D    E    F    G    H")
+	for row in token:
+		print(tempCount, " ", row)
+		tempCount = tempCount +1
 	
 	""""
+	['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N']
+" A     B   C    D    E    F    G    H"
+['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N']
+['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N']
+['N', 'N', 'N', 'W', 'B', 'N', 'N', 'N']
+['N', 'N', 'N', 'B', 'W', 'N', 'N', 'N']
+['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N']
+['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N']
+['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N']
 	row = ['B', 'W', 'W', 'N', 'W', 'B', 'W', 'B']	
 	print(row)
 	row = update_row(row, 2, 'B')
