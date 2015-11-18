@@ -5,6 +5,7 @@
 import Constants
 import TurtleMove
 import ReversiGrid
+import PieceChange
 
 #This function will take a game state and update the gamestate on the game board.
 #It takes the game state, which is a 64 character string
@@ -63,7 +64,8 @@ def stringInterpret(game_state, NewMove, turn):
 
 		turn_colour = whoseTurn(turn)
 
-		new_state = game_state[:move_to_string] + turn_colour + game_state[move_to_string + 1:]
+		new_state = PieceChange.ChangePieces(game_state, move_to_string, turn_colour)
+		#new_state = game_state[:move_to_string] + turn_colour + game_state[move_to_string + 1:]
 
 		if whoseTurn(turn) == "W":
 			color = "White"

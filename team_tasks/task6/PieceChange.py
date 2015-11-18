@@ -18,6 +18,9 @@ def CheckNorth(game_state, stringID, turn_colour, isTesting = False):
 	other_colour = OtherColour(turn_colour) 	#This Determines the colour of the other player's piece.
 	MoveID = stringID 							#This will make a copy of the index of the players move.
 
+
+	if stringID + Constants.NORTH > len(game_state) or stringID + Constants.NORTH < 0:
+		return game_state
 	#While the next token to check is the other colour.
 	#NORTH = -8
 	while game_state[stringID + Constants.NORTH] == other_colour:
@@ -92,6 +95,9 @@ def CheckNorthEast(game_state, stringID, turn_colour, isTesting = False):
 	other_colour = OtherColour(turn_colour) 	#This Determines the colour of the other player's piece.
 	MoveID = stringID 							#This will make a copy of the index of the players move.
 
+	if stringID + Constants.NORTHEAST > len(game_state) or stringID + Constants.NORTHEAST < 0:
+		return game_state
+
 	#While the next token to check is the other colour.
 	#NORTHEAST = -7
 	while game_state[stringID + Constants.NORTHEAST] == other_colour:
@@ -163,6 +169,9 @@ def CheckEast(game_state, stringID, turn_colour, isTesting = False):
 	other_colour = OtherColour(turn_colour) 	#This Determines the colour of the other player's piece.
 	MoveID = stringID 							#This will make a copy of the index of the players move.
 
+
+	if stringID + Constants.EAST> len(game_state) - 1 or stringID + Constants.EAST < 0:
+		return game_state
 	#While the next token to check is the other colour.
 	#EAST = 1
 	while game_state[stringID + Constants.EAST] == other_colour:
@@ -202,6 +211,9 @@ def CheckSouthEast(game_state, stringID, turn_colour, isTesting = False):
 	other_colour = OtherColour(turn_colour) 	#This Determines the colour of the other player's piece.
 	MoveID = stringID 							#This will make a copy of the index of the players move.
 
+
+	if stringID + Constants.SOUTHEAST > len(game_state) or stringID + Constants.SOUTHEAST < 0:
+		return game_state
 	#While the next token to check is the other colour.
 	#SouthEast = 9
 	while game_state[stringID + Constants.SOUTHEAST] == other_colour:
@@ -276,6 +288,9 @@ def CheckSouth(game_state, stringID, turn_colour, isTesting = False):
 	other_colour = OtherColour(turn_colour) 	#This Determines the colour of the other player's piece.
 	MoveID = stringID 							#This will make a copy of the index of the players move.
 
+
+	if stringID + Constants.SOUTH > len(game_state) or stringID + Constants.SOUTH < 0:
+		return game_state
 	#While the next token to check is the other colour.
 	#SOUTH = 8
 	while game_state[stringID + Constants.SOUTH] == other_colour:
@@ -352,6 +367,10 @@ def CheckSouthWest(game_state, stringID, turn_colour, isTesting = False):
 	other_colour = OtherColour(turn_colour) 	#This Determines the colour of the other player's piece.
 	MoveID = stringID 							#This will make a copy of the index of the players move.
 
+
+	if stringID + Constants.SOUTHWEST > len(game_state) or stringID + Constants.SOUTHWEST < 0:
+		return game_state
+
 	while game_state[stringID + Constants.SOUTHWEST] == other_colour:
 		#Check if move is invalid
 		if NofChanges > (8-(MoveID // 8)) - 1:
@@ -423,6 +442,9 @@ def CheckWest(game_state, stringID, turn_colour, isTesting = False):
 	other_colour = OtherColour(turn_colour) 	#This Determines the colour of the other player's piece.
 	MoveID = stringID 							#This will make a copy of the index of the players move.
 
+	if stringID + Constants.WEST > len(game_state) or stringID + Constants.WEST < 0:
+		return game_state
+
 	#While the next token to check is the other colour.
 	#WEST = -1
 	while game_state[stringID + Constants.WEST] == other_colour:
@@ -460,6 +482,9 @@ def CheckNorthWest(game_state, stringID, turn_colour, isTesting = False):
 	MoveXID = 0 						#This is going to be where the token across from
 	other_colour = OtherColour(turn_colour) #Determines the other colour.
 	MoveID = stringID 					#Makes a copy of the index of the current player's move.
+
+	if stringID + Constants.NORTHWEST > len(game_state) or stringID + Constants.NORTHWEST < 0:
+		return game_state
 
 	#While the next token to check is the other colour.
 	#NORTHWEST = -9
@@ -626,6 +651,16 @@ def testProgram():
 	print("___________________________")
 	print("TEST 1 TEST 1 TEST 1 TEST 1\n")
 	testFunction(CheckNorthWest, "WBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBW", 63, "W")
+
+
+
+	input()
+	print("CHECK ALL CHECK ALL CHECK ALL".center(27))
+	print("___________________________")
+	print("TEST TEST TEST TEST\n".center(27))
+	testFunction(ChangePieces, ("W" * 8) + ("B" * 48) + ("W" * 8), 33, "W")
+	testFunction(ChangePieces, "WBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBW", 63, "W")
+	testFunction(ChangePieces, "WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 5, "W")
 
 if __name__ == "__main__":
 	testProgram()
