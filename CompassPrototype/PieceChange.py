@@ -566,14 +566,21 @@ def OtherColour(turn_colour):
 def ChangePieces(game_state, stringID, turn_colour, isTesting = False):
 	#Check every direction
 	game_state = CheckNorth(game_state, stringID, turn_colour, isTesting)
+	print(game_state)
 	game_state = CheckNorthEast(game_state, stringID, turn_colour, isTesting)
+	print(game_state)
 	game_state = CheckEast(game_state, stringID, turn_colour, isTesting)
+	print(game_state)
 	game_state = CheckSouthEast(game_state, stringID, turn_colour, isTesting)
+	print(game_state)
 	game_state = CheckSouth(game_state, stringID, turn_colour, isTesting)
+	print(game_state)
 	game_state = CheckSouthWest(game_state, stringID, turn_colour, isTesting)
+	print(game_state)
 	game_state = CheckWest(game_state, stringID, turn_colour, isTesting)
+	print(game_state)
 	game_state = CheckNorthWest(game_state, stringID, turn_colour, isTesting)
-
+	print(game_state)
 	#Return updated string
 	return game_state#[:stringID] + turn_colour + game_state[stringID + 1:]
 
@@ -606,7 +613,8 @@ def ChangePiecesList(game_state, stringID, turn_colour, isTesting = False):
 #Returns: None
 #Notes: Refer to the function for what it's parameters are
 def testFunction(function, param_one, param_two, param_three, param_four = False):
-	TurtleMove.setup()
+#	TurtleMove.setup()
+
 	result = function(param_one, param_two, param_three, param_four)
 	formatted_start = Converter.asBoardRepresentation(param_one)
 	formatted_end = Converter.asBoardRepresentation(result)
@@ -618,6 +626,7 @@ def testFunction(function, param_one, param_two, param_three, param_four = False
 	print(formatted_end)
 	print(result)
 	StringInterpret.stringToPiece(result)
+
 
 #	print("List".center(8))
 #	print(formatted_list)
@@ -702,6 +711,7 @@ def testProgram():
 	testFunction(ChangePieces, "WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 5, "W")
 
 if __name__ == "__main__":
+	TurtleMove.setup()
 	testProgram()
-
+	Constants.WINDOW.exitonclick()
 	#testFunction(ChangePieces, ("W" * 8) + ("B" * 48) + ("W" * 8), 33, "W")
