@@ -2,6 +2,7 @@
 import Constants
 import Converter
 import StringInterpret
+import TurtleMove
 
 #Author: Kyle Hinton
 #This function will change the string so that the opponents pieces, in a valid move, will be changed on the string.
@@ -574,7 +575,7 @@ def ChangePieces(game_state, stringID, turn_colour, isTesting = False):
 	game_state = CheckNorthWest(game_state, stringID, turn_colour, isTesting)
 
 	#Return updated string
-	return game_state[:stringID] + turn_colour + game_state[stringID + 1:]
+	return game_state#[:stringID] + turn_colour + game_state[stringID + 1:]
 
 def ChangePiecesList(game_state, stringID, turn_colour, isTesting = False):
 
@@ -582,8 +583,11 @@ def ChangePiecesList(game_state, stringID, turn_colour, isTesting = False):
 		string_state = Converter.toString(game_state)
 
 	string_state = CheckNorth(game_state, stringID, turn_colour, isTesting)
+	print(string_state)
 	string_state = CheckNorthEast(game_state, stringID, turn_colour, isTesting)
+	print(string_state)
 	string_state = CheckEast(game_state, stringID, turn_colour, isTesting)
+	print(string_state)
 	string_state = CheckSouthEast(game_state, stringID, turn_colour, isTesting)
 	string_state = CheckSouth(game_state, stringID, turn_colour, isTesting)
 	string_state = CheckSouthWest(game_state, stringID, turn_colour, isTesting)
@@ -602,6 +606,7 @@ def ChangePiecesList(game_state, stringID, turn_colour, isTesting = False):
 #Returns: None
 #Notes: Refer to the function for what it's parameters are
 def testFunction(function, param_one, param_two, param_three, param_four = False):
+	TurtleMove.setup()
 	result = function(param_one, param_two, param_three, param_four)
 	formatted_start = Converter.asBoardRepresentation(param_one)
 	formatted_end = Converter.asBoardRepresentation(result)
@@ -612,6 +617,8 @@ def testFunction(function, param_one, param_two, param_three, param_four = False
 	print("Output".center(8))
 	print(formatted_end)
 	print(result)
+	StringInterpret.stringToPiece(result)
+
 #	print("List".center(8))
 #	print(formatted_list)
 
@@ -680,10 +687,21 @@ def testProgram():
 	print("CHECK ALL CHECK ALL CHECK ALL".center(27))
 	print("___________________________")
 	print("TEST TEST TEST TEST\n".center(27))
-	testFunction(ChangePiecesList, ("W" * 8) + ("B" * 48) + ("W" * 8), 33, "W")
-	testFunction(ChangePiecesList, "WBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBW", 63, "W")
-	testFunction(ChangePiecesList, "WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 5, "W")
+	testFunction(ChangePieces, ("W" * 8) + ("B" * 48) + ("W" * 8), 33, "W")
+
+	input()
+	print("CHECK ALL CHECK ALL CHECK ALL".center(27))
+	print("___________________________")
+	print("TEST 2 TEST 2 TEST 2 TEST 2\n".center(27))
+	testFunction(ChangePieces, "WBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBW", 63, "W")
+
+	input()
+	print("CHECK ALL CHECK ALL CHECK ALL".center(27))
+	print("___________________________")
+	print("TEST 3 TEST 3 TEST 3 TEST 3\n".center(27))
+	testFunction(ChangePieces, "WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 5, "W")
 
 if __name__ == "__main__":
 	testProgram()
+
 	#testFunction(ChangePieces, ("W" * 8) + ("B" * 48) + ("W" * 8), 33, "W")

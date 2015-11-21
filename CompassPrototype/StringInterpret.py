@@ -83,7 +83,7 @@ def stringInterpret(game_state, NewMove, turn):
 			print(row_IDX, "row_IDX")	#Row index number from numbers
 			print(column, "Column")	#Prints the Column Letter
 			print(row, "Row") #Prints the Row Number
-			print(game_state[move_to_string], ": Character at the move's index number.") #Prints the character at the index [move_to_string]
+#			print(game_state[move_to_string], ": Character at the move's index number.") #Prints the character at the index [move_to_string]
 			print(move_to_string, "Index number of new move") #Takes the move and converts it to the index number for the string
 			print(new_state)	#Prints the new_state with the character at index.move_to_string in place
 			print()
@@ -97,7 +97,7 @@ def setup2():
 	new_state = stringInterpret((new_state), "D5", -1)
 	new_state = stringInterpret((new_state), "E5", -2)
 	for turn in range(64):
-		new_state = stringInterpret((new_state), input("Move?"), turn + 1)
+		new_state = PieceChange.ChangePieces(new_state, input("Move?"), turn + 1)
 
 if __name__ == "__main__":
 		TurtleMove.setup()

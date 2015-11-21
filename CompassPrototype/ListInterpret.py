@@ -6,6 +6,8 @@ import Constants
 import TurtleMove
 import ReversiGrid
 import PieceChange
+import Converter
+import StringInterpret
 
 #This function will take a game state and update the gamestate on the game board.
 #It takes the game state, which is a 64 character string
@@ -86,14 +88,54 @@ def stringInterpret(game_state, NewMove, turn):
 			##########################
 		return new_state	#Return the updated game state
 
+def stringInterpretSetup(game_state, NewMove, turn):
+		column = NewMove[0].upper()
+		row = int(NewMove[1])
+		new_state = []
+		column_IDX = (Constants.COLUMN_LETTERS.index(column))
+		row_IDX = (Constants.ROW_NUMBERS.index(row))
+
+		move_IDX = ((row_IDX * Constants.NUM_OF_ROWS) + column_IDX)
+
+		turn_colour = whoseTurn(turn)
+
+#		new_state = PieceChange.ChangePiecesList(game_state, move_IDX, turn_colour)
+
+#		new_state[row_IDX][column_IDX] = turn_colour
+
+		if whoseTurn(turn) == Constants.PIECE_WHITE:
+			color = "White"
+		else:
+			color = "Black"
+
+		TurtleMove.placePiece(column, row, color)
+
+		if __name__ == "__main__":
+			#TESTING TESTING TESTING
+			##########################
+			print("Testing")
+			print("turn ", turn)
+			print(column_IDX, "column_IDX") # Column index number from letters
+			print(row_IDX, "row_IDX")	#Row index number from numbers
+			print(column, "Column")	#Prints the Column Letter
+			print(row, "Row") #Prints the Row Number
+			print(game_state[move_IDX], ": Character at the move's index number.") #Prints the character at the index [move_to_string]
+			print(move_IDX, "Index number of new move") #Takes the move and converts it to the index number for the string
+			print(new_state)	#Prints the new_state with the character at index.move_to_string in place
+			print()
+			##########################
+		return new_state	#Return the updated game state
+
 #Sets up the board using the pieces and reading through the string.
 def setup2():
-	new_state = stringInterpret(("NNNNNNNN" * 8), "D4", -2)
-	new_state = stringInterpret((new_state), "E4", -1)
-	new_state = stringInterpret((new_state), "D5", -1)
-	new_state = stringInterpret((new_state), "E5", -2)
+
+	start = StringInterpret.setup2()
+#	start = StringInterpret.stringInterpret(("NNNNNNNN" * 8), "D4", -2)
+#	start = stringInterpretSetup((new_state), "E4", -1)
+#	start = stringInterpretSetup((new_state), "D5", -1)
+#	start = stringInterpretSetup((new_state), "E5", -2)
 	for turn in range(64):
-		new_state = stringInterpret((new_state), input("Move?"), turn + 1)
+		new_state = stringInterpret((start), input("Move?"), turn + 1)
 
 if __name__ == "__main__":
 		TurtleMove.setup()
