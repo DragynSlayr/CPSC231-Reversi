@@ -20,7 +20,10 @@ def stringToPiece(game_state):
 			y_coord = Constants.ROW_NUMBERS[y]
 
 			#Check each piece at the index in the game state
+			print (index, "INDEX I WANT YOU!!")
+
 			piece = game_state[index]
+
 			if piece == "B":
 				TurtleMove.placePiece(x_coord, y_coord, "Black")
 			elif piece == "W":
@@ -64,8 +67,51 @@ def stringInterpret(game_state, NewMove, turn):
 
 		turn_colour = whoseTurn(turn)
 
+		move_state = game_state[:move_to_string] + turn_colour + game_state[move_to_string + 1:]
+
+		new_state = PieceChange.ChangePieces(move_state, move_to_string, turn_colour)
+
+		if whoseTurn(turn) == "W":
+			color = "White"
+		else:
+			color = "Black"
+
+		TurtleMove.placePiece(column, row, color)
+
+#		stringToPiece(new_state)
+
+		if __name__ == "__main__":
+			#TESTING TESTING TESTING
+			##########################
+			print("Testing")
+			print("turn ", turn)
+			print(column_IDX, "column_IDX") # Column index number from letters
+			print(row_IDX, "row_IDX")	#Row index number from numbers
+			print(column, "Column")	#Prints the Column Letter
+			print(row, "Row") #Prints the Row Number
+#			print(game_state[move_to_string], ": Character at the move's index number.") #Prints the character at the index [move_to_string]
+			print(move_to_string, "Index number of new move") #Takes the move and converts it to the index number for the string
+			print(new_state)	#Prints the new_state with the character at index.move_to_string in place
+			print()
+			##########################
+		return new_state	#returns the new_state, The updated move.
+
+def stringInterpretSetup(game_state, NewMove, turn):
+		column = NewMove[0].upper()
+		row = int(NewMove[1])
+
+		column_IDX = (Constants.COLUMN_LETTERS.index(column))
+		row_IDX = (Constants.ROW_NUMBERS.index(row))
+
+ 		#Equation for converting a move coordinate to the index number to be changed
+		move_to_string = ((row_IDX * Constants.NUM_OF_ROWS) + column_IDX)
+
+		turn_colour = whoseTurn(turn)
+
+
+#		move_state = game_state[:move_to_string] + turn_colour + game_state[move_to_string + 1:]
+
 		new_state = PieceChange.ChangePieces(game_state, move_to_string, turn_colour)
-		#new_state = game_state[:move_to_string] + turn_colour + game_state[move_to_string + 1:]
 
 		if whoseTurn(turn) == "W":
 			color = "White"
@@ -90,14 +136,18 @@ def stringInterpret(game_state, NewMove, turn):
 			##########################
 		return new_state	#returns the new_state, The updated move.
 
+
 #Sets up the board using the pieces and reading through the string.
 def setup2():
-	new_state = stringInterpret(("NNNNNNNN" * 8), "D4", -2)
-	new_state = stringInterpret((new_state), "E4", -1)
-	new_state = stringInterpret((new_state), "D5", -1)
-	new_state = stringInterpret((new_state), "E5", -2)
+	new_state = stringInterpretSetup(("NNNNNNNN" * 8), "D4", -2)
+	new_state = stringInterpretSetup((new_state), "E4", -1)
+	new_state = stringInterpretSetup((new_state), "D5", -1)
+	new_state = stringInterpretSetup((new_state), "E5", -2)
 	for turn in range(64):
-		new_state = PieceChange.ChangePieces(new_state, input("Move?"), turn + 1)
+		new_state = stringInterpret(new_state, input("Move?"), turn + 1)
+
+
+
 
 if __name__ == "__main__":
 		TurtleMove.setup()

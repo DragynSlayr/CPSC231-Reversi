@@ -22,6 +22,10 @@ def CheckNorth(game_state, stringID, turn_colour, isTesting = False):
 
 	if stringID + Constants.NORTH > len(game_state) or stringID + Constants.NORTH < 0:
 		return game_state
+
+	if game_state[stringID + Constants.NORTH] != other_colour or game_state[stringID + Constants.NORTH] == turn_colour:
+		print("!= any colour")
+		return game_state
 	#While the next token to check is the other colour.
 	#NORTH = -8
 	while game_state[stringID + Constants.NORTH] == other_colour:
@@ -30,9 +34,7 @@ def CheckNorth(game_state, stringID, turn_colour, isTesting = False):
 		if NofChanges > (MoveID // 8) - 1:
 			print("Out of bounds")
 			return game_state
-		if game_state[stringID + Constants.NORTH] != other_colour and game_state[stringID + Constants.NORTH] != turn_colour:
-			print("!= any colour")
-			return game_state
+
 
 		#Move to check the next piece.
 		stringID = stringID + Constants.NORTH
@@ -51,6 +53,16 @@ def CheckNorth(game_state, stringID, turn_colour, isTesting = False):
 
 			#Create a block of string with the character changed at the beginning.
 			PlaceHolder = turn_colour + game_state[stringID + 1:stringID - Constants.NORTH]
+
+			if turn_colour == "W":
+				colour = "White"
+			else:
+				colour = "Black"
+
+			ColumnRow = StringInterpret.pieceToString(stringID)
+			column = ColumnRow[0]
+			row = int(ColumnRow[1])
+			TurtleMove.placePiece(column, row, colour)
 
 			#Create another block of string that was assembled from the blocks of Placeholder.
 			slice_new_state = slice_new_state + PlaceHolder
@@ -131,6 +143,16 @@ def CheckNorthEast(game_state, stringID, turn_colour, isTesting = False):
 			#Create a block of string with the character changed at the beginning
 			PlaceHolder = turn_colour + game_state[stringID + 1:stringID - Constants.NORTHEAST]
 
+			if turn_colour == "W":
+				colour = "White"
+			else:
+				colour = "Black"
+
+			ColumnRow = StringInterpret.pieceToString(stringID)
+			column = ColumnRow[0]
+			row = int(ColumnRow[1])
+			TurtleMove.placePiece(column, row, colour)
+
 			#Create another block of string that was assembled from the blocks of Placeholder.
 			slice_new_state = slice_new_state + PlaceHolder
 
@@ -192,6 +214,17 @@ def CheckEast(game_state, stringID, turn_colour, isTesting = False):
 		#Move on to the Next Token
 		stringID = stringID + Constants.EAST
 
+		if turn_colour == "W":
+			colour = "White"
+		else:
+			colour = "Black"
+
+
+		ColumnRow = StringInterpret.pieceToString(stringID)
+		column = ColumnRow[0]
+		row = int(ColumnRow[1])
+		TurtleMove.placePiece(column, row, colour)
+
 		#Add one to the number of tokens that need to be changed.
 		NofChanges = NofChanges + 1
 
@@ -244,6 +277,17 @@ def CheckSouthEast(game_state, stringID, turn_colour, isTesting = False):
 
 			#Create a block of string with the character changed at the beginning.
 			PlaceHolder = turn_colour + game_state[stringID + 1:stringID + Constants.SOUTHEAST]
+
+			if turn_colour == "W":
+				colour = "White"
+			else:
+				colour = "Black"
+
+
+			ColumnRow = StringInterpret.pieceToString(stringID)
+			column = ColumnRow[0]
+			row = int(ColumnRow[1])
+			TurtleMove.placePiece(column, row, colour)
 
 			#Create another block of string that was assembled from the blocks of Placeholder.
 			slice_new_state = PlaceHolder + slice_new_state
@@ -322,6 +366,17 @@ def CheckSouth(game_state, stringID, turn_colour, isTesting = False):
 			#Create a block of string with the character changed at the beginning.
 			PlaceHolder = turn_colour + game_state[stringID + 1:stringID + Constants.SOUTH]
 
+			if turn_colour == "W":
+				colour = "White"
+			else:
+				colour = "Black"
+
+
+			ColumnRow = StringInterpret.pieceToString(stringID)
+			column = ColumnRow[0]
+			row = int(ColumnRow[1])
+			TurtleMove.placePiece(column, row, colour)
+
 			#Create another block of string that was assembled from the blocks of Placeholder.
 			slice_new_state = PlaceHolder + slice_new_state
 
@@ -399,6 +454,17 @@ def CheckSouthWest(game_state, stringID, turn_colour, isTesting = False):
 			#Create a block of string with the character changed at the beginning.
 			PlaceHolder = turn_colour + game_state[stringID + 1:stringID + Constants.SOUTHWEST]
 
+			if turn_colour == "W":
+				colour = "White"
+			else:
+				colour = "Black"
+
+
+			ColumnRow = StringInterpret.pieceToString(stringID)
+			column = ColumnRow[0]
+			row = int(ColumnRow[1])
+			TurtleMove.placePiece(column, row, colour)
+
 			#Create another block of string that was assembled from the blocks of Placeholder.
 			slice_new_state = PlaceHolder + slice_new_state
 
@@ -465,6 +531,17 @@ def CheckWest(game_state, stringID, turn_colour, isTesting = False):
 		#Move on to the Next Token
 		stringID = stringID + Constants.WEST
 
+		if turn_colour == "W":
+			colour = "White"
+		else:
+			colour = "Black"
+
+
+		ColumnRow = StringInterpret.pieceToString(stringID)
+		column = ColumnRow[0]
+		row = int(ColumnRow[1])
+		TurtleMove.placePiece(column, row, colour)
+
 		#Add one to the number of tokens that need to be changed.
 		NofChanges = NofChanges + 1
 
@@ -518,6 +595,17 @@ def CheckNorthWest(game_state, stringID, turn_colour, isTesting = False):
 			#Create a block of string with the character changed at the beginning
 			PlaceHolder = turn_colour + game_state[stringID + 1:stringID - Constants.NORTHWEST]
 
+			if turn_colour == "W":
+				colour = "White"
+			else:
+				colour = "Black"
+
+
+			ColumnRow = StringInterpret.pieceToString(stringID)
+			column = ColumnRow[0]
+			row = int(ColumnRow[1])
+			TurtleMove.placePiece(column, row, colour)
+
 			#Create another block of string that was assembled from the blocks of Placeholder.
 			slice_new_state = slice_new_state + PlaceHolder
 
@@ -566,21 +654,29 @@ def OtherColour(turn_colour):
 def ChangePieces(game_state, stringID, turn_colour, isTesting = False):
 	#Check every direction
 	game_state = CheckNorth(game_state, stringID, turn_colour, isTesting)
-	print(game_state)
+	print(stringID)
+	print("North\n ", Converter.asBoardRepresentation(game_state))
 	game_state = CheckNorthEast(game_state, stringID, turn_colour, isTesting)
-	print(game_state)
+	print(stringID)
+	print("North East\n ", Converter.asBoardRepresentation(game_state))
 	game_state = CheckEast(game_state, stringID, turn_colour, isTesting)
-	print(game_state)
+	print(stringID)
+	print("East\n ", Converter.asBoardRepresentation(game_state))
 	game_state = CheckSouthEast(game_state, stringID, turn_colour, isTesting)
-	print(game_state)
+	print(stringID)
+	print("SouthEast\n ", Converter.asBoardRepresentation(game_state))
 	game_state = CheckSouth(game_state, stringID, turn_colour, isTesting)
-	print(game_state)
+	print(stringID)
+	print("South\n ", Converter.asBoardRepresentation(game_state))
 	game_state = CheckSouthWest(game_state, stringID, turn_colour, isTesting)
-	print(game_state)
+	print("South West\n ", Converter.asBoardRepresentation(game_state))
+	print(stringID)
 	game_state = CheckWest(game_state, stringID, turn_colour, isTesting)
-	print(game_state)
+	print(stringID)
+	print("West\n ", Converter.asBoardRepresentation(game_state))
 	game_state = CheckNorthWest(game_state, stringID, turn_colour, isTesting)
-	print(game_state)
+	print(stringID)
+	print("NorthWest\n ", Converter.asBoardRepresentation(game_state))
 	#Return updated string
 	return game_state#[:stringID] + turn_colour + game_state[stringID + 1:]
 
@@ -624,8 +720,11 @@ def testFunction(function, param_one, param_two, param_three, param_four = False
 	print(formatted_start)
 	print("Output".center(8))
 	print(formatted_end)
+	print(param_one)
 	print(result)
-	StringInterpret.stringToPiece(result)
+	print(param_two)
+	print(param_three)
+#	StringInterpret.stringToPiece(result)
 
 
 #	print("List".center(8))
@@ -688,7 +787,7 @@ def testProgram():
 	print("NORTHWEST NORTHWEST NORTHWEST".center(27))
 	print("___________________________")
 	print("TEST 1 TEST 1 TEST 1 TEST 1\n")
-	testFunction(CheckNorthWest, "WBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBW", 63, "W")
+	testFunction(CheckNorthWest, "WBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", 63, "W")
 
 
 
@@ -702,13 +801,23 @@ def testProgram():
 	print("CHECK ALL CHECK ALL CHECK ALL".center(27))
 	print("___________________________")
 	print("TEST 2 TEST 2 TEST 2 TEST 2\n".center(27))
-	testFunction(ChangePieces, "WBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBW", 63, "W")
+	testFunction(ChangePieces, "WBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", 63, "W")
 
 	input()
 	print("CHECK ALL CHECK ALL CHECK ALL".center(27))
 	print("___________________________")
 	print("TEST 3 TEST 3 TEST 3 TEST 3\n".center(27))
-	testFunction(ChangePieces, "WWWWWWWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 5, "W")
+	testFunction(ChangePieces, "WWWWWBWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 5, "W")
+
+def setup2():
+
+	new_state = StringInterpret.stringInterpret(("NNNNNNNN" * 8), "D4", -2)
+	new_state = StringInterpret.stringInterpret((new_state), "E4", -1)
+	new_state = StringInterpret.stringInterpret((new_state), "D5", -1)
+	new_state = StringInterpret.stringInterpret((new_state), "E5", -2)
+
+	for turn in range(64):
+		new_state = StringInterpret.stringInterpret((new_state), input("Move?"), turn + 1)
 
 if __name__ == "__main__":
 	TurtleMove.setup()
