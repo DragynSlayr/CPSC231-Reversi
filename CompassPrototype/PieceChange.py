@@ -652,6 +652,8 @@ def OtherColour(turn_colour):
 #Three parameters: The game state string, the Index of the move on the string, and the current turn colour and an optional one for testing
 #returns: Updated string with new pieces.
 def ChangePieces(game_state, stringID, turn_colour, isTesting = False):
+
+#	stringID = StringInterpret.moveToIndex(NewMove)
 	#Check every direction
 	game_state = CheckNorth(game_state, stringID, turn_colour, isTesting)
 	print(stringID)
@@ -678,7 +680,7 @@ def ChangePieces(game_state, stringID, turn_colour, isTesting = False):
 	print(stringID)
 	print("NorthWest\n ", Converter.asBoardRepresentation(game_state))
 	#Return updated string
-	return game_state#[:stringID] + turn_colour + game_state[stringID + 1:]
+	return game_state[:stringID] + turn_colour + game_state[stringID + 1:]
 
 def ChangePiecesList(game_state, stringID, turn_colour, isTesting = False):
 
