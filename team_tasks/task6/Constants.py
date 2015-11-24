@@ -91,3 +91,14 @@ BACK_BUTTON_LEFT_X = 300
 BACK_BUTTON_RIGHT_X = 500
 BACK_BUTTON_TOP_Y = 100
 BACK_BUTTON_BOTTOM_Y = 0
+
+#The default Game_state
+GAME_STATE_START =                    [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]  
+GAME_STATE_START = GAME_STATE_START + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
+GAME_STATE_START = GAME_STATE_START + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
+GAME_STATE_START = GAME_STATE_START + [['N', 'N', 'N', 'W', 'B', 'N', 'N', 'N', ]]
+GAME_STATE_START = GAME_STATE_START + [['N', 'N', 'N', 'B', 'W', 'N', 'N', 'N', ]]
+GAME_STATE_START = GAME_STATE_START + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
+GAME_STATE_START = GAME_STATE_START + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
+GAME_STATE_START = GAME_STATE_START + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
+
