@@ -20,8 +20,6 @@ def stringToPiece(game_state):
 			y_coord = Constants.ROW_NUMBERS[y]
 
 			#Check each piece at the index in the game state
-			print (index, "INDEX I WANT YOU!!")
-
 			piece = game_state[index]
 
 			if piece == "B":
@@ -41,6 +39,17 @@ def pieceToString(index):
 	row = Constants.ROW_NUMBERS[index // 8]
 	return str(column) + str(row)
 
+def moveToIndex(NewMove):
+	column = NewMove[0].upper()
+	row = int(NewMove[1])
+
+	column_IDX = (Constants.COLUMN_LETTERS.index(column))
+	row_IDX = (Constants.ROW_NUMBERS.index(row))
+
+ 	#Equation for converting a move coordinate to the index number to be changed
+	moveIDX = ((row_IDX * Constants.NUM_OF_ROWS) + column_IDX)
+
+	return moveIDX
 #This function will decide on the colour of the next piece based on whose turn number it is.
 #The takes a counter for the turns as a parameter.
 #It returns a B or a W depending on whose turn it is.
@@ -50,37 +59,42 @@ def whoseTurn(counter):
 	else:
 		return "B"
 
+
 #This function will convert a move coordinate into a string.
 #It receives the parameters are a game state, a move coordinate, and the turn number.
 #It returns the updated string as new_state.
-#For testing, you can get the index number of the changed character with move_to_string
+#For testing, you can get the index number of the changed character with moveIDX
 #Author: Kyle Hinton
 def stringInterpret(game_state, NewMove, turn):
-		column = NewMove[0].upper()
-		row = int(NewMove[1])
 
-		column_IDX = (Constants.COLUMN_LETTERS.index(column))
-		row_IDX = (Constants.ROW_NUMBERS.index(row))
 
- 		#Equation for converting a move coordinate to the index number to be changed
-		move_to_string = ((row_IDX * Constants.NUM_OF_ROWS) + column_IDX)
+	column = NewMove[0].upper()
+	row = int(NewMove[1])
 
-		turn_colour = whoseTurn(turn)
+#	column_IDX = (Constants.COLUMN_LETTERS.index(column))
+#	row_IDX = (Constants.ROW_NUMBERS.index(row))
 
-		move_state = game_state[:move_to_string] + turn_colour + game_state[move_to_string + 1:]
+ 	#Equation for converting a move coordinate to the index number to be changed
+#	moveIDX = ((row_IDX * Constants.NUM_OF_ROWS) + column_IDX)
 
-		new_state = PieceChange.ChangePieces(move_state, move_to_string, turn_colour)
+	moveIDX = moveToIndex(NewMove)
 
-		if whoseTurn(turn) == "W":
-			color = "White"
-		else:
-			color = "Black"
+	turn_colour = whoseTurn(turn)
 
-		TurtleMove.placePiece(column, row, color)
+	new_state = game_state[:moveIDX] + turn_colour + game_state[moveIDX + 1:]
 
-#		stringToPiece(new_state)
+#	new_state = PieceChange.ChangePieces(game_state, NewMove, whoseTurn(turn))
 
-		if __name__ == "__main__":
+	if whoseTurn(turn) == "W":
+		color = "White"
+	else:
+		color = "Black"
+
+	TurtleMove.placePiece(column, row, color)
+
+#	stringToPiece(new_state)
+
+	if __name__ == "__main__":
 			#TESTING TESTING TESTING
 			##########################
 			print("Testing")
@@ -89,14 +103,16 @@ def stringInterpret(game_state, NewMove, turn):
 			print(row_IDX, "row_IDX")	#Row index number from numbers
 			print(column, "Column")	#Prints the Column Letter
 			print(row, "Row") #Prints the Row Number
-#			print(game_state[move_to_string], ": Character at the move's index number.") #Prints the character at the index [move_to_string]
-			print(move_to_string, "Index number of new move") #Takes the move and converts it to the index number for the string
-			print(new_state)	#Prints the new_state with the character at index.move_to_string in place
+#			print(game_state[moveIDX], ": Character at the move's index number.") #Prints the character at the index [moveIDX]
+			print(moveIDX, "Index number of new move") #Takes the move and converts it to the index number for the string
+			print(new_state)	#Prints the new_state with the character at index.moveIDX in place
 			print()
 			##########################
-		return new_state	#returns the new_state, The updated move.
+	return new_state	#returns the new_state, The updated move.
 
 def stringInterpretSetup(game_state, NewMove, turn):
+
+#		NewMove = input("Move?")
 		column = NewMove[0].upper()
 		row = int(NewMove[1])
 
@@ -104,14 +120,14 @@ def stringInterpretSetup(game_state, NewMove, turn):
 		row_IDX = (Constants.ROW_NUMBERS.index(row))
 
  		#Equation for converting a move coordinate to the index number to be changed
-		move_to_string = ((row_IDX * Constants.NUM_OF_ROWS) + column_IDX)
+		moveIDX = ((row_IDX * Constants.NUM_OF_ROWS) + column_IDX)
 
 		turn_colour = whoseTurn(turn)
 
 
-#		move_state = game_state[:move_to_string] + turn_colour + game_state[move_to_string + 1:]
+		move_state = game_state[:moveIDX] + turn_colour + game_state[moveIDX + 1:]
 
-		new_state = PieceChange.ChangePieces(game_state, move_to_string, turn_colour)
+		new_state = PieceChange.ChangePieces(game_state, moveIDX, turn_colour)
 
 		if whoseTurn(turn) == "W":
 			color = "White"
@@ -129,9 +145,9 @@ def stringInterpretSetup(game_state, NewMove, turn):
 			print(row_IDX, "row_IDX")	#Row index number from numbers
 			print(column, "Column")	#Prints the Column Letter
 			print(row, "Row") #Prints the Row Number
-#			print(game_state[move_to_string], ": Character at the move's index number.") #Prints the character at the index [move_to_string]
-			print(move_to_string, "Index number of new move") #Takes the move and converts it to the index number for the string
-			print(new_state)	#Prints the new_state with the character at index.move_to_string in place
+#			print(game_state[moveIDX], ": Character at the move's index number.") #Prints the character at the index [moveIDX]
+			print(moveIDX, "Index number of new move") #Takes the move and converts it to the index number for the string
+			print(new_state)	#Prints the new_state with the character at index.moveIDX in place
 			print()
 			##########################
 		return new_state	#returns the new_state, The updated move.
@@ -139,10 +155,14 @@ def stringInterpretSetup(game_state, NewMove, turn):
 
 #Sets up the board using the pieces and reading through the string.
 def setup2():
+	"""
 	new_state = stringInterpretSetup(("NNNNNNNN" * 8), "D4", -2)
 	new_state = stringInterpretSetup((new_state), "E4", -1)
 	new_state = stringInterpretSetup((new_state), "D5", -1)
 	new_state = stringInterpretSetup((new_state), "E5", -2)
+	"""
+	game_state = "NNNNNNNNNNNNNNNNNNNNNNNNNNNBWNNNNNNWBNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+	start_board = StringInterpret.stringToPiece(game_state)
 	for turn in range(64):
 		new_state = stringInterpret(new_state, input("Move?"), turn + 1)
 

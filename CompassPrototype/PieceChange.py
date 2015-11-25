@@ -14,18 +14,24 @@ def CheckNorth(game_state, stringID, turn_colour, isTesting = False):
 	PlaceHolder = "" 							#This will be a section of the new string.
 	slice_new_state = "" 						#This will be a bigger section of the new game state string.
 	new_state = "" 								#This going to be the new game stat.
+	copy_state = game_state
 	MoveID = 0									#This will make a copy of the index of the players move.
 	MoveXID = 0 								#This will be a marker for where the players piece is accross from their move.
 	other_colour = OtherColour(turn_colour) 	#This Determines the colour of the other player's piece.
 	MoveID = stringID 							#This will make a copy of the index of the players move.
-
+	copy_state = game_state
 
 	if stringID + Constants.NORTH > len(game_state) or stringID + Constants.NORTH < 0:
-		return game_state
+		print("Out of range")
+		return copy_state
 
-	if game_state[stringID + Constants.NORTH] != other_colour or game_state[stringID + Constants.NORTH] == turn_colour:
-		print("!= any colour")
-		return game_state
+#	if game_state[stringID + Constants.NORTH] == "N":
+#		print("N detected")
+#		return copy_state
+
+#	if game_state[stringID + Constants.NORTH] != other_colour or game_state[stringID + Constants.NORTH] == turn_colour:
+#		print("!= any colour")
+#		return game_state
 	#While the next token to check is the other colour.
 	#NORTH = -8
 	while game_state[stringID + Constants.NORTH] == other_colour:
@@ -33,7 +39,11 @@ def CheckNorth(game_state, stringID, turn_colour, isTesting = False):
 		#Return game state if the move is not valid
 		if NofChanges > (MoveID // 8) - 1:
 			print("Out of bounds")
-			return game_state
+			return copy_state
+
+		if game_state[stringID + Constants.NORTH] == "N":
+			print("None Token Found")
+			return copy_state
 
 
 		#Move to check the next piece.
@@ -107,23 +117,28 @@ def CheckNorthEast(game_state, stringID, turn_colour, isTesting = False):
 	MoveXID = 0 								#This will be a marker for where the players piece is accross from their move.
 	other_colour = OtherColour(turn_colour) 	#This Determines the colour of the other player's piece.
 	MoveID = stringID 							#This will make a copy of the index of the players move.
+	copy_state = game_state
 
 	if stringID + Constants.NORTHEAST > len(game_state) or stringID + Constants.NORTHEAST < 0:
-		return game_state
+		return copy_state
 
 	#While the next token to check is the other colour.
 	#NORTHEAST = -7
 	while game_state[stringID + Constants.NORTHEAST] == other_colour:
 
+		if game_state[stringID + Constants.NORTHEAST] == "N":
+			print("N detected")
+			return copy_state
+
 		#Check if move is valid
 		if NofChanges > (MoveID // 8) - 1:
 			print("Out of bounds!")
-			return game_state
-		if game_state[stringID + Constants.NORTHEAST] != other_colour and game_state[stringID + Constants.NORTHEAST] != turn_colour:
-			print(game_state[stringID + Constants.NORTHEAST] != other_colour)
-			print(game_state[stringID + Constants.NORTHEAST] != turn_colour)
-			print("!= any color")
-			return game_state
+			return copy_state
+	#	if game_state[stringID + Constants.NORTHEAST] != other_colour and game_state[stringID + Constants.NORTHEAST] != turn_colour:
+	#		print(game_state[stringID + Constants.NORTHEAST] != other_colour)
+	#		print(game_state[stringID + Constants.NORTHEAST] != turn_colour)
+	#		print("!= any color")
+	#		return copy_state
 
 		#Move to the next piece.
 		stringID = stringID + Constants.NORTHEAST
@@ -191,20 +206,25 @@ def CheckEast(game_state, stringID, turn_colour, isTesting = False):
 	MoveID = 0									#This will make a copy of the index of the players move.
 	other_colour = OtherColour(turn_colour) 	#This Determines the colour of the other player's piece.
 	MoveID = stringID 							#This will make a copy of the index of the players move.
-
+	new_state = ""
+	copy_state = game_state
 
 	if stringID + Constants.EAST> len(game_state) - 1 or stringID + Constants.EAST < 0:
-		return game_state
+		return copy_state
 	#While the next token to check is the other colour.
 	#EAST = 1
 	while game_state[stringID + Constants.EAST] == other_colour:
 		#Possible statements for catching invalid moves.
 		if NofChanges > ((8 - (MoveID % 8)) - 1):
 			print("Out of bounds.")
-			return game_state
-		if game_state[stringID + Constants.EAST] != other_colour and game_state[stringID + Constants.EAST] != turn_colour:
-			print("!= any colour")
-			return game_state
+			return copy_state
+
+		if game_state[stringID + Constants.EAST] == "N":
+			print("N detected")
+			return copy_state
+#		if game_state[stringID + Constants.EAST] != other_colour and game_state[stringID + Constants.EAST] != turn_colour:
+#			print("!= any colour")
+#			return game_state
 
 		#Testing.
 		if isTesting:
@@ -228,8 +248,8 @@ def CheckEast(game_state, stringID, turn_colour, isTesting = False):
 		#Add one to the number of tokens that need to be changed.
 		NofChanges = NofChanges + 1
 
-	return game_state[:MoveID + 1] + (turn_colour * NofChanges) + game_state[MoveID + NofChanges + 1:]
-
+	new_state = game_state[:MoveID + 1] + (turn_colour * NofChanges) + game_state[MoveID + NofChanges + 1:]
+	return new_state
 #Author: Kyle Hinton
 #This function will change the string so that the opponents pieces, in a valid move, will be changed on the string.
 #This function will change the pieces in the south-east direction.
@@ -244,10 +264,10 @@ def CheckSouthEast(game_state, stringID, turn_colour, isTesting = False):
 	MoveXID = 0 								#This will be a marker for where the players piece is accross from their move.
 	other_colour = OtherColour(turn_colour) 	#This Determines the colour of the other player's piece.
 	MoveID = stringID 							#This will make a copy of the index of the players move.
-
+	copy_state = game_state
 
 	if stringID + Constants.SOUTHEAST > len(game_state) or stringID + Constants.SOUTHEAST < 0:
-		return game_state
+		return copy_state
 	#While the next token to check is the other colour.
 	#SouthEast = 9
 	while game_state[stringID + Constants.SOUTHEAST] == other_colour:
@@ -255,10 +275,14 @@ def CheckSouthEast(game_state, stringID, turn_colour, isTesting = False):
 		#Check if move is invalid
 		if NofChanges > (8 - (MoveID // 8)) - 1:
 			print("Out of bounds!")
-			return game_state
-		if game_state[stringID + Constants.SOUTHEAST] != other_colour and game_state[stringID + Constants.SOUTHEAST] != turn_colour:
-			print("!= any color")
-			return game_state
+			return copy_state
+
+		if game_state[stringID + Constants.SOUTHEAST] == "N":
+			print("N detected")
+			return copy_state
+#		if game_state[stringID + Constants.SOUTHEAST] != other_colour and game_state[stringID + Constants.SOUTHEAST] != turn_colour:
+#			print("!= any color")
+#			return game_state
 
 		#Move to the next piece.
 		stringID = stringID + Constants.SOUTHEAST
@@ -331,11 +355,15 @@ def CheckSouth(game_state, stringID, turn_colour, isTesting = False):
 	MoveID = 0									#This will make a copy of the index of the players move.
 	MoveXID = 0 								#This will be a marker for where the players piece is accross from their move.
 	other_colour = OtherColour(turn_colour) 	#This Determines the colour of the other player's piece.
-	MoveID = stringID 							#This will make a copy of the index of the players move.
-
+	MoveID = stringID							#This will make a copy of the index of the players move.
+	copy_state = game_state
 
 	if stringID + Constants.SOUTH > len(game_state) or stringID + Constants.SOUTH < 0:
-		return game_state
+		return copy_state
+
+#	if game_state[stringID + Constants.SOUTHEAST] != other_colour or game_state[stringID + Constants.SOUTHEAST] == turn_colour:
+#		print("!= any color")
+#		return game_state
 	#While the next token to check is the other colour.
 	#SOUTH = 8
 	while game_state[stringID + Constants.SOUTH] == other_colour:
@@ -343,10 +371,11 @@ def CheckSouth(game_state, stringID, turn_colour, isTesting = False):
 		#Check if move is invalid
 		if NofChanges > (8 - (MoveID // 8)) - 1:
 			print("Out of bounds")
-			return game_state
-		if game_state[stringID + Constants.SOUTHEAST] != other_colour and game_state[stringID + Constants.SOUTHEAST] != turn_colour:
-			print("!= any color")
-			return game_state
+			return copy_state
+
+		if game_state[stringID + Constants.SOUTH] == "N":
+			print("N detected")
+			return copy_state
 
 		#Move to the next piece.
 		stringID = stringID + Constants.SOUTH
@@ -422,7 +451,7 @@ def CheckSouthWest(game_state, stringID, turn_colour, isTesting = False):
 	MoveXID = 0 								#This will be a marker for where the players piece is accross from their move.
 	other_colour = OtherColour(turn_colour) 	#This Determines the colour of the other player's piece.
 	MoveID = stringID 							#This will make a copy of the index of the players move.
-
+	copy_state = game_state
 
 	if stringID + Constants.SOUTHWEST > len(game_state) or stringID + Constants.SOUTHWEST < 0:
 		return game_state
@@ -432,9 +461,12 @@ def CheckSouthWest(game_state, stringID, turn_colour, isTesting = False):
 		if NofChanges > (8-(MoveID // 8)) - 1:
 			print("Out of bounds!")
 			return game_state
-		if game_state[stringID + Constants.SOUTHWEST] != other_colour and game_state[stringID + Constants.SOUTHWEST] != turn_colour:
-			print("!= any color")
-			return game_state
+#		if game_state[stringID + Constants.SOUTHWEST] != other_colour and game_state[stringID + Constants.SOUTHWEST] != turn_colour:
+#			print("!= any color")
+#			return game_state
+		if game_state[stringID + Constants.SOUTHWEST] == "N":
+			print("N detected")
+			return copy_state
 
 		#Move to the next piece in South West.
 		stringID = stringID + Constants.SOUTHWEST
@@ -508,9 +540,10 @@ def CheckWest(game_state, stringID, turn_colour, isTesting = False):
 	MoveXID = 0 								#This will be a marker for where the players piece is accross from their move.
 	other_colour = OtherColour(turn_colour) 	#This Determines the colour of the other player's piece.
 	MoveID = stringID 							#This will make a copy of the index of the players move.
+	copy_state = game_state
 
 	if stringID + Constants.WEST > len(game_state) or stringID + Constants.WEST < 0:
-		return game_state
+		return copy_state
 
 	#While the next token to check is the other colour.
 	#WEST = -1
@@ -518,10 +551,14 @@ def CheckWest(game_state, stringID, turn_colour, isTesting = False):
 		#Possible statements for catching invalid moves.
 		if NofChanges > (MoveID % 8) - 1:
 			print ("out of bounds")
-			return game_state
-		if game_state[stringID + Constants.WEST] != other_colour and game_state[stringID + Constants.WEST] != turn_colour:
-			print ("!= turn colour or other")
-			return game_state
+			return copy_state
+
+		if game_state[stringID + Constants.WEST] == "N":
+			print("N detected")
+			return copy_state
+	#	if game_state[stringID + Constants.WEST] != other_colour and game_state[stringID + Constants.WEST] != turn_colour:
+	#		print ("!= turn colour or other")
+	#		return game_state
 
 		#Testing
 		if isTesting:
@@ -545,7 +582,8 @@ def CheckWest(game_state, stringID, turn_colour, isTesting = False):
 		#Add one to the number of tokens that need to be changed.
 		NofChanges = NofChanges + 1
 
-	return game_state[:(MoveID - NofChanges)] + (turn_colour * NofChanges) + game_state[MoveID:]
+	new_state = game_state[:(MoveID - NofChanges)] + (turn_colour * NofChanges) + game_state[MoveID:]
+	return new_state
 
 #Author: Kyle Hinton
 #This function will change the string so that the opponents pieces, in a valid move, will be changed on the string.
@@ -560,9 +598,11 @@ def CheckNorthWest(game_state, stringID, turn_colour, isTesting = False):
 	MoveXID = 0 						#This is going to be where the token across from
 	other_colour = OtherColour(turn_colour) #Determines the other colour.
 	MoveID = stringID 					#Makes a copy of the index of the current player's move.
+	copy_state = game_state
 
 	if stringID + Constants.NORTHWEST > len(game_state) or stringID + Constants.NORTHWEST < 0:
-		return game_state
+		return copy_state
+
 
 	#While the next token to check is the other colour.
 	#NORTHWEST = -9
@@ -571,11 +611,15 @@ def CheckNorthWest(game_state, stringID, turn_colour, isTesting = False):
 		#Catch invalid moves
 		if NofChanges > (MoveID // 8) - 1:
 			print("Out of bounds!")
-			return game_state
+			return copy_state
 
-		if game_state[stringID + Constants.NORTHWEST] != other_colour and game_state[stringID + Constants.NORTHWEST] != turn_colour:
-			print("!= any colour")
-			return game_state
+		if game_state[stringID + Constants.NORTHWEST] == "N":
+			print("N detected")
+			return copy_state
+
+#		if game_state[stringID + Constants.NORTHWEST] != other_colour and game_state[stringID + Constants.NORTHWEST] != turn_colour:
+#			print("!= any colour")
+#			return game_state
 
 		#Move to the next piece.
 		stringID = stringID + Constants.NORTHWEST
