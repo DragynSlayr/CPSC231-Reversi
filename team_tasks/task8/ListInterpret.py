@@ -4,7 +4,6 @@
 #It will update the board and the game state string based on the move.
 import Constants
 import TurtleMove
-import ReversiGrid
 import ListUpdater
 
 #This function will take a game state and update the gamestate on the game board.
@@ -60,7 +59,7 @@ def stringInterpret(game_state, NewMove, turn):
 		new_state = game_state[:]
 
 		new_state = ListUpdater.updateGameState(new_state, NewMove, turn_colour )
-		
+
 		if whoseTurn(turn) == Constants.PIECE_WHITE:
 			color = "White"
 		else:
