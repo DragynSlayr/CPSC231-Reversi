@@ -116,6 +116,7 @@ def main():
 
 	#Clear the screen
 	wn.clear()
+	wn.tracer(10)
 
 	#pre-set the turtle
 	grid.speed(0)
