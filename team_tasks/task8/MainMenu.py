@@ -1,8 +1,6 @@
 #This file has the method, main,
 #to show and take input for the main menu
 import Constants
-import turtle
-import time
 import TurtleMove
 import Rules
 import sys
