@@ -1,8 +1,6 @@
 #This file handles all the clicking and logic of the game
-
 import Constants
 import TurtleMove
-import StringInterpret
 import ListInterpret
 import StringMove
 import VictoryStatus
@@ -39,18 +37,6 @@ def isValidSquare(x, y):
 
     #Check if the x and y are in any cell
     return x_valid and y_valid
-
-#Gets a random letter between A-H
-#Params: None
-#Returns: A letter from A-H
-def getRandomLetter():
-    return Constants.COLUMN_LETTERS[random.randrange(Constants.NUM_OF_COLUMNS)]
-
-#Gets a random number between 1-8
-#Params: None
-#Returns: A number from 1-8
-def getRandomNumber():
-    return Constants.ROW_NUMBERS[random.randrange(Constants.NUM_OF_ROWS)]
 
 #The computer generates a move and places a piece if possible
 #Params: state, The current game state
