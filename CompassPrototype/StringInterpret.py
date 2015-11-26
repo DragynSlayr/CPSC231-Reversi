@@ -71,8 +71,8 @@ def stringInterpret(game_state, NewMove, turn):
 	column = NewMove[0].upper()
 	row = int(NewMove[1])
 
-#	column_IDX = (Constants.COLUMN_LETTERS.index(column))
-#	row_IDX = (Constants.ROW_NUMBERS.index(row))
+	column_IDX = (Constants.COLUMN_LETTERS.index(column))
+	row_IDX = (Constants.ROW_NUMBERS.index(row))
 
  	#Equation for converting a move coordinate to the index number to be changed
 #	moveIDX = ((row_IDX * Constants.NUM_OF_ROWS) + column_IDX)
@@ -124,17 +124,18 @@ def stringInterpretSetup(game_state, NewMove, turn):
 
 		turn_colour = whoseTurn(turn)
 
-
-		move_state = game_state[:moveIDX] + turn_colour + game_state[moveIDX + 1:]
-
-		new_state = PieceChange.ChangePieces(game_state, moveIDX, turn_colour)
-
 		if whoseTurn(turn) == "W":
 			color = "White"
 		else:
 			color = "Black"
 
+
+		move_state = game_state[:moveIDX] + turn_colour + game_state[moveIDX + 1:]
+
 		TurtleMove.placePiece(column, row, color)
+
+		new_state = PieceChange.ChangePieces(game_state, moveIDX, turn_colour)
+
 
 		if __name__ == "__main__":
 			#TESTING TESTING TESTING
@@ -161,8 +162,8 @@ def setup2():
 	new_state = stringInterpretSetup((new_state), "D5", -1)
 	new_state = stringInterpretSetup((new_state), "E5", -2)
 	"""
-	game_state = "NNNNNNNNNNNNNNNNNNNNNNNNNNNBWNNNNNNWBNNNNNNNNNNNNNNNNNNNNNNNNNNN"
-	start_board = StringInterpret.stringToPiece(game_state)
+	new_state = "NNNNNNNNNNNNNNNNNNNNNNNNNNNBWNNNNNNWBNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+	start_board = stringToPiece(new_state)
 	for turn in range(64):
 		new_state = stringInterpret(new_state, input("Move?"), turn + 1)
 
