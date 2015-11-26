@@ -1,6 +1,5 @@
 #This file holds the constant values for the game
 #These values are used for all drawing and sizing of the game
-
 import turtle
 
 #Grid information
@@ -92,13 +91,13 @@ BACK_BUTTON_RIGHT_X = 500
 BACK_BUTTON_TOP_Y = 100
 BACK_BUTTON_BOTTOM_Y = 0
 
-#The default Game_state
-GAME_STATE_START =                    [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]  
-GAME_STATE_START = GAME_STATE_START + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
-GAME_STATE_START = GAME_STATE_START + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
-GAME_STATE_START = GAME_STATE_START + [['N', 'N', 'N', 'W', 'B', 'N', 'N', 'N', ]]
-GAME_STATE_START = GAME_STATE_START + [['N', 'N', 'N', 'B', 'W', 'N', 'N', 'N', ]]
-GAME_STATE_START = GAME_STATE_START + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
-GAME_STATE_START = GAME_STATE_START + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
-GAME_STATE_START = GAME_STATE_START + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
-
+#The default game state
+GAME_STATE_START = [
+['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N'],
+['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N'],
+['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N'],
+['N', 'N', 'N', 'W', 'B', 'N', 'N', 'N'],
+['N', 'N', 'N', 'B', 'W', 'N', 'N', 'N'],
+['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N'],
+['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N'],
+['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N']]
