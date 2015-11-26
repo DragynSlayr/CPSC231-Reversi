@@ -1,4 +1,3 @@
-import BoardGenerator as bg
 import Constants
 
 #==================================================================================================================================
@@ -307,11 +306,3 @@ def mainSquareValidator(game_state, pieceColor):
         movesList.append(letter + str(number))
 
     return movesList
-
-if __name__ == "__main__":
-
-    #TEST
-    sampleGameState = bg.generate(False, False)
-    print(sampleGameState)
-
-    print(mainSquareValidator(sampleGameState, "Black"))

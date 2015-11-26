@@ -6,7 +6,6 @@
 
 import Constants
 import Converter
-import BoardGenerator as bg
 import StringInterpret as si
 
 #Checks if a column is near the edges of the board
@@ -319,12 +318,3 @@ def getValidMoves(game_state):
             if isValidMove(move, Converter.toString(game_state)):
                 valid_moves.append(move)
     return valid_moves
-
-if __name__ == "__main__":
-    board = bg.generate(False, False)
-    for i in range(1, len(board) + 1):
-        print(board[i - 1], end = "")
-        if i % 8 == 0:
-            print()
-    print()
-    testWithInput(board)
