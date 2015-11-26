@@ -3,31 +3,18 @@ import turtle
 import Constants
 
 #function for creating a square
-#Function takes a turtle and returns nothing
-def square(grid):
+#Function takes nothing and returns nothing
+def square():
 	grid = Constants.TURTLE
 	for i in range(4):
 		grid.pendown()
 		grid.forward(Constants.CELL_WIDTH)
 		grid.left(90)
 
-#Function for labeling each square according to their coordinates in the array.
-#Function takes an x, y and a turtle and returns nothing
-def coordLabel(x, y, grid):
-	grid.penup()
-	coord = grid.pos()
-	coordx = grid.xcor()
-	coordy = grid.ycor()
-	grid.goto((coordx - 40), coordy + 25)
-	grid.pencolor("yellow")
-	grid.write((x, y), True)
-	grid.goto(coord)
-	grid.pendown()
-	grid.pencolor("black")
-
 #Function for sending the turtle to the next row lower.
-#Function takes a turtle and returns nothing
-def nextRow(grid):
+#Function takes nothing and returns nothing
+def nextRow():
+	grid = Constants.TURTLE
 	grid.penup()
 	grid.left(180)
 	grid.forward(Constants.WINDOW_WIDTH / 2)
@@ -37,8 +24,9 @@ def nextRow(grid):
 	grid.pendown()
 
 #Function to label the y coordinates vertically, to the left of the board.
-#Function takes a turtle and returns nothing
-def label_y(grid):
+#Function takes nothing and returns nothing
+def label_y():
+	grid = Constants.TURTLE
 	grid.goto(175, 125)
 
 	#Iterate through the row numbers in reverse
@@ -52,8 +40,9 @@ def label_y(grid):
 		grid.setheading(90)
 
 #Function to label the x coordinates horizontally, above the board.
-#Function takes a turtle and returns nothing
-def label_x(grid):
+#Function takes nothing and returns nothing
+def label_x():
+	grid = Constants.TURTLE
 	grid.goto(225, 525)
 	for sidex in Constants.COLUMN_LETTERS:
 		coord_xx = grid.xcor()
@@ -65,8 +54,9 @@ def label_x(grid):
 		grid.setheading(0)
 
 #Function that draws a frame around the board.
-#Function takes a turtle and returns nothing
-def reversiFrame(grid):
+#Function takes nothing and returns nothing
+def reversiFrame():
+	grid = Constants.TURTLE
 	size = grid.pensize()
 	grid.pencolor("dark green")
 	grid.pensize(9)
@@ -91,27 +81,25 @@ def reversiFrame(grid):
 #This is the function that creates the board, using the functions above.
 #It contains a nested for loop that will create the grid and label it.
 #It will also frame the game window.
-#Function takes a turtle and returns nothing
-def reversiBoard(grid):
+#Function takes nothing and returns nothing
+def reversiBoard():
+	grid = Constants.TURTLE
 	grid.fillcolor("dark green")
 	grid.pencolor ("black")
 	grid.begin_fill()
-	square(grid)
+	square()
 	grid.end_fill()
 	for y in Constants.ROW_NUMBERS: #This stacks the rows of squares downwards.
 		for x in Constants.COLUMN_LETTERS: #This creates the squares in a horizontal row.
-			grid.fillcolor("dark green")
-			grid.pencolor ("black")
 			grid.begin_fill()
-			square(grid)
+			square()
 			grid.end_fill()
 			grid.forward(Constants.CELL_WIDTH)
-			#coordLabel(x, y)
-		nextRow(grid)
+		nextRow()
 		grid.penup()
-	label_y(grid)
-	label_x(grid)
-	reversiFrame(grid)
+	label_y()
+	label_x()
+	reversiFrame()
 
 	grid.penup()
 	grid.goto(25, 575)
@@ -129,26 +117,14 @@ def main():
 	#Clear the screen
 	wn.clear()
 
-	#Set the size of the screen
-	wn.setup(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
-
-	#Set only the n-th frame to be drawn, this speeds up all drawing
-	wn.tracer(10)
-
-	#The method below changes the default coordinates to user made coordinates.
-	#in this case bottom left corner is 0,0. Changes screen to World coordinates mode from standard.
-	#0, 0 is bottom left of the window
-	wn.setworldcoordinates(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
-
 	#pre-set the turtle
 	grid.speed(0)
 	grid.penup()
 	grid.goto(Constants.WINDOW_WIDTH / 4, Constants.WINDOW_HEIGHT * (3 / 4))
 	grid.pendown()
 	grid.hideturtle()
-	reversiBoard(grid) #Creates the board.
+	reversiBoard() #Creates the board.
 	wn.update()
-	wn.reset()
 
 	if __name__ == "__main__":
 		wn.exitonclick()
