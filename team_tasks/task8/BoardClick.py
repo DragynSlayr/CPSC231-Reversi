@@ -11,6 +11,7 @@ import MoveValidator
 import ScreenWriter
 import Converter
 import SquareValidator
+import time
 
 #Converts an x coordinate to a cell on the board
 #Params: x, The x coordinate
@@ -99,6 +100,9 @@ def placePiece(x, y):
 
                     #Allow the computer to place a piece if the game is not over
                     if VictoryStatus.endGameStatus(game_state) != True:
+                        #Small delay
+                        time.sleep(1)
+
                         game_state = computerTurn(game_state, move_num)
                         move_num += 1
 
