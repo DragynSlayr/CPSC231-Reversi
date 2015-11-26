@@ -8,24 +8,35 @@ import Converter
 #def Move_and_Flip(game_state, MoveID, turn)
 ReversiGrid.main()
 
-game_state = "NNNNNNNNNNNNNNNNNNNNNNNNNNNBWNNNNNNWBNNNNNNNNNNNNNNNNNNNNNNNNNNN"
-start_board = StringInterpret.stringToPiece(game_state)
+new_state = "NNNNNNNNNNNNNNNNNNNNNNNNNNNBWNNNNNNWBNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+start_board = StringInterpret.stringToPiece(new_state)
 
-NewMove = input("Move?")
-turn = 2
 
-move_state = StringInterpret.stringInterpret(game_state, NewMove, turn)
-new_state = PieceChange.CheckSouth(move_state, StringInterpret.moveToIndex(NewMove), StringInterpret.whoseTurn(turn))
-new_state = PieceChange.CheckNorth(move_state, StringInterpret.moveToIndex(NewMove), StringInterpret.whoseTurn(turn))
-#new_state3 = PieceChange.CheckWest(new_state2, StringInterpret.moveToIndex(NewMove), StringInterpret.whoseTurn(turn))
-#new_state4 = PieceChange.CheckEast(new_state3, StringInterpret.moveToIndex(NewMove), StringInterpret.whoseTurn(turn))
-#new_state5 = PieceChange.CheckNorthWest(new_state4, StringInterpret.moveToIndex(NewMove), StringInterpret.whoseTurn(turn))
-#new_state6 = PieceChange.CheckNorthEast(new_state5, StringInterpret.moveToIndex(NewMove), StringInterpret.whoseTurn(turn))
-#new_state7 = PieceChange.CheckSouthWest(new_state6, StringInterpret.moveToIndex(NewMove), StringInterpret.whoseTurn(turn))
-#new_state8 = PieceChange.CheckSouthEast(new_state7, StringInterpret.moveToIndex(NewMove), StringInterpret.whoseTurn(turn))
 
-print(game_state)
-print(new_state, "HI YA")
+for turn in range(64):
+    print (new_state, "Game State")
+    NewMove = input("Move?")
+    new_state = StringInterpret.stringInterpret(new_state, NewMove, turn)
+    print(new_state, "Move")
+    new_state = PieceChange.CheckSouth(new_state, StringInterpret.moveToIndex(NewMove), StringInterpret.whoseTurn(turn))
+    print (new_state, "South")
+    new_state = PieceChange.CheckNorth(new_state, StringInterpret.moveToIndex(NewMove), StringInterpret.whoseTurn(turn))
+    print (new_state, "North")
+    new_state = PieceChange.CheckWest(new_state, StringInterpret.moveToIndex(NewMove), StringInterpret.whoseTurn(turn))
+    print (new_state, "West")
+    new_state = PieceChange.CheckEast(new_state, StringInterpret.moveToIndex(NewMove), StringInterpret.whoseTurn(turn))
+    print (new_state, "East")
+    new_state = PieceChange.CheckNorthWest(new_state, StringInterpret.moveToIndex(NewMove), StringInterpret.whoseTurn(turn))
+    print (new_state, "NorthWest")
+    new_state = PieceChange.CheckNorthEast(new_state, StringInterpret.moveToIndex(NewMove), StringInterpret.whoseTurn(turn))
+    print (new_state, "NorthEast")
+    new_state = PieceChange.CheckSouthWest(new_state, StringInterpret.moveToIndex(NewMove), StringInterpret.whoseTurn(turn))
+    print (new_state, "SouthWest")
+    new_state = PieceChange.CheckSouthEast(new_state, StringInterpret.moveToIndex(NewMove), StringInterpret.whoseTurn(turn))
+    print (new_state, "SouthEast")
+
+    print(turn)
+    print(new_state, "HI YA")
 
 
 
