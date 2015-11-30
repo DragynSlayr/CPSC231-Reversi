@@ -46,7 +46,7 @@ def getMove(x, y):
 def getMovesForTurn(state, move_num):
     piece = listInterpret.whoseTurn(move_num)
     string_state = converter.toString(state)
-    return squareValidator.mainsquareValidator(string_state, piece)
+    return squareValidator.mainSquareValidator(string_state, piece)
 
 #Displays all valid moves to the board
 #Params: state, Current game state
