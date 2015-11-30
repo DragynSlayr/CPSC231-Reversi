@@ -1,7 +1,7 @@
 #This program contains methods for updating the state once a move has been made
 import constants
 import converter
-import StringInterpret
+import stringInterpret
 
 #Author: Kyle Hinton
 #This function will change the string so that the opponents pieces, in a valid move, will be changed on the string.
@@ -588,7 +588,7 @@ def testFunction(function, param_one, param_two, param_three, param_four = False
 	result = function(param_one, param_two, param_three, param_four)
 	formatted_start = converter.asBoardRepresentation(param_one)
 	formatted_end = converter.asBoardRepresentation(result)
-	print("At:", StringInterpret.pieceToString(param_two))
+	print("At:", stringInterpret.pieceToString(param_two))
 	print("Input".center(8))
 	print(formatted_start)
 	print("Output".center(8))
