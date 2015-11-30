@@ -1,10 +1,9 @@
 #This file has the method, main,
 #to show and take input for the main menu
-import Constants
-import TurtleMove
-import Rules
 import sys
-import Main
+import constants
+import rulesMenu
+import main as mainGame
 
 #Moves a turtle to a location without making a line
 #Params: turtle, The turtle
@@ -32,13 +31,13 @@ def drawButton(turtle, x, y, label):
 	#Draw the button
 	moveTurtle(turtle, x, y)
 	for i in range(4):
-		turtle.forward(Constants.BUTTON_WIDTH)
+		turtle.forward(constants.BUTTON_WIDTH)
 		turtle.right(90)
-		turtle.forward(Constants.BUTTON_HEIGHT)
+		turtle.forward(constants.BUTTON_HEIGHT)
 		turtle.right(90)
 
 	#Move to the center of the button and write a word
-	moveTurtle(turtle, x + (Constants.BUTTON_WIDTH / 2), y - (Constants.BUTTON_HEIGHT * (3/5)))
+	moveTurtle(turtle, x + (constants.BUTTON_WIDTH / 2), y - (constants.BUTTON_HEIGHT * (3/5)))
 	turtle.write(label, False, "center", font = ("Arial", 15, "bold"))
 
 	#Change the width to normal
@@ -49,11 +48,11 @@ def drawButton(turtle, x, y, label):
 #Returns: None
 def showMenu():
 	#Get the turtle
-	turtle = Constants.TURTLE
+	turtle = constants.TURTLE
 
 	#Move to the title location
 	turtle.clear()
-	moveTurtle(turtle, Constants.TITLE_LOCATIONX, Constants.TITLE_LOCATIONY)
+	moveTurtle(turtle, constants.TITLE_LOCATIONX, constants.TITLE_LOCATIONY)
 
 	#Write the title to the screen
 	turtle.write("REVERSI GAME", False, align = "center", font = ("Arial", 50, "bold"))
@@ -62,9 +61,9 @@ def showMenu():
 	options = ["Rules", "Play", "Exit"]
 
 	#Draw all the buttons
-	drawButton(turtle, Constants.RULES_BUTTON_LEFT_X, Constants.BUTTON_TOP_Y, options[0])
-	drawButton(turtle, Constants.PLAY_BUTTON_LEFT_X, Constants.BUTTON_TOP_Y, options[1])
-	drawButton(turtle, Constants.EXIT_BUTTON_LEFT_X, Constants.BUTTON_TOP_Y, options[2])
+	drawButton(turtle, constants.RULES_BUTTON_LEFT_X, constants.BUTTON_TOP_Y, options[0])
+	drawButton(turtle, constants.PLAY_BUTTON_LEFT_X, constants.BUTTON_TOP_Y, options[1])
+	drawButton(turtle, constants.EXIT_BUTTON_LEFT_X, constants.BUTTON_TOP_Y, options[2])
 
 #Checks if a click is in the button area
 #Params: x, The x location of the click
@@ -72,8 +71,8 @@ def showMenu():
 #Returns: True if the click was in the button area, False otherwise
 def isButtonClicked(x, y):
 	#Check if x and y are within the button area
-	x_valid = x >= Constants.RULES_BUTTON_LEFT_X and x <= Constants.EXIT_BUTTON_RIGHT_X
-	y_valid = y >= Constants.BUTTON_BOTTOM_Y and y <= Constants.BUTTON_TOP_Y
+	x_valid = x >= constants.RULES_BUTTON_LEFT_X and x <= constants.EXIT_BUTTON_RIGHT_X
+	y_valid = y >= constants.BUTTON_BOTTOM_Y and y <= constants.BUTTON_TOP_Y
 
 	#Return the result
 	return x_valid and y_valid
@@ -82,19 +81,19 @@ def isButtonClicked(x, y):
 #Params: x, The x location to check
 #Returns: True if in the rules button, False otherwise
 def isRulesButton(x):
-	return x >= Constants.RULES_BUTTON_LEFT_X and x <= Constants.RULES_BUTTON_RIGHT_X
+	return x >= constants.RULES_BUTTON_LEFT_X and x <= constants.RULES_BUTTON_RIGHT_X
 
 #Checks if the x is over the play button
 #Params: x, The x location to check
 #Returns: True if in the play button, False otherwise
 def isPlayButton(x):
-	return x >= Constants.PLAY_BUTTON_LEFT_X and x <= Constants.PLAY_BUTTON_RIGHT_X
+	return x >= constants.PLAY_BUTTON_LEFT_X and x <= constants.PLAY_BUTTON_RIGHT_X
 
 #Checks if the x is over the exit button
 #Params: x, The x location to check
 #Returns: True if in the exit button, False otherwise
 def isExitButton(x):
-	return x >= Constants.EXIT_BUTTON_LEFT_X and x <= Constants.EXIT_BUTTON_RIGHT_X
+	return x >= constants.EXIT_BUTTON_LEFT_X and x <= constants.EXIT_BUTTON_RIGHT_X
 
 #Gets the index of the button that is clicked
 #Params: x, The x location of the click
@@ -120,10 +119,10 @@ def makeChoice(x, y):
 		button = getClickedButton(x)
 
 		#Get the window
-		wn = Constants.WINDOW
+		wn = constants.WINDOW
 
 		#Store options
-		options = [Rules.show, Main.main, sys.exit]
+		options = [rulesMenu.show, mainGame.start, sys.exit]
 
 		#Call the desired method
 		if button >= 0:
@@ -134,11 +133,11 @@ def makeChoice(x, y):
 #Returns nothing and takes no parameters
 def main():
 	#Get the window
-	wn = Constants.WINDOW
+	wn = constants.WINDOW
 
 	#Set up the window
-	wn.setup(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
-	wn.setworldcoordinates(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT)
+	wn.setup(constants.WINDOW_WIDTH, constants.WINDOW_HEIGHT)
+	wn.setworldcoordinates(0, 0, constants.WINDOW_WIDTH, constants.WINDOW_HEIGHT)
 	wn.clear()
 	wn.tracer(10)
 

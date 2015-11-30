@@ -1,5 +1,5 @@
 #This program contains a method for converting the state from string to list and vice versa
-import Constants
+import constants
 
 #Converts the game state from a string to a 2d list
 #Params: state_string, The game state as a string
@@ -16,7 +16,7 @@ def toList(state_string):
         row.append(letter)
 
         #Add the row to the list if it is the right size
-        if len(row) == Constants.NUM_OF_COLUMNS:
+        if len(row) == constants.NUM_OF_COLUMNS:
             state_list.append(row)
 
             #Reset the row

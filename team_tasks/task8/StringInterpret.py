@@ -2,10 +2,8 @@
 #It will setup the board and place the correct piece colour based on the turn number.
 #It will prompt the user for moves in the terminal and will only take a valid move so a Capital and a number.
 #It will update the board and the game state string based on the move.
-import Constants
-import TurtleMove
-import ReversiGrid
-import PieceChange
+import constants
+import pieceChange
 
 #This function will take a game state and update the gamestate on the game board.
 #It takes the game state, which is a 64 character string
@@ -13,11 +11,11 @@ import PieceChange
 #Author: Kyle Hinton
 def stringToPiece(game_state):
 	index = 0
-	for y in range(len(Constants.ROW_NUMBERS)):
-		for x in range(len(Constants.COLUMN_LETTERS)):
+	for y in range(len(constants.ROW_NUMBERS)):
+		for x in range(len(constants.COLUMN_LETTERS)):
 			#Get location
-			x_coord = Constants.COLUMN_LETTERS[x]
-			y_coord = Constants.ROW_NUMBERS[y]
+			x_coord = constants.COLUMN_LETTERS[x]
+			y_coord = constants.ROW_NUMBERS[y]
 
 			#Check each piece at the index in the game state
 			piece = game_state[index]
@@ -34,8 +32,8 @@ def stringToPiece(game_state):
 #Returns: A string representing the Index
 #Example: pieceToString(10) returns "C2"
 def pieceToString(index):
-	column = Constants.COLUMN_LETTERS[index % 8]
-	row = Constants.ROW_NUMBERS[index // 8]
+	column = constants.COLUMN_LETTERS[index % 8]
+	row = constants.ROW_NUMBERS[index // 8]
 	return str(column) + str(row)
 
 #This function will decide on the colour of the next piece based on whose turn number it is.
@@ -56,15 +54,15 @@ def stringInterpret(game_state, NewMove, turn):
 		column = NewMove[0].upper()
 		row = int(NewMove[1])
 
-		column_IDX = (Constants.COLUMN_LETTERS.index(column))
-		row_IDX = (Constants.ROW_NUMBERS.index(row))
+		column_IDX = (constants.COLUMN_LETTERS.index(column))
+		row_IDX = (constants.ROW_NUMBERS.index(row))
 
  		#Equation for converting a move coordinate to the index number to be changed
-		move_to_string = ((row_IDX * Constants.NUM_OF_ROWS) + column_IDX)
+		move_to_string = ((row_IDX * constants.NUM_OF_ROWS) + column_IDX)
 
 		turn_colour = whoseTurn(turn)
 
-		new_state = PieceChange.ChangePieces(game_state, move_to_string, turn_colour)
+		new_state = pieceChange.ChangePieces(game_state, move_to_string, turn_colour)
 		#new_state = game_state[:move_to_string] + turn_colour + game_state[move_to_string + 1:]
 
 		if whoseTurn(turn) == "W":
@@ -102,4 +100,4 @@ def setup2():
 if __name__ == "__main__":
 		TurtleMove.setup()
 		setup2()
-		Constants.WINDOW.exitonclick()
+		constants.WINDOW.exitonclick()

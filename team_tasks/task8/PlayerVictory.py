@@ -1,6 +1,6 @@
 #A function that takes a game state as a parameter
 # and returns which player won.
-import Constants
+import constants
 
 #Gets a string representing who won
 #Takes the game state as a parameter
@@ -14,9 +14,9 @@ def playerWon(game_state):
     #Iterate through the game state and count black and white pieces
     for y in game_state:
         for x in y:
-            if x == Constants.PIECE_BLACK:
+            if x == constants.PIECE_BLACK:
                 num_black += 1
-            elif x == Constants.PIECE_WHITE:
+            elif x == constants.PIECE_WHITE:
                 num_white += 1
 
     #Compare number of white and black pieces and return

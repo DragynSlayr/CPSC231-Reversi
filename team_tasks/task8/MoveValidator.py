@@ -4,21 +4,20 @@
 # and returns the update game state.
 # It should use the function written by team member 1.
 
-import Constants
-import Converter
-import StringInterpret as si
+import constants
+import converter
 
 #Checks if a column is near the edges of the board
 #Params: column, The column to check
 #Returns: True if the column is an edge one, False otherwise
 def isEdgeColumn(column):
-    return (column == Constants.COLUMN_LETTERS[0] or column == Constants.COLUMN_LETTERS[len(Constants.COLUMN_LETTERS) - 1])
+    return (column == constants.COLUMN_LETTERS[0] or column == constants.COLUMN_LETTERS[len(constants.COLUMN_LETTERS) - 1])
 
 #Checks if a row is near the edges of the board
 #Params: row, The row to check
 #Returns: True if the row is an edge one, False otherwise
 def isEdgeRow(row):
-    return (row == Constants.ROW_NUMBERS[0] or row == Constants.ROW_NUMBERS[len(Constants.ROW_NUMBERS) - 1])
+    return (row == constants.ROW_NUMBERS[0] or row == constants.ROW_NUMBERS[len(constants.ROW_NUMBERS) - 1])
 
 #Checks if a point is a corner
 #Params: column, The column of the point
@@ -40,13 +39,13 @@ def isCorner(column, row):
 # |~|~|~|~|~|~|~|~|
 # |3|~|~|~|~|~|~|4|
 def getCorner(column, row):
-    if column == Constants.COLUMN_LETTERS[0]:#Column A
-        if row == Constants.ROW_NUMBERS[0]:#Row 1
+    if column == constants.COLUMN_LETTERS[0]:#Column A
+        if row == constants.ROW_NUMBERS[0]:#Row 1
             return 1
         else:
             return 3
     else:#Column H
-        if row == Constants.ROW_NUMBERS[0]:#Row 1
+        if row == constants.ROW_NUMBERS[0]:#Row 1
             return 2
         else:
             return 4
@@ -57,7 +56,7 @@ def getCorner(column, row):
 #Returns: Index of a point
 #Example: calculateIndex("C", 5) returns 34
 def calculateIndex(column, row):
-    return Constants.COLUMN_LETTERS.index(column) + (Constants.ROW_NUMBERS.index(row) * 8)
+    return constants.COLUMN_LETTERS.index(column) + (constants.ROW_NUMBERS.index(row) * 8)
 
 #Gets a letter from a game state using a point
 #Params: column, The column of the point
@@ -143,7 +142,7 @@ def countFilledSpaces(pieces):
     count = 0
     for i in pieces:
         piece = i[:1]
-        if piece == Constants.PIECE_BLACK or piece == Constants.PIECE_WHITE:
+        if piece == constants.PIECE_BLACK or piece == constants.PIECE_WHITE:
             count += 1
     return count
 
@@ -151,7 +150,7 @@ def countFilledSpaces(pieces):
 #Params: column, The column to get the index for
 #Returns: 1 if left-most column, 2 otherwise
 def getColumn(column):
-    if column == Constants.COLUMN_LETTERS[0]:
+    if column == constants.COLUMN_LETTERS[0]:
         return 1
     else:
         return 2
@@ -192,7 +191,7 @@ def piecesByColumn(game_state, column_index, column, row):
 #Params: row, The row check
 #Returns: 1 if row is 1, 2 otherwise
 def getRow(row):
-    if row == Constants.ROW_NUMBERS[0]:
+    if row == constants.ROW_NUMBERS[0]:
         return 1
     else:
         return 2
@@ -260,7 +259,7 @@ def isValidMove(move, game_state):
     column = move[:1].upper()
 
     #Check if the move is on the board at all
-    if (column in Constants.COLUMN_LETTERS) and (row in Constants.ROW_NUMBERS):
+    if (column in constants.COLUMN_LETTERS) and (row in constants.ROW_NUMBERS):
         #Make sure that position is empty
         if getPieceAt(column, row, game_state) != "N":
             return False
@@ -312,9 +311,9 @@ def getValidMoves(game_state):
     valid_moves = []
     for y in range(len(game_state)):
         for x in range(len(game_state[y])):
-            column = Constants.COLUMN_LETTERS[y]
-            row = Constants.ROW_NUMBERS[x]
+            column = constants.COLUMN_LETTERS[y]
+            row = constants.ROW_NUMBERS[x]
             move = column + str(row)
-            if isValidMove(move, Converter.toString(game_state)):
+            if isValidMove(move, converter.toString(game_state)):
                 valid_moves.append(move)
     return valid_moves

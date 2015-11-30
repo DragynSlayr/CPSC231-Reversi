@@ -1,6 +1,6 @@
 #This program contains methods for updating the state once a move has been made
-import Constants
-import Converter
+import constants
+import converter
 import StringInterpret
 
 #Author: Kyle Hinton
@@ -19,43 +19,43 @@ def CheckNorth(game_state, stringID, turn_colour, isTesting = False):
 	MoveID = stringID 							#This will make a copy of the index of the players move.
 
 
-	if stringID + Constants.NORTH > len(game_state) or stringID + Constants.NORTH < 0:
+	if stringID + constants.NORTH > len(game_state) or stringID + constants.NORTH < 0:
 		return game_state
 	#While the next token to check is the other colour.
 	#NORTH = -8
-	while game_state[stringID + Constants.NORTH] == other_colour:
+	while game_state[stringID + constants.NORTH] == other_colour:
 
 		#Return game state if the move is not valid
 		if NofChanges > (MoveID // 8) - 1:
 			print("Out of bounds")
 			return game_state
-		if game_state[stringID + Constants.NORTH] != other_colour and game_state[stringID + Constants.NORTH] != turn_colour:
+		if game_state[stringID + constants.NORTH] != other_colour and game_state[stringID + constants.NORTH] != turn_colour:
 			print("!= any colour")
 			return game_state
 
 		#Move to check the next piece.
-		stringID = stringID + Constants.NORTH
+		stringID = stringID + constants.NORTH
 
 		#Counts one more for the number of pieces to change.
 		NofChanges = NofChanges + 1
 
 	#If the next piece is the turn player's colour....
-	if game_state[stringID + Constants.NORTH] == turn_colour:
+	if game_state[stringID + constants.NORTH] == turn_colour:
 
 		#Mark token across is the ID of the last piece to change plus NORTH.
-		MoveXID = stringID + Constants.NORTH
+		MoveXID = stringID + constants.NORTH
 
 		#While there is still a number of pieces left to change.
 		while NofChanges != 0:
 
 			#Create a block of string with the character changed at the beginning.
-			PlaceHolder = turn_colour + game_state[stringID + 1:stringID - Constants.NORTH]
+			PlaceHolder = turn_colour + game_state[stringID + 1:stringID - constants.NORTH]
 
 			#Create another block of string that was assembled from the blocks of Placeholder.
 			slice_new_state = slice_new_state + PlaceHolder
 
 			#Moving backwards through the index of the pieces that need to be changed.
-			stringID = stringID - Constants.NORTH
+			stringID = stringID - constants.NORTH
 
 			#One less piece to change.
 			NofChanges = NofChanges - 1
@@ -69,7 +69,7 @@ def CheckNorth(game_state, stringID, turn_colour, isTesting = False):
 
 		#If there are no pieces left to change, assemble the new string.
 		if NofChanges == 0:
-			new_state = game_state[:MoveXID - Constants.NORTH] + slice_new_state + game_state[MoveID:]
+			new_state = game_state[:MoveXID - constants.NORTH] + slice_new_state + game_state[MoveID:]
 
 			#testing
 			if isTesting:
@@ -95,46 +95,46 @@ def CheckNorthEast(game_state, stringID, turn_colour, isTesting = False):
 	other_colour = OtherColour(turn_colour) 	#This Determines the colour of the other player's piece.
 	MoveID = stringID 							#This will make a copy of the index of the players move.
 
-	if stringID + Constants.NORTHEAST > len(game_state) or stringID + Constants.NORTHEAST < 0:
+	if stringID + constants.NORTHEAST > len(game_state) or stringID + constants.NORTHEAST < 0:
 		return game_state
 
 	#While the next token to check is the other colour.
 	#NORTHEAST = -7
-	while game_state[stringID + Constants.NORTHEAST] == other_colour:
+	while game_state[stringID + constants.NORTHEAST] == other_colour:
 
 		#Check if move is valid
 		if NofChanges > (MoveID // 8) - 1:
 			print("Out of bounds!")
 			return game_state
-		if game_state[stringID + Constants.NORTHEAST] != other_colour and game_state[stringID + Constants.NORTHEAST] != turn_colour:
-			print(game_state[stringID + Constants.NORTHEAST] != other_colour)
-			print(game_state[stringID + Constants.NORTHEAST] != turn_colour)
+		if game_state[stringID + constants.NORTHEAST] != other_colour and game_state[stringID + constants.NORTHEAST] != turn_colour:
+			print(game_state[stringID + constants.NORTHEAST] != other_colour)
+			print(game_state[stringID + constants.NORTHEAST] != turn_colour)
 			print("!= any color")
 			return game_state
 
 		#Move to the next piece.
-		stringID = stringID + Constants.NORTHEAST
+		stringID = stringID + constants.NORTHEAST
 
 		#Counts one more for the number of pieces to change.
 		NofChanges = NofChanges + 1
 
 	#If the next piece is the turn player's colour....
-	if game_state[stringID + Constants.NORTHEAST] == turn_colour:
+	if game_state[stringID + constants.NORTHEAST] == turn_colour:
 
 		#The token across is the ID of the last piece to change plus NORTHEAST.
-		MoveXID = stringID + Constants.NORTHEAST
+		MoveXID = stringID + constants.NORTHEAST
 
 		#While there is still a number of pieces left to change.
 		while NofChanges != 0:
 
 			#Create a block of string with the character changed at the beginning
-			PlaceHolder = turn_colour + game_state[stringID + 1:stringID - Constants.NORTHEAST]
+			PlaceHolder = turn_colour + game_state[stringID + 1:stringID - constants.NORTHEAST]
 
 			#Create another block of string that was assembled from the blocks of Placeholder.
 			slice_new_state = slice_new_state + PlaceHolder
 
 			#Moving backwards through the index of the pieces that need to be changed.
-			stringID = stringID - Constants.NORTHEAST
+			stringID = stringID - constants.NORTHEAST
 
 			#One less piece to change.
 			NofChanges = NofChanges - 1
@@ -148,7 +148,7 @@ def CheckNorthEast(game_state, stringID, turn_colour, isTesting = False):
 
 		#If there are no pieces left to change, assemble the new string.
 		if NofChanges == 0:
-			new_state = game_state[:MoveXID - Constants.NORTHEAST] + slice_new_state + game_state[MoveID:]
+			new_state = game_state[:MoveXID - constants.NORTHEAST] + slice_new_state + game_state[MoveID:]
 
 			#Testing
 			if isTesting:
@@ -170,26 +170,26 @@ def CheckEast(game_state, stringID, turn_colour, isTesting = False):
 	MoveID = stringID 							#This will make a copy of the index of the players move.
 
 
-	if stringID + Constants.EAST> len(game_state) - 1 or stringID + Constants.EAST < 0:
+	if stringID + constants.EAST> len(game_state) - 1 or stringID + constants.EAST < 0:
 		return game_state
 	#While the next token to check is the other colour.
 	#EAST = 1
-	while game_state[stringID + Constants.EAST] == other_colour:
+	while game_state[stringID + constants.EAST] == other_colour:
 		#Possible statements for catching invalid moves.
 		if NofChanges > ((8 - (MoveID % 8)) - 1):
 			print("Out of bounds.")
 			return game_state
-		if game_state[stringID + Constants.EAST] != other_colour and game_state[stringID + Constants.EAST] != turn_colour:
+		if game_state[stringID + constants.EAST] != other_colour and game_state[stringID + constants.EAST] != turn_colour:
 			print("!= any colour")
 			return game_state
 
 		#Testing.
 		if isTesting:
 			print (NofChanges, "NofChanges Number of other colours")
-			print (stringID + (Constants.EAST), "index of other_colour")
+			print (stringID + (constants.EAST), "index of other_colour")
 
 		#Move on to the Next Token
-		stringID = stringID + Constants.EAST
+		stringID = stringID + constants.EAST
 
 		#Add one to the number of tokens that need to be changed.
 		NofChanges = NofChanges + 1
@@ -212,43 +212,43 @@ def CheckSouthEast(game_state, stringID, turn_colour, isTesting = False):
 	MoveID = stringID 							#This will make a copy of the index of the players move.
 
 
-	if stringID + Constants.SOUTHEAST > len(game_state) or stringID + Constants.SOUTHEAST < 0:
+	if stringID + constants.SOUTHEAST > len(game_state) or stringID + constants.SOUTHEAST < 0:
 		return game_state
 	#While the next token to check is the other colour.
 	#SouthEast = 9
-	while game_state[stringID + Constants.SOUTHEAST] == other_colour:
+	while game_state[stringID + constants.SOUTHEAST] == other_colour:
 
 		#Check if move is invalid
 		if NofChanges > (8 - (MoveID // 8)) - 1:
 			print("Out of bounds!")
 			return game_state
-		if game_state[stringID + Constants.SOUTHEAST] != other_colour and game_state[stringID + Constants.SOUTHEAST] != turn_colour:
+		if game_state[stringID + constants.SOUTHEAST] != other_colour and game_state[stringID + constants.SOUTHEAST] != turn_colour:
 			print("!= any color")
 			return game_state
 
 		#Move to the next piece.
-		stringID = stringID + Constants.SOUTHEAST
+		stringID = stringID + constants.SOUTHEAST
 
 		#Counts one more for the number of pieces to change.
 		NofChanges = NofChanges + 1
 
 	#If the next piece is the turn player's colour....
-	if game_state[stringID + Constants.SOUTHEAST] == turn_colour:
+	if game_state[stringID + constants.SOUTHEAST] == turn_colour:
 
 		#The token across is the ID of the last piece to change plus SOUTHEAST.
-		MoveXID = stringID + Constants.SOUTHEAST
+		MoveXID = stringID + constants.SOUTHEAST
 
 		#While there is still a number of pieces left to change.
 		while NofChanges != 0:
 
 			#Create a block of string with the character changed at the beginning.
-			PlaceHolder = turn_colour + game_state[stringID + 1:stringID + Constants.SOUTHEAST]
+			PlaceHolder = turn_colour + game_state[stringID + 1:stringID + constants.SOUTHEAST]
 
 			#Create another block of string that was assembled from the blocks of Placeholder.
 			slice_new_state = PlaceHolder + slice_new_state
 
 			#Moving backwards through the index of the pieces that need to be changed.
-			stringID = stringID - Constants.SOUTHEAST
+			stringID = stringID - constants.SOUTHEAST
 
 			#One less piece to change.
 			NofChanges = NofChanges - 1
@@ -262,7 +262,7 @@ def CheckSouthEast(game_state, stringID, turn_colour, isTesting = False):
 
 		#If there are no pieces left to change, assemble the new string.
 		if NofChanges == 0:
-			new_state = game_state[:MoveID + Constants.SOUTHEAST] + slice_new_state + game_state[MoveXID:]
+			new_state = game_state[:MoveID + constants.SOUTHEAST] + slice_new_state + game_state[MoveXID:]
 
 			#Testing
 			if isTesting:
@@ -289,43 +289,43 @@ def CheckSouth(game_state, stringID, turn_colour, isTesting = False):
 	MoveID = stringID 							#This will make a copy of the index of the players move.
 
 
-	if stringID + Constants.SOUTH > len(game_state) or stringID + Constants.SOUTH < 0:
+	if stringID + constants.SOUTH > len(game_state) or stringID + constants.SOUTH < 0:
 		return game_state
 	#While the next token to check is the other colour.
 	#SOUTH = 8
-	while game_state[stringID + Constants.SOUTH] == other_colour:
+	while game_state[stringID + constants.SOUTH] == other_colour:
 
 		#Check if move is invalid
 		if NofChanges > (8 - (MoveID // 8)) - 1:
 			print("Out of bounds")
 			return game_state
-		if game_state[stringID + Constants.SOUTHEAST] != other_colour and game_state[stringID + Constants.SOUTHEAST] != turn_colour:
+		if game_state[stringID + constants.SOUTHEAST] != other_colour and game_state[stringID + constants.SOUTHEAST] != turn_colour:
 			print("!= any color")
 			return game_state
 
 		#Move to the next piece.
-		stringID = stringID + Constants.SOUTH
+		stringID = stringID + constants.SOUTH
 
 		#Counts one more for the number of pieces to change.
 		NofChanges = NofChanges + 1
 
 	#If the next piece is the turn player's colour....
-	if game_state[stringID + Constants.SOUTH] == turn_colour:
+	if game_state[stringID + constants.SOUTH] == turn_colour:
 
 		#The token across is the ID of the last piece to change plus SOUTH.
-		MoveXID = stringID + Constants.SOUTH
+		MoveXID = stringID + constants.SOUTH
 
 		#While there is still a number of pieces left to change.
 		while NofChanges != 0:
 
 			#Create a block of string with the character changed at the beginning.
-			PlaceHolder = turn_colour + game_state[stringID + 1:stringID + Constants.SOUTH]
+			PlaceHolder = turn_colour + game_state[stringID + 1:stringID + constants.SOUTH]
 
 			#Create another block of string that was assembled from the blocks of Placeholder.
 			slice_new_state = PlaceHolder + slice_new_state
 
 			#Moving backwards through the index of the pieces that need to be changed.
-			stringID = stringID - Constants.SOUTH
+			stringID = stringID - constants.SOUTH
 
 			#One less piece to change.
 			NofChanges = NofChanges - 1
@@ -339,11 +339,11 @@ def CheckSouth(game_state, stringID, turn_colour, isTesting = False):
 
 		#If there are no pieces left to change, assemble the new string.
 		if NofChanges == 0:
-			new_state = game_state[:MoveID + Constants.SOUTH] + slice_new_state + game_state[MoveXID:]
+			new_state = game_state[:MoveID + constants.SOUTH] + slice_new_state + game_state[MoveXID:]
 
 			#Testing.
 			if isTesting:
-				print (MoveID + Constants.SOUTH, " MoveID")
+				print (MoveID + constants.SOUTH, " MoveID")
 				print (MoveXID, " MoveXID")
 				print ("012345678901234567890123456789012345678901234567890123")
 				print (game_state)
@@ -368,41 +368,41 @@ def CheckSouthWest(game_state, stringID, turn_colour, isTesting = False):
 	MoveID = stringID 							#This will make a copy of the index of the players move.
 
 
-	if stringID + Constants.SOUTHWEST > len(game_state) or stringID + Constants.SOUTHWEST < 0:
+	if stringID + constants.SOUTHWEST > len(game_state) or stringID + constants.SOUTHWEST < 0:
 		return game_state
 
-	while game_state[stringID + Constants.SOUTHWEST] == other_colour:
+	while game_state[stringID + constants.SOUTHWEST] == other_colour:
 		#Check if move is invalid
 		if NofChanges > (8-(MoveID // 8)) - 1:
 			print("Out of bounds!")
 			return game_state
-		if game_state[stringID + Constants.SOUTHWEST] != other_colour and game_state[stringID + Constants.SOUTHWEST] != turn_colour:
+		if game_state[stringID + constants.SOUTHWEST] != other_colour and game_state[stringID + constants.SOUTHWEST] != turn_colour:
 			print("!= any color")
 			return game_state
 
 		#Move to the next piece in South West.
-		stringID = stringID + Constants.SOUTHWEST
+		stringID = stringID + constants.SOUTHWEST
 
 		#Counts one more for the number of pieces to change.
 		NofChanges = NofChanges + 1
 
 	#If the next piece is the turn player's colour....
-	if game_state[stringID + Constants.SOUTHWEST] == turn_colour:
+	if game_state[stringID + constants.SOUTHWEST] == turn_colour:
 
 		#The token across is the ID of the last piece to change plus SOUTHWEST.
-		MoveXID = stringID + Constants.SOUTHWEST
+		MoveXID = stringID + constants.SOUTHWEST
 
 		#While there is still a number of pieces left to change.
 		while NofChanges != 0:
 
 			#Create a block of string with the character changed at the beginning.
-			PlaceHolder = turn_colour + game_state[stringID + 1:stringID + Constants.SOUTHWEST]
+			PlaceHolder = turn_colour + game_state[stringID + 1:stringID + constants.SOUTHWEST]
 
 			#Create another block of string that was assembled from the blocks of Placeholder.
 			slice_new_state = PlaceHolder + slice_new_state
 
 			#Moving backwards through the index of the pieces that need to be changed.
-			stringID = stringID - Constants.SOUTHWEST
+			stringID = stringID - constants.SOUTHWEST
 
 			#One less piece to change.
 			NofChanges = NofChanges - 1
@@ -416,7 +416,7 @@ def CheckSouthWest(game_state, stringID, turn_colour, isTesting = False):
 
 		#If there are no pieces left to change, assemble the new string.
 		if NofChanges == 0:
-			new_state = game_state[:MoveID + Constants.SOUTHWEST] + slice_new_state + game_state[MoveXID:]
+			new_state = game_state[:MoveID + constants.SOUTHWEST] + slice_new_state + game_state[MoveXID:]
 
 			#testing
 			if isTesting:
@@ -442,27 +442,27 @@ def CheckWest(game_state, stringID, turn_colour, isTesting = False):
 	other_colour = OtherColour(turn_colour) 	#This Determines the colour of the other player's piece.
 	MoveID = stringID 							#This will make a copy of the index of the players move.
 
-	if stringID + Constants.WEST > len(game_state) or stringID + Constants.WEST < 0:
+	if stringID + constants.WEST > len(game_state) or stringID + constants.WEST < 0:
 		return game_state
 
 	#While the next token to check is the other colour.
 	#WEST = -1
-	while game_state[stringID + Constants.WEST] == other_colour:
+	while game_state[stringID + constants.WEST] == other_colour:
 		#Possible statements for catching invalid moves.
 		if NofChanges > (MoveID % 8) - 1:
 			print ("out of bounds")
 			return game_state
-		if game_state[stringID + Constants.WEST] != other_colour and game_state[stringID + Constants.WEST] != turn_colour:
+		if game_state[stringID + constants.WEST] != other_colour and game_state[stringID + constants.WEST] != turn_colour:
 			print ("!= turn colour or other")
 			return game_state
 
 		#Testing
 		if isTesting:
 			print(NofChanges, "NofChanges Number of other colours")
-			print(stringID + (Constants.WEST), "index of other_colour")
+			print(stringID + (constants.WEST), "index of other_colour")
 
 		#Move on to the Next Token
-		stringID = stringID + Constants.WEST
+		stringID = stringID + constants.WEST
 
 		#Add one to the number of tokens that need to be changed.
 		NofChanges = NofChanges + 1
@@ -483,45 +483,45 @@ def CheckNorthWest(game_state, stringID, turn_colour, isTesting = False):
 	other_colour = OtherColour(turn_colour) #Determines the other colour.
 	MoveID = stringID 					#Makes a copy of the index of the current player's move.
 
-	if stringID + Constants.NORTHWEST > len(game_state) or stringID + Constants.NORTHWEST < 0:
+	if stringID + constants.NORTHWEST > len(game_state) or stringID + constants.NORTHWEST < 0:
 		return game_state
 
 	#While the next token to check is the other colour.
 	#NORTHWEST = -9
-	while game_state[stringID + Constants.NORTHWEST] == other_colour:
+	while game_state[stringID + constants.NORTHWEST] == other_colour:
 
 		#Catch invalid moves
 		if NofChanges > (MoveID // 8) - 1:
 			print("Out of bounds!")
 			return game_state
 
-		if game_state[stringID + Constants.NORTHWEST] != other_colour and game_state[stringID + Constants.NORTHWEST] != turn_colour:
+		if game_state[stringID + constants.NORTHWEST] != other_colour and game_state[stringID + constants.NORTHWEST] != turn_colour:
 			print("!= any colour")
 			return game_state
 
 		#Move to the next piece.
-		stringID = stringID + Constants.NORTHWEST
+		stringID = stringID + constants.NORTHWEST
 
 		#Counts one more for the number of pieces to change.
 		NofChanges = NofChanges + 1
 
 	#If the next piece is the turn player's colour....
-	if game_state[stringID + Constants.NORTHWEST] == turn_colour:
+	if game_state[stringID + constants.NORTHWEST] == turn_colour:
 
 		#The token across is the ID of the last piece to change plus NORTHWEST
-		MoveXID = stringID + Constants.NORTHWEST
+		MoveXID = stringID + constants.NORTHWEST
 
 		#While there is still a number of pieces left to change.
 		while NofChanges != 0:
 
 			#Create a block of string with the character changed at the beginning
-			PlaceHolder = turn_colour + game_state[stringID + 1:stringID - Constants.NORTHWEST]
+			PlaceHolder = turn_colour + game_state[stringID + 1:stringID - constants.NORTHWEST]
 
 			#Create another block of string that was assembled from the blocks of Placeholder.
 			slice_new_state = slice_new_state + PlaceHolder
 
 			#Moveing backwards through the index of the pieces that need to be changed.
-			stringID = stringID - Constants.NORTHWEST
+			stringID = stringID - constants.NORTHWEST
 
 			#One less piece to change.
 			NofChanges = NofChanges - 1
@@ -535,7 +535,7 @@ def CheckNorthWest(game_state, stringID, turn_colour, isTesting = False):
 
 		#If there are no pieces left to change, assemble the new string.
 		if NofChanges == 0:
-			new_state = game_state[:MoveXID - Constants.NORTHWEST] + slice_new_state + game_state[MoveID:]
+			new_state = game_state[:MoveXID - constants.NORTHWEST] + slice_new_state + game_state[MoveID:]
 
 			#Testing
 			if isTesting:
@@ -586,8 +586,8 @@ def ChangePieces(game_state, stringID, turn_colour, isTesting = False):
 #Notes: Refer to the function for what it's parameters are
 def testFunction(function, param_one, param_two, param_three, param_four = False):
 	result = function(param_one, param_two, param_three, param_four)
-	formatted_start = Converter.asBoardRepresentation(param_one)
-	formatted_end = Converter.asBoardRepresentation(result)
+	formatted_start = converter.asBoardRepresentation(param_one)
+	formatted_end = converter.asBoardRepresentation(result)
 	print("At:", StringInterpret.pieceToString(param_two))
 	print("Input".center(8))
 	print(formatted_start)

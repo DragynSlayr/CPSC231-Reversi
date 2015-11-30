@@ -1,9 +1,7 @@
 #This file contains methods that help with overall move validation
-import TurtleMove
+import turtleMove
 import string
-import Constants
-import ReversiGrid
-import StringInterpret
+import constants
 
 #Function returns a string that represents the initial grid state
 #Takes no parameters
@@ -22,8 +20,8 @@ def getChar(game_state, location):
 def convertColumnNumber(column):
 	loopcount = 0
 	column = column.upper()
-	for i in range(len(Constants.COLUMN_LETTERS)):
-		if column == Constants.COLUMN_LETTERS[i]:
+	for i in range(len(constants.COLUMN_LETTERS)):
+		if column == constants.COLUMN_LETTERS[i]:
 			return i + 1
 
 	#print (column)
@@ -33,7 +31,7 @@ def convertColumnNumber(column):
 #Function takes the current grid string and an unstripped location string
 #Returns Boolean whether or not it is on the grid.
 def validateMoveLocation(game_state, location):
-	xy = TurtleMove.getColumnAndRow(location)
+	xy = turtleMove.getColumnAndRow(location)
 	x =  convertColumnNumber(xy[0]) #NOTE!!: This will be assigned 'invalid_range' if it is outside of range. This is done by the convert function
 	y = xy[1]
 
@@ -46,15 +44,15 @@ def validateMoveLocation(game_state, location):
 	#print("Move:", y, x)
 
 	#Checks if the location is occupied already
-	#return getChar(game_state, x + (8*(y -1))) == Constants.PIECE_NONE
-	return game_state[y - 1][x - 1] == Constants.PIECE_NONE
+	#return getChar(game_state, x + (8*(y -1))) == constants.PIECE_NONE
+	return game_state[y - 1][x - 1] == constants.PIECE_NONE
 	#All of that math simply takes the number of x + a certain number of rows
 
 #Displays a window that asks the user for input
 #Takes a message as input
 #Returns the user's input
 def menuInput(text):
-	wn = Constants.WINDOW
+	wn = constants.WINDOW
 	user_input = wn.textinput("User Input", text)
 	return user_input
 
@@ -84,7 +82,7 @@ def getMove(game_state, message):
 #Example: updateStringState(initializeGridStringStart(), 'H8', 'B')
 def updateStringState(game_state, location, colour):
 	#Get column and row from location
-	xy = TurtleMove.get_column_and_row(location)
+	xy = turtleMove.get_column_and_row(location)
 
 	#Extract column and row from above
 	x =  convertColumnNumber(xy[0]) #NOTE!!: This will be assigned 'invalid_range' if it is outside of range. This is done by the convert function

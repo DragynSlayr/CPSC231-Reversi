@@ -1,4 +1,4 @@
-import Constants
+import constants
 
 #==================================================================================================================================
 #==================================================================================================================================
@@ -289,7 +289,7 @@ def mainSquareValidator(game_state, pieceColor):
     #The program will go over the whole grid and check whether there is aready a piece on a square or not
     validMoves = firstValidation(validMoves)
 
-    if pieceColor == Constants.PIECE_WHITE:
+    if pieceColor == constants.PIECE_WHITE:
         pieceColor = "White"
     else:
         pieceColor = "Black"
@@ -301,8 +301,8 @@ def mainSquareValidator(game_state, pieceColor):
 
     for location in listOfValidMoves:
         x, y, piece = location
-        letter = Constants.COLUMN_LETTERS[x - 1]
-        number = Constants.ROW_NUMBERS[y - 1]
+        letter = constants.COLUMN_LETTERS[x - 1]
+        number = constants.ROW_NUMBERS[y - 1]
         movesList.append(letter + str(number))
 
     return movesList

@@ -1,20 +1,20 @@
 #This file holds the functions to start the game
-import MainMenu
-import ReversiGrid
-import ListInterpret
-import Constants
-import BoardClick
+import mainMenu
+import reversiGrid
+import listInterpret
+import constants
+import boardClick
 import random
 
-def main():
-	#Set up the other classes
-	ReversiGrid.main()
+def start():
+	#Draw the board
+	reversiGrid.main()
 
 	#Get the starting board config
-	game_state = Constants.GAME_STATE_START
+	game_state = constants.GAME_STATE_START
 
 	#Place the pieces from the starting board
-	ListInterpret.stringToPiece(game_state)
+	listInterpret.stringToPiece(game_state)
 
 	#The number of moves made so far
 	move_num = 0
@@ -24,7 +24,7 @@ def main():
 
 	#Start listening for clicks on a board,
 	#BoardClick takes over the logic from here
-	BoardClick.run(game_state, move_num, isPlayerMove)
+	boardClick.run(game_state, move_num, isPlayerMove)
 
 if __name__ == "__main__":
-	MainMenu.main()
+	mainMenu.main()

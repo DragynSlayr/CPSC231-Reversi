@@ -1,7 +1,5 @@
 import time
 import string
-import MainMenu
-import Constants
 
 #Times how long a function takes to execute
 #Params: function, The function to time
@@ -27,13 +25,11 @@ def timeFunction(function, *parameters):
     return float(total)
 
 def main():
-    trial_file = open("MainMenu.Main1.txt", "w")
-    trial_file.write("Name:MainMenu.Main\n")
+    trial_file = open("Time.sleep.txt", "w")
+    trial_file.write("Name:Time.sleep\n")
     for i in range(1, 11):
-        time_taken = timeFunction(MainMenu.main, None)
+        time_taken = timeFunction(time.sleep, 1)
         trial_file.write("Trial " + str(i) + ":" + str(time_taken) + "s\n")
-        Constants.WINDOW.reset()
-        Constants.TURTLE.reset()
     trial_file.close()
 
 if __name__ == "__main__":
