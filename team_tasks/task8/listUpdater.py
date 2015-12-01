@@ -37,6 +37,10 @@ def inverseTurnChar(char):
 	else:
 		return 'Error Invalid Param'
 
+		
+#Takes list based coordinates and a colour and placed the piece in the location
+#Takes x and y coordinates as well as the piece type from a list. 
+#ex charToPiece(0, 0, 'B') would place a black piece at A1.
 def charToPiece(x, y, temp_piece):
 	conv_move = convertMoveType(x, y)
 	temp_x = conv_move[0]
@@ -78,30 +82,45 @@ def updateRow(row, relative_location, turn_letter):
 	
 	return new_row
 
+	
+	
+#Function is the core of the list updation.
+#Takes a portion of a list in the form of a row
+#Also takes the turn_letter
+#Function returns the row updated assuming it is the right half of a list to be upadated	
+	
 def updateCore(row, turn_letter):
+	#Declare Necessary Variables
 	start_que = True
 	que = []
 	end_found = False
 	
+	#Main loop adds letters to the que until the end is found
+	
 	for letter in row:
 		if start_que == True:
 			if letter == inverseTurnChar(turn_letter):
+				#add the letter to the que
 				que.append(letter)
 		
+			#check if the end was found and if so end the que additions
 			if letter == turn_letter:
 				start_que = False
 				end_found = True
 			
+			#Check if the end is empty, and then empty the que as it is no longer valid
 			if letter == 'N':
 				end_found = False
 				start_que = False
 				que = []
 				
-	counter = 0
+	
+	#Update the row based on the letters in the que
+	index = 0
 	if end_found == True and len(que) > 0:
 		for letter in que:
-			row[counter] = turn_letter
-			counter = counter+1
+			row[index] = turn_letter
+			index = index+1
 		
 	return row
 
@@ -122,24 +141,28 @@ def updateColumn(game_state, x, y, turn_letter):
 
 	#Using the updated row, change the game_state
 	new_game_state = game_state [:]
-	loop_count = 0
+	index = 0
 
-	#loop_count is what tracks where we are in the updated row, and acts as an index
+	#index is what tracks where we are in the updated row
 	for row in new_game_state:
-		if loop_count < len(temp_row):
+		if index < len(temp_row):
 			#Update the piece in the location in the game_state
-			temp_piece = temp_row[loop_count]
+			temp_piece = temp_row[index]
 			row[x] = temp_piece
+			
+			#update board
+			charToPiece(x, index, temp_piece)
 
-			charToPiece(x, loop_count, temp_piece)
-
-
-
-
-		loop_count = loop_count + 1
+		index = index + 1
 
 	return new_game_state
 
+	
+#Function returns a diagnal based on the direction that it is given
+#Functions takes the game state, x and y coordinates of the move
+#deltaX and deltaY represent the change in direction in the 2d list.
+#returns the diagnal that was found in said direction	
+	
 def getDiagnal(game_state, x, y, deltaX, deltaY):
 	#Declare all necessary variables
 	edge_found = False
@@ -184,20 +207,27 @@ def getDiagnal(game_state, x, y, deltaX, deltaY):
 #deltaIteration handles if the function moves forward or backward in the string
 
 def diagCore(game_state, diag_row, x, y, relative, deltaX, deltaY, deltaIteration):
-
+	#Declare necessary variables
 	xTracker = x
 	yTracker = y
 	iteration = relative-1
+	
+	#main loop
 	for letter in diag_row:
 		if 0<= yTracker <=7:
+			#find row that we are need
 			temp_row = game_state[yTracker]
 			if 0 <= xTracker <= 7:
+				#find piece that is needed
 				if 0<= iteration <= len(diag_row)-1:
-
+					#find piece that is needed
+					#and then update it using the updated row
 					piece = diag_row[iteration]
 					temp_row[xTracker] = piece
 					game_state[yTracker] = temp_row
-
+					
+					
+					#update board
 					charToPiece(xTracker, yTracker, piece)
 
 		xTracker = xTracker + deltaX
@@ -211,11 +241,7 @@ def diagCore(game_state, diag_row, x, y, relative, deltaX, deltaY, deltaIteratio
 			#
 				#
 					#
-#Function returns the updates game_state
-#The function looks long and painful, but it operates on a similar idea as updateRow and update_column
-	#The function starts by getting all characters above the location that is in the diagnol and adds it the row that we can use updateRow on
-	#We the then get all the characters below and add it to the row
-	#After updating it, we can change the characters using the same way that we found the diagnals
+#Function returns the updates game_state	
 
 def updateDiagnalDU2(game_state, x, y, turn_letter):
 
@@ -257,10 +283,6 @@ def updateDiagnalDU2(game_state, x, y, turn_letter):
 			#
 		#
 #Function returns the updates game_state
-#The function looks long and painful, but it operates on a similar idea as updateRow and update_column
-	#The function starts by getting all characters above the location that is in the diagnol and adds it the row that we can use updateRow on
-	#We the then get all the characters below and add it to the row
-	#After updating it, we can change the characters using the same way that we found the diagnals
 
 #Function works the same as the other diagnal updater, just with a modified dirction addition
 def update_diagnalUD2(game_state, x, y, turn_letter):
@@ -293,9 +315,9 @@ def update_diagnalUD2(game_state, x, y, turn_letter):
 
 
 	return game_state
-	#We now need to update the game_state to match the diag that was just updated
+	
 
-#Function updates the game_state based on a move, that is assumed valid
+#Function updates the game_state based on a move, that is ASSUMED VALID
 #Only updates horizontal and vertical, will update diagnol eventually
 #Takes the current game_state, the move, and the turn letter
 #Returns the updated game_state
@@ -311,9 +333,10 @@ def updateGameState(game_state, move, turn_letter):
 	#Update the column
 	temp_game_state = updateColumn(game_state, x, y, turn_letter)
 
+	#Update the row
 	temp_row = updateRow(temp_game_state[y], x, turn_letter)
 	temp_game_state[y] = temp_row
-	#Update the row
+	
 
 	#Because updateRow does not draw the pieces on the board, unlike the other update functions, we must draw them here
 	counter = 0
