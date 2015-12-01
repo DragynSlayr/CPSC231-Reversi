@@ -27,15 +27,13 @@ X_OFFSET = (WINDOW_WIDTH / 4) + CELL_WIDTH #Evaluates to 250
 Y_OFFSET = (WINDOW_HEIGHT * (2/3)) + (WINDOW_HEIGHT / 8) #Evaluates to 475
 
 #Offset for the title
-TITLE_LOCATIONX = WINDOW_WIDTH / 2 #Evaluates to 400
-TITLE_LOCATIONY = WINDOW_HEIGHT * 0.75 #Evaluates to 450
+TITLE_LOCATIONX = WINDOW_WIDTH / 2 #50% of window width
+TITLE_LOCATIONY = WINDOW_HEIGHT * (3/4) #75% of window height
 
-#The offset for the rules
+#The values for the rules
 RULES_LINESTARTX = 0
-RULES_LINESTARTY = WINDOW_HEIGHT * (99 / 100) #Evaluates to 500
-
-#The y position of the rules
-RULES_LIST = WINDOW_HEIGHT / 2 #Evaluates to 300
+RULES_LINESTARTY = WINDOW_HEIGHT * (89 / 100) #89% of the window height
+RULES_SHIFT = 55
 
 #The window and turtle, not actually constants
 WINDOW = turtle.Screen()
