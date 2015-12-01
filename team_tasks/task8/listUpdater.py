@@ -63,141 +63,47 @@ def charToPiece(x, y, temp_piece):
 #Works for "rows" of all sizes
 #returns the updated row
 
-def updateRow(row, relative_location, turn_letter):
-	#Declare all necessary variables that we need to immediately use
-	start_convert = False
+def updateRow(row, relative_location, turn_letter):	
 	row_left = row[:relative_location]
-	end_found = False
-	que = []
-	stop = False
-	loop_counter = 0
-
-
-	#Row left has to be reveresed so that we can treat it the same way as row right.
 	row_left.reverse()
+	row_right = row[relative_location+1:] 
+	
+	row_left = updateCore(row_left, turn_letter)
+	row_left.reverse()
+	row_right = updateCore(row_right, turn_letter)
+			
+	new_row = row_left 
+	new_row.append(turn_letter) 
+	new_row = new_row + row_right
+	
+	return new_row
 
-	#For loop finds all the valid letters in the specified row and adds them to the que
-	#To be a valid letter, the letter must be the inverse turn character,
-		#And must have a turn letter on the other side of another inverse turn letter
-
-	#There are two main triggers that handle this:
-		#stop is a generic preventer that is used to prevent additional characters from being added to the que
-		#start_convert marks when to add the character to the que
-	for letter in row_left:
-
-		if letter == inverseTurnChar(turn_letter) and stop == False:
-			start_convert = True
-
-
-		if letter == constants.PIECE_NONE:
-			start_convert == False
-			stop = True
-
-		if letter == turn_letter and loop_counter > 0:
-			start_convert = False
-			stop = True
-			end_found = True
-
-
-		#We need to check that the letter beside is not empty, or outside of the board
-		#This can be handled simply with the below try - except
-		#loop_counter tracks the index of the list
-		try:
-			if row_left[loop_counter+1] == constants.PIECE_NONE:
-				start_convert = False
-
-
-		except:
-			start_convert = False
-
-		#If the above conditions have been met we can add the letter to the que
-		if start_convert == True and letter == inverseTurnChar(turn_letter):
-			que.append(letter)
-
-
-		loop_counter = loop_counter +1
-
-
-	#Use a different index counter
+def updateCore(row, turn_letter):
+	start_que = True
+	que = []
+	end_found = False
+	
+	for letter in row:
+		if start_que == True:
+			if letter == inverseTurnChar(turn_letter):
+				que.append(letter)
+		
+			if letter == turn_letter:
+				start_que = False
+				end_found = True
+			
+			if letter == 'N':
+				end_found = False
+				start_que = False
+				que = []
+				
 	counter = 0
-
-	#If the end has been found and the que actually has letters in it,
-	#then we can change the letters in the que and reinsert them back into the row
-
 	if end_found == True and len(que) > 0:
 		for letter in que:
-			row_left[counter] = turn_letter
+			row[counter] = turn_letter
 			counter = counter+1
-
-	#Undo the reversal that we did at the start of the code, so it can be safely added back
-	row_left.reverse()
-
-
-
-	#Complete the same process on the righthand side of the row.
-	#To do this we reset the variables needed
-
-	start_convert = False
-	row_right = row[relative_location+1:]
-	#row_right does not include the actual placed move so we need to add +1 to the relative_location
-
-	end_found = False
-	que2 = []
-	stop = False
-	loop_counter = 0
-
-
-
-	#Identicle process that used on row_left just with row_right and a different que
-
-	for letter in row_right:
-
-		if letter == inverseTurnChar(turn_letter) and stop == False:
-			start_convert = True
-
-		if letter == constants.PIECE_NONE:
-			start_convert == False
-			stop = True
-		if letter == turn_letter and loop_counter > 0:
-			start_convert = False
-			end_found = True
-			stop = True
-
-		try:
-			if row_right[loop_counter+1] == constants.PIECE_NONE:
-				start_convert = False
-
-
-		except:
-			start_convert = False
-
-		if start_convert == True and letter == inverseTurnChar(turn_letter):
-			que2.append(letter)
-
-		loop_counter = loop_counter +1
-
-
-
-
-	counter = 0
-	if end_found == True and len(que2) > 0:
-		for letter in que2:
-			row_right[counter] = turn_letter
-			counter = counter+1
-
-
-
-
-
-	#newRow is what will be returned
-	#Combine left and right rows
-	new_row = row_left
-	#Add the turn letter in the location needed
-	new_row.append(turn_letter)
-	new_row = new_row + row_right
-
-
-	return new_row
+		
+	return row
 
 
 #Updates the board game_state vertically
