@@ -2,15 +2,14 @@
 import constants
 import mainMenu
 
-#Displays the rules
+#Get a list of the rules for the game
 #Params: None
-#Returns: None
-def displayRules():
-    #Get the window and turtle
-    turtle = constants.TURTLE
-
-	#Create a list for holding the rules
+#Returns: A list of rules
+def getRulesList():
+    #list for the rules
     rules = []
+
+    #Add the rules to the list
     rules.append("Reversi is a 2 player game that is played on an 8 x 8 grid. \n \n")
     rules.append("The game discs have both a black and white side. \n \n")
     rules.append("To win you have to have the majority of the discs changed to your color at the end of the game. \n \n")
@@ -21,17 +20,26 @@ def displayRules():
     rules.append("When placing your discs on your turn, there has to be at least one piece of the opposite colour between \n your placed piece and any of your previously placed pieces. Otherwise the move is not valid. ")
     rules.append("The placed pieces have to make either a horizontal, vertical or diagonal line with the opposing player's discs to flip any pieces over.")
 
+    return rules
+
+#Displays the rules
+#Params: None
+#Returns: None
+def displayRules():
+    #Get the window and turtle
+    turtle = constants.TURTLE
+
+	#Get the rules list
+    rules = getRulesList()
+
 	#Move the turtle to the appropriate location for the rules output
-    line = constants.RULES_LINESTARTY
+    rule_y = constants.RULES_LINESTARTY
     mainMenu.moveTurtle(turtle, constants.TITLE_LOCATIONX, constants.RULES_LINESTARTY)
 
 	#Go through the rules list
     for r in range(len(rules)):
-        #Each loop moves the next rule down 30 units
-        line -= 55
-
         #Move the turtle
-        mainMenu.moveTurtle(turtle, constants.RULES_LINESTARTX, line)
+        mainMenu.moveTurtle(turtle, constants.RULES_LINESTARTX, rule_y)
 
         #Format the line
         rule = "\n" + str(r + 1) + ") " + rules[r]
@@ -39,8 +47,8 @@ def displayRules():
         #Draw the rule
         turtle.write(rule, False, align = "left", font = ("Arial", 10, "normal"))
 
-        #Move back to the start of the line
-        mainMenu.moveTurtle(turtle, constants.RULES_LINESTARTX, line)
+        #Each loop moves the next rule down
+        rule_y -= constants.RULES_SHIFT
 
     #Draw a button
     mainMenu.drawButton(turtle, constants.BACK_BUTTON_LEFT_X, constants.BACK_BUTTON_TOP_Y, "Back")
@@ -60,6 +68,7 @@ def isBackClicked(x, y):
 def checkClicks(x, y):
     #Check if the back button was clicked
     if isBackClicked(x, y):
+        #Go back to the main menu
         mainMenu.main()
 
 def show():
