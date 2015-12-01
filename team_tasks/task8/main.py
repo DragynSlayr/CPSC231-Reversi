@@ -20,11 +20,11 @@ def start():
 	move_num = 0
 
 	#Determine who goes first
-	isPlayerMove = random.randint(0, 1) == 0
+	player_move = random.randint(0, 1) == 0
 
 	#Start listening for clicks on a board,
 	#BoardClick takes over the logic from here
-	boardClick.run(game_state, move_num, isPlayerMove)
+	boardClick.run(game_state, move_num, player_move)
 
 if __name__ == "__main__":
 	mainMenu.main()
