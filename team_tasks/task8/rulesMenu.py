@@ -66,7 +66,7 @@ def show():
     #Setup the window
     wn = constants.WINDOW
     wn.clear()
-    wn.tracer(10)
+    wn.tracer(constants.FRAME_TO_DRAW)
 
     #Show the rules
     displayRules()

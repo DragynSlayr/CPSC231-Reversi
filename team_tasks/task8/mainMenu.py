@@ -139,7 +139,7 @@ def main():
 	wn.setup(constants.WINDOW_WIDTH, constants.WINDOW_HEIGHT)
 	wn.setworldcoordinates(0, 0, constants.WINDOW_WIDTH, constants.WINDOW_HEIGHT)
 	wn.clear()
-	wn.tracer(10)
+	wn.tracer(constants.FRAME_TO_DRAW)
 
 	#Draw the main menu
 	showMenu()

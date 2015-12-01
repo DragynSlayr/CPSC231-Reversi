@@ -11,6 +11,9 @@ NUM_OF_CELLS = NUM_OF_ROWS * NUM_OF_COLUMNS
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 
+#Only mutiples of this frame of the animation will be drawn
+FRAME_TO_DRAW = 10
+
 #Cell information
 CELL_WIDTH = 50
 CELL_HEIGHT = 50
@@ -34,7 +37,7 @@ RULES_LINESTARTY = WINDOW_HEIGHT * (99 / 100) #Evaluates to 500
 #The y position of the rules
 RULES_LIST = WINDOW_HEIGHT / 2 #Evaluates to 300
 
-#The window and turtle
+#The window and turtle, not actually constants
 WINDOW = turtle.Screen()
 TURTLE = turtle.Turtle()
 

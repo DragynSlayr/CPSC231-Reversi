@@ -116,7 +116,7 @@ def main():
 
 	#Clear the screen
 	wn.clear()
-	wn.tracer(10)
+	wn.tracer(constants.FRAME_TO_DRAW)
 
 	#pre-set the turtle
 	grid.speed(0)
