@@ -1,7 +1,10 @@
-import BoardGenerator as bg
-import Constants
+#Checks each square in the grid and returns a list of valid of moves based on the current game state
 
 #Author: Anton Lysov
+
+
+import BoardGenerator as bg
+import Constants
 
 #Checks whether the coordiantes of the square are valid
 #Params: testedSquare: the square's coordianates
@@ -306,7 +309,7 @@ def mainSquareValidator(game_state, pieceColor):
 
 if __name__ == "__main__":
 
-    #TEST
+    #Test code
     sampleGameState = bg.generate(False, False)
     print(sampleGameState)
 
