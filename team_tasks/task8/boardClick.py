@@ -255,8 +255,8 @@ def run(state, move_num, isPlayerMove):
     #Set up the window
     wn = constants.WINDOW
     wn.onclick(placePiece)
-    wn.onkey(saveGame, "s")
-    wn.onkey(loadGame, "l")
-    wn.onkey(quitGame, "space")
+    wn.onkey(saveGame, constants.SAVE_KEY)
+    wn.onkey(loadGame, constants.LOAD_KEY)
+    wn.onkey(quitGame, constants.EXIT_KEY)
     wn.listen()
     wn.mainloop()

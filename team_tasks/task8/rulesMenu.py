@@ -76,6 +76,6 @@ def show():
 
 	#Allow clicking
     wn.onclick(checkClicks)
-    wn.onkey(wn.bye, "space")
+    wn.onkey(wn.bye, constants.EXIT_KEY)
     wn.listen()
     wn.mainloop()

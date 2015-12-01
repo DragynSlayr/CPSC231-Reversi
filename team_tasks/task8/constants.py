@@ -104,3 +104,8 @@ GAME_STATE_START = [
 ['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N'],
 ['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N'],
 ['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N']]
+
+#Keys that can be pressed during the game
+EXIT_KEY = "space"
+SAVE_KEY = "s"
+LOAD_KEY = "l"
