@@ -11,12 +11,17 @@ import listUpdater
 #It returns nothing
 #Author: Kyle Hinton
 def stringToPiece(game_state):
+	#Iterate through game state list
 	for y in range(len(game_state)):
 		for x in range(len(game_state[y])):
+			#Get column and row of position
 			column = constants.COLUMN_LETTERS[y]
 			row = constants.ROW_NUMBERS[x]
+
+			#Get piece at position
 			piece = game_state[x][y]
 
+			#Place piece or reset square at position
 			if piece == constants.PIECE_BLACK:
 				turtleMove.placePiece(column, row, "Black")
 			elif piece == constants.PIECE_WHITE:
@@ -31,7 +36,7 @@ def stringToPiece(game_state):
 def pieceToString(index):
 	column = constants.COLUMN_LETTERS[index % 8]
 	row = constants.ROW_NUMBERS[index // 8]
-	return str(column) + str(row)
+	return column + str(row)
 
 #This function will decide on the colour of the next piece based on whose turn number it is.
 #The takes a counter for the turns as a parameter.
@@ -47,24 +52,20 @@ def whoseTurn(counter):
 #It returns the updated string as new_state.
 #For testing, you can get the index number of the changed character with move_to_string
 #Author: Kyle Hinton
-def stringInterpret(game_state, NewMove, turn):
-		column = NewMove[0].upper()
-		row = int(NewMove[1])
+def stringInterpret(game_state, move, turn):
+	#Get letter and number from move
+	letter = move[0].upper()
+	number = int(move[1])
 
-		column_IDX = (constants.COLUMN_LETTERS.index(column))
-		row_IDX = (constants.ROW_NUMBERS.index(row))
+	#Get indices of the move
+	column_index = constants.COLUMN_LETTERS.index(letter)
+	row_index = constants.ROW_NUMBERS.index(number)
 
-		turn_colour = whoseTurn(turn)
+	#Get color of piece being placed
+	turn_colour = whoseTurn(turn)
 
-		new_state = game_state[:]
+	#Update the game state
+	new_state = listUpdater.updateGameState(game_state[:], move, turn_colour)
 
-		new_state = listUpdater.updateGameState(new_state, NewMove, turn_colour )
-
-		if whoseTurn(turn) == constants.PIECE_WHITE:
-			color = "White"
-		else:
-			color = "Black"
-
-		turtleMove.placePiece(column, row, color)
-
-		return new_state	#Return the updated game state
+	#Return the updated game state
+	return new_state
