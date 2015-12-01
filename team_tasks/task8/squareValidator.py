@@ -2,7 +2,7 @@
 
 #Author: Anton Lysov
 
-import Constants
+import constants
 
 #Checks whether the coordiantes of the square are valid
 #Params: testedSquare: the square's coordianates
@@ -54,29 +54,29 @@ def testPieceOnSquares(validMoves):
     return validMoves
 
 #Checks whether color of the input pieces are opposite
-#Params:        color: the color of the first piece
+#Params:   pieceColor: the color of the first piece
 #        colorToMatch: the color of the second piece
 #Returns: True
 #        False
-def oppositeColor(color, colorToMatch):
-    if (color == "Black" and colorToMatch == "isW" or
-        color == "White" and colorToMatch == "isB" or
-        color == "isW" and colorToMatch == "Black" or
-        color == "isB" and colorToMatch == "White"):
+def oppositeColor(pieceColor, colorToMatch):
+    if (pieceColor == "Black" and colorToMatch == "isW" or
+        pieceColor == "White" and colorToMatch == "isB" or
+        pieceColor == "isW"   and colorToMatch == "Black" or
+        pieceColor == "isB"   and colorToMatch == "White"):
         return True
-    elif (color == "Black" and colorToMatch == "isB" or
-          color == "White" and colorToMatch == "isW" or
-          color == "isB" and colorToMatch == "Black" or
-          color == "Black" and colorToMatch == "White"):
+    elif (pieceColor == "Black" and colorToMatch == "isB" or
+          pieceColor == "White" and colorToMatch == "isW" or
+          pieceColor == "isB"   and colorToMatch == "Black" or
+          pieceColor == "Black" and colorToMatch == "White"):
           return False
 
 
 #Checks whether there's a piece of opposite color in the NW from the tested square
 #Params: testedSquare: the square's coordianates
-#                color: the color of the piece
-#           validMoves: the current list of valid moves
+#          pieceColor: the color of the piece
+#          validMoves: the current list of valid moves
 #Returns: True
-def testColorNW(testedSquare, validMoves, color):
+def testColorNW(testedSquare, validMoves, pieceColor):
 
     testColorNW = [0,0,'']
     testColorNW[0] = testedSquare[0] - 1
@@ -90,17 +90,17 @@ def testColorNW(testedSquare, validMoves, color):
             if (validMoves[square][0] == testColorNW[0] and
                 validMoves[square][1] == testColorNW[1]):
 
-                if oppositeColor(color, validMoves[square][2]):
+                if oppositeColor(pieceColor, validMoves[square][2]):
                     return True
                 else:
                     return False
 
 #Checks whether there's a piece of opposite color in the N from the tested square
 #Params: testedSquare: the square's coordianates
-#                color: the color of the piece
-#           validMoves: the current list of valid moves
+#          pieceColor: the color of the piece
+#          validMoves: the current list of valid moves
 #Returns: True
-def testColorN(testedSquare, validMoves, color):
+def testColorN(testedSquare, validMoves, pieceColor):
 
     testColorN = [0,0,'']
     testColorN[0] = testedSquare[0]
@@ -114,15 +114,15 @@ def testColorN(testedSquare, validMoves, color):
             if (validMoves[square][0] == testColorN[0] and
                 validMoves[square][1] == testColorN[1]):
 
-                if oppositeColor(color, validMoves[square][2]):
+                if oppositeColor(pieceColor, validMoves[square][2]):
                     return True
 
 #Checks whether there's a piece of opposite color in the NE from the tested square
 #Params: testedSquare: the square's coordianates
-#                color: the color of the piece
-#           validMoves: the current list of valid moves
+#          pieceColor: the color of the piece
+#          validMoves: the current list of valid moves
 #Returns: True
-def testColorNE(testedSquare, validMoves, color):
+def testColorNE(testedSquare, validMoves, pieceColor):
 
     testColorNE = [0,0,'']
     testColorNE[0] = testedSquare[0] + 1
@@ -136,15 +136,15 @@ def testColorNE(testedSquare, validMoves, color):
             if (validMoves[square][0] == testColorNE[0] and
                 validMoves[square][1] == testColorNE[1]):
 
-                if oppositeColor(color, validMoves[square][2]):
+                if oppositeColor(pieceColor, validMoves[square][2]):
                     return True
 
 #Checks whether there's a piece of opposite color in the W from the tested square
 #Params: testedSquare: the square's coordianates
-#                color: the color of the piece
-#           validMoves: the current list of valid moves
+#          pieceColor: the color of the piece
+#          validMoves: the current list of valid moves
 #Returns: True
-def testColorW(testedSquare, validMoves, color):
+def testColorW(testedSquare, validMoves, pieceColor):
 
     testColorW = [0,0,'']
     testColorW[0] = testedSquare[0] - 1
@@ -158,15 +158,15 @@ def testColorW(testedSquare, validMoves, color):
             if (validMoves[square][0] == testColorW[0] and
                 validMoves[square][1] == testColorW[1]):
 
-                if oppositeColor(color, validMoves[square][2]):
+                if oppositeColor(pieceColor, validMoves[square][2]):
                     return True
 
 #Checks whether there's a piece of opposite color in the E from the tested square
 #Params: testedSquare: the square's coordianates
-#                color: the color of the piece
-#           validMoves: the current list of valid moves
+#          pieceColor: the pieceColor of the piece
+#          validMoves: the current list of valid moves
 #Returns: True
-def testColorE(testedSquare, validMoves, color):
+def testColorE(testedSquare, validMoves, pieceColor):
 
     testColorE = [0,0,'']
     testColorE[0] = testedSquare[0] + 1
@@ -180,15 +180,15 @@ def testColorE(testedSquare, validMoves, color):
             if (validMoves[square][0] == testColorE[0] and
                 validMoves[square][1] == testColorE[1]):
 
-                if oppositeColor(color, validMoves[square][2]):
+                if oppositeColor(pieceColor, validMoves[square][2]):
                     return True
 
 #Checks whether there's a piece of opposite color in the SW from the tested square
 #Params: testedSquare: the square's coordianates
-#                color: the color of the piece
-#           validMoves: the current list of valid moves
+#          pieceColor: the color of the piece
+#          validMoves: the current list of valid moves
 #Returns: True
-def testColorSW(testedSquare, validMoves, color):
+def testColorSW(testedSquare, validMoves, pieceColor):
 
     testColorSW = [0,0,'']
     testColorSW[0] = testedSquare[0] - 1
@@ -202,15 +202,15 @@ def testColorSW(testedSquare, validMoves, color):
             if (validMoves[square][0] == testColorSW[0] and
                 validMoves[square][1] == testColorSW[1]):
 
-                if oppositeColor(color, validMoves[square][2]):
+                if oppositeColor(pieceColor, validMoves[square][2]):
                     return True
 
 #Checks whether there's a piece of opposite color in the S from the tested square
 #Params: testedSquare: the square's coordianates
-#                color: the color of the piece
-#           validMoves: the current list of valid moves
+#          pieceColor: the color of the piece
+#          validMoves: the current list of valid moves
 #Returns: True
-def testColorS(testedSquare, validMoves, color):
+def testColorS(testedSquare, validMoves, pieceColor):
 
     testColorS = [0,0,'']
     testColorS[0] = testedSquare[0]
@@ -224,15 +224,15 @@ def testColorS(testedSquare, validMoves, color):
             if (validMoves[square][0] == testColorS[0] and
                 validMoves[square][1] == testColorS[1]):
 
-                if oppositeColor(color, validMoves[square][2]):
+                if oppositeColor(pieceColor, validMoves[square][2]):
                     return True
 
 #Checks whether there's a piece of opposite color in the SE from the tested square
 #Params: testedSquare: the square's coordianates
-#                color: the color of the piece
-#           validMoves: the current list of valid moves
+#          pieceColor: the color of the piece
+#          validMoves: the current list of valid moves
 #Returns: True
-def testColorSE(testedSquare, validMoves, color):
+def testColorSE(testedSquare, validMoves, pieceColor):
 
     testColorSE = [0,0,'']
     testColorSE[0] = testedSquare[0] + 1
@@ -246,7 +246,7 @@ def testColorSE(testedSquare, validMoves, color):
             if (validMoves[square][0] == testColorSE[0] and
                 validMoves[square][1] == testColorSE[1]):
 
-                if oppositeColor(color, validMoves[square][2]):
+                if oppositeColor(pieceColor, validMoves[square][2]):
                     return True
 
 #Checks for the opposite color squares around the tested square
@@ -287,7 +287,7 @@ def mainSquareValidator(game_state, pieceColor):
     #Checks the whole grid and makes the squares that already have a piece invalid
     validMoves = testPieceOnSquares(validMoves)
 
-    if pieceColor == Constants.PIECE_WHITE:
+    if pieceColor == constants.PIECE_WHITE:
         pieceColor = "White"
     else:
         pieceColor = "Black"
