@@ -30,7 +30,7 @@ def drawButton(turtle, x, y, label):
 
 	#Draw the button
 	moveTurtle(turtle, x, y)
-	for i in range(4):
+	for i in range(2):
 		turtle.forward(constants.BUTTON_WIDTH)
 		turtle.right(90)
 		turtle.forward(constants.BUTTON_HEIGHT)
@@ -81,19 +81,25 @@ def isButtonClicked(x, y):
 #Params: x, The x location to check
 #Returns: True if in the rules button, False otherwise
 def isRulesButton(x):
-	return x >= constants.RULES_BUTTON_LEFT_X and x <= constants.RULES_BUTTON_RIGHT_X
+	left_bound = x >= constants.RULES_BUTTON_LEFT_X
+	right_bound = x <= constants.RULES_BUTTON_RIGHT_X
+	return left_bound and right_bound
 
 #Checks if the x is over the play button
 #Params: x, The x location to check
 #Returns: True if in the play button, False otherwise
 def isPlayButton(x):
-	return x >= constants.PLAY_BUTTON_LEFT_X and x <= constants.PLAY_BUTTON_RIGHT_X
+	left_bound = x >= constants.PLAY_BUTTON_LEFT_X
+	right_bound = x <= constants.PLAY_BUTTON_RIGHT_X
+	return left_bound and right_bound
 
 #Checks if the x is over the exit button
 #Params: x, The x location to check
 #Returns: True if in the exit button, False otherwise
 def isExitButton(x):
-	return x >= constants.EXIT_BUTTON_LEFT_X and x <= constants.EXIT_BUTTON_RIGHT_X
+	left_bound = x >= constants.EXIT_BUTTON_LEFT_X
+	right_bound = x <= constants.EXIT_BUTTON_RIGHT_X
+	return left_bound and right_bound
 
 #Gets the index of the button that is clicked
 #Params: x, The x location of the click
@@ -116,17 +122,13 @@ def makeChoice(x, y):
 	#Check if a button is pressed
 	if isButtonClicked(x, y):
 		#Get the index of the clicked button
-		button = getClickedButton(x)
+		button_index = getClickedButton(x)
 
-		#Get the window
-		wn = constants.WINDOW
+		#Possible methods corresponding to button
+		button_commands = [rulesMenu.show, mainGame.start, sys.exit]
 
-		#Store options
-		options = [rulesMenu.show, mainGame.start, sys.exit]
-
-		#Call the desired method
-		if button >= 0:
-			options[button]()
+		#Call a method from the list of options
+		button_commands[button_index]()
 
 #Function shows the main menu and will show the desired menu
 #Function will not continue unless the user press's play
@@ -149,7 +151,7 @@ def main():
 
 	#Allow clicking
 	wn.onclick(makeChoice)
-	wn.onkey(wn.bye, "space")
+	wn.onkey(wn.bye, constants.EXIT_KEY)
 	wn.listen()
 	wn.mainloop()
 
