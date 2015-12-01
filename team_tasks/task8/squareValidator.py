@@ -1,42 +1,24 @@
-import constants
-
-#==================================================================================================================================
-#==================================================================================================================================
-#=================================================================DOCUMENTATION====================================================
-#==================================================================================================================================
-#==================================================================================================================================
+#Checks each square in the grid and returns a list of valid of moves based on the current game state
 
 #Author: Anton Lysov
 
-#The Idea: We create a list that consists of squares of the board and assume that all squares are valid moves.
-#After a series of validation tests we get a list of squares that only consists of valid steps (the state of the square is not valid to "Invalid").
-#So, the computer can randomly choose one of them and the player won't be able to click invalid squares.
+import Constants
 
+#Checks whether the coordiantes of the square are valid
+#Params: testedSquare: the square's coordianates
+#Returns: True
+def onTheBoard(testedSquare):
 
-#1ST STEP:
-#The program gets a game state as a string and converts it into a list using gameStateFromStringToList function
-
-#2nd STEP:
-#1ST VALIDATION: A piece cannot be placed on a square with another piece on it.
-               # The program will go over the whole grid and check whether there is aready a piece on a square or not
-               # using isAlreadyAPiece funciton. If not, then the state of the square will be changed to "Invalid"
-
-#2ND VALIDATION: A piece cannot be placed on a square that is not surrounded by at least one piece
-               # The program will go over the whole grid and check whether there is at least one piece of opposite color around the square that is checked.
-
-
-#The function checks whether the coordiantes of the square are valid or not.
-#The function returns True if the coordiantes of a testing square are valid.
-def onTheBoard(testingSquare):
-
-    if (testingSquare[0] >= 1 and
-        testingSquare[0] <= 8 and
-        testingSquare[1] >= 1 and
-        testingSquare[1] <= 8):
+    if (testedSquare[0] >= 1 and
+        testedSquare[0] <= 8 and
+        testedSquare[1] >= 1 and
+        testedSquare[1] <= 8):
 
         return True
 
-#The function gets a game state string and converts it into a list validMoves.
+#Gets a game state string and converts it into a list validMoves
+#Params: gameStateString: the current game state stored in a string
+#Returns: validMoves: the current list of valid moves
 def gameStateFromStringToList(gameStateString):
 
     #Creates initial list of possible valid steps
@@ -53,34 +35,29 @@ def gameStateFromStringToList(gameStateString):
 
     return validMoves
 
-
-#The function checks whether there's already a piece on a testing square or not. and returns True if conditions are met.
-#The funciton returns True if there's already a piece on a testing square.
-def isAlreadyAPiece(testingSquare):
-    if testingSquare[2] == "B" or testingSquare[2] == "W":
+#Checks whether there's already a piece on the tested square
+#Params: testedSquare: the square's coordianates
+#Returns: True
+def isAlreadyPieceOnSquare(testedSquare):
+    if testedSquare[2] == "B" or testedSquare[2] == "W":
         return True
 
-#The function checks whether there's already a piece on a testing square or not. and returns True if conditions are met.
-#The funciton changes the state of the square if there's already a piece on a testing square .
-def firstValidation(validMoves):
+#Checks the whole grid and makes the squares that already have a piece invalid
+#Params: validMoves: the current list of valid moves
+#Returns: validMoves: updated list of valid moves
+def testPieceOnSquares(validMoves):
 
     for square in range(len(validMoves)):
-        if isAlreadyAPiece(validMoves[square]) == True:
+        if isAlreadyPieceOnSquare(validMoves[square]) == True:
             validMoves[square][2] = "is" + validMoves[square][2]
 
     return validMoves
 
-
-#==============================================================================================================================
-#==============================================================================================================================
-#======================================================THE 2ND VALIDATION======================================================
-#==============================================================================================================================
-#==============================================================================================================================
-
-
-#The funciton gets the piece color that has to be placed on the board.
-#If the color is opposite to the color of the testing piece, the function returns True
-#If the color is the same to the color of the testing piece, the function returns False
+#Checks whether color of the input pieces are opposite
+#Params:        color: the color of the first piece
+#        colorToMatch: the color of the second piece
+#Returns: True
+#        False
 def oppositeColor(color, colorToMatch):
     if (color == "Black" and colorToMatch == "isW" or
         color == "White" and colorToMatch == "isB" or
@@ -93,15 +70,19 @@ def oppositeColor(color, colorToMatch):
           color == "Black" and colorToMatch == "White"):
           return False
 
-#The function checks whether whether there's a piece of opposite color in the NW from the testing square.
-#The funciton return True if there's a piece.
-def testColorNW(testingSquare, validMoves, color):
+
+#Checks whether there's a piece of opposite color in the NW from the tested square
+#Params: testedSquare: the square's coordianates
+#                color: the color of the piece
+#           validMoves: the current list of valid moves
+#Returns: True
+def testColorNW(testedSquare, validMoves, color):
 
     testColorNW = [0,0,'']
-    testColorNW[0] = testingSquare[0] - 1
-    testColorNW[1] = testingSquare[1] - 1
+    testColorNW[0] = testedSquare[0] - 1
+    testColorNW[1] = testedSquare[1] - 1
 
-    #looking for the state of the square with the same coordinates and checks if it's on the board and checks if it's empty
+    #looking for the state of the square with the same coordinates and checks whether it's on the board and empty
     if onTheBoard(testColorNW) == True:
 
         for square in range(len(validMoves)):
@@ -114,15 +95,18 @@ def testColorNW(testingSquare, validMoves, color):
                 else:
                     return False
 
-#The function checks whether whether there's a piece of opposite color in the N from the testing square.
-#The funciton return True if there's a piece.
-def testColorN(testingSquare, validMoves, color):
+#Checks whether there's a piece of opposite color in the N from the tested square
+#Params: testedSquare: the square's coordianates
+#                color: the color of the piece
+#           validMoves: the current list of valid moves
+#Returns: True
+def testColorN(testedSquare, validMoves, color):
 
     testColorN = [0,0,'']
-    testColorN[0] = testingSquare[0]
-    testColorN[1] = testingSquare[1] - 1
+    testColorN[0] = testedSquare[0]
+    testColorN[1] = testedSquare[1] - 1
 
-    #looking for the state of the square with the same coordinates and checks if it's on the board and checks if it's empty
+    #looking for the state of the square with the same coordinates and checks whether it's on the board and empty
     if onTheBoard(testColorN) == True:
 
         for square in range(len(validMoves)):
@@ -133,15 +117,18 @@ def testColorN(testingSquare, validMoves, color):
                 if oppositeColor(color, validMoves[square][2]):
                     return True
 
-#The function checks whether whether there's a piece of opposite color in the NE from the testing square.
-#The funciton return True if there's a piece.
-def testColorNE(testingSquare, validMoves, color):
+#Checks whether there's a piece of opposite color in the NE from the tested square
+#Params: testedSquare: the square's coordianates
+#                color: the color of the piece
+#           validMoves: the current list of valid moves
+#Returns: True
+def testColorNE(testedSquare, validMoves, color):
 
     testColorNE = [0,0,'']
-    testColorNE[0] = testingSquare[0] + 1
-    testColorNE[1] = testingSquare[1] - 1
+    testColorNE[0] = testedSquare[0] + 1
+    testColorNE[1] = testedSquare[1] - 1
 
-    #looking for the state of the square with the same coordinates and checks if it's on the board and checks if it's empty
+    #looking for the state of the square with the same coordinates and checks whether it's on the board and empty
     if onTheBoard(testColorNE) == True:
 
         for square in range(len(validMoves)):
@@ -152,15 +139,18 @@ def testColorNE(testingSquare, validMoves, color):
                 if oppositeColor(color, validMoves[square][2]):
                     return True
 
-#The function checks whether whether there's a piece of opposite color in the W from the testing square.
-#The funciton return True if there's a piece.
-def testColorW(testingSquare, validMoves, color):
+#Checks whether there's a piece of opposite color in the W from the tested square
+#Params: testedSquare: the square's coordianates
+#                color: the color of the piece
+#           validMoves: the current list of valid moves
+#Returns: True
+def testColorW(testedSquare, validMoves, color):
 
     testColorW = [0,0,'']
-    testColorW[0] = testingSquare[0] - 1
-    testColorW[1] = testingSquare[1]
+    testColorW[0] = testedSquare[0] - 1
+    testColorW[1] = testedSquare[1]
 
-    #looking for the state of the square with the same coordinates and checks if it's on the board and checks if it's empty
+    #looking for the state of the square with the same coordinates and checks whether it's on the board and empty
     if onTheBoard(testColorW) == True:
 
         for square in range(len(validMoves)):
@@ -171,15 +161,18 @@ def testColorW(testingSquare, validMoves, color):
                 if oppositeColor(color, validMoves[square][2]):
                     return True
 
-#The function checks whether whether there's a piece of opposite color in the E from the testing square.
-#The funciton return True if there's a piece.
-def testColorE(testingSquare, validMoves, color):
+#Checks whether there's a piece of opposite color in the E from the tested square
+#Params: testedSquare: the square's coordianates
+#                color: the color of the piece
+#           validMoves: the current list of valid moves
+#Returns: True
+def testColorE(testedSquare, validMoves, color):
 
     testColorE = [0,0,'']
-    testColorE[0] = testingSquare[0] + 1
-    testColorE[1] = testingSquare[1]
+    testColorE[0] = testedSquare[0] + 1
+    testColorE[1] = testedSquare[1]
 
-    #looking for the state of the square with the same coordinates and checks if it's on the board and checks if it's empty
+    #looking for the state of the square with the same coordinates and checks whether it's on the board and empty
     if onTheBoard(testColorE) == True:
 
         for square in range(len(validMoves)):
@@ -190,15 +183,18 @@ def testColorE(testingSquare, validMoves, color):
                 if oppositeColor(color, validMoves[square][2]):
                     return True
 
-#The function checks whether whether there's a piece of opposite color in the SW from the testing square.
-#The funciton return True if there's a piece.
-def testColorSW(testingSquare, validMoves, color):
+#Checks whether there's a piece of opposite color in the SW from the tested square
+#Params: testedSquare: the square's coordianates
+#                color: the color of the piece
+#           validMoves: the current list of valid moves
+#Returns: True
+def testColorSW(testedSquare, validMoves, color):
 
     testColorSW = [0,0,'']
-    testColorSW[0] = testingSquare[0] - 1
-    testColorSW[1] = testingSquare[1] + 1
+    testColorSW[0] = testedSquare[0] - 1
+    testColorSW[1] = testedSquare[1] + 1
 
-    #looking for the state of the square with the same coordinates and checks if it's on the board and checks if it's empty
+    #looking for the state of the square with the same coordinates and checks whether it's on the board and empty
     if onTheBoard(testColorSW) == True:
 
         for square in range(len(validMoves)):
@@ -209,15 +205,18 @@ def testColorSW(testingSquare, validMoves, color):
                 if oppositeColor(color, validMoves[square][2]):
                     return True
 
-#The function checks whether whether there's a piece of opposite color in the S from the testing square.
-#The funciton return True if there's a piece.
-def testColorS(testingSquare, validMoves, color):
+#Checks whether there's a piece of opposite color in the S from the tested square
+#Params: testedSquare: the square's coordianates
+#                color: the color of the piece
+#           validMoves: the current list of valid moves
+#Returns: True
+def testColorS(testedSquare, validMoves, color):
 
     testColorS = [0,0,'']
-    testColorS[0] = testingSquare[0]
-    testColorS[1] = testingSquare[1] + 1
+    testColorS[0] = testedSquare[0]
+    testColorS[1] = testedSquare[1] + 1
 
-    #looking for the state of the square with the same coordinates and checks if it's on the board and checks if it's empty
+    #looking for the state of the square with the same coordinates and checks whether it's on the board and empty
     if onTheBoard(testColorS) == True:
 
         for square in range(len(validMoves)):
@@ -228,15 +227,18 @@ def testColorS(testingSquare, validMoves, color):
                 if oppositeColor(color, validMoves[square][2]):
                     return True
 
-#The function checks whether whether there's a piece of opposite color in the SE from the testing square.
-#The funciton return True if there's a piece.
-def testColorSE(testingSquare, validMoves, color):
+#Checks whether there's a piece of opposite color in the SE from the tested square
+#Params: testedSquare: the square's coordianates
+#                color: the color of the piece
+#           validMoves: the current list of valid moves
+#Returns: True
+def testColorSE(testedSquare, validMoves, color):
 
     testColorSE = [0,0,'']
-    testColorSE[0] = testingSquare[0] + 1
-    testColorSE[1] = testingSquare[1] + 1
+    testColorSE[0] = testedSquare[0] + 1
+    testColorSE[1] = testedSquare[1] + 1
 
-    #looking for the state of the square with the same coordinates and checks if it's on the board and checks if it's empty
+    #looking for the state of the square with the same coordinates and checks whether it's on the board and empty
     if onTheBoard(testColorSE) == True:
 
         for square in range(len(validMoves)):
@@ -247,10 +249,11 @@ def testColorSE(testingSquare, validMoves, color):
                 if oppositeColor(color, validMoves[square][2]):
                     return True
 
-
-#The function gets the color of a piece and is looking for squares with an opposite piece color on it
-#The function returns a list of squares where that piece can be placed
-def secondValidation(validMoves, pieceColor):
+#Checks for the opposite color squares around the tested square
+#Params: validMoves: the current list of valid moves
+#        pieceColor: the color of the piece
+#Returns: listOfValidMoves: updated list of valid moves
+def testColorAroundSquare(validMoves, pieceColor):
     for square in range(len(validMoves)):
         if validMoves[square][2] == "N":
             if (testColorNW(validMoves[square], validMoves, pieceColor) != True and
@@ -272,30 +275,25 @@ def secondValidation(validMoves, pieceColor):
 
     return listOfValidMoves
 
-
-#==============================================================================================================================
-#==============================================================================================================================
-#======================================================THE MAIN FUNCTION=======================================================
-#==============================================================================================================================
-#==============================================================================================================================
-
-
-#the main function
+#The main function.
+#Params: game_state: the current game state stored in a string
+#        pieceColor: the color of the piece placed on the tested square
+#Returns: movesList: list of valid moves
 def mainSquareValidator(game_state, pieceColor):
 
-    #The program gets a game state as a string and converts it into a validMoves list
+    #Gets a game state string and converts it into a list validMoves
     validMoves = gameStateFromStringToList(game_state)
 
-    #The program will go over the whole grid and check whether there is aready a piece on a square or not
-    validMoves = firstValidation(validMoves)
+    #Checks the whole grid and makes the squares that already have a piece invalid
+    validMoves = testPieceOnSquares(validMoves)
 
-    if pieceColor == constants.PIECE_WHITE:
+    if pieceColor == Constants.PIECE_WHITE:
         pieceColor = "White"
     else:
         pieceColor = "Black"
 
-    #The program will go over the whole grid and check whether there is at least one piece of opposite color around the square that is checked.
-    listOfValidMoves = secondValidation(validMoves, pieceColor)
+    #Checks the whole grid and makes the squares that already have a piece invalid
+    listOfValidMoves = testColorAroundSquare(validMoves, pieceColor)
 
     movesList = []
 
