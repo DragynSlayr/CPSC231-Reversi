@@ -9,7 +9,7 @@ def removeNewLine(line):
     new_line = ""
     for i in range(len(line)):
         if line[i] == "\n":
-            #Exclude just the \n character, which counts as only one indx in the string
+            #Exclude just the \n character, which counts as only one index in the string
             new_line = line[:i] + line[i + 1:]
     return new_line
 
@@ -28,17 +28,25 @@ def findVarLine(lines, name):
             #Return the string
             return stripped
 
+def getFileLines(file_name = "variables.txt"):
+    #Open a file for reading and writing
+    var_file = open(file_name, "r")
+
+    #Read each line and store it as a list element
+    lines = var_file.readlines()
+
+    #Close the file
+    var_file.close()
+
+    return lines
+
 #Writes a variable to variables.txt
 #Params: name, The name of the variable to write
 #        value, The value of the variable to write, must be String
 #        file_name, The name of the file, defaults to variables.txr
 #Returns: None
 def saveVariable(name, value, file_name = "variables.txt"):
-    #Open a file for reading and writing
-    var_file = open(file_name, "r+")
-
-    #Read each line and store it as a list element
-    lines = var_file.readlines()
+    lines = getFileLines(file_name)
 
     #Initialize a list
     line_list = []
@@ -57,10 +65,7 @@ def saveVariable(name, value, file_name = "variables.txt"):
     open(file_name, "w").close()
 
     #Reopen the file
-    var_file = open(file_name, "r+")
-
-    #Go to the beginning
-    var_file.seek(0)
+    var_file = open(file_name, "w")
 
     #Writes the list
     var_file.writelines(line_list)
