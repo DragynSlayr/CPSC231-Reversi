@@ -114,6 +114,66 @@ def computerTurn(state, move_num):
         #Make the move
         return listInterpret.stringInterpret(state, move, move_num)
 
+#Displays an ending message and clears the temporary file
+#Params: game_state, The state of the game
+#Returns: None
+def finishGame(game_state):
+    #Print who won
+    game_status = playerVictory.playerWon(game_state)
+    screenWriter.writeMessage(game_status)
+
+    #Wait for user
+    constants.WINDOW.exitonclick()
+
+    #Reset state and move
+    fileHandler.saveVariable("State", "")
+    fileHandler.saveVariable("Move", "")
+
+#Changes variables needed for a move
+#Params: None
+#Returns: A tuple of (game_state, move_num)
+def startMove():
+    #Save variable
+    fileHandler.saveVariable("Moving", "True")
+
+    #Load the variables we need
+    game_state = converter.toList(fileHandler.loadVariable("State"))
+    move_num = int(fileHandler.loadVariable("Move"))
+
+    #Return game_state and move_num as a tuple
+    return (game_state, move_num)
+
+#Saves state and move number to a file,
+#as well as updating the score board and showing valid moves
+#Params: game_state, The state of the game
+#        move_num, The number of the move
+#Returns: None
+def endMove(game_state, move_num):
+    #Save the variables
+    fileHandler.saveVariable("State", converter.toString(game_state))
+    fileHandler.saveVariable("Move", str(move_num))
+
+    #Update the scoreboard
+    updateScoreBoard(game_state)
+
+    #Show possible moves
+    displayValidMoves(game_state, move_num)
+
+#Makes the player's move visible
+#Params: game_state, The game state
+#        move, The move being made
+#        move_num, The current move number
+#Returns: move_num + 1
+def makePlayerMove(game_state, move, move_num):
+    #Clear space at move
+    turtleMove.resetSquare(move)
+
+    #Update the game state
+    game_state = listInterpret.stringInterpret(game_state, move, move_num)
+
+    #Return the new move number
+    return move_num + 1
+
 #Places a piece at a location if it is a cell
 #Params: x, The x location to check
 #        y, The y location to check
@@ -121,58 +181,32 @@ def computerTurn(state, move_num):
 def placePiece(x, y):
     #Make sure a move is not being made
     if fileHandler.loadVariable("Moving") == "False":
-        #Save variable
-        fileHandler.saveVariable("Moving", "True")
-
-        #Load the variables we need
-        game_state = converter.toList(fileHandler.loadVariable("State"))
-        move_num = int(fileHandler.loadVariable("Move"))
+        #Get the variables for the start of the move
+        game_state, move_num = startMove()
 
         #Make sure the game is not over
-        if victoryStatus.endGameStatus(game_state) != True:
+        if not victoryStatus.endGameStatus(game_state):
+            #Get the move
+            move = getMove(x, y)
+
             #Check if the point is valid
-            if isValidSquare(x, y):
-                #Get the move from the click
-                move = getMove(x, y)
+            if isValidSquare(x, y) and isValidMove(game_state, move, move_num):
+                #Make the player's move
+                move_num = makePlayerMove(game_state, move, move_num)
 
-                #Make sure a piece is not in this location and the move is valid
-                if isValidMove(game_state, move, move_num):
-                    #Clear space at move
-                    turtleMove.resetSquare(move)
+                #Check if the game is over
+                if not victoryStatus.endGameStatus(game_state):
+                    #Small delay
+                    time.sleep(1)
 
-                    #Update the game state
-                    game_state = listInterpret.stringInterpret(game_state, move, move_num)
+                    #Let the computer make a turn
+                    game_state = computerTurn(game_state, move_num)
                     move_num += 1
 
-                    #Check if the game is over
-                    if not victoryStatus.endGameStatus(game_state):
-                        #Small delay
-                        time.sleep(1)
-
-                        #Let the computer make a turn
-                        game_state = computerTurn(game_state, move_num)
-                        move_num += 1
-
-                    #Save the variables
-                    fileHandler.saveVariable("State", converter.toString(game_state))
-                    fileHandler.saveVariable("Move", str(move_num))
-
-                    #Update the scoreboard
-                    updateScoreBoard(game_state)
-
-                    #Show possible moves
-                    displayValidMoves(game_state, move_num)
+                #End the move
+                endMove(game_state, move_num)
         else:
-            #Print who won
-            game_status = playerVictory.playerWon(game_state)
-            screenWriter.writeMessage(game_status)
-
-            #Wait for user
-            constants.WINDOW.exitonclick()
-
-            #Reset state and move
-            fileHandler.saveVariable("State", "")
-            fileHandler.saveVariable("Move", "")
+            finishGame(game_state)
 
         #Save variable
         fileHandler.saveVariable("Moving", "False")
@@ -231,24 +265,24 @@ def quitGame():
 
 #The main loop of the function
 #Waits for input from the user
-#Params: state, The current game state
+#Params: game_state, The current game state
 #        move_num, The current move number
-#        isPlayerMove, Whether it is the player's move or not
+#        player_move, Whether it is the player's move or not
 #Returns: None
-def run(state, move_num, isPlayerMove):
+def run(game_state, move_num, player_move):
     #Allow the computer to make it's move
-    if not isPlayerMove:
-        state = computerTurn(state, move_num)
+    if not player_move:
+        state = computerTurn(game_state, move_num)
         move_num += 1
 
     #Update the scoreboard
-    updateScoreBoard(state)
+    updateScoreBoard(game_state)
 
     #Show possible moves
-    displayValidMoves(state, move_num)
+    displayValidMoves(game_state, move_num)
 
     #Save variables to be used later
-    fileHandler.saveVariable("State", converter.toString(state))
+    fileHandler.saveVariable("State", converter.toString(game_state))
     fileHandler.saveVariable("Move", str(move_num))
     fileHandler.saveVariable("Moving", "False")
 
