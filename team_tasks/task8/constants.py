@@ -12,7 +12,7 @@ WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 
 #Only mutiples of this frame of the animation will be drawn
-FRAME_TO_DRAW = 10
+FRAME_TO_DRAW = 1000
 
 #Cell information
 CELL_WIDTH = 50
@@ -43,6 +43,9 @@ TURTLE = turtle.Turtle()
 PIECE_BLACK = 'B'
 PIECE_WHITE = 'W'
 PIECE_NONE = 'N'
+
+#A valid move will always change more pieces than this
+PIECE_CHANGE_THRESHOLD = 1
 
 #Information for the boards coordinates
 #The board is drawn between:
