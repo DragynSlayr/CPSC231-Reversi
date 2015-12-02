@@ -70,7 +70,7 @@ def stringInterpret(game_state, NewMove, turn):
 		else:
 			color = "Black"
 
-		TurtleMove.placePiece(column, row, color)
+#		TurtleMove.placePiece(column, row, color)
 
 		if __name__ == "__main__":
 			#TESTING TESTING TESTING

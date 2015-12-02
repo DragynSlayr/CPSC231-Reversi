@@ -186,7 +186,7 @@ def promptMove():
 # Returns: None
 def setup():
 	#Draws the board
-	ReversiGrid.main()
+	reversiGrid.main()
 
 	#Places starting pieces for Reversi
 	placePiece("D", 4, "black")
@@ -196,5 +196,5 @@ def setup():
 
 #Only run this file if it is the main file
 if __name__ == "__main__":
-	setup()
+#	setup()
 	promptMove()
