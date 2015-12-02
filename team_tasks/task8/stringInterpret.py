@@ -45,6 +45,19 @@ def whoseTurn(counter):
 	else:
 		return "B"
 
+#This function takes the move entry and returns the string Index.
+#Parameter: the move entry like "A7"
+#Returns string index
+
+def moveToIndex(NewMove):
+	column = NewMove[0].upper()
+	row = int(NewMove[1])
+
+	column_IDX = (constants.COLUMN_LETTERS.index(column))
+	row_IDX = (constants.ROW_NUMBERS.index(row))
+ 	#Equation for converting a move coordinate to the index number to be changed
+	moveIDX = ((row_IDX * constants.NUM_OF_ROWS) + column_IDX)
+
 #This function will convert a move coordinate into a string.
 #It receives the parameters are a game state, a move coordinate, and the turn number.
 #It returns the updated string as new_state.

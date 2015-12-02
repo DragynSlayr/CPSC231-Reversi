@@ -836,13 +836,13 @@ def testProgram():
 	print("CHECK ALL CHECK ALL CHECK ALL".center(27))
 	print("___________________________")
 	print("TEST 2 TEST 2 TEST 2 TEST 2\n".center(27))
-	testFunction(directionStrCheck, "WBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", 63, "W")
+	testFunction(directionStrCheck, "WBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", "C5", 3)
 
 	input()
 	print("CHECK ALL CHECK ALL CHECK ALL".center(27))
 	print("___________________________")
 	print("TEST 3 TEST 3 TEST 3 TEST 3\n".center(27))
-	testFunction(directionStrCheck, "WWWWWBWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", 5, "W")
+	testFunction(directionStrCheck, "WWWWWBWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", "E6", 4)
 
 def setup2():
 
