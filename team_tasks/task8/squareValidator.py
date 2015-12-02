@@ -71,16 +71,18 @@ def oppositeColor(pieceColor, colorToMatch):
           return False
 
 
-#Checks whether there's a piece of opposite color in the NW from the tested square
+#Checks whether there's a piece of opposite color in the position from the tested square
 #Params: testedSquare: the square's coordianates
 #          pieceColor: the color of the piece
 #          validMoves: the current list of valid moves
+#       horizontalPos: the horizontal coordinate of the tested square
+#         verticalPos: the vertical coordinate of the tested square
 #Returns: True
-def testColorNW(testedSquare, validMoves, pieceColor):
+def testColor(testedSquare, validMoves, pieceColor, horizontalPos, verticalPos):
 
     testColorNW = [0,0,'']
-    testColorNW[0] = testedSquare[0] - 1
-    testColorNW[1] = testedSquare[1] - 1
+    testColorNW[0] = testedSquare[0] + horizontalPos
+    testColorNW[1] = testedSquare[1] + verticalPos
 
     #looking for the state of the square with the same coordinates and checks whether it's on the board and empty
     if onTheBoard(testColorNW) == True:
@@ -95,160 +97,6 @@ def testColorNW(testedSquare, validMoves, pieceColor):
                 else:
                     return False
 
-#Checks whether there's a piece of opposite color in the N from the tested square
-#Params: testedSquare: the square's coordianates
-#          pieceColor: the color of the piece
-#          validMoves: the current list of valid moves
-#Returns: True
-def testColorN(testedSquare, validMoves, pieceColor):
-
-    testColorN = [0,0,'']
-    testColorN[0] = testedSquare[0]
-    testColorN[1] = testedSquare[1] - 1
-
-    #looking for the state of the square with the same coordinates and checks whether it's on the board and empty
-    if onTheBoard(testColorN) == True:
-
-        for square in range(len(validMoves)):
-
-            if (validMoves[square][0] == testColorN[0] and
-                validMoves[square][1] == testColorN[1]):
-
-                if oppositeColor(pieceColor, validMoves[square][2]):
-                    return True
-
-#Checks whether there's a piece of opposite color in the NE from the tested square
-#Params: testedSquare: the square's coordianates
-#          pieceColor: the color of the piece
-#          validMoves: the current list of valid moves
-#Returns: True
-def testColorNE(testedSquare, validMoves, pieceColor):
-
-    testColorNE = [0,0,'']
-    testColorNE[0] = testedSquare[0] + 1
-    testColorNE[1] = testedSquare[1] - 1
-
-    #looking for the state of the square with the same coordinates and checks whether it's on the board and empty
-    if onTheBoard(testColorNE) == True:
-
-        for square in range(len(validMoves)):
-
-            if (validMoves[square][0] == testColorNE[0] and
-                validMoves[square][1] == testColorNE[1]):
-
-                if oppositeColor(pieceColor, validMoves[square][2]):
-                    return True
-
-#Checks whether there's a piece of opposite color in the W from the tested square
-#Params: testedSquare: the square's coordianates
-#          pieceColor: the color of the piece
-#          validMoves: the current list of valid moves
-#Returns: True
-def testColorW(testedSquare, validMoves, pieceColor):
-
-    testColorW = [0,0,'']
-    testColorW[0] = testedSquare[0] - 1
-    testColorW[1] = testedSquare[1]
-
-    #looking for the state of the square with the same coordinates and checks whether it's on the board and empty
-    if onTheBoard(testColorW) == True:
-
-        for square in range(len(validMoves)):
-
-            if (validMoves[square][0] == testColorW[0] and
-                validMoves[square][1] == testColorW[1]):
-
-                if oppositeColor(pieceColor, validMoves[square][2]):
-                    return True
-
-#Checks whether there's a piece of opposite color in the E from the tested square
-#Params: testedSquare: the square's coordianates
-#          pieceColor: the pieceColor of the piece
-#          validMoves: the current list of valid moves
-#Returns: True
-def testColorE(testedSquare, validMoves, pieceColor):
-
-    testColorE = [0,0,'']
-    testColorE[0] = testedSquare[0] + 1
-    testColorE[1] = testedSquare[1]
-
-    #looking for the state of the square with the same coordinates and checks whether it's on the board and empty
-    if onTheBoard(testColorE) == True:
-
-        for square in range(len(validMoves)):
-
-            if (validMoves[square][0] == testColorE[0] and
-                validMoves[square][1] == testColorE[1]):
-
-                if oppositeColor(pieceColor, validMoves[square][2]):
-                    return True
-
-#Checks whether there's a piece of opposite color in the SW from the tested square
-#Params: testedSquare: the square's coordianates
-#          pieceColor: the color of the piece
-#          validMoves: the current list of valid moves
-#Returns: True
-def testColorSW(testedSquare, validMoves, pieceColor):
-
-    testColorSW = [0,0,'']
-    testColorSW[0] = testedSquare[0] - 1
-    testColorSW[1] = testedSquare[1] + 1
-
-    #looking for the state of the square with the same coordinates and checks whether it's on the board and empty
-    if onTheBoard(testColorSW) == True:
-
-        for square in range(len(validMoves)):
-
-            if (validMoves[square][0] == testColorSW[0] and
-                validMoves[square][1] == testColorSW[1]):
-
-                if oppositeColor(pieceColor, validMoves[square][2]):
-                    return True
-
-#Checks whether there's a piece of opposite color in the S from the tested square
-#Params: testedSquare: the square's coordianates
-#          pieceColor: the color of the piece
-#          validMoves: the current list of valid moves
-#Returns: True
-def testColorS(testedSquare, validMoves, pieceColor):
-
-    testColorS = [0,0,'']
-    testColorS[0] = testedSquare[0]
-    testColorS[1] = testedSquare[1] + 1
-
-    #looking for the state of the square with the same coordinates and checks whether it's on the board and empty
-    if onTheBoard(testColorS) == True:
-
-        for square in range(len(validMoves)):
-
-            if (validMoves[square][0] == testColorS[0] and
-                validMoves[square][1] == testColorS[1]):
-
-                if oppositeColor(pieceColor, validMoves[square][2]):
-                    return True
-
-#Checks whether there's a piece of opposite color in the SE from the tested square
-#Params: testedSquare: the square's coordianates
-#          pieceColor: the color of the piece
-#          validMoves: the current list of valid moves
-#Returns: True
-def testColorSE(testedSquare, validMoves, pieceColor):
-
-    testColorSE = [0,0,'']
-    testColorSE[0] = testedSquare[0] + 1
-    testColorSE[1] = testedSquare[1] + 1
-
-    #looking for the state of the square with the same coordinates and checks whether it's on the board and empty
-    if onTheBoard(testColorSE) == True:
-
-        for square in range(len(validMoves)):
-
-            if (validMoves[square][0] == testColorSE[0] and
-                validMoves[square][1] == testColorSE[1]):
-
-                if oppositeColor(pieceColor, validMoves[square][2]):
-                    return True
-
 #Checks for the opposite color squares around the tested square
 #Params: validMoves: the current list of valid moves
 #        pieceColor: the color of the piece
@@ -256,14 +104,14 @@ def testColorSE(testedSquare, validMoves, pieceColor):
 def testColorAroundSquare(validMoves, pieceColor):
     for square in range(len(validMoves)):
         if validMoves[square][2] == "N":
-            if (testColorNW(validMoves[square], validMoves, pieceColor) != True and
-                testColorN(validMoves[square], validMoves, pieceColor)  != True and
-                testColorNE(validMoves[square], validMoves, pieceColor) != True and
-                testColorW(validMoves[square], validMoves, pieceColor)  != True and
-                testColorE(validMoves[square], validMoves, pieceColor)  != True and
-                testColorSW(validMoves[square], validMoves, pieceColor) != True and
-                testColorS(validMoves[square], validMoves, pieceColor)  != True and
-                testColorSE(validMoves[square], validMoves, pieceColor) != True):
+            if (testColor(validMoves[square], validMoves, pieceColor, -1, -1) != True and  #tests the North-West
+                testColor(validMoves[square], validMoves, pieceColor,  0, -1) != True and  #tests the North
+                testColor(validMoves[square], validMoves, pieceColor,  1, -1) != True and  #tests the North-East
+                testColor(validMoves[square], validMoves, pieceColor, -1,  0) != True and  #tests the West
+                testColor(validMoves[square], validMoves, pieceColor,  1,  0) != True and  #tests the East
+                testColor(validMoves[square], validMoves, pieceColor, -1,  1) != True and  #tests the South-West
+                testColor(validMoves[square], validMoves, pieceColor,  0,  1) != True and  #tests the South
+                testColor(validMoves[square], validMoves, pieceColor,  1,  1) != True):    #tests the South-East
 
                 validMoves[square][2] = "Invalid"
 
