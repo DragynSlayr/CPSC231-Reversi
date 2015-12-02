@@ -2,6 +2,7 @@
 import constants
 import turtleMove
 import listInterpret
+import listUpdater
 import stringMove
 import victoryStatus
 import playerVictory
@@ -39,14 +40,49 @@ def getMove(x, y):
 
     return move
 
+def countUpdatedPieces(game_state, move, move_num):
+    #Create a deep copy of game state
+    state_string = converter.toString(game_state)
+    copy_state = converter.toList(state_string)
+
+    piece = listInterpret.whoseTurn(move_num)
+    changed_state = listUpdater.updateGameState(copy_state, move, piece, False)
+
+    change_count = 0
+    for i in range(len(game_state)):
+        for j in range(len(game_state[i])):
+            if game_state[i][j] != changed_state[i][j]:
+                change_count += 1
+
+    return change_count
+
+
 #Gets valid moves depending on state and move number
 #Params: state, The game state
 #        move_num, The current move numbers
 #Returns: Possible moves for move number
 def getMovesForTurn(state, move_num):
-    piece = listInterpret.whoseTurn(move_num)
-    string_state = converter.toString(state)
-    return squareValidator.mainSquareValidator(string_state, piece)
+    #piece = listInterpret.whoseTurn(move_num)
+    #string_state = converter.toString(state)
+    #return squareValidator.mainSquareValidator(string_state, piece)
+
+    moves_list = []
+
+    for i in range(len(state)):
+        for j in range(len(state[i])):
+            letter = constants.COLUMN_LETTERS[i]
+            number = constants.ROW_NUMBERS[j]
+            move = letter + str(number)
+
+            changes = countUpdatedPieces(state, move, move_num)
+
+            if changes == 0 or changes > 1:
+                print(move + ": " + str(changes))
+
+            if changes > constants.PIECE_CHANGE_THRESHOLD:
+                moves_list.append(move)
+
+    return moves_list
 
 #Displays all valid moves to the board
 #Params: state, Current game state
@@ -54,7 +90,7 @@ def getMovesForTurn(state, move_num):
 #Returns: None
 def displayValidMoves(state, move_num):
     valid_moves = getMovesForTurn(state, move_num)
-    turtleMove.displayValidMoves(valid_moves)
+    turtleMove.displayValidMoves(valid_moves, state)
 
 #Checks if a move is valid
 #Params: state, The game state
@@ -186,11 +222,11 @@ def placePiece(x, y):
 
         #Make sure the game is not over
         if not victoryStatus.endGameStatus(game_state):
-            #Get the move
-            move = getMove(x, y)
-
             #Check if the point is valid
-            if isValidSquare(x, y) and isValidMove(game_state, move, move_num):
+            if isValidSquare(x, y) and isValidMove(game_state, getMove(x, y), move_num):
+                #Get the move
+                move = getMove(x, y)
+
                 #Make the player's move
                 move_num = makePlayerMove(game_state, move, move_num)
 
