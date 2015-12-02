@@ -112,7 +112,7 @@ def computerTurn(state, move_num):
         move = valid_moves[random_num]
 
         #Make the move
-        return listInterpret.stringInterpret(state, move, move_num)
+        return listInterpret.listInterpret(state, move, move_num)
 
 #Displays an ending message and clears the temporary file
 #Params: game_state, The state of the game
@@ -169,7 +169,7 @@ def makePlayerMove(game_state, move, move_num):
     turtleMove.resetSquare(move)
 
     #Update the game state
-    game_state = listInterpret.stringInterpret(game_state, move, move_num)
+    game_state = listInterpret.listInterpret(game_state, move, move_num)
 
     #Return the new move number
     return move_num + 1
@@ -239,7 +239,7 @@ def loadGame():
     saved_state = converter.toList(saved_state)
 
     #Load board configuration
-    listInterpret.stringToPiece(saved_state)
+    listInterpret.listToPiece(saved_state)
 
     #Update the scoreboard
     updateScoreBoard(saved_state)

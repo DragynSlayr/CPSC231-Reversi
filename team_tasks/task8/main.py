@@ -14,7 +14,7 @@ def start():
 	game_state = constants.GAME_STATE_START
 
 	#Place the pieces from the starting board
-	listInterpret.stringToPiece(game_state)
+	listInterpret.listToPiece(game_state)
 
 	#The number of moves made so far
 	move_num = 0

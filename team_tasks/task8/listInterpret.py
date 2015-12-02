@@ -10,7 +10,7 @@ import listUpdater
 #It takes the game state, which is a 64 character string
 #It returns nothing
 #Author: Kyle Hinton
-def stringToPiece(game_state):
+def listToPiece(game_state):
 	#Iterate through game state list
 	for y in range(len(game_state)):
 		for x in range(len(game_state[y])):
@@ -52,7 +52,7 @@ def whoseTurn(counter):
 #It returns the updated string as new_state.
 #For testing, you can get the index number of the changed character with move_to_string
 #Author: Kyle Hinton
-def stringInterpret(game_state, move, turn):
+def listInterpret(game_state, move, turn):
 	#Get letter and number from move
 	letter = move[0].upper()
 	number = int(move[1])
