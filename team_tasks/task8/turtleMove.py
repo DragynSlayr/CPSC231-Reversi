@@ -2,6 +2,7 @@
 import string
 import constants
 import reversiGrid
+import listUpdater
 
 #Holds all valid moves that have been displayed
 SHOWN_MOVES = []
@@ -36,12 +37,24 @@ def resetSquare(move):
 #Draw all valid moves to the board
 #Params: valid_moves, The moves to draw
 #Returns: None
-def displayValidMoves(valid_moves):
+def displayValidMoves(valid_moves, state):
 	global SHOWN_MOVES
+
 	for move in valid_moves:
+		converted_move = listUpdater.convertMove(move)
+		x = converted_move[0] - 1
+		y = converted_move[1] - 1
+
 		if move not in SHOWN_MOVES:
-			placePiece(move[0], int(move[1]), "#34DDDD")
-			SHOWN_MOVES.append(move)
+			if state[x][y] == constants.PIECE_NONE:
+				placePiece(move[0], int(move[1]), "#34DDDD")
+				SHOWN_MOVES.append(move)
+			else:
+				if state[x][y] == constants.PIECE_BLACK:
+					color = "Black"
+				else:
+					color = "White"
+				placePiece(move[0], int(move[1]), color)
 
 # Removes spaces and punctuation from a string
 # Params: location, the string to strip
@@ -186,7 +199,7 @@ def promptMove():
 # Returns: None
 def setup():
 	#Draws the board
-	reversiGrid.main()
+	ReversiGrid.main()
 
 	#Places starting pieces for Reversi
 	placePiece("D", 4, "black")
@@ -196,5 +209,5 @@ def setup():
 
 #Only run this file if it is the main file
 if __name__ == "__main__":
-#	setup()
+	setup()
 	promptMove()
