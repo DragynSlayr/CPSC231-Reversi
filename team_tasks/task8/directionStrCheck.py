@@ -755,22 +755,23 @@ def OtherColour(turn_colour):
 #returns: Updated string with new pieces.
 def directionStrCheck(game_state, NewMove, turn, isTesting = False):
 	new_state = stringInterpret.stringInterpret(game_state, NewMove, turn)
+	moveID = stringInterpret.moveToIndex(NewMove)
 	print(new_state, "Move")
-	new_state = CheckSouth(new_state, stringInterpret.moveToIndex(NewMove), stringInterpret.whoseTurn(turn))
+	new_state = CheckSouth(new_state, moveID, stringInterpret.whoseTurn(turn))
 	print (new_state, "South")
-	new_state = CheckNorth(new_state, stringInterpret.moveToIndex(NewMove), stringInterpret.whoseTurn(turn))
+	new_state = CheckNorth(new_state, moveID, stringInterpret.whoseTurn(turn))
 	print (new_state, "North")
-	new_state = CheckWest(new_state, stringInterpret.moveToIndex(NewMove), stringInterpret.whoseTurn(turn))
+	new_state = CheckWest(new_state, moveID, stringInterpret.whoseTurn(turn))
 	print (new_state, "West")
-	new_state = CheckEast(new_state, stringInterpret.moveToIndex(NewMove), stringInterpret.whoseTurn(turn))
+	new_state = CheckEast(new_state, moveID, stringInterpret.whoseTurn(turn))
 	print (new_state, "East")
-	new_state = CheckNorthWest(new_state, stringInterpret.moveToIndex(NewMove), stringInterpret.whoseTurn(turn))
+	new_state = CheckNorthWest(new_state, moveID, stringInterpret.whoseTurn(turn))
 	print (new_state, "NorthWest")
-	new_state = CheckNorthEast(new_state, stringInterpret.moveToIndex(NewMove), stringInterpret.whoseTurn(turn))
+	new_state = CheckNorthEast(new_state, moveID, stringInterpret.whoseTurn(turn))
 	print (new_state, "NorthEast")
-	new_state = CheckSouthWest(new_state, stringInterpret.moveToIndex(NewMove), stringInterpret.whoseTurn(turn))
+	new_state = CheckSouthWest(new_state, moveID, stringInterpret.whoseTurn(turn))
 	print (new_state, "SouthWest")
-	new_state = CheckSouthEast(new_state, stringInterpret.moveToIndex(NewMove), stringInterpret.whoseTurn(turn))
+	new_state = CheckSouthEast(new_state, moveID, stringInterpret.whoseTurn(turn))
 	print (new_state, "SouthEast")
 
 	print(turn)
@@ -855,7 +856,12 @@ def setup2():
 		new_state = stringInterpret.stringInterpret((new_state), input("Move?"), turn + 1)
 
 if __name__ == "__main__":
-	turtleMove.setup()
-	testProgram()
-	constants.WINDOW.exitonclick()
+	print(directionStrCheck("WWWWWBWWBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBWWWWWWWW", "E6", 4))
+	print(directionStrCheck("WBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", "C5", 3))
+
+
+
+#	turtleMove.setup()
+#	testProgram()
+#	constants.WINDOW.exitonclick()
 	#testFunction(directionStrCheck, ("W" * 8) + ("B" * 48) + ("W" * 8), 33, "W")
