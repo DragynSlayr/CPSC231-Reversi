@@ -199,7 +199,7 @@ def promptMove():
 # Returns: None
 def setup():
 	#Draws the board
-	ReversiGrid.main()
+	reversiGrid.main()
 
 	#Places starting pieces for Reversi
 	placePiece("D", 4, "black")

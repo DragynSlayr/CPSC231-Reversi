@@ -58,6 +58,8 @@ def moveToIndex(NewMove):
  	#Equation for converting a move coordinate to the index number to be changed
 	moveIDX = ((row_IDX * constants.NUM_OF_ROWS) + column_IDX)
 
+	return moveIDX
+
 #This function will convert a move coordinate into a string.
 #It receives the parameters are a game state, a move coordinate, and the turn number.
 #It returns the updated string as new_state.
