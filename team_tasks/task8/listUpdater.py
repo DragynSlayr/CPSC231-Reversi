@@ -292,6 +292,11 @@ def updateGameState(game_state, move, turn_letter, draw_move = True):
 
 	temp_game_state = game_state[:]
 
+
+	#Update the row
+	temp_row = updateRow(temp_game_state[y], x, turn_letter)
+	temp_game_state[y] = temp_row
+
 	#Update the column
 	temp_game_state = updateColumn(game_state, x, y, turn_letter, draw_move)
 	
