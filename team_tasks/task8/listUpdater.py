@@ -294,6 +294,10 @@ def updateGameState(game_state, move, turn_letter, draw_move = True):
 
 	#Update the column
 	temp_game_state = updateColumn(game_state, x, y, turn_letter, draw_move)
+	
+	#Update the diagnals in both directions
+	temp_game_state = updateDiagnalDU2(temp_game_state, x, y, turn_letter, draw_move)
+	temp_game_state = update_diagnalUD2(game_state, x, y, turn_letter, draw_move)
 
 	#Update the row
 	temp_row = updateRow(temp_game_state[y], x, turn_letter)
@@ -314,14 +318,6 @@ def updateGameState(game_state, move, turn_letter, draw_move = True):
 					turtleMove.placePiece(Tx, Ty , temp_piece)
 		counter = counter +1
 
-	#Update the diagnals in both directions
-	temp_game_state = updateDiagnalDU2(temp_game_state, x, y, turn_letter, draw_move)
-	temp_game_state = update_diagnalUD2(game_state, x, y, turn_letter, draw_move)
-
-	#Ensure that the move is updated in the token
-	final_row = temp_game_state[y]
-	final_row[x] = turn_letter
-	temp_game_state[y] = final_row
 
 	return temp_game_state
 
