@@ -3,6 +3,7 @@
 import sys
 import constants
 import rulesMenu
+import screenWriter
 import main as mainGame
 
 #Moves a turtle to a location without making a line
@@ -125,7 +126,7 @@ def makeChoice(x, y):
 		button_index = getClickedButton(x)
 
 		#Possible methods corresponding to button
-		button_commands = [rulesMenu.show, mainGame.start, sys.exit]
+		button_commands = [rulesMenu.show, mainGame.start, sys.exit, screenWriter.noButtonError]
 
 		#Call a method from the list of options
 		button_commands[button_index]()

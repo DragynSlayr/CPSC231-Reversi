@@ -73,3 +73,6 @@ def writeMessage(message):
 
     #Return to starting area
     goto(starting_X, starting_y)
+
+def noButtonError():
+    writeMessage("Click a button!")
