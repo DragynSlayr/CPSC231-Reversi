@@ -12,7 +12,7 @@ WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 
 #Only mutiples of this frame of the animation will be drawn
-FRAME_TO_DRAW = 1000
+FRAME_TO_DRAW = 0
 
 #Cell information
 CELL_WIDTH = 50
