@@ -279,11 +279,24 @@ def update_diagnalUD2(game_state, x, y, turn_letter, draw_move = True):
 
 	return game_state
 
+	
+def showCurrentGameState(game_state):
+	print("<<<Current Game State >>>")
+	print("        A    B    C    D    E    F    G    H")
+	counter = 1
+	for row in game_state:
+		print(counter , " : " , row)
+		counter = counter + 1
 #Function updates the game_state based on a move, that is ASSUMED VALID
 #Only updates horizontal and vertical, will update diagnol eventually
 #Takes the current game_state, the move, and the turn letter and whether update to grid
 #Returns the updated game_state
 def updateGameState(game_state, move, turn_letter, draw_move = True):
+	
+	if draw_move == True:
+		print("<<<< Entering Update >>>>")
+		showCurrentGameState(game_state)
+	
 	#Get the x and y coordinates in the move,
 	#Subtract 1 so they can be used as list indexes
 	xy = convertMove(move)
@@ -292,11 +305,12 @@ def updateGameState(game_state, move, turn_letter, draw_move = True):
 
 	temp_game_state = game_state[:]
 
-
+	
 	#Update the row
 	temp_row = updateRow(temp_game_state[y], x, turn_letter)
 	temp_game_state[y] = temp_row
 
+	
 	#Update the column
 	temp_game_state = updateColumn(game_state, x, y, turn_letter, draw_move)
 	
@@ -304,35 +318,42 @@ def updateGameState(game_state, move, turn_letter, draw_move = True):
 	temp_game_state = updateDiagnalDU2(temp_game_state, x, y, turn_letter, draw_move)
 	temp_game_state = update_diagnalUD2(game_state, x, y, turn_letter, draw_move)
 
+	
 	#Update the row
 	temp_row = updateRow(temp_game_state[y], x, turn_letter)
 	temp_game_state[y] = temp_row
 
 	#Because updateRow does not draw the pieces on the board, unlike the other update functions, we must draw them here
-	counter = 0
-	for i in temp_row:
-		conv_move = convertMoveType(counter, y+1)
-		Tx = conv_move[0]
-		Ty = conv_move[1]
-		if i != constants.PIECE_NONE:
-				if i == constants.PIECE_BLACK:
-					temp_piece = "Black"
-				else:
-					temp_piece = "White"
-				if draw_move:
-					turtleMove.placePiece(Tx, Ty , temp_piece)
-		counter = counter +1
-
-
+	if draw_move == True:
+		counter = 0
+		for i in temp_row:
+			conv_move = convertMoveType(counter, y+1)
+			Tx = conv_move[0]
+			Ty = conv_move[1]
+			if i != constants.PIECE_NONE:
+					if i == constants.PIECE_BLACK:
+						temp_piece = "Black"
+					else:
+						temp_piece = "White"
+					if draw_move:
+						turtleMove.placePiece(Tx, Ty , temp_piece)
+			counter = counter +1
+		
+	
+	if draw_move == True:
+		showCurrentGameState(temp_game_state)
+		print("<<<< Exiting Update >>>>")
+	
+		
 	return temp_game_state
 
 #Generic test code
 #Do not worry about this, it was just used for debugging
 def testCode():
-	#row = ['N', 'N', 'N', 'W', 'B', 'N', 'N', 'N']
-	#print(row)
-	#row = updateRow(row, 2, 'B')
-	#print(row)
+	row = ['N', 'N', 'W', 'W', 'W', 'N', 'N', 'N']
+	print(row)
+	row = updateRow(row, 1, 'B')
+	print(row)
 	"""
 	print("CHECK HORIZONTAL BASIC::>>>")
 	print("  A    B    C    D    E    F    G    H")
@@ -385,8 +406,8 @@ def testCode():
 	game_state = game_state + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
 	game_state = game_state + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
 	game_state = game_state + [['N', 'N', 'N', 'W', 'B', 'N', 'N', 'N', ]]
-	game_state = game_state + [['N', 'N', 'N', 'B', 'W', 'N', 'N', 'N', ]]
-	game_state = game_state + [['N', 'N', 'W', 'N', 'N', 'N', 'N', 'N', ]]
+	game_state = game_state + [['N', 'N', 'W', 'W', 'W', 'N', 'N', 'N', ]]
+	game_state = game_state + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
 	game_state = game_state + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
 	game_state = game_state + [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', ]]
 	for row in game_state:
@@ -396,7 +417,7 @@ def testCode():
 	print("  is now  >>>")
 	print(" A    B    C    D    E    F    G    H")
 
-	game_state = updateGameState(game_state, 'F3', 'W')
+	game_state = updateGameState(game_state, 'C4', 'B')
 	for row in game_state:
 		print(row)
 	""""
