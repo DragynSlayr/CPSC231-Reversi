@@ -34,27 +34,34 @@ def resetSquare(move):
 		turtle.forward(constants.CELL_WIDTH / 2)
 	turtle.end_fill()
 
+def getMoveIndices(move):
+    x = constants.COLUMN_LETTERS.index(move[0])
+    y = constants.ROW_NUMBERS.index(int(move[1]))
+
+    return (x, y)
+
 #Draw all valid moves to the board
 #Params: valid_moves, The moves to draw
 #Returns: None
 def displayValidMoves(valid_moves, state):
 	global SHOWN_MOVES
 
+	for i in range(len(state)):
+		for j in range(len(state[i])):
+			if state[j][i] == constants.PIECE_NONE:
+				column = constants.COLUMN_LETTERS[i]
+				row = constants.ROW_NUMBERS[j]
+
+				resetSquare(column + str(row))
+
 	for move in valid_moves:
 		converted_move = listUpdater.convertMove(move)
-		x = converted_move[0] - 1
-		y = converted_move[1] - 1
 
-		if move not in SHOWN_MOVES:
-			if state[x][y] == constants.PIECE_NONE:
-				placePiece(move[0], int(move[1]), "#34DDDD")
-				SHOWN_MOVES.append(move)
-			else:
-				if state[x][y] == constants.PIECE_BLACK:
-					color = "Black"
-				else:
-					color = "White"
-				placePiece(move[0], int(move[1]), color)
+		y, x = getMoveIndices(move)
+
+		if state[x][y] == constants.PIECE_NONE:
+			placePiece(move[0], int(move[1]), "#34DDDD")
+			SHOWN_MOVES.append(move)
 
 # Removes spaces and punctuation from a string
 # Params: location, the string to strip

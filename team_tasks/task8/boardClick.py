@@ -51,7 +51,7 @@ def countUpdatedPieces(game_state, move, move_num):
     change_count = 0
     for i in range(len(game_state)):
         for j in range(len(game_state[i])):
-            if game_state[i][j] != changed_state[i][j]:
+            if game_state[j][i] != changed_state[j][i]:
                 change_count += 1
 
     return change_count
@@ -75,9 +75,6 @@ def getMovesForTurn(state, move_num):
             move = letter + str(number)
 
             changes = countUpdatedPieces(state, move, move_num)
-
-            if changes == 0 or changes > 1:
-                print(move + ": " + str(changes))
 
             if changes > constants.PIECE_CHANGE_THRESHOLD:
                 moves_list.append(move)
@@ -192,8 +189,8 @@ def endMove(game_state, move_num):
     #Update the scoreboard
     updateScoreBoard(game_state)
 
-    #Show possible moves
-    displayValidMoves(game_state, move_num)
+    #Reload the board
+    loadGame("variables.txt", False)
 
 #Makes the player's move visible
 #Params: game_state, The game state
@@ -260,12 +257,13 @@ def saveGame():
     fileHandler.saveVariable("Move", current_move_num, "save.txt")
 
 #Loads the saved game configuration
-#Params: None
+#Params: file_name, The file to load from
+#        redraw, Whether the board should be redrawn
 #Returns: None
-def loadGame():
+def loadGame(file_name = "save.txt", redraw = True):
     #Load game info
-    saved_state = fileHandler.loadVariable("State", "save.txt")
-    saved_move_num = fileHandler.loadVariable("Move", "save.txt")
+    saved_state = fileHandler.loadVariable("State", file_name)
+    saved_move_num = fileHandler.loadVariable("Move", file_name)
 
     #Write loaded variables to variables file
     fileHandler.saveVariable("State", saved_state)
@@ -274,8 +272,9 @@ def loadGame():
     #Convert state from string to list
     saved_state = converter.toList(saved_state)
 
-    #Load board configuration
-    listInterpret.listToPiece(saved_state)
+    if redraw:
+        #Load board configuration
+        listInterpret.listToPiece(saved_state)
 
     #Update the scoreboard
     updateScoreBoard(saved_state)
