@@ -1,6 +1,7 @@
 #This is the module that will create the Reversi Game board.
 import turtle
 import constants
+import converter
 
 #function for creating a square
 #Function takes nothing and returns nothing
@@ -133,8 +134,12 @@ def reversiBoard():
 	grid.goto(20, 545)
 	grid.pendown()
 	grid.pencolor(constants.GRID_FG_COLOR)
-	#spread_name = [for i in constants.GAME_NAME]
-	grid.write("R   e   v   e   r   s   i", False, constants.LEFT_TEXT, constants.GRID_NAME_STYLE)
+
+	#List comprehension to put spaces between each letter in the game name
+	spread_name_list = [(i + "  ") for i in constants.GAME_NAME]
+	spread_name_string = converter.toString(spread_name_list)
+
+	grid.write(spread_name_string, False, constants.LEFT_TEXT, constants.GRID_NAME_STYLE)
 
 #This function creates the window, sets the coordinates of the window, creates the grid with labels, and frames it.
 #Function takes no parameters and returns nothing
