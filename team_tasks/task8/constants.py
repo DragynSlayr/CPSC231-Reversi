@@ -47,6 +47,9 @@ PIECE_NONE = 'N'
 #A valid move will always change more pieces than this
 PIECE_CHANGE_THRESHOLD = 1
 
+#The delay between player and computer turns, in seconds
+MOVE_DELAY = 1
+
 #Information for the boards coordinates
 #The board is drawn between:
 #(LEFT_MOST_X, BOTTOM_MOST_Y) and (RIGHT_MOST_X, TOP_MOST_Y)

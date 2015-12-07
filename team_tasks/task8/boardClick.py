@@ -74,10 +74,11 @@ def getMovesForTurn(state, move_num):
             number = constants.ROW_NUMBERS[j]
             move = letter + str(number)
 
-            changes = countUpdatedPieces(state, move, move_num)
+            if state[j][i] == constants.PIECE_NONE:
+                changes = countUpdatedPieces(state, move, move_num)
 
-            if changes > constants.PIECE_CHANGE_THRESHOLD:
-                moves_list.append(move)
+                if changes > constants.PIECE_CHANGE_THRESHOLD:
+                    moves_list.append(move)
 
     return moves_list
 
@@ -186,14 +187,14 @@ def endMove(game_state, move_num):
     fileHandler.saveVariable("State", converter.toString(game_state))
     fileHandler.saveVariable("Move", str(move_num))
 
-    #Update the scoreboard
-    updateScoreBoard(game_state)
-
-
-#    screenWriter.writeTurn(move_num)
-
     #Reload the board
     loadGame("variables.txt", False)
+
+    #Update the scoreboard
+    updateScoreBoard(converter.toList(fileHandler.loadVariable("State")))
+
+    #Update the window
+    constants.WINDOW.update()
 
 #Makes the player's move visible
 #Params: game_state, The game state
@@ -230,10 +231,12 @@ def placePiece(x, y):
                 #Make the player's move
                 move_num = makePlayerMove(game_state, move, move_num)
 
+                screenWriter.writeTurn(move_num)
+
                 #Check if the game is over
                 if not victoryStatus.endGameStatus(game_state):
                     #Small delay
-                    time.sleep(1)
+                    time.sleep(constants.MOVE_DELAY)
 
                     #Let the computer make a turn
                     game_state = computerTurn(game_state, move_num)
@@ -315,10 +318,8 @@ def run(game_state, move_num, player_move):
         state = computerTurn(game_state, move_num)
         move_num += 1
 
-    #Update the scoreboard
-    updateScoreBoard(game_state)
-
-    screenWriter.writeTurn(move_num)
+    #End the computer's move
+    endMove(game_state, move_num)
 
     #Show possible moves
     displayValidMoves(game_state, move_num)
