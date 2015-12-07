@@ -30,7 +30,7 @@ def toList(state_string):
 #Returns: The game state as a string
 def toString(state_list):
     #The string to hold the state
-    state_string = ""
+    state_string = constants.VARIABLE_BLANK
 
     #Traverse the outer list
     for row in state_list:
@@ -48,11 +48,11 @@ def toString(state_list):
 #Returns: The state as a formatted board
 def asBoardRepresentation(state):
     #Make sure state is a list
-    if type(state) == type("String"):
+    if type(state) == type(constants.VARIABLE_BLANK):
         state = toList(state)
 
     #Will hold the board
-    board = ""
+    board = constants.VARIABLE_BLANK
 
     #Go through each index in the state
     for row in range(len(state)):
@@ -62,7 +62,7 @@ def asBoardRepresentation(state):
 
         #Add a new line if not at the last line
         if row != len(state) - 1:
-            board += "\n"
+            board += '\n'
 
     #Return the string
     return board
