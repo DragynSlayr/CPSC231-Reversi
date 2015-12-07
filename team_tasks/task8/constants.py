@@ -142,11 +142,26 @@ LEFT_TEXT = "left"
 BUTTON_TEXT_STYLE = ("Arial", 15, "bold")
 NAME_TEXT_STYLE = ("Arial", 50, "bold")
 GRID_NAME_STYLE = ("Arial", 27, "bold", "underline")
+RULES_TEXT_STYLE = ("Arial", 10, "normal")
 GAME_NAME = "REVERSI"
 MENU_OPTIONS = ["Rules", "Play", "Exit"]
+RULES_OPTION = "Return to Menu"
 
 #Strings for end conditions
 TIE_STRING = "It was a Tie!"
 BLACK_STRING = PIECE_COLOR_BLACK + " won, with "
 WHITE_STRING = PIECE_COLOR_WHITE + " won, with "
 PIECES_STRING = " pieces!"
+
+#Rules of the game
+RULES = [
+"Reversi is a 2 player game that is played on an 8 x 8 grid.\n\n",
+"The game discs have both a black and white side.\n\n",
+"To win you have to have the majority of the discs changed to your color at the end of the game.\n\n",
+"The game ends when there are no more possible moves to make.\n\n",
+"The game can end before the entire grid is filled.\n\n",
+"Players take turns placing discs, with their color facing up.\n\n",
+"When a player places a disk on the board, all the pieces that are between that player's newly placed disc\nand any of their previously placed discs, are turned to that player's color.\n",
+"When placing your discs on your turn, there has to be at least one piece of the opposite colour between\nyour placed piece and any of your previously placed pieces. Otherwise the move is not valid.",
+"The placed pieces have to make either a horizontal, vertical or diagonal line with the opposing player's discs to flip any pieces over."
+]
