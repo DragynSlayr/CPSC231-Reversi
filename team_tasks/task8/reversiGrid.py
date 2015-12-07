@@ -27,13 +27,13 @@ def nextRow():
 #Function takes nothing and returns nothing
 def label_y():
 	grid = constants.TURTLE
-	grid.goto(175, 125)
+	grid.goto(175, 110)
 
 	#Iterate through the row numbers in reverse
 	for sidey in constants.ROW_NUMBERS[::-1]:
 		coord_yy = grid.ycor()
 		grid.pendown()
-		grid.write(sidey, False)
+		grid.write(sidey, False, "left", ("Arial", 15, "bold"))
 		grid.penup()
 		coord_yy = coord_yy + constants.CELL_HEIGHT
 		grid.goto(175, coord_yy)
@@ -43,14 +43,14 @@ def label_y():
 #Function takes nothing and returns nothing
 def label_x():
 	grid = constants.TURTLE
-	grid.goto(225, 525)
+	grid.goto(210, 500)
 	for sidex in constants.COLUMN_LETTERS:
 		coord_xx = grid.xcor()
 		grid.pendown()
-		grid.write(sidex, False)
+		grid.write(sidex, False, "left", ("Arial", 15, "bold"))
 		grid.penup()
 		coord_xx = coord_xx + constants.CELL_WIDTH
-		grid.goto(coord_xx, 525)
+		grid.goto(coord_xx, 500)
 		grid.setheading(0)
 
 #Function that draws a frame around the board.
@@ -59,7 +59,7 @@ def reversiFrame():
 	grid = constants.TURTLE
 	size = grid.pensize()
 	grid.pencolor("dark green")
-	grid.pensize(9)
+	grid.pensize(14)
 	grid.goto(-5,-5)
 	grid.setheading(90)
 	grid.pendown()
@@ -73,6 +73,34 @@ def reversiFrame():
 	grid.right(90)
 	grid.forward(constants.WINDOW_WIDTH - 1)
 	grid.right(90)
+
+	grid.pencolor("yellow")
+	grid.pensize(6)
+	grid.goto(-5, -5)
+	grid.setheading(90)
+	grid.forward(constants.WINDOW_HEIGHT)
+	grid.right(90)
+	grid.forward(constants.WINDOW_WIDTH - 1)
+	grid.right(90)
+	grid.forward(constants.WINDOW_HEIGHT)
+	grid.right(90)
+	grid.forward(constants.WINDOW_WIDTH - 1)
+	grid.right(90)
+
+	grid.pencolor("black")
+	grid.pensize(3)
+	grid.goto(-5, -5)
+	grid.setheading(90)
+	grid.forward(constants.WINDOW_HEIGHT)
+	grid.right(90)
+	grid.forward(constants.WINDOW_WIDTH - 1)
+	grid.right(90)
+	grid.forward(constants.WINDOW_HEIGHT)
+	grid.right(90)
+	grid.forward(constants.WINDOW_WIDTH - 1)
+	grid.right(90)
+
+
 	grid.penup()
 
 	#Reset size
@@ -102,10 +130,10 @@ def reversiBoard():
 	reversiFrame()
 
 	grid.penup()
-	grid.goto(25, 575)
+	grid.goto(20, 545)
 	grid.pendown()
 	grid.pencolor("black")
-	grid.write("R   e   v   e   r   s   i", False)
+	grid.write("R   e   v   e   r   s   i", False, "left", ("Arial", 27, "bold", "underline"))
 
 #This function creates the window, sets the coordinates of the window, creates the grid with labels, and frames it.
 #Function takes no parameters and returns nothing
