@@ -60,6 +60,19 @@ def writeScore(black, white):
     #Return to starting position
     goto(starting_X, starting_y)
 
+
+def writeTurn(turn_num):
+
+    starting_x, starting_y = constants.TURTLE.pos()
+
+    goto(25, 25)
+    clearArea(25, 25)
+    write("TURN NUMBER \n     " + str(turn_num))
+
+    goto(starting_x, starting_y)
+
+
+
 #Writes a message to the bottom of the screen
 #Params: message, The message to write
 #Returns: None

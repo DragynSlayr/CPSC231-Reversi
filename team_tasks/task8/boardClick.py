@@ -189,6 +189,9 @@ def endMove(game_state, move_num):
     #Update the scoreboard
     updateScoreBoard(game_state)
 
+
+    screenWriter.writeTurn(move_num)
+
     #Reload the board
     loadGame("variables.txt", False)
 
@@ -277,7 +280,9 @@ def loadGame(file_name = "save.txt", redraw = True):
         listInterpret.listToPiece(saved_state)
 
     #Update the scoreboard
-    updateScoreBoard(saved_state)
+    updateScoreBoard(saved_move_num)
+
+    screenWriter.writeTurn(saved_move_num)
 
     #Reset valid moves from turtleMove
     turtleMove.SHOWN_MOVES = []
@@ -312,6 +317,8 @@ def run(game_state, move_num, player_move):
 
     #Update the scoreboard
     updateScoreBoard(game_state)
+
+    screenWriter.writeTurn(move_num)
 
     #Show possible moves
     displayValidMoves(game_state, move_num)
