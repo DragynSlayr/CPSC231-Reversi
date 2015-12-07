@@ -28,7 +28,7 @@ def write(message):
 def clearArea(x, y):
     t = constants.TURTLE
     t.up()
-    t.fillcolor("White")
+    t.fillcolor("light green")
 
     #Draw a filled box
     t.begin_fill()
