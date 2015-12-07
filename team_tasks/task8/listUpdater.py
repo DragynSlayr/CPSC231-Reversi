@@ -44,9 +44,9 @@ def charToPiece(x, y, temp_piece):
 	#Get the colour of the piece
 	if temp_piece != constants.PIECE_NONE:
 		if temp_piece == constants.PIECE_BLACK:
-			color = "Black"
+			color = constants.PIECE_COLOR_BLACK
 		else:
-			color = "White"
+			color = constants.PIECE_COLOR_WHITE
 		#Place the piece on the board in the appropriate spot
 		turtleMove.placePiece(temp_x, temp_y, color)
 
@@ -58,7 +58,7 @@ def charToPiece(x, y, temp_piece):
 #Would return 	['N', 'W', 'B', 'B', 'B', 'W', 'N']
 #Function takes a specific row or list, the location that a piece has been placed, and the turn letter as parameters
 #Function then updates the row as if it was horizontal
-#Works for "rows" of all sizes
+#Works for 'rows' of all sizes
 #returns the updated row
 def updateRow(row, relative_location, turn_letter):
 	row_left = row[:relative_location]
@@ -279,7 +279,7 @@ def update_diagnalUD2(game_state, x, y, turn_letter, draw_move = True):
 
 	return game_state
 
-	
+
 def showCurrentGameState(game_state):
 	print("<<<Current Game State >>>")
 	print("        A    B    C    D    E    F    G    H")
@@ -292,11 +292,11 @@ def showCurrentGameState(game_state):
 #Takes the current game_state, the move, and the turn letter and whether update to grid
 #Returns the updated game_state
 def updateGameState(game_state, move, turn_letter, draw_move = True):
-	
+
 	if draw_move == True:
 		print("<<<< Entering Update >>>>")
 		showCurrentGameState(game_state)
-	
+
 	#Get the x and y coordinates in the move,
 	#Subtract 1 so they can be used as list indexes
 	xy = convertMove(move)
@@ -305,20 +305,20 @@ def updateGameState(game_state, move, turn_letter, draw_move = True):
 
 	temp_game_state = game_state[:]
 
-	
+
 	#Update the row
 	temp_row = updateRow(temp_game_state[y], x, turn_letter)
 	temp_game_state[y] = temp_row
 
-	
+
 	#Update the column
 	temp_game_state = updateColumn(game_state, x, y, turn_letter, draw_move)
-	
+
 	#Update the diagnals in both directions
 	temp_game_state = updateDiagnalDU2(temp_game_state, x, y, turn_letter, draw_move)
 	temp_game_state = update_diagnalUD2(game_state, x, y, turn_letter, draw_move)
 
-	
+
 	#Update the row
 	temp_row = updateRow(temp_game_state[y], x, turn_letter)
 	temp_game_state[y] = temp_row
@@ -332,19 +332,19 @@ def updateGameState(game_state, move, turn_letter, draw_move = True):
 			Ty = conv_move[1]
 			if i != constants.PIECE_NONE:
 					if i == constants.PIECE_BLACK:
-						temp_piece = "Black"
+						temp_piece = constants.PIECE_COLOR_BLACK
 					else:
-						temp_piece = "White"
+						temp_piece = constants.PIECE_COLOR_WHITE
 					if draw_move:
 						turtleMove.placePiece(Tx, Ty , temp_piece)
 			counter = counter +1
-		
-	
+
+
 	if draw_move == True:
 		showCurrentGameState(temp_game_state)
 		print("<<<< Exiting Update >>>>")
-	
-		
+
+
 	return temp_game_state
 
 #Generic test code

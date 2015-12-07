@@ -23,16 +23,16 @@ def listToPiece(game_state):
 
 			#Place piece or reset square at position
 			if piece == constants.PIECE_BLACK:
-				turtleMove.placePiece(column, row, "Black")
+				turtleMove.placePiece(column, row, constants.PIECE_COLOR_BLACK)
 			elif piece == constants.PIECE_WHITE:
-				turtleMove.placePiece(column, row, "White")
+				turtleMove.placePiece(column, row, constants.PIECE_COLOR_WHITE)
 			else:
 				turtleMove.resetSquare(column + str(row))
 
 #Converts an index to a move
 #Params: index, The index to convert
 #Returns: A string representing the Index
-#Example: pieceToString(10) returns "C2"
+#Example: pieceToString(10) returns 'C2'
 def pieceToString(index):#TODO Check if we need this
 	column = constants.COLUMN_LETTERS[index % 8]
 	row = constants.ROW_NUMBERS[index // 8]
