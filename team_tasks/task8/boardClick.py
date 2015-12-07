@@ -208,47 +208,47 @@ def makePlayerMove(game_state, move, move_num):
 #Returns: None
 def placePiece(x, y):
     #Make sure a move is not being made
-    if fileHandler.loadVariable(constants.VARIABLE_MOVING) == constants.VARIABLE_BOOL_FALSE:
-        #Get the variables for the start of the move
-        game_state, move_num = startMove()
+	if fileHandler.loadVariable(constants.VARIABLE_MOVING) == constants.VARIABLE_BOOL_FALSE:
+		#Get the variables for the start of the move
+		game_state, move_num = startMove()
 
         #Make sure the game is not over
-        if not victoryStatus.endGameStatus(game_state):
-            pass_please = False
-		    if 650<= x <= 650 + 85:
+		if not victoryStatus.endGameStatus(game_state):
+			pass_please = False
+			if 650<= x <= 650 + 85:
 				if 50<= y <=50 + 45:
-                    pass_please = True
+					pass_please = True
            
            
            #Check if the point is valid
-            if isValidSquare(x, y) and isValidMove(game_state, getMove(x, y), move_num):
-               if pass_please == False: #Get the move
-                    move = getMove(x, y)
+			if isValidSquare(x, y) and isValidMove(game_state, getMove(x, y), move_num):
+				if pass_please == False: #Get the move
+					move = getMove(x, y)
 
                     #Make the player's move
-                    move_num = makePlayerMove(game_state, move, move_num)
+					move_num = makePlayerMove(game_state, move, move_num)
 
-                    screenWriter.writeTurn(move_num)
+					screenWriter.writeTurn(move_num)
 
                 #Check if the game is over
-            if not victoryStatus.endGameStatus(game_state):
+			if not victoryStatus.endGameStatus(game_state):
                 #Small delay
-                time.sleep(constants.MOVE_DELAY)
+				time.sleep(constants.MOVE_DELAY)
                 
-                if pass_please == True:
+				if pass_please == True:
 					move_num += 1
 
                 #Let the computer make a turn
-                game_state = computerTurn(game_state, move_num)
-                move_num += 1
+				game_state = computerTurn(game_state, move_num)
+				move_num += 1
 
                 #End the move
-            endMove(game_state, move_num)
-        else:
-            finishGame(game_state)
+			endMove(game_state, move_num)
+		else:
+			finishGame(game_state)
 
         #Save variable
-        fileHandler.saveVariable(constants.VARIABLE_MOVING, constants.VARIABLE_BOOL_FALSE)
+		fileHandler.saveVariable(constants.VARIABLE_MOVING, constants.VARIABLE_BOOL_FALSE)
 
 #Saves the current game configuration
 #Params: None
