@@ -5,7 +5,7 @@ import constants
 #Params: piece, The piece to count occurences of
 #		 game_state, The string to check
 #Returns: A count of the piece in the game_state
-def countPieces(piece, game_state):
+def countPieces(piece, game_state):#TODO Comment this method
 	count = 0
 	for y in game_state:
 		for x in y:
@@ -17,7 +17,7 @@ def countPieces(piece, game_state):
 #Params: game_state, A string representation of the board
 #Returns: True if the board is full and False otherwise
 #Author: Inderpreet Dhillon
-def endGameStatus(game_state):
+def endGameStatus(game_state):#TODO Comment this method
 	limit = constants.NUM_OF_CELLS
 	count = countPieces(constants.PIECE_BLACK, game_state) + countPieces(constants.PIECE_WHITE, game_state)
 	return count == limit

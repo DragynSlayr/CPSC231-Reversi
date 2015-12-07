@@ -33,7 +33,7 @@ def listToPiece(game_state):
 #Params: index, The index to convert
 #Returns: A string representing the Index
 #Example: pieceToString(10) returns "C2"
-def pieceToString(index):
+def pieceToString(index):#TODO Check if we need this
 	column = constants.COLUMN_LETTERS[index % 8]
 	row = constants.ROW_NUMBERS[index // 8]
 	return column + str(row)

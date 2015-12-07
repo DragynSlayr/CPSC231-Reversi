@@ -6,7 +6,7 @@ import constants
 #Params: x, The x position to go to
 #        y, The y position to go to
 #Returns: None
-def goto(x, y):
+def goto(x, y):#TODO Comment this method
     t = constants.TURTLE
     t.up()
     t.goto(x, y)

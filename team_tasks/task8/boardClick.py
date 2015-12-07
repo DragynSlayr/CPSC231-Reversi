@@ -58,7 +58,7 @@ def countUpdatedPieces(game_state, move, move_num):
 #Params: state, The game state
 #        move_num, The current move numbers
 #Returns: Possible moves for move number
-def getMovesForTurn(state, move_num):
+def getMovesForTurn(state, move_num):#TODO Comment this method
     moves_list = []
 
     for i in range(len(state)):

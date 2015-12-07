@@ -66,20 +66,3 @@ def asBoardRepresentation(state):
 
     #Return the string
     return board
-
-
-def main():
-    state = (("N" * 8) + ("B" * 8) + ("W" * 8) + ("NBWNBWNB")) * 2
-    state_list = toList(state)
-    #print(state_list)
-
-    state_string = toString(state_list)
-    #print(state_string)
-
-    board_list = asBoardRepresentation(state_list)
-    board_string = asBoardRepresentation(state_string)
-    print(board_list == board_string)
-    print(board_list)
-
-if __name__ == "__main__":
-    main()

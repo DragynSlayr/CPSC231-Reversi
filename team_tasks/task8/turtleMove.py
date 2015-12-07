@@ -34,7 +34,7 @@ def resetSquare(move):
 		turtle.forward(constants.CELL_WIDTH / 2)
 	turtle.end_fill()
 
-def getMoveIndices(move):
+def getMoveIndices(move):#TODO Comment this method
     x = constants.COLUMN_LETTERS.index(move[0])
     y = constants.ROW_NUMBERS.index(int(move[1]))
 
@@ -43,7 +43,7 @@ def getMoveIndices(move):
 #Draw all valid moves to the board
 #Params: valid_moves, The moves to draw
 #Returns: None
-def displayValidMoves(valid_moves, state):
+def displayValidMoves(valid_moves, state):#TODO Comment this method
 	global SHOWN_MOVES
 
 	for i in range(len(state)):
@@ -62,53 +62,6 @@ def displayValidMoves(valid_moves, state):
 		if state[x][y] == constants.PIECE_NONE:
 			placePiece(move[0], int(move[1]), "#34DDDD")
 			SHOWN_MOVES.append(move)
-
-# Removes spaces and punctuation from a string
-# Params: location, the string to strip
-# Returns: A string of only numbers and letters
-# Example: "A-**=-8" returns "A8"
-def getStrippedLine(location):
-	#Get all characters that can't be used
-	not_needed_chars = string.punctuation + string.whitespace + " "
-
-	#Store location
-	stripped_line = location
-
-	#Remove every character that is not need
-	for i in not_needed_chars:
-		stripped_line = stripped_line.replace(i, "")
-
-	#Return the stripped line
-	return stripped_line
-
-# Seperates a string into letter and number(s)
-# Params: location, A string of form "letter..<junk>..number"
-# Returns: An array of [letter, number]
-# Example: "A-=-.,-2" returns ["A", 2]
-def getColumnAndRow(location):
-	#Get the stripped line ex: A8
-	column_and_row = getStrippedLine(location)
-
-	#Get the column
-	column = column_and_row[:1]
-
-	#Get the row
-	row = int(column_and_row[1:])
-
-	#Return column and row
-	return [column, row]
-
-# Checks if the coordinate lies within the board
-# Params: column, The column letter of the coordinate
-#		  row, The row number of the coordinate
-# Returns: True if on the board, False otherwise
-# Example: ("a", 4) returns True, while ("i", 4) returns False
-def checkvalidity(column, row):
-	#Change entered column to uppercase
-	column = column.upper()
-
-	#Check if column is in the valid columns and is in the rows
-	return (column in constants.COLUMN_LETTERS) and (row in constants.ROW_NUMBERS)
 
 # Gets the position in pixesl at the coordinate
 # Params: column, The column letter of the coordinate
@@ -159,62 +112,3 @@ def placePiece(column, row, color):
 
 	#Update what is drawn
 	wn.update()
-
-# Prompts the user for a valid move then executes that move
-# Params: None
-# Returns: None
-def promptMove():
-	#Initialize some local variables
-	valid_move = False
-	location = ""
-
-	#Try and except allow the program to keep going after an error
-	try:
-		#Only run when move is not valid
-		while not valid_move:
-			#Get the window
-			wn = constants.WINDOW
-
-			#Prompt the user for a location
-			location = wn.textinput("Piece Location", "Enter a location ('q' to quit): ").strip()
-
-			#Splits location into column and row
-			column_and_row = getColumnAndRow(location)
-
-			#Extract column and row
-			column = column_and_row[0]
-			row = column_and_row[1]
-
-			#Check if the move is valid
-			valid_move = checkvalidity(column, row)
-
-			#Alert the user
-			if not valid_move:
-				print("That is not a valid position!")
-
-		#Place a piece at the position
-		placePiece(column, row, "white")
-	except:
-		#Message printed after an error
-		print("Game over.")
-
-	#Exit when the screen is clicked
-	constants.WINDOW.exitonclick()
-
-# Draws the board and places starting pieces
-# Params: None
-# Returns: None
-def setup():
-	#Draws the board
-	reversiGrid.main()
-
-	#Places starting pieces for Reversi
-	placePiece("D", 4, "black")
-	placePiece("E", 4, "white")
-	placePiece("D", 5, "white")
-	placePiece("E", 5, "black")
-
-#Only run this file if it is the main file
-if __name__ == "__main__":
-	setup()
-	promptMove()

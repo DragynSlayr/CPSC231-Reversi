@@ -71,6 +71,9 @@ def checkClicks(x, y):
         #Go back to the main menu
         mainMenu.main()
 
+#Shows the rules
+#Params: None
+#Returns: None
 def show():
     #Setup the window
     wn = constants.WINDOW

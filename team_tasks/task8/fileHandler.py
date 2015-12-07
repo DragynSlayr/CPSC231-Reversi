@@ -93,12 +93,3 @@ def loadVariable(name, file_name = "variables.txt"):
     #Make sure line is valid
     if found_line != None:
         return found_line.split(":")[1]
-
-def main():
-    saveVariable("State", "N" * 64)
-    print(loadVariable("State"))
-    saveVariable("Move", str(4))
-    print(loadVariable("Move"))
-
-if __name__ == "__main__":
-    main()
