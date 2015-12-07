@@ -22,8 +22,10 @@ def playerWon(game_state):
     #Compare number of white and black pieces and return
     #the result of the game
     if num_black == num_white:
-        return "It was a Tie!"
+        return constants.TIE_STRING
     elif num_black > num_white:
-        return "Black won, with " + str(num_black) + " pieces!"
+        black_win_string = constants.BLACK_STRING + str(num_black) + constants.PIECES_STRING
+        return black_win_string
     else:
-        return "White won, with " + str(num_white) + " pieces!"
+        white_win_string = constants.WHITE_STRING + str(num_white) + constants.PIECES_STRING
+        return white_win_string
