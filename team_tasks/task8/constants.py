@@ -128,9 +128,9 @@ VARIABLE_BOOL_TRUE = "True"
 VARIABLE_BOOL_FALSE = "False"
 VARIABLE_SEPARATOR = ":"
 
-#For colors, uses hex values
-PIECE_COLOR_BLACK = "#000000"
-PIECE_COLOR_WHITE = "#FFFFFF"
+#For colors
+PIECE_COLOR_BLACK = "Black"
+PIECE_COLOR_WHITE = "White"
 
 #Used when writing
 CENTER_TEXT = "center"
@@ -139,3 +139,9 @@ BUTTON_TEXT_STYLE = ("Arial", 15, "bold")
 NAME_TEXT_STYLE = ("Arial", 50, "bold")
 GAME_NAME = "REVERSI"
 MENU_OPTIONS = ["Rules", "Play", "Exit"]
+
+#Strings for end conditions
+TIE_STRING = "It was a Tie!"
+BLACK_STRING = PIECE_COLOR_BLACK + " won, with "
+WHITE_STRING = PIECE_COLOR_WHITE + " won, with "
+PIECES_STRING = " pieces!"
