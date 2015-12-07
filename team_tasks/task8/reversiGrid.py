@@ -28,7 +28,7 @@ def nextRow():
 #Function takes nothing and returns nothing
 def label_y():
 	grid = constants.TURTLE
-	grid.goto(175, 110)
+	grid.goto(constants.X_NUM_LABEL, constants.Y_NUM_LABEL)
 
 	#Iterate through the row numbers in reverse
 	for sidey in constants.ROW_NUMBERS[::-1]:
@@ -37,21 +37,21 @@ def label_y():
 		grid.write(sidey, False, constants.LEFT_TEXT, constants.BUTTON_TEXT_STYLE)
 		grid.penup()
 		coord_yy = coord_yy + constants.CELL_HEIGHT
-		grid.goto(175, coord_yy)
+		grid.goto(constants.X_NUM_LABEL, coord_yy)
 		grid.setheading(90)
 
 #Function to label the x coordinates horizontally, above the board.
 #Function takes nothing and returns nothing
 def label_x():
 	grid = constants.TURTLE
-	grid.goto(210, 500)
+	grid.goto(constants.X_LETTER_LABEL, constants.Y_LETTER_LABEL)
 	for sidex in constants.COLUMN_LETTERS:
 		coord_xx = grid.xcor()
 		grid.pendown()
 		grid.write(sidex, False, constants.LEFT_TEXT, constants.BUTTON_TEXT_STYLE)
 		grid.penup()
 		coord_xx = coord_xx + constants.CELL_WIDTH
-		grid.goto(coord_xx, 500)
+		grid.goto(coord_xx, constants.Y_LETTER_LABEL)
 		grid.setheading(0)
 
 #Function that draws a frame around the board.

@@ -30,6 +30,15 @@ Y_OFFSET = (WINDOW_HEIGHT * (2/3)) + (WINDOW_HEIGHT / 8) #Evaluates to 475
 TITLE_LOCATIONX = WINDOW_WIDTH / 2 #50% of window width
 TITLE_LOCATIONY = WINDOW_HEIGHT * (3/4) #75% of window height
 
+#Constants for the column and row labels.
+X_LETTER_LABEL = 220
+Y_LETTER_LABEL = 500
+
+X_NUM_LABEL = 175
+Y_NUM_LABEL = 110
+
+
+
 #The values for the rules
 RULES_LINESTARTX = 0
 RULES_LINESTARTY = WINDOW_HEIGHT * (89 / 100) #89% of the window height
