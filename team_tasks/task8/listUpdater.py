@@ -293,9 +293,9 @@ def showCurrentGameState(game_state):
 #Returns the updated game_state
 def updateGameState(game_state, move, turn_letter, draw_move = True):
 
-	if draw_move == True:
-		print("<<<< Entering Update >>>>")
-		showCurrentGameState(game_state)
+	#if draw_move == True:
+	#	print("<<<< Entering Update >>>>")
+	#	showCurrentGameState(game_state)
 
 	#Get the x and y coordinates in the move,
 	#Subtract 1 so they can be used as list indexes
@@ -340,9 +340,9 @@ def updateGameState(game_state, move, turn_letter, draw_move = True):
 			counter = counter +1
 
 
-	if draw_move == True:
-		showCurrentGameState(temp_game_state)
-		print("<<<< Exiting Update >>>>")
+	#if draw_move == True:
+	#	showCurrentGameState(temp_game_state)
+	#	print("<<<< Exiting Update >>>>")
 
 
 	return temp_game_state
