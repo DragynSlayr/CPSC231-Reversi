@@ -131,3 +131,11 @@ VARIABLE_SEPARATOR = ":"
 #For colors, uses hex values
 PIECE_COLOR_BLACK = "#000000"
 PIECE_COLOR_WHITE = "#FFFFFF"
+
+#Used when writing
+CENTER_TEXT = "center"
+LEFT_TEXT = "left"
+BUTTON_TEXT_STYLE = ("Arial", 15, "bold")
+NAME_TEXT_STYLE = ("Arial", 50, "bold")
+GAME_NAME = "REVERSI"
+MENU_OPTIONS = ["Rules", "Play", "Exit"]

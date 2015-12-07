@@ -39,7 +39,7 @@ def drawButton(turtle, x, y, label):
 
 	#Move to the center of the button and write a word
 	moveTurtle(turtle, x + (constants.BUTTON_WIDTH / 2), y - (constants.BUTTON_HEIGHT * (3/5)))
-	turtle.write(label, False, "center", font = ("Arial", 15, "bold"))
+	turtle.write(label, False, constants.CENTER_TEXT, constants.BUTTON_TEXT_STYLE)
 
 	#Change the width to normal
 	turtle.pensize(size)
@@ -56,10 +56,10 @@ def showMenu():
 	moveTurtle(turtle, constants.TITLE_LOCATIONX, constants.TITLE_LOCATIONY)
 
 	#Write the title to the screen
-	turtle.write("REVERSI GAME", False, align = "center", font = ("Arial", 50, "bold"))
+	turtle.write(constants.GAME_NAME, False, constants.CENTER_TEXT, constants.NAME_TEXT_STYLE)
 
 	#List of options
-	options = ["Rules", "Play", "Exit"]
+	options = constants.MENU_OPTIONS
 
 	#Draw all the buttons
 	drawButton(turtle, constants.RULES_BUTTON_LEFT_X, constants.BUTTON_TOP_Y, options[0])
