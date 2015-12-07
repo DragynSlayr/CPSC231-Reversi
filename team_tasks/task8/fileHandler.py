@@ -1,14 +1,14 @@
 #This program holds a method to write a variable to a file, saveVariable,
 #and a method to read a variable from a file, loadVariable.
-#The file being used is variables.txt
+import constants
 
 #Removes all instances of \n character
 #Params: line, The line to remove \n from
 #Returns: A string with no \n characters
 def removeNewLine(line):
-    new_line = ""
+    new_line = constants.VARIABLE_BLANK
     for i in range(len(line)):
-        if line[i] == "\n":
+        if line[i] == '\n':
             #Exclude just the \n character, which counts as only one index in the string
             new_line = line[:i] + line[i + 1:]
     return new_line
@@ -24,13 +24,13 @@ def findVarLine(lines, name):
         stripped = removeNewLine(line)
 
         #Check if the variable name matches
-        if stripped.startswith(name + ":"):
+        if stripped.startswith(name + constants.VARIABLE_SEPARATOR):
             #Return the string
             return stripped
 
-def getFileLines(file_name = "variables.txt"):
+def getFileLines(file_name = constants.TEMP_FILE):
     #Open a file for reading and writing
-    var_file = open(file_name, "r")
+    var_file = open(file_name, constants.FILE_READ)
 
     #Read each line and store it as a list element
     lines = var_file.readlines()
@@ -45,7 +45,7 @@ def getFileLines(file_name = "variables.txt"):
 #        value, The value of the variable to write, must be String
 #        file_name, The name of the file, defaults to variables.txr
 #Returns: None
-def saveVariable(name, value, file_name = "variables.txt"):
+def saveVariable(name, value, file_name = constants.TEMP_FILE):
     lines = getFileLines(file_name)
 
     #Initialize a list
@@ -54,18 +54,18 @@ def saveVariable(name, value, file_name = "variables.txt"):
     #Go through lines
     for line in lines:
         #Check if we found the line we wanted to change
-        if line.startswith(name + ":"):
+        if line.startswith(name + constants.VARIABLE_SEPARATOR):
             stripped = removeNewLine(line)
-            stripped_split = stripped.split(":")
-            line_list.append(stripped_split[0] + ":" + value + "\n")
+            stripped_split = stripped.split(constants.VARIABLE_SEPARATOR)
+            line_list.append(stripped_split[0] + constants.VARIABLE_SEPARATOR + value + '\n')
         else:
             line_list.append(line)
 
     #Wipe the file
-    open(file_name, "w").close()
+    open(file_name, constants.FILE_WRITE).close()
 
     #Reopen the file
-    var_file = open(file_name, "w")
+    var_file = open(file_name, constants.FILE_WRITE)
 
     #Writes the list
     var_file.writelines(line_list)
@@ -77,9 +77,9 @@ def saveVariable(name, value, file_name = "variables.txt"):
 #Params: name, The name of the variable to read
 #        file_name, The name of the file, defaults to variables.txt
 #Returns: The value of the variable if found, None otherwise
-def loadVariable(name, file_name = "variables.txt"):
+def loadVariable(name, file_name = constants.TEMP_FILE):
     #Open a file for reading and writing
-    var_file = open(file_name, "r+")
+    var_file = open(file_name, constants.FILE_READ_WRITE)
 
     #Read each line and store it as a list element
     lines = var_file.readlines()
@@ -92,4 +92,4 @@ def loadVariable(name, file_name = "variables.txt"):
 
     #Make sure line is valid
     if found_line != None:
-        return found_line.split(":")[1]
+        return found_line.split(constants.VARIABLE_SEPARATOR)[1]
