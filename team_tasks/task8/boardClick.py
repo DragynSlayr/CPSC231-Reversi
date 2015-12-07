@@ -3,15 +3,12 @@ import constants
 import turtleMove
 import listInterpret
 import listUpdater
-import stringMove
 import victoryStatus
 import playerVictory
 import fileHandler
 import random
-import moveValidator
 import screenWriter
 import converter
-import squareValidator
 import time
 
 #Updates the scoreboard to reflect the game state
@@ -62,10 +59,6 @@ def countUpdatedPieces(game_state, move, move_num):
 #        move_num, The current move numbers
 #Returns: Possible moves for move number
 def getMovesForTurn(state, move_num):
-    #piece = listInterpret.whoseTurn(move_num)
-    #string_state = converter.toString(state)
-    #return squareValidator.mainSquareValidator(string_state, piece)
-
     moves_list = []
 
     for i in range(len(state)):
@@ -96,10 +89,8 @@ def displayValidMoves(state, move_num):
 #        move_num, The number of the move
 #Returns: True if the move is valid, False otherwise
 def isValidMove(state, move, move_num):
-    firstValidation = stringMove.validateMoveLocation(state, move)
-    secondValidation = moveValidator.isValidMove(move, converter.toString(state))
-    thirdValidation = move in getMovesForTurn(state, move_num)
-    return firstValidation and secondValidation and thirdValidation
+    isValid = move in getMovesForTurn(state, move_num)
+    return isValid
 
 #Converts an x coordinate to a cell on the board
 #Params: x, The x coordinate
