@@ -18,7 +18,7 @@ def goto(x, y):#TODO Comment this method
 #Notes: Font will be left-justified, bold, Arial in size 20
 def write(message):
     t = constants.TURTLE
-    t.write(message, False, "left", ("Arial", 20, "bold"))
+    t.write(message, False, constants.LEFT_TEXT, constants.SCORE_BOARD_TEXT_STYLE)
 
 #Draws a white box at a location
 #Params: x, The x coordinate of the location
@@ -28,7 +28,7 @@ def write(message):
 def clearArea(x, y):
     t = constants.TURTLE
     t.up()
-    t.fillcolor("light green")
+    t.fillcolor(constants.PLAY_SCREEN_BG_COLOR)
 
     #Draw a filled box
     t.begin_fill()
@@ -50,12 +50,12 @@ def writeScore(black, white):
     #Go to Black's area and draw their score
     goto(constants.BLACK_SCORE_X, constants.BLACK_SCORE_Y)
     clearArea(constants.BLACK_SCORE_X, constants.BLACK_SCORE_Y)
-    write("BLACK\n    " + str(black))
+    write(constants.SCORE_TITLE_BLACK + str(black))
 
     #Go to White's area and draw their score
     goto(constants.WHITE_SCORE_X, constants.WHITE_SCORE_Y)
     clearArea(constants.WHITE_SCORE_X, constants.WHITE_SCORE_Y)
-    write("WHITE\n    " + str(white))
+    write(constants.SCORE_TITLE_WHITE + str(white))
 
     #Return to starting position
     goto(starting_X, starting_y)
@@ -68,7 +68,7 @@ def writeTurn(turn_num):
     starting_x, starting_y = constants.TURTLE.pos()
     goto(25, 25)
     clearArea(25, 25)
-    write("TURN NUMBER \n     " + str(turn_num))
+    write(constants.TURN_STRING + str(turn_num))
     goto(starting_x, starting_y)
 
 #Writes a message to the bottom of the screen
@@ -85,5 +85,8 @@ def writeMessage(message):
     #Return to starting area
     goto(starting_X, starting_y)
 
+#Prints an error message
+#Params: None
+#Returns: None
 def noButtonError():
-    writeMessage("Click a button!")
+    writeMessage(constants.BUTTON_ERROR_MESSAGE)

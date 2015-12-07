@@ -140,12 +140,17 @@ BORDER_COLOR = "Yellow"
 CENTER_TEXT = "center"
 LEFT_TEXT = "left"
 BUTTON_TEXT_STYLE = ("Arial", 15, "bold")
+SCORE_BOARD_TEXT_STYLE = ("Arial", 20, "bold")
 NAME_TEXT_STYLE = ("Arial", 50, "bold")
 GRID_NAME_STYLE = ("Arial", 27, "bold", "underline")
 RULES_TEXT_STYLE = ("Arial", 10, "normal")
 GAME_NAME = "REVERSI"
 MENU_OPTIONS = ["Rules", "Play", "Exit"]
 RULES_OPTION = "Return to Menu"
+SCORE_TITLE_BLACK = PIECE_COLOR_BLACK + "\n    "
+SCORE_TITLE_WHITE = PIECE_COLOR_WHITE + "\n    "
+TURN_STRING = "TURN NUMBER \n     "
+BUTTON_ERROR_MESSAGE = "Please Click a Button!"
 
 #Strings for end conditions
 TIE_STRING = "It was a Tie!"
