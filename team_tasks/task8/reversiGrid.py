@@ -142,9 +142,11 @@ def main():
 	grid = constants.TURTLE
 	wn = constants.WINDOW
 
+
 	#Clear the screen
 	wn.clear()
 	wn.tracer(constants.FRAME_TO_DRAW)
+	wn.bgcolor("light green")
 
 	#pre-set the turtle
 	grid.speed(0)
