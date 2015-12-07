@@ -53,6 +53,28 @@ def label_x():
 		coord_xx = coord_xx + constants.CELL_WIDTH
 		grid.goto(coord_xx, constants.Y_LETTER_LABEL)
 		grid.setheading(0)
+		
+def passButton():
+	pass_button = turtle.Turtle()
+	pass_button.up()
+	pass_button.goto(650, 50)
+	pass_button.down()
+	pass_button.fillcolor("white")
+	pass_button.pencolor ("black")
+	pass_button.begin_fill()
+	pass_button.left(90)
+	pass_button.pendown()
+	pass_button.forward(45)
+	pass_button.right(90)
+	pass_button.forward(85)
+	pass_button.right(90)
+	pass_button.forward(45)
+	pass_button.right(90)
+	pass_button.forward(85)
+	pass_button.right(50)
+	pass_button.end_fill()
+	pass_button.write("Pass", False, constants.LEFT_TEXT, constants.GRID_NAME_STYLE)
+	pass_button.up()
 
 #Function that draws a frame around the board.
 #Function takes nothing and returns nothing
@@ -160,6 +182,7 @@ def main():
 	grid.pendown()
 	grid.hideturtle()
 	reversiBoard() #Creates the board.
+	passButton()
 	wn.update()
 
 	if __name__ == "__main__":
