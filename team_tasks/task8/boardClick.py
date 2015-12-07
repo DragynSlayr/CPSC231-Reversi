@@ -22,7 +22,7 @@ def updateScoreBoard(game_state):
 #Gets a move from an x and y coordinate
 #Params: x, The x coordinate of a click
 #        y, The x coordinate of a click
-#Returns: A string containing the move. ex, "A1"
+#Returns: A string containing the move. ex, 'A1'
 def getMove(x, y):
     #Convert the x and y to the coordinate of a cell
     x = convertXToBoard(x)
@@ -151,19 +151,19 @@ def finishGame(game_state):
     constants.WINDOW.exitonclick()
 
     #Reset state and move
-    fileHandler.saveVariable("State", "")
-    fileHandler.saveVariable("Move", "")
+    fileHandler.saveVariable(constants.VARIABLE_STATE, constants.VARIABLE_BLANK)
+    fileHandler.saveVariable(constants.VARIABLE_MOVE, constants.VARIABLE_BLANK)
 
 #Changes variables needed for a move
 #Params: None
 #Returns: A tuple of (game_state, move_num)
 def startMove():
     #Save variable
-    fileHandler.saveVariable("Moving", "True")
+    fileHandler.saveVariable(constants.VARIABLE_MOVING, constants.VARIABLE_BOOL_TRUE)
 
     #Load the variables we need
-    game_state = converter.toList(fileHandler.loadVariable("State"))
-    move_num = int(fileHandler.loadVariable("Move"))
+    game_state = converter.toList(fileHandler.loadVariable(constants.VARIABLE_STATE))
+    move_num = int(fileHandler.loadVariable(constants.VARIABLE_MOVE))
 
     #Return game_state and move_num as a tuple
     return (game_state, move_num)
@@ -175,14 +175,14 @@ def startMove():
 #Returns: None
 def endMove(game_state, move_num):
     #Save the variables
-    fileHandler.saveVariable("State", converter.toString(game_state))
-    fileHandler.saveVariable("Move", str(move_num))
+    fileHandler.saveVariable(constants.VARIABLE_STATE, converter.toString(game_state))
+    fileHandler.saveVariable(constants.VARIABLE_MOVE, str(move_num))
 
     #Reload the board
-    loadGame("variables.txt", False)
+    loadGame(constants.TEMP_FILE, False)
 
     #Update the scoreboard
-    updateScoreBoard(converter.toList(fileHandler.loadVariable("State")))
+    updateScoreBoard(converter.toList(fileHandler.loadVariable(constants.VARIABLE_STATE)))
 
     #Update the window
     constants.WINDOW.update()
@@ -208,7 +208,7 @@ def makePlayerMove(game_state, move, move_num):
 #Returns: None
 def placePiece(x, y):
     #Make sure a move is not being made
-    if fileHandler.loadVariable("Moving") == "False":
+    if fileHandler.loadVariable(constants.VARIABLE_MOVING) == constants.VARIABLE_BOOL_FALSE:
         #Get the variables for the start of the move
         game_state, move_num = startMove()
 
@@ -239,32 +239,32 @@ def placePiece(x, y):
             finishGame(game_state)
 
         #Save variable
-        fileHandler.saveVariable("Moving", "False")
+        fileHandler.saveVariable(constants.VARIABLE_MOVING, constants.VARIABLE_BOOL_FALSE)
 
 #Saves the current game configuration
 #Params: None
 #Returns: None
 def saveGame():
     #Get current game info
-    current_state = fileHandler.loadVariable("State")
-    current_move_num = fileHandler.loadVariable("Move")
+    current_state = fileHandler.loadVariable(constants.VARIABLE_STATE)
+    current_move_num = fileHandler.loadVariable(constants.VARIABLE_MOVE)
 
     #Save game info
-    fileHandler.saveVariable("State", current_state, "save.txt")
-    fileHandler.saveVariable("Move", current_move_num, "save.txt")
+    fileHandler.saveVariable(constants.VARIABLE_STATE, current_state, constants.SAVE_FILE)
+    fileHandler.saveVariable(constants.VARIABLE_MOVE, current_move_num, constants.SAVE_FILE)
 
 #Loads the saved game configuration
 #Params: file_name, The file to load from
 #        redraw, Whether the board should be redrawn
 #Returns: None
-def loadGame(file_name = "save.txt", redraw = True):
+def loadGame(file_name = constants.SAVE_FILE, redraw = True):
     #Load game info
-    saved_state = fileHandler.loadVariable("State", file_name)
-    saved_move_num = fileHandler.loadVariable("Move", file_name)
+    saved_state = fileHandler.loadVariable(constants.VARIABLE_STATE, file_name)
+    saved_move_num = fileHandler.loadVariable(constants.VARIABLE_MOVE, file_name)
 
     #Write loaded variables to variables file
-    fileHandler.saveVariable("State", saved_state)
-    fileHandler.saveVariable("Move", saved_move_num)
+    fileHandler.saveVariable(constants.VARIABLE_STATE, saved_state)
+    fileHandler.saveVariable(constants.VARIABLE_MOVE, saved_move_num)
 
     #Convert state from string to list
     saved_state = converter.toList(saved_state)
@@ -289,9 +289,9 @@ def loadGame(file_name = "save.txt", redraw = True):
 #Returns: None
 def quitGame():
     #Reset variables
-    fileHandler.saveVariable("State", "")
-    fileHandler.saveVariable("Move", "")
-    fileHandler.saveVariable("Moving", "False")
+    fileHandler.saveVariable(constants.VARIABLE_STATE, constants.VARIABLE_BLANK)
+    fileHandler.saveVariable(constants.VARIABLE_MOVE, constants.VARIABLE_BLANK)
+    fileHandler.saveVariable(constants.VARIABLE_MOVING, constants.VARIABLE_BOOL_FALSE)
 
     #Close the game
     wn = constants.WINDOW
@@ -316,9 +316,9 @@ def run(game_state, move_num, player_move):
     displayValidMoves(game_state, move_num)
 
     #Save variables to be used later
-    fileHandler.saveVariable("State", converter.toString(game_state))
-    fileHandler.saveVariable("Move", str(move_num))
-    fileHandler.saveVariable("Moving", "False")
+    fileHandler.saveVariable(constants.VARIABLE_STATE, converter.toString(game_state))
+    fileHandler.saveVariable(constants.VARIABLE_MOVE, str(move_num))
+    fileHandler.saveVariable(constants.VARIABLE_MOVING, constants.VARIABLE_BOOL_FALSE)
 
     #Set up the window
     wn = constants.WINDOW

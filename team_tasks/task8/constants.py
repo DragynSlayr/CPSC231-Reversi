@@ -113,3 +113,13 @@ GAME_STATE_START = [
 EXIT_KEY = "space"
 SAVE_KEY = "s"
 LOAD_KEY = "l"
+
+#Files and variables in them
+TEMP_FILE = "variables.txt"
+SAVE_FILE = "save.txt"
+VARIABLE_MOVE = "Move"
+VARIABLE_STATE = "State"
+VARIABLE_MOVING = "Moving"
+VARIABLE_BLANK = ""
+VARIABLE_BOOL_TRUE = "True"
+VARIABLE_BOOL_FALSE = "False"
