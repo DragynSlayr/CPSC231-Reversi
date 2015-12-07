@@ -131,6 +131,9 @@ VARIABLE_SEPARATOR = ":"
 #For colors
 PIECE_COLOR_BLACK = "Black"
 PIECE_COLOR_WHITE = "White"
+GRID_BG_COLOR = "Dark Green"
+GRID_FG_COLOR = "Black"
+BORDER_COLOR = "Yellow"
 
 #Used when writing
 CENTER_TEXT = "center"
