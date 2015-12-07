@@ -24,7 +24,7 @@ def resetSquare(move):
 	turtle.down()
 
 	#Set the color
-	turtle.fillcolor("dark green")
+	turtle.fillcolor(constants.GRID_BG_COLOR)
 
 	#Draw the square
 	turtle.begin_fill()
@@ -60,14 +60,14 @@ def displayValidMoves(valid_moves, state):#TODO Comment this method
 		y, x = getMoveIndices(move)
 
 		if state[x][y] == constants.PIECE_NONE:
-			placePiece(move[0], int(move[1]), "#34DDDD")
+			placePiece(move[0], int(move[1]), constants.PIECE_COLOR_VALID)
 			SHOWN_MOVES.append(move)
 
 # Gets the position in pixesl at the coordinate
 # Params: column, The column letter of the coordinate
 #		  row, The row number of teh coordinate
 # Returns: The position of the coordinates, in a tuple (x, y)
-# Example: ("a", 1) returns (200, 475)
+# Example: ('a', 1) returns (200, 475)
 def getPosition(column, row):
 	#Get the x coordinate which is
 	#the offset plus the cell width * the cell letter as a number
@@ -85,7 +85,7 @@ def getPosition(column, row):
 #		  row, The row number of the position
 #		  color, A string specifying piece color; None does not draw
 # Returns: None
-# Example, ("A", 2, "white") places a white piece at (A, 2)
+# Example, ('A', 2, 'white') places a white piece at (A, 2)
 def placePiece(column, row, color):
 	#Upper case letter
 	column = column.upper()
