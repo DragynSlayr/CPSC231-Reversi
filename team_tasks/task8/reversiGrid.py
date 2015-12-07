@@ -33,7 +33,7 @@ def label_y():
 	for sidey in constants.ROW_NUMBERS[::-1]:
 		coord_yy = grid.ycor()
 		grid.pendown()
-		grid.write(sidey, False, "left", ("Arial", 15, "bold"))
+		grid.write(sidey, False, constants.LEFT_TEXT, constants.BUTTON_TEXT_STYLE)
 		grid.penup()
 		coord_yy = coord_yy + constants.CELL_HEIGHT
 		grid.goto(175, coord_yy)
@@ -47,7 +47,7 @@ def label_x():
 	for sidex in constants.COLUMN_LETTERS:
 		coord_xx = grid.xcor()
 		grid.pendown()
-		grid.write(sidex, False, "left", ("Arial", 15, "bold"))
+		grid.write(sidex, False, constants.LEFT_TEXT, constants.BUTTON_TEXT_STYLE)
 		grid.penup()
 		coord_xx = coord_xx + constants.CELL_WIDTH
 		grid.goto(coord_xx, 500)
@@ -58,7 +58,7 @@ def label_x():
 def reversiFrame():
 	grid = constants.TURTLE
 	size = grid.pensize()
-	grid.pencolor("dark green")
+	grid.pencolor(constants.GRID_BG_COLOR)
 	grid.pensize(14)
 	grid.goto(-5,-5)
 	grid.setheading(90)
@@ -74,7 +74,7 @@ def reversiFrame():
 	grid.forward(constants.WINDOW_WIDTH - 1)
 	grid.right(90)
 
-	grid.pencolor("yellow")
+	grid.pencolor(constants.BORDER_COLOR)
 	grid.pensize(6)
 	grid.goto(-5, -5)
 	grid.setheading(90)
@@ -87,7 +87,7 @@ def reversiFrame():
 	grid.forward(constants.WINDOW_WIDTH - 1)
 	grid.right(90)
 
-	grid.pencolor("black")
+	grid.pencolor(constants.GRID_FG_COLOR)
 	grid.pensize(3)
 	grid.goto(-5, -5)
 	grid.setheading(90)
@@ -112,8 +112,8 @@ def reversiFrame():
 #Function takes nothing and returns nothing
 def reversiBoard():
 	grid = constants.TURTLE
-	grid.fillcolor("dark green")
-	grid.pencolor ("black")
+	grid.fillcolor(constants.GRID_BG_COLOR)
+	grid.pencolor (constants.GRID_FG_COLOR)
 	grid.begin_fill()
 	square()
 	grid.end_fill()
@@ -132,8 +132,9 @@ def reversiBoard():
 	grid.penup()
 	grid.goto(20, 545)
 	grid.pendown()
-	grid.pencolor("black")
-	grid.write("R   e   v   e   r   s   i", False, "left", ("Arial", 27, "bold", "underline"))
+	grid.pencolor(constants.GRID_FG_COLOR)
+	#spread_name = [for i in constants.GAME_NAME]
+	grid.write("R   e   v   e   r   s   i", False, constants.LEFT_TEXT, constants.GRID_NAME_STYLE)
 
 #This function creates the window, sets the coordinates of the window, creates the grid with labels, and frames it.
 #Function takes no parameters and returns nothing
@@ -142,11 +143,10 @@ def main():
 	grid = constants.TURTLE
 	wn = constants.WINDOW
 
-
 	#Clear the screen
 	wn.clear()
 	wn.tracer(constants.FRAME_TO_DRAW)
-	wn.bgcolor("light green")
+	wn.bgcolor(constants.PLAY_SCREEN_BG_COLOR)
 
 	#pre-set the turtle
 	grid.speed(0)

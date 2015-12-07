@@ -133,6 +133,7 @@ PIECE_COLOR_BLACK = "Black"
 PIECE_COLOR_WHITE = "White"
 GRID_BG_COLOR = "Dark Green"
 GRID_FG_COLOR = "Black"
+PLAY_SCREEN_BG_COLOR = "Light Green"
 BORDER_COLOR = "Yellow"
 
 #Used when writing
@@ -140,6 +141,7 @@ CENTER_TEXT = "center"
 LEFT_TEXT = "left"
 BUTTON_TEXT_STYLE = ("Arial", 15, "bold")
 NAME_TEXT_STYLE = ("Arial", 50, "bold")
+GRID_NAME_STYLE = ("Arial", 27, "bold", "underline")
 GAME_NAME = "REVERSI"
 MENU_OPTIONS = ["Rules", "Play", "Exit"]
 
