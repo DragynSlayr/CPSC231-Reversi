@@ -214,27 +214,36 @@ def placePiece(x, y):
 
         #Make sure the game is not over
         if not victoryStatus.endGameStatus(game_state):
-            #Check if the point is valid
+            pass_please = False
+		    if 650<= x <= 650 + 85:
+				if 50<= y <=50 + 45:
+                    pass_please = True
+           
+           
+           #Check if the point is valid
             if isValidSquare(x, y) and isValidMove(game_state, getMove(x, y), move_num):
-                #Get the move
-                move = getMove(x, y)
+               if pass_please == False: #Get the move
+                    move = getMove(x, y)
 
-                #Make the player's move
-                move_num = makePlayerMove(game_state, move, move_num)
+                    #Make the player's move
+                    move_num = makePlayerMove(game_state, move, move_num)
 
-                screenWriter.writeTurn(move_num)
+                    screenWriter.writeTurn(move_num)
 
                 #Check if the game is over
-                if not victoryStatus.endGameStatus(game_state):
-                    #Small delay
-                    time.sleep(constants.MOVE_DELAY)
+            if not victoryStatus.endGameStatus(game_state):
+                #Small delay
+                time.sleep(constants.MOVE_DELAY)
+                
+                if pass_please == True:
+					move_num += 1
 
-                    #Let the computer make a turn
-                    game_state = computerTurn(game_state, move_num)
-                    move_num += 1
+                #Let the computer make a turn
+                game_state = computerTurn(game_state, move_num)
+                move_num += 1
 
                 #End the move
-                endMove(game_state, move_num)
+            endMove(game_state, move_num)
         else:
             finishGame(game_state)
 
