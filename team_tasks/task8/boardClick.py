@@ -190,7 +190,7 @@ def endMove(game_state, move_num):
     updateScoreBoard(game_state)
 
 
-    screenWriter.writeTurn(move_num)
+#    screenWriter.writeTurn(move_num)
 
     #Reload the board
     loadGame("variables.txt", False)
