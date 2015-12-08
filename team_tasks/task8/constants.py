@@ -167,6 +167,7 @@ RULES_OPTION = "Return to Menu"
 SCORE_TITLE_BLACK = PIECE_COLOR_BLACK + "\n    "
 SCORE_TITLE_WHITE = PIECE_COLOR_WHITE + "\n    "
 TURN_STRING = "TURN NUMBER \n     "
+TURN_COLOUR_STRING = "TURN \nCOLOUR \n"
 BUTTON_ERROR_MESSAGE = "Please Click a Button!"
 
 #Strings for end conditions
