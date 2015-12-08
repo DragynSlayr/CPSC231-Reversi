@@ -80,7 +80,7 @@ WHITE_SCORE_X = 660
 WHITE_SCORE_Y = 440
 BLACK_SCORE_X = 40
 BLACK_SCORE_Y = 440
-MESSAGE_X = 300
+MESSAGE_X = 200
 MESSAGE_Y = 20
 
 #Constants for checking for pieces in the directions
@@ -167,7 +167,7 @@ TURN_STRING = "TURN NUMBER \n     "
 BUTTON_ERROR_MESSAGE = "Please Click a Button!"
 
 #Strings for end conditions
-TIE_STRING = "It was a Tie!"
+TIE_STRING = "           It was a Tie!"
 BLACK_STRING = PIECE_COLOR_BLACK + " won, with "
 WHITE_STRING = PIECE_COLOR_WHITE + " won, with "
 PIECES_STRING = " pieces!"
