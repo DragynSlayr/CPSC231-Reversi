@@ -1,15 +1,13 @@
-#Running this file in the terminal will let you play the board with input from the command prompt.
-#It will setup the board and place the correct piece colour based on the turn number.
-#It will prompt the user for moves in the terminal and will only take a valid move so a Capital and a number.
-#It will update the board and the game state string based on the move.
+#This file contains methods to load and change lists
 import constants
 import turtleMove
 import listUpdater
 
-#This function will take a game state and update the gamestate on the game board.
-#It takes the game state, which is a 64 character string
-#It returns nothing
+#Places pieces from a list to the board
+#Params: game_state, The list to load
+#Returns: None
 #Author: Kyle Hinton
+#Editor: Inderpreet Dhillon
 def listToPiece(game_state):
 	#Iterate through game state list
 	for y in range(len(game_state)):
@@ -29,29 +27,24 @@ def listToPiece(game_state):
 			else:
 				turtleMove.resetSquare(column + str(row))
 
-#Converts an index to a move
-#Params: index, The index to convert
-#Returns: A string representing the Index
-#Example: pieceToString(10) returns 'C2'
-def pieceToString(index):#TODO Check if we need this
-	column = constants.COLUMN_LETTERS[index % 8]
-	row = constants.ROW_NUMBERS[index // 8]
-	return column + str(row)
-
-#This function will decide on the colour of the next piece based on whose turn number it is.
-#The takes a counter for the turns as a parameter.
-#It returns a B or a W depending on whose turn it is.
+#Gets the current turn piece based on the turn number
+#Params: counter, The turn number
+#Return: White's piece if even turn, Black's otherwise
+#Author: Kyle Hinton
+#Editor: None
 def whoseTurn(counter):
 	if counter % 2 == 0:
 		return constants.PIECE_WHITE
 	else:
 		return constants.PIECE_BLACK
 
-#This function will convert a move coordinate into a string.
-#It receives the parameters are a game state, a move coordinate, and the turn number.
-#It returns the updated string as new_state.
-#For testing, you can get the index number of the changed character with move_to_string
+#Interpret's a move into the game state
+#Params: game_state, The state of the game
+#		 move, The move to interpret
+#		 turn, The turn number
+#Returns: The updated state
 #Author: Kyle Hinton
+#Editor: Inderpreet Dhillon, David Keizer
 def listInterpret(game_state, move, turn):
 	#Get letter and number from move
 	letter = move[0].upper()
