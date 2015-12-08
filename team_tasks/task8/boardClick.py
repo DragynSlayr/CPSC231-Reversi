@@ -37,15 +37,26 @@ def getMove(x, y):
 
     return move
 
+#Counts how many pieces will change after a move
+#Params: game_state, The state of the game
+#        move, The move to check
+#        move_num, The number of the move
+#Returns: An int representing how many pieces changed
 def countUpdatedPieces(game_state, move, move_num):
     #Create a deep copy of game state
     state_string = converter.toString(game_state)
     copy_state = converter.toList(state_string)
 
+    #Find which piece is being placed
     piece = listInterpret.whoseTurn(move_num)
+
+    #Get an updated state after the move
     changed_state = listUpdater.updateGameState(copy_state, move, piece, False)
 
+    #Count how many pieces changed
     change_count = 0
+
+    #Traverse both states and compare pieces
     for i in range(len(game_state)):
         for j in range(len(game_state[i])):
             if game_state[j][i] != changed_state[j][i]:
@@ -58,19 +69,25 @@ def countUpdatedPieces(game_state, move, move_num):
 #Params: state, The game state
 #        move_num, The current move numbers
 #Returns: Possible moves for move number
-def getMovesForTurn(state, move_num):#TODO Comment this method
+def getMovesForTurn(state, move_num):
     moves_list = []
 
+    #Traverse the entire state
     for i in range(len(state)):
         for j in range(len(state[i])):
-            letter = constants.COLUMN_LETTERS[i]
-            number = constants.ROW_NUMBERS[j]
-            move = letter + str(number)
-
+            #Check if the current position is unoccupied
             if state[j][i] == constants.PIECE_NONE:
+                #Get the move from indices
+                letter = constants.COLUMN_LETTERS[i]
+                number = constants.ROW_NUMBERS[j]
+                move = letter + str(number)
+
+                #Get the total amount of changes
                 changes = countUpdatedPieces(state, move, move_num)
 
+                #A vild move will have at least 2 pieces changed
                 if changes > constants.PIECE_CHANGE_THRESHOLD:
+                    #Add the valid move to the list
                     moves_list.append(move)
 
     return moves_list
