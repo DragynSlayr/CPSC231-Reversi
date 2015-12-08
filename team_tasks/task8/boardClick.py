@@ -202,53 +202,98 @@ def makePlayerMove(game_state, move, move_num):
     #Return the new move number
     return move_num + 1
 
+#Checks if the pass button is clicked
+#Params: x, The x coordinate of a click
+#        y, The y coordinate of a click
+#Returns: True if pass button is clicked, False otherwise
+def isPassClicked(x, y):
+    #Check that the click is between the 4 sides
+    x_valid_left = (x >= constants.PASS_BUTTON_X)
+    x_valid_right = (x <= constants.PASS_BUTTON_X + constants.PASS_BUTTON_WIDTH)
+    y_valid_left = (y >= constants.PASS_BUTTON_Y)
+    y_valid_right = (y <= constants.PASS_BUTTON_Y + constants.PASS_BUTTON_HEIGHT)
+
+    #Return result
+    return (x_valid_left and x_valid_right) and (y_valid_left and y_valid_right)
+
+#All the logic for the player's turns
+#Params: x, The x coordinate of a click
+#        y, The y coordinate of a click
+#        game_state, The state of the game
+#        move_num, The number of the move
+#        passing_turn, Whether the turn is being passed
+#Returns: A move number after the player's move
+def playerTurn(x, y, game_state, move_num, passing_turn):
+    #Check if the player has tried to pass
+    if passing_turn:
+        #Return the same move number
+        return move_num
+    else:
+        #Check if the point is valid
+        if isValidSquare(x, y) and isValidMove(game_state, getMove(x, y), move_num):
+            #Get the move
+            move = getMove(x, y)
+
+            #Make the player's move
+            move_num = makePlayerMove(game_state, move, move_num)
+
+            #Write the move number
+            screenWriter.writeTurn(move_num)
+
+        #Return the new move number
+        return move_num
+
+#Makes the computer's turns
+#Params: game_state, The state of the game_state
+#        move_num, The number of the move
+#        passing_turn, Whether the player passed their turn
+#Returns: The new game state and move number
+def makeComputerTurn(game_state, move_num, passing_turn):
+    #Check if the game is over
+    if not victoryStatus.endGameStatus(game_state):
+        #Small delay
+        time.sleep(constants.MOVE_DELAY)
+
+        #Increment the move if the player passed
+        if passing_turn:
+            move_num += 1
+
+        #Let the computer make a turn
+        game_state = computerTurn(game_state, move_num)
+        move_num += 1
+
+    #Return game state and move number
+    return (game_state, move_num)
+
 #Places a piece at a location if it is a cell
 #Params: x, The x location to check
 #        y, The y location to check
 #Returns: None
 def placePiece(x, y):
     #Make sure a move is not being made
-	if fileHandler.loadVariable(constants.VARIABLE_MOVING) == constants.VARIABLE_BOOL_FALSE:
-		#Get the variables for the start of the move
-		game_state, move_num = startMove()
+    if fileHandler.loadVariable(constants.VARIABLE_MOVING) == constants.VARIABLE_BOOL_FALSE:
+        #Get the variables for the start of the move
+        game_state, move_num = startMove()
 
         #Make sure the game is not over
-		if not victoryStatus.endGameStatus(game_state):
-			pass_please = False
-			if 650<= x <= 650 + 85:
-				if 50<= y <=50 + 45:
-					pass_please = True
-           
-           
-           #Check if the point is valid
-			if isValidSquare(x, y) and isValidMove(game_state, getMove(x, y), move_num):
-				if pass_please == False: #Get the move
-					move = getMove(x, y)
+        if not victoryStatus.endGameStatus(game_state):
+            #Check if the player tried to pass
+            passing_turn = isPassClicked(x, y)
 
-                    #Make the player's move
-					move_num = makePlayerMove(game_state, move, move_num)
+            #Make the player's move
+            move_num = playerTurn(x, y, game_state, move_num, passing_turn)
 
-					screenWriter.writeTurn(move_num)
+            #Make the computer's move
+            game_state, move_num = makeComputerTurn(game_state, move_num, passing_turn)
 
-                #Check if the game is over
-			if not victoryStatus.endGameStatus(game_state):
-                #Small delay
-				time.sleep(constants.MOVE_DELAY)
-                
-				if pass_please == True:
-					move_num += 1
-
-                #Let the computer make a turn
-				game_state = computerTurn(game_state, move_num)
-				move_num += 1
-
-                #End the move
-			endMove(game_state, move_num)
-		else:
-			finishGame(game_state)
+            #End the move
+            endMove(game_state, move_num)
+        else:
+            #End the game
+            finishGame(game_state)
 
         #Save variable
-		fileHandler.saveVariable(constants.VARIABLE_MOVING, constants.VARIABLE_BOOL_FALSE)
+        fileHandler.saveVariable(constants.VARIABLE_MOVING, constants.VARIABLE_BOOL_FALSE)
 
 #Saves the current game configuration
 #Params: None
