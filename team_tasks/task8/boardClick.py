@@ -358,17 +358,19 @@ def placePiece(x, y):
 
         #Make sure the game is not over
         if not victoryStatus.endGameStatus(game_state):
-            #Check if the player tried to pass
+            #Check if the player tried to pass or if the click was valid
             passing_turn = isPassClicked(x, y)
+            click_valid = (isValidSquare(x, y) and isValidMove(game_state, getMove(x, y), move_num))
 
-            #Make the player's move
-            move_num = playerTurn(x, y, game_state, move_num, passing_turn)
+            if passing_turn or click_valid:
+                #Make the player's move
+                move_num = playerTurn(x, y, game_state, move_num, passing_turn)
 
-            #Make the computer's move
-            game_state, move_num = makeComputerTurn(game_state, move_num, passing_turn)
+                #Make the computer's move
+                game_state, move_num = makeComputerTurn(game_state, move_num, passing_turn)
 
-            #End the move
-            endMove(game_state, move_num)
+                #End the move
+                endMove(game_state, move_num)
         else:
             #End the game
             finishGame(game_state)
