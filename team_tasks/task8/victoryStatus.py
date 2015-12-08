@@ -1,5 +1,6 @@
 #This file constains functions to check if the game is over
 import constants
+import boardClick
 
 #Counts the number of a specified character in a string
 #Params: piece, The piece to count occurences of
@@ -21,7 +22,7 @@ def countPieces(piece, game_state):
 
 #Checks if the game is over
 #Params: game_state, A string representation of the board
-#Returns: True if the board is full and False otherwise
+#Returns: True if the game is over and False otherwise
 #Author: Inderpreet Dhillon
 #Editor: None
 def endGameStatus(game_state):
@@ -34,4 +35,11 @@ def endGameStatus(game_state):
 	#Check if the board is full
 	board_full = (limit - empty_spaces) == limit
 
-	return board_full
+	#Get moves for black and white
+	white_moves = boardClick.getMovesForTurn(game_state, 0)
+	black_moves = boardClick.getMovesForTurn(game_state, 1)
+
+	#Check that there is at least one move available
+	moves_available = (len(white_moves) + len(black_moves)) > 0
+
+	return board_full or not moves_available
