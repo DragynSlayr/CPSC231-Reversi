@@ -156,6 +156,34 @@ def isValidSquare(x, y):
     #Check if the x and y are in any cell
     return x_valid and y_valid
 
+#Calculates the move that will earn the most pieces
+#Params: valid_moves, A list of possible moves
+#        state, The current game state
+#        move_num, The current move number
+#Returns: The move that will earn the most pieces
+#Author: Inderpreet Dhillon
+#Editor: None
+def selectBestMove(valid_moves, state, move_num):
+    moves_list = []
+
+    #Add moves and number of changes to a list
+    for move in valid_moves:
+        changes = countUpdatedPieces(state, move, move_num)
+        moves_list.append([changes, move])
+
+    #Base values
+    best_move = moves_list[0][0]
+    most_changes = 0
+
+    #Traverse list
+    for i in range(len(moves_list)):
+        if moves_list[i][0] > most_changes:
+            #Reassign best move and most changes if the current position is better
+            most_changes = moves_list[i][0]
+            best_move = moves_list[i][1]
+
+    return best_move
+
 #The computer generates a move and places a piece if possible
 #Params: state, The current game state
 #        move_num, The current move number
@@ -170,14 +198,11 @@ def computerTurn(state, move_num):
     if len(valid_moves) == 0:
         return state
     else:
-        #Generate a random number
-        random_num = random.randrange(len(valid_moves))
-
-        #Get a move from the list
-        move = valid_moves[random_num]
+        #Get the 'best' move
+        best_move = selectBestMove(valid_moves, state, move_num)
 
         #Make the move
-        return listInterpret.listInterpret(state, move, move_num)
+        return listInterpret.listInterpret(state, best_move, move_num)
 
 #Displays an ending message and clears the temporary file
 #Params: game_state, The state of the game
