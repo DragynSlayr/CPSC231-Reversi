@@ -387,10 +387,11 @@ def loadGame(file_name = constants.SAVE_FILE, redraw = True):
         #Load board configuration
         listInterpret.listToPiece(saved_state)
 
-    #Update the scoreboard
-    updateScoreBoard(saved_move_num)
-
+    #Write turn number
     screenWriter.writeTurn(saved_move_num)
+
+    #Update the scoreboard
+    updateScoreBoard(saved_state)
 
     #Reset valid moves from turtleMove
     turtleMove.SHOWN_MOVES = []
