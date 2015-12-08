@@ -42,4 +42,11 @@ def endGameStatus(game_state):
 	#Check that there is at least one move available
 	moves_available = (len(white_moves) + len(black_moves)) > 0
 
-	return board_full or not moves_available
+	#Get the number of each piece on the board
+	white_pieces = countPieces(constants.PIECE_WHITE, game_state)
+	black_pieces = countPieces(constants.PIECE_BLACK, game_state)
+
+	#Check that both players have pieces on the board
+	players_have_pieces = white_pieces > 0 and black_pieces > 0
+
+	return board_full or not moves_available or not players_have_pieces
