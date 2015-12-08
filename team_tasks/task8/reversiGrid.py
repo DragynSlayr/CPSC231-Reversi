@@ -109,7 +109,7 @@ def reversiFrame():
 	size = grid.pensize()
 	grid.pencolor(constants.GRID_BG_COLOR)
 	grid.pensize(14)
-	grid.goto(-5,-5)
+	grid.goto(constants.FRAME_ORIGIN, constants.FRAME_ORIGIN)
 	grid.setheading(90)
 	grid.pendown()
 
@@ -125,7 +125,7 @@ def reversiFrame():
 
 	grid.pencolor(constants.BORDER_COLOR)
 	grid.pensize(6)
-	grid.goto(-5, -5)
+	grid.goto(constants.FRAME_ORIGIN, constants.FRAME_ORIGIN)
 	grid.setheading(90)
 	grid.forward(constants.WINDOW_HEIGHT)
 	grid.right(90)
@@ -138,7 +138,7 @@ def reversiFrame():
 
 	grid.pencolor(constants.GRID_FG_COLOR)
 	grid.pensize(3)
-	grid.goto(-5, -5)
+	grid.goto(constants.FRAME_ORIGIN, constants.FRAME_ORIGIN)
 	grid.setheading(90)
 	grid.forward(constants.WINDOW_HEIGHT)
 	grid.right(90)

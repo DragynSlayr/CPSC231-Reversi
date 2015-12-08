@@ -37,6 +37,9 @@ Y_LETTER_LABEL = 500
 X_NUM_LABEL = 175
 Y_NUM_LABEL = 110
 
+#Constants for drawing frame.
+FRAME_ORIGIN = -5
+
 #Constants for pass button
 PASS_BUTTON_X = 650
 PASS_BUTTON_Y = 50
