@@ -14,15 +14,22 @@ import time
 #Updates the scoreboard to reflect the game state
 #Params: game_state, The state of the game
 #Returns: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def updateScoreBoard(game_state):
+    #Get both scores
     black_score = victoryStatus.countPieces(constants.PIECE_BLACK, game_state)
     white_score = victoryStatus.countPieces(constants.PIECE_WHITE, game_state)
+
+    #Update the score area
     screenWriter.writeScore(black_score, white_score)
 
 #Gets a move from an x and y coordinate
 #Params: x, The x coordinate of a click
 #        y, The x coordinate of a click
 #Returns: A string containing the move. ex, 'A1'
+#Author: Inderpreet Dhillon
+#Editor: None
 def getMove(x, y):
     #Convert the x and y to the coordinate of a cell
     x = convertXToBoard(x)
@@ -42,6 +49,8 @@ def getMove(x, y):
 #        move, The move to check
 #        move_num, The number of the move
 #Returns: An int representing how many pieces changed
+#Author: Inderpreet Dhillon
+#Editor: None
 def countUpdatedPieces(game_state, move, move_num):
     #Create a deep copy of game state
     state_string = converter.toString(game_state)
@@ -69,6 +78,8 @@ def countUpdatedPieces(game_state, move, move_num):
 #Params: state, The game state
 #        move_num, The current move numbers
 #Returns: Possible moves for move number
+#Author: Inderpreet Dhillon
+#Editor: None
 def getMovesForTurn(state, move_num):
     moves_list = []
 
@@ -96,6 +107,8 @@ def getMovesForTurn(state, move_num):
 #Params: state, Current game state
 #        move_num, Move number
 #Returns: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def displayValidMoves(state, move_num):
     valid_moves = getMovesForTurn(state, move_num)
     turtleMove.displayValidMoves(valid_moves, state)
@@ -105,6 +118,8 @@ def displayValidMoves(state, move_num):
 #        move, The move to check
 #        move_num, The number of the move
 #Returns: True if the move is valid, False otherwise
+#Author: Inderpreet Dhillon
+#Editor: None
 def isValidMove(state, move, move_num):
     isValid = move in getMovesForTurn(state, move_num)
     return isValid
@@ -112,6 +127,8 @@ def isValidMove(state, move, move_num):
 #Converts an x coordinate to a cell on the board
 #Params: x, The x coordinate
 #Returns: An index of the x coordinate of a cell
+#Author: Inderpreet Dhillon
+#Editor: None
 def convertXToBoard(x):
     x = (x / constants.CELL_WIDTH) - constants.OFFSET_OF_COLUMNS
     return int(x)
@@ -119,6 +136,8 @@ def convertXToBoard(x):
 #Converts a y coordinate to a cell on the board
 #Params: y, The y coordinate
 #Returns: An index of the y coordinate of a cell
+#Author: Inderpreet Dhillon
+#Editor: None
 def convertYToBoard(y):
     y = (y / constants.CELL_HEIGHT) - constants.OFFSET_OF_ROWS
     return int(y)
@@ -127,6 +146,8 @@ def convertYToBoard(y):
 #Params: x, The x coordinate of the location
 #        y, The y coordinate of the location
 #Returns: True if a piece can be placed at a location, False otherwise
+#Author: Inderpreet Dhillon
+#Editor: None
 def isValidSquare(x, y):
     #Check if each coordinate is valid separately
     x_valid = x >= constants.LEFT_MOST_X and x <= constants.RIGHT_MOST_X
@@ -139,6 +160,8 @@ def isValidSquare(x, y):
 #Params: state, The current game state
 #        move_num, The current move number
 #Returns: The new game state
+#Author: Inderpreet Dhillon
+#Editor: None
 def computerTurn(state, move_num):
     #Get a list of possible moves
     valid_moves = getMovesForTurn(state, move_num)
@@ -159,6 +182,8 @@ def computerTurn(state, move_num):
 #Displays an ending message and clears the temporary file
 #Params: game_state, The state of the game
 #Returns: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def finishGame(game_state):
     #Print who won
     game_status = playerVictory.playerWon(game_state)
@@ -174,6 +199,8 @@ def finishGame(game_state):
 #Changes variables needed for a move
 #Params: None
 #Returns: A tuple of (game_state, move_num)
+#Author: Inderpreet Dhillon
+#Editor: None
 def startMove():
     #Save variable
     fileHandler.saveVariable(constants.VARIABLE_MOVING, constants.VARIABLE_BOOL_TRUE)
@@ -190,6 +217,8 @@ def startMove():
 #Params: game_state, The state of the game
 #        move_num, The number of the move
 #Returns: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def endMove(game_state, move_num):
     #Save the variables
     fileHandler.saveVariable(constants.VARIABLE_STATE, converter.toString(game_state))
@@ -209,6 +238,8 @@ def endMove(game_state, move_num):
 #        move, The move being made
 #        move_num, The current move number
 #Returns: move_num + 1
+#Author: Inderpreet Dhillon
+#Editor: None
 def makePlayerMove(game_state, move, move_num):
     #Clear space at move
     turtleMove.resetSquare(move)
@@ -223,6 +254,8 @@ def makePlayerMove(game_state, move, move_num):
 #Params: x, The x coordinate of a click
 #        y, The y coordinate of a click
 #Returns: True if pass button is clicked, False otherwise
+#Author: Inderpreet Dhillon, David Keizer
+#Editor: None
 def isPassClicked(x, y):
     #Check that the click is between the 4 sides
     x_valid_left = (x >= constants.PASS_BUTTON_X)
@@ -240,6 +273,8 @@ def isPassClicked(x, y):
 #        move_num, The number of the move
 #        passing_turn, Whether the turn is being passed
 #Returns: A move number after the player's move
+#Author: Inderpreet Dhillon
+#Editor: None
 def playerTurn(x, y, game_state, move_num, passing_turn):
     #Check if the player has tried to pass
     if passing_turn:
@@ -265,6 +300,8 @@ def playerTurn(x, y, game_state, move_num, passing_turn):
 #        move_num, The number of the move
 #        passing_turn, Whether the player passed their turn
 #Returns: The new game state and move number
+#Author: Inderpreet Dhillon
+#Editor: None
 def makeComputerTurn(game_state, move_num, passing_turn):
     #Check if the game is over
     if not victoryStatus.endGameStatus(game_state):
@@ -286,6 +323,8 @@ def makeComputerTurn(game_state, move_num, passing_turn):
 #Params: x, The x location to check
 #        y, The y location to check
 #Returns: None
+#Author: Inderpreet Dhillon
+#Editor: David Keizer
 def placePiece(x, y):
     #Make sure a move is not being made
     if fileHandler.loadVariable(constants.VARIABLE_MOVING) == constants.VARIABLE_BOOL_FALSE:
@@ -315,6 +354,8 @@ def placePiece(x, y):
 #Saves the current game configuration
 #Params: None
 #Returns: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def saveGame():
     #Get current game info
     current_state = fileHandler.loadVariable(constants.VARIABLE_STATE)
@@ -328,6 +369,8 @@ def saveGame():
 #Params: file_name, The file to load from
 #        redraw, Whether the board should be redrawn
 #Returns: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def loadGame(file_name = constants.SAVE_FILE, redraw = True):
     #Load game info
     saved_state = fileHandler.loadVariable(constants.VARIABLE_STATE, file_name)
@@ -358,6 +401,8 @@ def loadGame(file_name = constants.SAVE_FILE, redraw = True):
 #Gracefully quits the game
 #Params: None
 #Returns: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def quitGame():
     #Reset variables
     fileHandler.saveVariable(constants.VARIABLE_STATE, constants.VARIABLE_BLANK)
@@ -374,6 +419,8 @@ def quitGame():
 #        move_num, The current move number
 #        player_move, Whether it is the player's move or not
 #Returns: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def run(game_state, move_num, player_move):
     #Allow the computer to make it's move
     if not player_move:
