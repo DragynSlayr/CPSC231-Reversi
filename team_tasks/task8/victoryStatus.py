@@ -1,10 +1,12 @@
-#This file constains a function that takes a current game state as a parameter and returns true if the game is over.
+#This file constains functions to check if the game is over
 import constants
 
 #Counts the number of a specified character in a string
 #Params: piece, The piece to count occurences of
 #		 game_state, The string to check
 #Returns: A count of the piece in the game_state
+#Author: Inderpreet Dhillon
+#Editor: None
 def countPieces(piece, game_state):
 	count = 0
 
@@ -21,6 +23,7 @@ def countPieces(piece, game_state):
 #Params: game_state, A string representation of the board
 #Returns: True if the board is full and False otherwise
 #Author: Inderpreet Dhillon
+#Editor: None
 def endGameStatus(game_state):
 	#Max possible spaces that could be filled
 	limit = constants.NUM_OF_CELLS
