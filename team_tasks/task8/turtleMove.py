@@ -1,4 +1,4 @@
-#Contains methods for interpreting input and placing pieces
+#Contains methods for placing various pieces
 import string
 import constants
 import reversiGrid
@@ -10,6 +10,8 @@ SHOWN_MOVES = []
 #Redraws a single square back to default
 #Params: move, The position of the square to reset
 #Returns: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def resetSquare(move):
 	#Get column and row from move
 	column = move[0]
@@ -34,18 +36,31 @@ def resetSquare(move):
 		turtle.forward(constants.CELL_WIDTH / 2)
 	turtle.end_fill()
 
-def getMoveIndices(move):#TODO Comment this method
-    x = constants.COLUMN_LETTERS.index(move[0])
-    y = constants.ROW_NUMBERS.index(int(move[1]))
+#Gets indices from a move
+#Params: move, The move to get indices from
+#Returns: X and Y as (X, Y)
+#Author: Inderpreet Dhillon
+#Editor: None
+def getMoveIndices(move):
+	#Get column and row
+	column = move[0]
+	row = int(move[1])
 
-    return (x, y)
+	#Get index of column and row
+	x = constants.COLUMN_LETTERS.index(column)
+	y = constants.ROW_NUMBERS.index(int(row))
+
+	return (x, y)
 
 #Draw all valid moves to the board
 #Params: valid_moves, The moves to draw
 #Returns: None
-def displayValidMoves(valid_moves, state):#TODO Comment this method
+#Author: Inderpreet Dhillon
+#Editor: None
+def displayValidMoves(valid_moves, state):
 	global SHOWN_MOVES
 
+	#Reset every square that is a blank space
 	for i in range(len(state)):
 		for j in range(len(state[i])):
 			if state[j][i] == constants.PIECE_NONE:
@@ -54,6 +69,7 @@ def displayValidMoves(valid_moves, state):#TODO Comment this method
 
 				resetSquare(column + str(row))
 
+	#Place each valid move
 	for move in valid_moves:
 		converted_move = listUpdater.convertMove(move)
 
