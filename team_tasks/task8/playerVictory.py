@@ -1,5 +1,4 @@
-#A function that takes a game state as a parameter
-# and returns which player won.
+#This class has a method to get who won
 import constants
 
 #Gets a string representing who won
