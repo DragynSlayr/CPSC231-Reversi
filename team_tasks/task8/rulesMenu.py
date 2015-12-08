@@ -5,6 +5,8 @@ import mainMenu
 #Displays the rules
 #Params: None
 #Returns: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def displayRules():
     #Get the window and turtle
     turtle = constants.TURTLE
@@ -33,6 +35,12 @@ def displayRules():
     #Draw a button
     mainMenu.drawButton(turtle, constants.BACK_BUTTON_LEFT_X, constants.BACK_BUTTON_TOP_Y, constants.RULES_OPTION)
 
+#Checks if the back button is clicked
+#Params: x, The x coordinate of a click
+#        y, The y coordinate of a click
+#Returns: True if the back button is clicked, False otherwise
+#Author: Inderpreet Dhillon
+#Editor: None
 def isBackClicked(x, y):
     #Check x and y separately
     x_valid = x >= constants.BACK_BUTTON_LEFT_X and x <= constants.BACK_BUTTON_RIGHT_X
@@ -45,6 +53,8 @@ def isBackClicked(x, y):
 #Params: x, The x location of the click
 #        y, The y location of the click
 #Returns: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def checkClicks(x, y):
     #Check if the back button was clicked
     if isBackClicked(x, y):
@@ -54,6 +64,8 @@ def checkClicks(x, y):
 #Shows the rules
 #Params: None
 #Returns: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def show():
     #Setup the window
     wn = constants.WINDOW
