@@ -1,11 +1,12 @@
-#This file contains methods for writing a string to a point in the window and
-#for clearing a small section of the window
+#This file contains methods for writing info to the screen
 import constants
 
 #Goes to a postion without drawing a line
 #Params: x, The x position to go to
 #        y, The y position to go to
 #Returns: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def goto(x, y):#TODO Comment this method
     t = constants.TURTLE
     t.up()
@@ -16,6 +17,8 @@ def goto(x, y):#TODO Comment this method
 #Params: message, The message to write
 #Returns: None
 #Notes: Font will be left-justified, bold, Arial in size 20
+#Author: Inderpreet Dhillon
+#Editor: None
 def write(message):
     t = constants.TURTLE
     t.write(message, False, constants.LEFT_TEXT, constants.SCORE_BOARD_TEXT_STYLE)
@@ -24,7 +27,9 @@ def write(message):
 #Params: x, The x coordinate of the location
 #        y, The y coordinate of the location
 #Returns: None
-#Notes: The bax drawn will be 75x75 and will be all white
+#Notes: The bax drawn will be 75x75
+#Author: Inderpreet Dhillon
+#Editor: None
 def clearArea(x, y):
     t = constants.TURTLE
     t.up()
@@ -43,6 +48,8 @@ def clearArea(x, y):
 #Params: black, Black's current score
 #        white, White's current score
 #Returns: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def writeScore(black, white):
     #Store the starting position so the turtle can return there later
     starting_X, starting_y = constants.TURTLE.pos()
@@ -63,7 +70,8 @@ def writeScore(black, white):
 #Writes the turn number on the game board in the bottom left corner.
 #Parameters: The turn number
 #Returns: None
-#Outputs the turn number on the board.
+#Author: Kyle Hinton
+#Editor: None
 def writeTurn(turn_num):
     starting_x, starting_y = constants.TURTLE.pos()
     goto(25, 25)
@@ -74,6 +82,8 @@ def writeTurn(turn_num):
 #Writes a message to the bottom of the screen
 #Params: message, The message to write
 #Returns: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def writeMessage(message):
     #Store starting location for later use
     starting_X, starting_y = constants.TURTLE.pos()
@@ -88,5 +98,7 @@ def writeMessage(message):
 #Prints an error message
 #Params: None
 #Returns: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def noButtonError():
     writeMessage(constants.BUTTON_ERROR_MESSAGE)
