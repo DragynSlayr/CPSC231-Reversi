@@ -81,7 +81,9 @@ def writeTurn(turn_num):
     else:
         current_turn = constants.PIECE_COLOR_BLACK
 
-    write(constants.TURN_STRING + str(turn_num))
+    player_turn_num = int(turn_num) + 1
+
+    write(constants.TURN_STRING + str(player_turn_num))
 
     goto(constants.TURN_NUMBER_LOCATION, constants.TURN_COLOUR_LOCATION)
     clearArea(constants.TURN_NUMBER_LOCATION, constants.TURN_COLOUR_LOCATION)
