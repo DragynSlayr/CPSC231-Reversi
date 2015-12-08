@@ -3,10 +3,10 @@
 import constants
 
 #Gets a string representing who won
-#Takes the game state as a parameter
-#Reurns who won and the amount of pieces they had
+#Params: game_state, The state of the game
+#Returns: A string containg who won
 #Author: Anton Lysov
-#Editor: Inderpreet Dhillon, Added comments to top of function
+#Editor: Inderpreet Dhillon
 def playerWon(game_state):
     num_black = 0
     num_white = 0
