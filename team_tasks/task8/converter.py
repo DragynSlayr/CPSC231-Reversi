@@ -1,9 +1,11 @@
-#This program contains a method for converting the state from string to list and vice versa
+#This program contains methods for converting between list and string
 import constants
 
 #Converts the game state from a string to a 2d list
 #Params: state_string, The game state as a string
 #Returns: The game state as a 2d list
+#Author: Inderpreet Dhillon
+#Editor: None
 def toList(state_string):
     #Lists to hold the state
     row = []
@@ -28,6 +30,8 @@ def toList(state_string):
 #Converts a 2d list into a string
 #Params: state_list, The 2d list of the game state
 #Returns: The game state as a string
+#Author: Inderpreet Dhillon
+#Editor: None
 def toString(state_list):
     #The string to hold the state
     state_string = constants.VARIABLE_BLANK
@@ -46,6 +50,8 @@ def toString(state_list):
 #Gets a nice representation of the state
 #Params: state, The state as a string or list
 #Returns: The state as a formatted board
+#Author: Inderpreet Dhillon
+#Editor: None
 def asBoardRepresentation(state):
     #Make sure state is a list
     if type(state) == type(constants.VARIABLE_BLANK):

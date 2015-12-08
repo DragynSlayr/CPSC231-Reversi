@@ -5,6 +5,8 @@ import constants
 #Removes all instances of \n character
 #Params: line, The line to remove \n from
 #Returns: A string with no \n characters
+#Author: Inderpreet Dhillon
+#Editor: None
 def removeNewLine(line):
     new_line = constants.VARIABLE_BLANK
     for i in range(len(line)):
@@ -17,6 +19,8 @@ def removeNewLine(line):
 #Params: lines, The lines to look in
 #        name, What the desired line starts with
 #Returns: The first line that beigns with name
+#Author: Inderpreet Dhillon
+#Editor: None
 def findVarLine(lines, name):
     #Go through each line from the file
     for line in lines:
@@ -28,6 +32,11 @@ def findVarLine(lines, name):
             #Return the string
             return stripped
 
+#Reads all lines from a file
+#Params: file_name, The file to read from
+#Returns: A list of the lines from the file
+#Author: Inderpreet Dhillon
+#Editor: None
 def getFileLines(file_name = constants.TEMP_FILE):
     #Open a file for reading and writing
     var_file = open(file_name, constants.FILE_READ)
@@ -45,6 +54,8 @@ def getFileLines(file_name = constants.TEMP_FILE):
 #        value, The value of the variable to write, must be String
 #        file_name, The name of the file, defaults to variables.txr
 #Returns: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def saveVariable(name, value, file_name = constants.TEMP_FILE):
     lines = getFileLines(file_name)
 
@@ -77,6 +88,8 @@ def saveVariable(name, value, file_name = constants.TEMP_FILE):
 #Params: name, The name of the variable to read
 #        file_name, The name of the file, defaults to variables.txt
 #Returns: The value of the variable if found, None otherwise
+#Author: Inderpreet Dhillon
+#Editor: None
 def loadVariable(name, file_name = constants.TEMP_FILE):
     #Open a file for reading and writing
     var_file = open(file_name, constants.FILE_READ_WRITE)
