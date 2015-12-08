@@ -1,10 +1,13 @@
-#This is the module that will create the Reversi Game board.
+#This file contains methods to draw the board
 import turtle
 import constants
 import converter
 
-#function for creating a square
-#Function takes nothing and returns nothing
+#Draws a square
+#Params: None
+#Returns: None
+#Author: Kyle Hinton
+#Editor: None
 def square():
 	grid = constants.TURTLE
 	for i in range(4):
@@ -12,8 +15,11 @@ def square():
 		grid.forward(constants.CELL_WIDTH)
 		grid.left(90)
 
-#Function for sending the turtle to the next row lower.
-#Function takes nothing and returns nothing
+#Move the turtle to the next row
+#Params: None
+#Returns: None
+#Author: Kyle Hinton
+#Editor: None
 def nextRow():
 	grid = constants.TURTLE
 	grid.penup()
@@ -24,8 +30,11 @@ def nextRow():
 	grid.left(90)
 	grid.pendown()
 
-#Function to label the y coordinates vertically, to the left of the board.
-#Function takes nothing and returns nothing
+#Labels the y axis of the grid
+#Params: None
+#Returns: None
+#Author: Kyle Hinton
+#Editor: None
 def label_y():
 	grid = constants.TURTLE
 	grid.goto(constants.X_NUM_LABEL, constants.Y_NUM_LABEL)
@@ -40,11 +49,15 @@ def label_y():
 		grid.goto(constants.X_NUM_LABEL, coord_yy)
 		grid.setheading(90)
 
-#Function to label the x coordinates horizontally, above the board.
-#Function takes nothing and returns nothing
+#Labels the x axis of the grid
+#Params: None
+#Returns: None
+#Author: Kyle Hinton
+#Editor: None
 def label_x():
 	grid = constants.TURTLE
 	grid.goto(constants.X_LETTER_LABEL, constants.Y_LETTER_LABEL)
+
 	for sidex in constants.COLUMN_LETTERS:
 		coord_xx = grid.xcor()
 		grid.pendown()
@@ -53,14 +66,20 @@ def label_x():
 		coord_xx = coord_xx + constants.CELL_WIDTH
 		grid.goto(coord_xx, constants.Y_LETTER_LABEL)
 		grid.setheading(0)
-		
+
+#Draws the pass button
+#Params: None
+#Returns: None
+#Author: David Keizer
+#Editor: None
 def passButton():
 	pass_button = turtle.Turtle()
+	pass_button.hideturtle()
 	pass_button.up()
 	pass_button.goto(650, 50)
 	pass_button.down()
-	pass_button.fillcolor("white")
-	pass_button.pencolor ("black")
+	pass_button.fillcolor(constants.PLAY_SCREEN_BG_COLOR)
+	pass_button.pencolor (constants.GRID_FG_COLOR)
 	pass_button.begin_fill()
 	pass_button.left(90)
 	pass_button.pendown()
@@ -73,11 +92,18 @@ def passButton():
 	pass_button.forward(85)
 	pass_button.right(50)
 	pass_button.end_fill()
-	pass_button.write("Pass", False, constants.LEFT_TEXT, constants.GRID_NAME_STYLE)
+	pass_button.setheading(40)
+	pass_button.up()
+	pass_button.forward(20)
+	pass_button.down()
+	pass_button.write("Pass", False, constants.LEFT_TEXT, constants.BUTTON_TEXT_STYLE)
 	pass_button.up()
 
-#Function that draws a frame around the board.
-#Function takes nothing and returns nothing
+#Draws a border around the screen
+#Params: None
+#Returns: None
+#Author: Kyle Hinton
+#Editor: Inderpreet Dhillon
 def reversiFrame():
 	grid = constants.TURTLE
 	size = grid.pensize()
@@ -123,16 +149,16 @@ def reversiFrame():
 	grid.forward(constants.WINDOW_WIDTH - 1)
 	grid.right(90)
 
-
 	grid.penup()
 
 	#Reset size
 	grid.pensize(size)
 
-#This is the function that creates the board, using the functions above.
-#It contains a nested for loop that will create the grid and label it.
-#It will also frame the game window.
-#Function takes nothing and returns nothing
+#Creates the board
+#Params: None
+#Returns: None
+#Author: Kyle Hinton
+#Editor: None
 def reversiBoard():
 	grid = constants.TURTLE
 	grid.fillcolor(constants.GRID_BG_COLOR)
@@ -163,8 +189,11 @@ def reversiBoard():
 
 	grid.write(spread_name_string, False, constants.LEFT_TEXT, constants.GRID_NAME_STYLE)
 
-#This function creates the window, sets the coordinates of the window, creates the grid with labels, and frames it.
-#Function takes no parameters and returns nothing
+#Set's up the window and draws the board
+#Params: None
+#Returns: None
+#Author: Kyle Hinton
+#Editor: None
 def main():
 	#Get window and turtle
 	grid = constants.TURTLE
