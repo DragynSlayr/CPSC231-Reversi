@@ -67,7 +67,7 @@ def writeScore(black, white):
     #Return to starting position
     goto(starting_X, starting_y)
 
-#Writes the turn number on the game board in the bottom left corner.
+#Writes the turn number and colour on the game board in the bottom left corner.
 #Parameters: The turn number
 #Returns: None
 #Author: Kyle Hinton
@@ -76,13 +76,13 @@ def writeTurn(turn_num):
     starting_x, starting_y = constants.TURTLE.pos()
     goto(25, 25)
     clearArea(25, 25)
-#    clearArea(25, 100)
     if int(turn_num) % 2 == 0:
         current_turn = constants.PIECE_COLOR_WHITE
     else:
         current_turn = constants.PIECE_COLOR_BLACK
 
     write(constants.TURN_STRING + str(turn_num))
+    
     goto(25, 100)
     clearArea(25, 100)
     write(constants.TURN_COLOUR_STRING + current_turn)
