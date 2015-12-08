@@ -360,7 +360,8 @@ def placePiece(x, y):
         if not victoryStatus.endGameStatus(game_state):
             #Check if the player tried to pass or if the click was valid
             passing_turn = isPassClicked(x, y)
-            click_valid = (isValidSquare(x, y) and isValidMove(game_state, getMove(x, y), move_num))
+            click_valid = (isValidSquare(x, y) and \
+                          isValidMove(game_state, getMove(x, y), move_num))
 
             if passing_turn or click_valid:
                 #Make the player's move
