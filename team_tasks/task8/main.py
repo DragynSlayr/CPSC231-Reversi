@@ -6,6 +6,11 @@ import constants
 import boardClick
 import random
 
+#Starts the game
+#Params: None
+#Returns: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def start():
 	#Draw the board
 	reversiGrid.main()
