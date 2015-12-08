@@ -74,17 +74,17 @@ def writeScore(black, white):
 #Editor: None
 def writeTurn(turn_num):
     starting_x, starting_y = constants.TURTLE.pos()
-    goto(25, 25)
-    clearArea(25, 25)
+    goto(constants.TURN_NUMBER_LOCATION, constants.TURN_NUMBER_LOCATION)
+    clearArea(constants.TURN_NUMBER_LOCATION, constants.TURN_NUMBER_LOCATION)
     if int(turn_num) % 2 == 0:
         current_turn = constants.PIECE_COLOR_WHITE
     else:
         current_turn = constants.PIECE_COLOR_BLACK
 
     write(constants.TURN_STRING + str(turn_num))
-    
-    goto(25, 100)
-    clearArea(25, 100)
+
+    goto(constants.TURN_NUMBER_LOCATION, constants.TURN_COLOUR_LOCATION)
+    clearArea(constants.TURN_NUMBER_LOCATION, constants.TURN_COLOUR_LOCATION)
     write(constants.TURN_COLOUR_STRING + current_turn)
 
     goto(starting_x, starting_y)

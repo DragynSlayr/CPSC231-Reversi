@@ -40,6 +40,10 @@ Y_NUM_LABEL = 110
 #Constants for drawing frame.
 FRAME_ORIGIN = -5
 
+#Constants for visual turn tracking in bottom left of board
+TURN_NUMBER_LOCATION = 25
+TURN_COLOUR_LOCATION = 100
+
 #Constants for pass button
 PASS_BUTTON_X = 650
 PASS_BUTTON_Y = 50
