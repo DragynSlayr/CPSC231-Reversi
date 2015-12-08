@@ -1,5 +1,4 @@
-#This file has the method, main,
-#to show and take input for the main menu
+#This file has methods to show the main menu and take input
 import sys
 import constants
 import rulesMenu
@@ -11,6 +10,8 @@ import main as mainGame
 #		 x, The x location
 #		 y, The y location
 #Returns: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def moveTurtle(turtle, x, y):
 	turtle.up()
 	turtle.goto(x, y)
@@ -22,6 +23,8 @@ def moveTurtle(turtle, x, y):
 #		 y, The y position of the top left of the button
 #		 label, The word to write on the button
 #Returns: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def drawButton(turtle, x, y, label):
 	#Store the original line width
 	size = turtle.pensize()
@@ -47,6 +50,8 @@ def drawButton(turtle, x, y, label):
 #Draws the main menu
 #Params: None
 #Returns: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def showMenu():
 	#Get the turtle
 	turtle = constants.TURTLE
@@ -70,6 +75,8 @@ def showMenu():
 #Params: x, The x location of the click
 #		 y, The y location of the click
 #Returns: True if the click was in the button area, False otherwise
+#Author: Inderpreet Dhillon
+#Editor: None
 def isButtonClicked(x, y):
 	#Check if x and y are within the button area
 	x_valid = x >= constants.RULES_BUTTON_LEFT_X and x <= constants.EXIT_BUTTON_RIGHT_X
@@ -81,6 +88,8 @@ def isButtonClicked(x, y):
 #Checks if the x is over the rules button
 #Params: x, The x location to check
 #Returns: True if in the rules button, False otherwise
+#Author: Inderpreet Dhillon
+#Editor: None
 def isRulesButton(x):
 	left_bound = x >= constants.RULES_BUTTON_LEFT_X
 	right_bound = x <= constants.RULES_BUTTON_RIGHT_X
@@ -89,6 +98,8 @@ def isRulesButton(x):
 #Checks if the x is over the play button
 #Params: x, The x location to check
 #Returns: True if in the play button, False otherwise
+#Author: Inderpreet Dhillon
+#Editor: None
 def isPlayButton(x):
 	left_bound = x >= constants.PLAY_BUTTON_LEFT_X
 	right_bound = x <= constants.PLAY_BUTTON_RIGHT_X
@@ -97,6 +108,8 @@ def isPlayButton(x):
 #Checks if the x is over the exit button
 #Params: x, The x location to check
 #Returns: True if in the exit button, False otherwise
+#Author: Inderpreet Dhillon
+#Editor: None
 def isExitButton(x):
 	left_bound = x >= constants.EXIT_BUTTON_LEFT_X
 	right_bound = x <= constants.EXIT_BUTTON_RIGHT_X
@@ -105,6 +118,8 @@ def isExitButton(x):
 #Gets the index of the button that is clicked
 #Params: x, The x location of the click
 #Returns: The index of the button, -1 if not a button
+#Author: Inderpreet Dhillon
+#Editor: None
 def getClickedButton(x):
 	if isRulesButton(x):
 		return 0
@@ -119,6 +134,8 @@ def getClickedButton(x):
 #Params: x, The x position of the click
 #		 y, The y position of the click
 #Return: None
+#Author: Inderpreet Dhillon
+#Editor: None
 def makeChoice(x, y):
 	#Check if a button is pressed
 	if isButtonClicked(x, y):
@@ -131,9 +148,11 @@ def makeChoice(x, y):
 		#Call a method from the list of options
 		button_commands[button_index]()
 
-#Function shows the main menu and will show the desired menu
-#Function will not continue unless the user press's play
-#Returns nothing and takes no parameters
+#Shows the main menu
+#Params: None
+#Returns: None
+#Author: David Keizer
+#Editor: Inderpreet Dhillon
 def main():
 	#Get the window
 	wn = constants.WINDOW
